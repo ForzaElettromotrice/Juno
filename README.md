@@ -1,3 +1,3 @@
 # Juno
 
-Progetto di Metodologie di programma zione anno 2021/22
+Progetto di Metodologie di programmazione anno 2021/22
