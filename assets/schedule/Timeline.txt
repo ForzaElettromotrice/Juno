@@ -22,7 +22,5 @@ TIMELINE:
 TODO:
     1. Implement User contructor
     2. Implement getLevel method in User class
-    3. Implement setLevel method in User class
-    4. Implement load and save in User class
-    5. Implement addExp method in Level class
-    6. Implement load and save in Level class
+    3. Implement load and save in User class
+    4. Implement load and save in Level class
