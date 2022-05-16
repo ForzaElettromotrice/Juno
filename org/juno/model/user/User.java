@@ -1,4 +1,4 @@
-package juno.model.user;
+package org.juno.model.user;
 
 /**
  * Defines: User class,
@@ -16,7 +16,7 @@ public class User
     public User()
     {
         level = new Level();
-        //TODO: scrivilo
+        //TODO: invocare load
     }
 
     /**
@@ -47,7 +47,7 @@ public class User
         return defeats + victories;
     }
 
-    // TODO: Level getter
+    // TODO: fare il get del lvl e dell'exp
 
     /**
      * Setters
@@ -82,27 +82,24 @@ public class User
         defeats++;
     }
 
-    //TODO: Level setter
-
     /**
-     * Load and Save
+     * Load and Save ->
+     *
+     *      1: nickname;
+     *      2: avatar;
+     *      3: victories;
+     *      4: defeats;
+     *      5: exp
+     *
      */
-
     public void load()
     {
-        //TODO: load
+        //TODO: caricare dal file di testo tutto il necessario
     }
 
-    /**
-     * 1: nickname;
-     * 2: avatar;
-     * 3: victories;
-     * 4: defeats;
-     * 5: exp
-     */
     public void save()
     {
-        //TODO: save
+        //TODO: salvare dal file di testo tutto il necessario
     }
 
 }
