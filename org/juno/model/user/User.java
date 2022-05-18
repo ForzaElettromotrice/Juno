@@ -15,11 +15,7 @@ public class User
     private int defeats;
     private final Level level;
 
-    /**
-     * Defines: Level class,
-     *
-     * @author R0n3l, ForzaElettromotrice
-     */
+
     private static class Level
     {
         private int lvl;

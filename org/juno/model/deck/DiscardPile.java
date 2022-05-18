@@ -1,5 +1,7 @@
 package org.juno.model.deck;
 
+import java.util.Collection;
+
 /**
  * Defines: Discarded class,
  *
@@ -24,8 +26,17 @@ public class DiscardPile extends Deck
         deck.addFirst(c);
     }
 
+    public Collection<Card> restart()
+    {
+        Card top = deck.removeFirst();
+        Collection<Card> out = (Collection<Card>) deck.clone();
+        reset();
+        add(top);
+        return out;
+    }
+
     @Override
-    void reset()
+    public void reset()
     {
         deck.clear();
     }

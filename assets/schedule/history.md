@@ -1,6 +1,6 @@
-##TIMELINE:
+#TIMELINE:
 
-#15/05/2022
+##15/05/2022
 
 1. Defined project specifics:
 
@@ -24,7 +24,7 @@
 
    *Created the user.txt document which will contain the profile specifics.
 
-#TODO:
+##TODO:
 
 1. Implement User contructor
 2. Implement getLevel method in User class

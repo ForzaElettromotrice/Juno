@@ -1,6 +1,8 @@
 package org.juno.model.deck;
 
 import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.stream.Collectors;
 
 /**
@@ -27,8 +29,18 @@ public class DrawPile extends Deck
         return deck.removeFirst();
     }
 
+    public void shuffle()
+    {
+        Collections.shuffle(deck);
+    }
+
+    public void addAll(Collection<Card> c)
+    {
+        deck.addAll(c);
+    }
+
     @Override
-    void reset()
+    public void reset()
     {
         for (Card.Color c: Arrays.stream(Card.Color.values()).filter(x -> x != Card.Color.BLACK).toList())
         {
@@ -38,14 +50,8 @@ public class DrawPile extends Deck
                 deck.add(new Card(c, v));
             }
             deck.add(new Card(c, Card.Value.ZERO));
-            deck.add(new Card(Card.Color.BLACK, Card.Value.JOLLY));
-            deck.add(new Card(Card.Color.BLACK, Card.Value.PLUSFOUR));
+            deck.add(new WildCard(Card.Color.BLACK, Card.Value.JOLLY));
+            deck.add(new WildCard(Card.Color.BLACK, Card.Value.PLUSFOUR));
         }
-        System.out.println(deck);
-    }
-
-    public static void main(String[] args)
-    {
-        new DrawPile().reset();
     }
 }
