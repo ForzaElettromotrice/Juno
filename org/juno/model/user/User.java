@@ -1,5 +1,7 @@
 package org.juno.model.user;
 
+import java.io.*;
+
 /**
  * Defines: User class,
  *
@@ -13,10 +15,36 @@ public class User
     private int defeats;
     private final Level level;
 
+    /**
+     * Defines: Level class,
+     *
+     * @author R0n3l, ForzaElettromotrice
+     */
+    private static class Level
+    {
+        private int lvl;
+        private int exp;
+
+        private Level()
+        {
+        }
+
+        private void addExp(int e)
+        {
+            exp += e;
+            checkLevel();
+        }
+
+        private void checkLevel()
+        {
+            if (exp >= (4 + lvl) * 500) lvl++;
+        }
+    }
+
     public User()
     {
         level = new Level();
-        //TODO: invocare load
+        load();
     }
 
     /**
@@ -47,8 +75,6 @@ public class User
         return defeats + victories;
     }
 
-    // TODO: fare il get del lvl e dell'exp
-
     /**
      * Setters
      */
@@ -62,16 +88,6 @@ public class User
         this.avatar = avatar;
     }
 
-    private void setVictories(int victories)
-    {
-        this.victories = victories;
-    }
-
-    private void setDefeats(int defeats)
-    {
-        this.defeats = defeats;
-    }
-
     public void addVictories()
     {
         victories++;
@@ -83,23 +99,53 @@ public class User
     }
 
     /**
-     * Load and Save ->
-     *
-     *      1: nickname;
-     *      2: avatar;
-     *      3: victories;
-     *      4: defeats;
-     *      5: exp
-     *
+     * Load and Save:
+     * <p>
+     * 1: nickname;
+     * <p>
+     * 2: avatar;
+     * <p>
+     * 3: victories;
+     * <p>
+     * 4: defeats;
+     * <p>
+     * 5: lvl;
+     * <p>
+     * 6: exp.
      */
     public void load()
     {
-        //TODO: caricare dal file di testo tutto il necessario
+        try (BufferedReader br = new BufferedReader(new FileReader("assets/data/user.txt")))
+        {
+            nickname = br.readLine();
+            avatar = br.readLine();
+            victories = Integer.parseInt(br.readLine());
+            defeats = Integer.parseInt(br.readLine());
+            level.lvl = Integer.parseInt(br.readLine());
+            level.exp = Integer.parseInt(br.readLine());
+        } catch (IOException e)
+        {
+            e.printStackTrace();
+        } finally
+        {
+            level.checkLevel();
+        }
     }
 
     public void save()
     {
-        //TODO: salvare dal file di testo tutto il necessario
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter("assets/data/user.txt")))
+        {
+            bw.write(String.format("%s%n%s%n%d%n%d%n%d%n%d", nickname, avatar, victories, defeats,
+                    level.lvl, level.exp));
+        } catch (java.io.IOException e)
+        {
+            e.printStackTrace();
+        }
     }
 
+    public void addExp(int e)
+    {
+        level.addExp(e);
+    }
 }
