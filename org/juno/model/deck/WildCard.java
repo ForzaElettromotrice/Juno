@@ -7,11 +7,19 @@ package org.juno.model.deck;
  */
 public class WildCard extends Card
 {
-    public WildCard(Color color, Value value)
+    /**
+     * Constructor
+     * @param value The Card value
+     */
+    public WildCard(Value value)
     {
-        super(color, value);
+        super(Color.BLACK, value);
     }
 
+    /**
+     * Set the Card color
+     * @param c Color to set
+     */
     public void setColor(Color c)
     {
         color = c;

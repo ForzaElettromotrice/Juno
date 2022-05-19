@@ -10,11 +10,17 @@ public abstract class Deck
 {
     protected LinkedList<Card> deck;
 
+    /**
+     * Create the deck to the initial state
+     */
     protected Deck()
     {
         deck = new LinkedList<>();
         reset();
     }
 
+    /**
+     * Resets the deck to the initial state
+     */
     abstract void reset();
 }
