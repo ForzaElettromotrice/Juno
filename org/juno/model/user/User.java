@@ -26,7 +26,7 @@ public class User
         }
 
         /**
-         * Add the given value to the total exp and then check if u reached the next level
+         * Add the given value to the partial exp and then check if u reached the next level
          * @param e experience gained
          */
         private void addExp(int e)
@@ -40,7 +40,11 @@ public class User
          */
         private void checkLevel()
         {
-            if (exp >= (4 + lvl) * 500) lvl++;
+            if (exp >= (4 + lvl) * 500)
+            {
+                lvl++;
+                exp = 0;
+            }
         }
     }
 
@@ -101,8 +105,30 @@ public class User
     }
 
     /**
-     * Returns the current exp
-     * @return current exp
+     * Returns the total exp
+     * @return total exp
+     */
+    public int getTotalExp()
+    {
+        return getTotalExp(level.lvl, level.exp);
+    }
+
+    /**
+     * Calculates total exp based on partial exp
+     * @param level -> current level
+     * @param exp -> partial exp
+     * @return total exp
+     */
+    public int getTotalExp(int level, int exp)
+    {
+        if (level==1)
+            return exp;
+        return exp+getTotalExp((4+level-1)*500, level-1);
+    }
+
+    /**
+     * Return partial exp
+     * @return partial exp
      */
     public int getExp()
     {
