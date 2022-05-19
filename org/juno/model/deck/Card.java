@@ -49,6 +49,8 @@ public class Card
         this.value = value;
     }
 
+    //Getters
+
     /**
      * Returns the Card color
      * @return the Card color

@@ -48,7 +48,7 @@ public class DrawPile extends Deck
     }
 
     /**
-     * Add all the givend Card to the deck
+     * Add all the given Card to the deck
      * @param c Collections of Cards
      */
     public void addAll(Collection<Card> c)

@@ -100,6 +100,24 @@ public class User
         return defeats + victories;
     }
 
+    /**
+     * Returns the current exp
+     * @return current exp
+     */
+    public int getExp()
+    {
+        return level.exp;
+    }
+
+    /**
+     * Returns the current level
+     * @return current level
+     */
+    public int getLevel()
+    {
+        return level.lvl;
+    }
+
     //Setters
 
     /**
