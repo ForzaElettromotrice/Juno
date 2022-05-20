@@ -110,7 +110,7 @@ public class User
      */
     public int getTotalExp()
     {
-       return 500*((4*level.lvl)+(level.lvl*(level.lvl+1)/2));
+       return 500*((4*level.lvl)+(level.lvl*(level.lvl+1)/2)) + level.exp;
     }
 
     /**
