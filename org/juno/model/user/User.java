@@ -105,25 +105,12 @@ public class User
     }
 
     /**
-     * Returns the total exp
-     * @return total exp
+     * Returns the total exp gained
+     * @return the total exp
      */
     public int getTotalExp()
     {
-        return getTotalExp(level.lvl, level.exp);
-    }
-
-    /**
-     * Calculates total exp based on partial exp
-     * @param level -> current level
-     * @param exp -> partial exp
-     * @return total exp
-     */
-    public int getTotalExp(int level, int exp)
-    {
-        if (level==1)
-            return exp;
-        return exp+getTotalExp((4+level-1)*500, level-1);
+       return 500*((4*level.lvl)+(level.lvl*(level.lvl+1)/2));
     }
 
     /**
