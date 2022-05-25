@@ -7,33 +7,58 @@ package org.juno.model.deck;
  */
 public class Card
 {
-    protected enum Value
+    public enum Value
     {
-        ZERO,
-        ONE,
-        TWO,
-        THREE,
-        FOUR,
-        FIVE,
-        SIX,
-        SEVEN,
-        EIGHT,
-        NINE,
-        PLUSTWO,
-        REVERSE,
-        STOP,
-        JOLLY,
-        PLUSFOUR;
+        ZERO(0),
+        ONE(1),
+        TWO(2),
+        THREE(3),
+        FOUR(4),
+        FIVE(5),
+        SIX(6),
+        SEVEN(7),
+        EIGHT(8),
+        NINE(9),
+        PLUSTWO(10),
+        REVERSE(11),
+        STOP(12),
+        JOLLY(13),
+        PLUSFOUR(14);
+
+        private int val;
+
+        Value(int val)
+        {
+            this.val=val;
+        }
+
+        public int getVal()
+        {
+            return val;
+        }
     }
 
-    protected enum Color
+    public enum Color
     {
-        RED,
-        BLUE,
-        GREEN,
-        YELLOW,
-        BLACK;
+        RED(0),
+        BLUE(1),
+        GREEN(2),
+        YELLOW(3),
+        BLACK(4);
+
+        private int val;
+
+        Color(int val)
+        {
+            this.val=val;
+        }
+
+        public int getVal()
+        {
+            return val;
+        }
     }
+
 
     protected Color color;
     protected final Value value;

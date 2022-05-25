@@ -51,6 +51,11 @@ public class DiscardPile extends Deck
         return out;
     }
 
+    public Card getFirst()
+    {
+        return deck.getFirst();
+    }
+
     /**
      * Reset the deck to the initial state
      */
