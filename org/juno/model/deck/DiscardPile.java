@@ -33,7 +33,7 @@ public class DiscardPile extends Deck
      * Add a card on top of the deck
      * @param c The given Card
      */
-    public void add(Card c)
+    public void discard(Card c)
     {
         deck.addFirst(c);
     }
@@ -42,12 +42,12 @@ public class DiscardPile extends Deck
      * Remove all the Card from the deck except the first one
      * @return all the discarded card
      */
-    public Collection<Card> restart()
+    public Collection<Card> reshuffle()
     {
         Card top = deck.removeFirst();
         Collection<Card> out = new LinkedList<>(deck);
         reset();
-        add(top);
+        discard(top);
         return out;
     }
 

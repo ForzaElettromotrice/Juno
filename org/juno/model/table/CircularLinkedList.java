@@ -14,14 +14,12 @@ public class CircularLinkedList<T>
 	private static class Node<T>
 	{
 		private Node<T> prev;
-		private final T value;
+		private T value;
 		private Node<T> next;
 
-		private Node(Node<T> prev, T val, Node<T> next)
+		private Node(T val)
 		{
-			this.prev = prev;
 			value = val;
-			this.next = next;
 		}
 	}
 
@@ -29,11 +27,11 @@ public class CircularLinkedList<T>
 	private Node<T> tail;
 	private int size;
 
-	public CircularLinkedList(T value)
+	private Node<T> currentNode;
+
+	public void setFirst()
 	{
-		head = new Node<>(null, value, null);
-		tail = head;
-		size = 1;
+		currentNode=head;
 	}
 
 	private void add(Node<T> newElement)
@@ -46,7 +44,7 @@ public class CircularLinkedList<T>
 
 	public void addFirst(T value)
 	{
-		Node<T> newElement = new Node<>(null, value, null);
+		Node<T> newElement = new Node<>(value);
 		if(isEmpty()) add(newElement);
 		else tail = newElement;
 
@@ -56,7 +54,7 @@ public class CircularLinkedList<T>
 
 	public void addLast(T value)
 	{
-		Node<T> newElement = new Node<>(null, value, null);
+		Node<T> newElement = new Node<>(value);
 		if(isEmpty()) add(newElement);
 		else head = newElement;
 
@@ -89,7 +87,7 @@ public class CircularLinkedList<T>
 			dest = dest.next;
 		}
 
-		Node<T> newElement = new Node<>(null, value, null);
+		Node<T> newElement = new Node<>(value);
 
 		newElement.next = dest;
 		newElement.prev = dest.prev;
@@ -132,5 +130,27 @@ public class CircularLinkedList<T>
 		}
 
 		return dest.value;
+	}
+
+	public void clear()
+	{
+		head.prev=null;
+		tail.next=null;
+		for (Node<T> node = head; node != null;)
+		{
+			Node<T> next = node.next;
+			node.value=null;
+			node.next=null;
+			node.prev=null;
+			node=next;
+		}
+		size=0;
+		head=tail=null;
+	}
+
+	public T getNext()
+	{
+		currentNode=currentNode.next;
+		return currentNode.value;
 	}
 }

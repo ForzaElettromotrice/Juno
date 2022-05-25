@@ -25,7 +25,7 @@ public class Card
         JOLLY(13),
         PLUSFOUR(14);
 
-        private int val;
+        private final int val;
 
         Value(int val)
         {
@@ -46,7 +46,7 @@ public class Card
         YELLOW(3),
         BLACK(4);
 
-        private int val;
+        private final int val;
 
         Color(int val)
         {

@@ -64,7 +64,7 @@ public class DrawPile extends Deck
     {
         for (Card.Color c: Arrays.stream(Card.Color.values()).filter(x -> x != Card.Color.BLACK).toList())
         {
-            for (Card.Value v: Arrays.stream(Card.Value.values()).filter(x-> x!=Card.Value.ZERO&&x!=Card.Value.JOLLY&&x!=Card.Value.PLUSFOUR).toList())
+            for (Card.Value v : Arrays.stream(Card.Value.values()).filter(x -> x != Card.Value.ZERO && x != Card.Value.JOLLY && x != Card.Value.PLUSFOUR).toList())
             {
                 deck.add(new Card(c, v));
                 deck.add(new Card(c, v));
@@ -73,5 +73,6 @@ public class DrawPile extends Deck
             deck.add(new WildCard(Card.Value.JOLLY));
             deck.add(new WildCard(Card.Value.PLUSFOUR));
         }
+        shuffle();
     }
 }

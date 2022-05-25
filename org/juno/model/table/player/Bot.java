@@ -11,15 +11,35 @@ import java.util.Random;
  */
 public class Bot extends Player
 {
+    private static final Random rand = new Random();
     public Card.Color randColor()
     {
         return hand.isEmpty() ? Card.Color.RED : hand.getFirst().getColor();
     }
 
     @Override
-    public boolean discard(Card c)
+    public void discard(Card c)
     {
-        if (hand.size()==2 && new Random().nextInt(100)>= 20) sayUno();
-        return super.discard(c);
+        if (hand.size()==2 && rand.nextInt(100)>= 20) sayUno();
+        super.discard(c);
+    }
+
+    public void chooseCard(Card c)
+    {
+        for (Card card : hand)
+        {
+            if(card.isValid(c))
+            {
+                discard(card);
+                return;
+            }
+        }
+        Card card = draw();
+        if (card.isValid(c))
+        {
+            discard(card);
+            return;
+        }
+        setEndTurn(true);
     }
 }
