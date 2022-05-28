@@ -1,6 +1,5 @@
 package org.juno;
 
-
 /**
  * Defines: Juno class,
  *
