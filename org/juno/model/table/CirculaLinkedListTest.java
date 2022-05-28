@@ -1,15 +1,15 @@
 package org.juno.model.table;
 
 /**
- * Defines: CircularLinkedList class,
+ * Defines: CirculaLinkedListTest datastructure,
  * <p>
- * this class has been created only for this project
- * it can't be used as a true circular linked list since
- * it doesn't have some core methods (remove, set etc..)
+ *  * this class has been created only for this project
+ *  * it can't be used as a true circular linked list since
+ *  * it doesn't have some core methods (remove, set etc..)
  *
  * @author ForzaElettromotrice, R0n3l
  */
-public class CircularLinkedList<T>
+public class CirculaLinkedListTest<T>
 {
 	private static class Node<T>
 	{
