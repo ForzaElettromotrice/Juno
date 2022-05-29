@@ -3,8 +3,6 @@ package org.juno.model.table;
 import org.juno.model.deck.Card;
 import org.juno.model.deck.DiscardPile;
 import org.juno.model.deck.DrawPile;
-import org.juno.model.table.player.Bot;
-import org.juno.model.table.player.Player;
 
 /**
  * Defines: Table class,

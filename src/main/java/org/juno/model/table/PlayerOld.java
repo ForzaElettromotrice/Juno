@@ -1,4 +1,4 @@
-package org.juno.model.table.player;
+package org.juno.model.table;
 
 import org.juno.model.deck.Card;
 import org.juno.model.deck.DiscardPile;

@@ -1,4 +1,4 @@
-package org.juno.model.table.player;
+package org.juno.model.table;
 
 /**
  * Defines: Bot class,

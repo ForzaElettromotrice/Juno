@@ -1,8 +1,5 @@
 package org.juno.model.table;
 
-import org.juno.model.table.player.Bot;
-import org.juno.model.table.player.Player;
-
 /**
  * Defines: CircularLinkedList class,
  *
