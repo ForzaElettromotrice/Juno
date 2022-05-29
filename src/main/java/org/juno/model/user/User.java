@@ -9,6 +9,8 @@ import java.io.*;
  */
 public class User
 {
+    private static final String PATH = "src/main/resources/org/juno/model/user/user.txt";
+
     private String nickname;
     private String avatar;
     private int victories;
@@ -185,7 +187,7 @@ public class User
      */
     public void load()
     {
-        try (BufferedReader br = new BufferedReader(new FileReader("assets/data/user.txt")))
+        try (BufferedReader br = new BufferedReader(new FileReader(PATH)))
         {
             nickname = br.readLine();
             avatar = br.readLine();
@@ -219,7 +221,7 @@ public class User
      */
     public void save()
     {
-        try (BufferedWriter bw = new BufferedWriter(new FileWriter("assets/data/user.txt")))
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(PATH)))
         {
             bw.write(String.format("%s%n%s%n%d%n%d%n%d%n%d", nickname, avatar, victories, defeats,
                     level.lvl, level.exp));
