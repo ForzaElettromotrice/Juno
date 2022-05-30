@@ -21,8 +21,7 @@ public class Table
     private boolean plus2;
     private boolean plus4;
     private boolean stop;
-    private boolean endGame;
-    private boolean endMatch;
+    private Player winner;
 
 
     private Table()
@@ -34,12 +33,37 @@ public class Table
         return INSTANCE;
     }
 
+    public void startGame()
+    {
+        reset();
+        boolean endGame = false;
+
+        while (!endGame)
+        {
+            startMatch();
+            endGame = checkPoints();
+        }
+    }
+    private boolean checkPoints()
+    {
+        for (Player player : TURN_ORDER.getPlayers())
+        {
+            if (player.getPoints() >= 500)
+            {
+                winner = player;
+                return true;
+            }
+        }
+        return false;
+    }
+
     public void startMatch()
     {
-        TURN_ORDER.reset();
+        TURN_ORDER.resetMatch();
         DISCARD_PILE.reset();
         DRAW_PILE.reset();
 
+        boolean endMatch = false;
         Player currentPlayer = null;
 
         for (int i = 0; i < 4; i++)
@@ -53,9 +77,8 @@ public class Table
 
         DISCARD_PILE.discard(firstCard);
 
-        while (!endGame)
+        while (!endMatch)
         {
-
             currentPlayer = TURN_ORDER.nextPlayer();
 
             if (plus2) currentPlayer.draw(2);
@@ -66,15 +89,10 @@ public class Table
             plus4 = false;
             stop = false;
 
-
-            endGame = turn(currentPlayer);
-
-
+            endMatch = turn(currentPlayer);
         }
 
-        checkPoints(currentPlayer);
-
-
+        updatePoints(currentPlayer);
     }
 
     private void checkEffect(Card card)
@@ -126,7 +144,9 @@ public class Table
 
         }
 
-        if (player.getSizeHand == 1)
+        player.resetTurn();
+
+        if (player.getSizeHand() == 1)
         {
 
             try
@@ -138,19 +158,23 @@ public class Table
             }
             if (!player.saidUno()) player.draw(2);
         }
-        return player.getSizeHand == 0;
+        return player.getSizeHand() == 0;
     }
 
-    private void checkPoints(Player winner)
+    private void updatePoints(Player winner)
     {
-        Player p;
-        for (int i = 0; i < 4; i++)
+        for (Player player : TURN_ORDER.getPlayers())
         {
-            p = TURN_ORDER.nextPlayer();
-            winner.addPoints(p.calculatePoints());
+            winner.addPoints(player.calculatePoints());
         }
-        // TODO: Se il gioco finisce vai al calcolo exp e poi al menu, altrimenti starti la prossima
-        // if(winner.getPoints() >= 500) endMatch = true;
+    }
 
+    private void reset()
+    {
+        TURN_ORDER.resetGame();
+        winner = null;
+        plus2 = false;
+        plus4 = false;
+        stop = false;
     }
 }

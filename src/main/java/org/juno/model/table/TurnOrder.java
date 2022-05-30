@@ -13,7 +13,7 @@ public class TurnOrder
 	private static final TurnOrder INSTANCE = new TurnOrder();
 	private static final Random RANDOMIZER = new Random();
 
-	Player[] players = new Player[4];
+	private Player[] players = new Player[4];
 
 	private int currentPlayer;
 	private boolean isInverted;
@@ -33,15 +33,6 @@ public class TurnOrder
 	}
 
 
-	public void reset()
-	{
-		for (Player player : players)
-		{
-			player.reset();
-		}
-		isInverted = false;
-		currentPlayer = RANDOMIZER.nextInt(4); // Serve per decidere randomicamente il primo giocatore
-	}
 
 	public Player nextPlayer()
 	{
@@ -60,5 +51,28 @@ public class TurnOrder
 		isInverted = !isInverted;
 	}
 
+	public void resetMatch()
+	{
+		for (Player player : players)
+		{
+			player.resetMatch();
+		}
+		isInverted = false;
+		nextPlayer(); // Serve per scegliere come giocatore corrente il successivo
+	}
 
+	public void resetGame()
+	{
+		for (Player player : players)
+		{
+			player.resetGame();
+		}
+
+		currentPlayer = RANDOMIZER.nextInt(4);
+	}
+
+	public Player[] getPlayers()
+	{
+		return players;
+	}
 }
