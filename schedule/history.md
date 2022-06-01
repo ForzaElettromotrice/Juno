@@ -101,14 +101,14 @@
             setEndTurn and getEndTurn (setters and getters for endTurn) methods.
     * Created the Bot class that extends Player. It has a private Random rand field to decide if the bot says Uno.
         - Created the randColor (decides what color the black card should assume based on the cards in
-            the hand), discard (overrides Player's method by adding a method that in 80% cases says
-            Uno when it only has one card on hand) and chooseCard (plays the first possible card and eventually
-            draws a new one) methods.
-                    
-
+          the hand), discard (overrides Player's method by adding a method that in 80% cases says
+          Uno when it only has one card on hand) and chooseCard (plays the first possible card and eventually
+          draws a new one) methods.
 
 ##TODO:
 
 1. Review Table methods
 2. Rethink the game flow, how cards are checked and Table/Player/Bot roles
 3. Start working on the GUI
+
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
