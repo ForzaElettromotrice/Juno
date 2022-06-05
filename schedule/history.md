@@ -105,10 +105,60 @@
           Uno when it only has one card on hand) and chooseCard (plays the first possible card and eventually
           draws a new one) methods.
 
+##28/05/2022-29/05/2022
+
+1. Reformatted all files and deleted Player, Bot, CircularLinkedList and Table.
+2. Imported javafx libraries and moved the project on a Maven project.
+3. Added a new folder in model called table: it will contain Table, Player, Bot and TurnOrder.
+
+##29/05/2022
+
+1. Recreated Player.
+    * Added method names (to be implemented later) used inside Table: reset, draw, hasChosen, 
+      hasPassed, getChosenCard, chooseColor, hasChosenColor, saidUno, calculatePoints, addPoints, 
+      getPoints, getSizeHand.
+2. Recreated Table: it is a Singleton and manages a complete match.
+    * Added the static fields Table, DiscardPile, DrawPile and TurnOrder. 
+    * Added the fields plus2, plus4, stop, endGame and endMatch.
+    * Implemented the methods getINSTANCE, startMatch (ends when a player has 500 points),
+      checkEffect (checks a card effect and modifies the field), turn and checkPoints.
+3. Created TurnOrder instead of CircularLinkedList.
+    * Created the static fields TurnOrder and Random.
+    * Created the fields players, currentPlayer and isInverted.
+    * Created the constructor (3 bots and 1 player).
+    * Implemented the methods getINSTANCE, reset, nextPlayer and reverseTurnOrder.
+
+##30/05/2022
+
+1. Implemented Player. It works with fields that change when the player makes a decision
+    otherwise the program waits until they change.
+    * Created the static field DrawPile.
+    * Created the fields hand, points, chosenCard, hasPassed and saidUno.
+    * Created the constructor (creates the hand).
+    * Implemented the methods getSizeHand, draw (draws a specified number of cards), sort,
+        hasChosen, hasPassed, getChosenCard, chooseColor, saidUno, calculatePoints (of the
+        remained cards), addPoints, getPoints, resetTurn, resetMatch and resetGame.
+
+2. Implemented Bot. Extends Player but automates some methods and makes instant decisions.
+    * Created the static fields DiscardPile and Random.
+    * Created the constructor (super).
+    * Overridden the methods hasChosen (chooses the first valid card, draws or passes) and
+       saidUno (says Uno in 80% cases).
+    * Implemented the method draw (only needed by the bot to draw a single card when it doesn't
+        have playable cards).
+
+3. Implemented new methods in TurnOrder: resetMatch, resetGame and getPlayers.
+
+4. Redefined Table: it manages turns, matches (ends when someone finishes all cards) and games
+   (ends when someone reaches 500 points).
+    * Added field winner and rebased endGame and endMatch as inner method fields.
+    * Added methods startGame, checkPoints and reset.
+    * Modified methods startMatch and checkPoints (now updatePoints, adds points to the winning
+        player) to be valid for changes.
+        
+
+
 ##TODO:
 
-1. Review Table methods
-2. Rethink the game flow, how cards are checked and Table/Player/Bot roles
-3. Start working on the GUI
+1. GUI
 
-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
