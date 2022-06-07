@@ -1,5 +1,8 @@
 package org.juno.controller;
 
+import javafx.fxml.FXML;
+import javafx.stage.Stage;
+
 /**
  * Defines: startMenu, class
  *
@@ -7,8 +10,12 @@ package org.juno.controller;
  */
 public class startMenu {
 
-    public void mouseClicked()
+    @FXML
+    public javafx.scene.control.Button exitButton;
+    @FXML
+    public void exitClicked()
     {
-        System.out.println("cliccato");
+        Stage stage = (Stage) exitButton.getScene().getWindow();
+        stage.close();
     }
 }
