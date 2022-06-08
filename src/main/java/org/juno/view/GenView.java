@@ -37,8 +37,8 @@ public abstract class GenView
 //		startMenu = new Scene(loader.load());
 		FXMLLoader loaderStats = new FXMLLoader(GenView.class.getResource("StatsMenu.fxml"));
 		stats = new Scene(loaderStats.load());
-//		FXMLLoader loader = new FXMLLoader(GenView.class.getResource("StartMenu.fxml"));
-//		startMenu = new Scene(loader.load());
+		FXMLLoader loader = new FXMLLoader(GenView.class.getResource("Settings.fxml"));
+		settings = new Scene(loader.load());
 	}
 
 	public static Scene getStartMenu()
@@ -64,8 +64,4 @@ public abstract class GenView
 				});
 	}
 
-	public void menuClicked()
-	{
-		changeScene(0);
-	}
 }

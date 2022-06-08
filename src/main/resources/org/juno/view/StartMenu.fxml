@@ -48,7 +48,7 @@
                 <Insets />
             </VBox.margin>
         </Button>
-        <Button alignment="TOP_CENTER" contentDisplay="TOP" mnemonicParsing="false" text="Settings">
+        <Button alignment="TOP_CENTER" contentDisplay="TOP" mnemonicParsing="false" onMouseClicked="#settingsClicked" text="Settings">
             <VBox.margin>
                 <Insets />
             </VBox.margin>
