@@ -4,6 +4,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import org.juno.view.GenView;
 
 import java.io.IOException;
 
@@ -20,11 +21,12 @@ public class Juno extends Application
 		launch(args);
 	}
 	@Override
-	public void start(Stage stage) throws IOException {
-		FXMLLoader loader = new FXMLLoader(Juno.class.getResource("startMenu.fxml"));
-		Scene scene = new Scene(loader.load());
+	public void start(Stage stage) throws IOException
+	{
+		GenView.setWindow(stage);
+		GenView.load();
+		stage.setScene(GenView.getStartMenu());
 		stage.setTitle("JUno");
-		stage.setScene(scene);
 		stage.show();
 	}
 }
