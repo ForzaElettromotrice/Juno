@@ -1,7 +1,6 @@
 package org.juno.controller;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import org.juno.view.GenView;
 import org.juno.view.StartMenuView;
 

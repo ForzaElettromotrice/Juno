@@ -29,14 +29,14 @@ public abstract class GenView
 
 	public static void load() throws IOException
 	{
-		FXMLLoader loader = new FXMLLoader(GenView.class.getResource("StartMenu.fxml"));
-		startMenu = new Scene(loader.load());
+		FXMLLoader loaderStart = new FXMLLoader(GenView.class.getResource("StartMenu.fxml"));
+		startMenu = new Scene(loaderStart.load());
 //		FXMLLoader loader = new FXMLLoader(GenView.class.getResource("StartMenu.fxml"));
 //		startMenu = new Scene(loader.load());
 //		FXMLLoader loader = new FXMLLoader(GenView.class.getResource("StartMenu.fxml"));
 //		startMenu = new Scene(loader.load());
-//		FXMLLoader loader = new FXMLLoader(GenView.class.getResource("StartMenu.fxml"));
-//		startMenu = new Scene(loader.load());
+		FXMLLoader loaderStats = new FXMLLoader(GenView.class.getResource("StatsMenu.fxml"));
+		stats = new Scene(loaderStats.load());
 //		FXMLLoader loader = new FXMLLoader(GenView.class.getResource("StartMenu.fxml"));
 //		startMenu = new Scene(loader.load());
 	}
@@ -62,5 +62,10 @@ public abstract class GenView
 					case 4 -> play;
 					default -> throw new RuntimeException("Non esiste questa scena");
 				});
+	}
+
+	public void menuClicked()
+	{
+		changeScene(0);
 	}
 }
