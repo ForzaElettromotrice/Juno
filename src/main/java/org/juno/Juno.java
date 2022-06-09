@@ -1,6 +1,7 @@
 package org.juno;
 
 import javafx.application.Application;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import org.juno.view.GenView;
 
@@ -25,6 +26,7 @@ public class Juno extends Application
 		GenView.load();
 		stage.setScene(GenView.getStartMenu());
 		stage.setTitle("JUno");
+		stage.getIcons().add(new Image(Juno.class.getResourceAsStream("images/icon.png")));
 		stage.show();
 	}
 }
