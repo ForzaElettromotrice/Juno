@@ -2,64 +2,71 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.paint.Color?>
-<?import javafx.scene.paint.RadialGradient?>
-<?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.juno.controller.StartMenuController">
-    <Pane layoutX="15.0" layoutY="14.0" prefHeight="40.0" prefWidth="564.0">
-        <Label alignment="CENTER" layoutX="13.0" layoutY="12.0" prefHeight="17.0" prefWidth="538.0" text="WELCOME TO JUNO!" textAlignment="CENTER">
-            <font>
-                <Font name="Franklin Gothic Medium" size="25.0" />
-            </font>
-            <textFill>
-                <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
-                    <stops>
-                        <Stop>
-                            <color>
-                                <Color red="0.8600000143051147" green="0.11548571288585663" blue="0.0860000029206276" />
-                            </color>
-                        </Stop>
-                        <Stop offset="1.0">
-                            <color>
-                                <Color red="0.8310794234275818" green="0.9210526347160339" blue="0.021320663392543793" />
-                            </color>
-                        </Stop>
-                    </stops>
-                </RadialGradient>
-            </textFill>
-        </Label>
-    </Pane>
-    <VBox alignment="TOP_CENTER" layoutX="62.0" layoutY="54.0" prefHeight="317.0" prefWidth="100.0" spacing="30.0">
-        <Button alignment="TOP_CENTER" contentDisplay="TOP" mnemonicParsing="false" onMouseClicked="#playClicked" text="Play">
-            <opaqueInsets>
-                <Insets />
-            </opaqueInsets>
-            <VBox.margin>
-                <Insets />
-            </VBox.margin>
-        </Button>
-        <Button alignment="TOP_CENTER" contentDisplay="TOP" mnemonicParsing="false" onMouseClicked="#statsClicked" text="Stats">
-            <VBox.margin>
-                <Insets />
-            </VBox.margin>
-        </Button>
-        <Button alignment="TOP_CENTER" contentDisplay="TOP" mnemonicParsing="false" onMouseClicked="#settingsClicked" text="Settings">
-            <VBox.margin>
-                <Insets />
-            </VBox.margin>
-        </Button>
-        <Button alignment="TOP_CENTER" contentDisplay="TOP" mnemonicParsing="false" onMouseClicked="#exitClicked" text="Exit">
-            <VBox.margin>
-                <Insets />
-            </VBox.margin>
-        </Button>
-        <padding>
-            <Insets top="50.0" />
-        </padding>
-    </VBox>
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.juno.controller.StartMenuController">
+   <ImageView blendMode="MULTIPLY" fitHeight="500.0" fitWidth="600.0" pickOnBounds="true">
+      <image>
+         <Image url="@../images/pngtree-comic-book-page-background-with-radial-halftone-effects-and-rays-in-image_263217.jpg" />
+      </image>
+   </ImageView>
+     <Button alignment="TOP_CENTER" contentDisplay="CENTER" layoutX="97.0" layoutY="37.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#playClicked" prefHeight="100.0" prefWidth="100.0" rotate="-12.5" style="-fx-background-color: transparent;" text="Play" textFill="WHITE">
+         <opaqueInsets>
+             <Insets />
+         </opaqueInsets>
+      <graphic>
+         <ImageView fitHeight="163.0" fitWidth="110.0" onMouseClicked="#playClicked" pickOnBounds="true" preserveRatio="true" style="-fx-background-color: transparent;">
+            <image>
+               <Image url="@../images/back.png" />
+            </image>
+         </ImageView>
+      </graphic>
+      <font>
+         <Font name="Impact" size="26.0" />
+      </font>
+     </Button>
+     <Button alignment="TOP_CENTER" contentDisplay="CENTER" layoutX="84.0" layoutY="291.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#statsClicked" prefHeight="100.0" prefWidth="100.0" rotate="17.1" style="-fx-background-color: transparent;" text="Stats" textFill="WHITE">
+      <graphic>
+         <ImageView fitHeight="163.0" fitWidth="110.0" onMouseClicked="#statsClicked" pickOnBounds="true" preserveRatio="true">
+            <image>
+               <Image url="@../images/back.png" />
+            </image>
+         </ImageView>
+      </graphic>
+      <font>
+         <Font name="Impact" size="26.0" />
+      </font>
+     </Button>
+   <Button alignment="TOP_CENTER" contentDisplay="CENTER" layoutX="358.0" layoutY="282.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#exitClicked" prefHeight="100.0" prefWidth="100.0" rotate="-16.7" style="-fx-background-color: transparent;" text="Exit" textFill="WHITE">
+      <graphic>
+         <ImageView fitHeight="163.0" fitWidth="110.0" onMouseClicked="#exitClicked" pickOnBounds="true" preserveRatio="true">
+            <image>
+               <Image url="@../images/back.png" />
+            </image>
+         </ImageView>
+      </graphic>
+      <font>
+         <Font name="Impact" size="26.0" />
+      </font>
+   </Button>
+   <Button alignment="TOP_CENTER" contentDisplay="CENTER" layoutX="423.0" layoutY="26.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#settingsClicked" prefHeight="100.0" prefWidth="100.0" rotate="18.4" style="-fx-background-color: transparent;" text="Settings" textFill="WHITE">
+      <graphic>
+         <ImageView fitHeight="163.0" fitWidth="110.0" onMouseClicked="#settingsClicked" pickOnBounds="true" preserveRatio="true">
+            <image>
+               <Image url="@../images/back.png" />
+            </image>
+         </ImageView>
+      </graphic>
+      <font>
+         <Font name="Impact" size="19.0" />
+      </font>
+   </Button>
+   <ImageView fitHeight="171.0" fitWidth="236.0" layoutX="189.0" layoutY="152.0" pickOnBounds="true" preserveRatio="true">
+      <image>
+         <Image url="@../images/uno!.png" />
+      </image>
+   </ImageView>
 </Pane>
