@@ -1,6 +1,9 @@
 package org.juno.controller;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import org.juno.view.GenView;
 import org.juno.view.StartMenuView;
 
@@ -12,6 +15,12 @@ import org.juno.view.StartMenuView;
 public class StartMenuController
 {
     private static final StartMenuView START_MENU_VIEW = StartMenuView.getINSTANCE();
+
+    @FXML
+    public Button stats;
+
+    @FXML
+    public ImageView lightsStats;
 
     @FXML
     public void playClicked()
@@ -35,5 +44,17 @@ public class StartMenuController
     public void exitClicked()
     {
         GenView.closeWindow();
+    }
+
+    @FXML
+    public void statsEntered()
+    {
+        lightsStats.setVisible(true);
+    }
+
+    @FXML
+    public void statsExited()
+    {
+        lightsStats.setVisible(false);
     }
 }

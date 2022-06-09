@@ -7,66 +7,66 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.juno.controller.StartMenuController">
-   <ImageView blendMode="MULTIPLY" fitHeight="500.0" fitWidth="600.0" pickOnBounds="true">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="540.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.juno.controller.StartMenuController">
+   <ImageView blendMode="MULTIPLY" fitHeight="540.0" fitWidth="960.0" pickOnBounds="true">
       <image>
          <Image url="@../images/pngtree-comic-book-page-background-with-radial-halftone-effects-and-rays-in-image_263217.jpg" />
       </image>
    </ImageView>
-     <Button alignment="TOP_CENTER" contentDisplay="CENTER" layoutX="97.0" layoutY="37.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#playClicked" prefHeight="100.0" prefWidth="100.0" rotate="-12.5" style="-fx-background-color: transparent;" text="Play" textFill="WHITE">
+   <ImageView fx:id="lightsStats" fitHeight="170.0" fitWidth="248.0" layoutX="86.0" layoutY="323.0" pickOnBounds="true" rotate="107.7" visible="false">
+      <image>
+         <Image url="@../images/png-transparent-light-background-frame-decorative-borders-borders-and-frames-film-frame-frames-birthday-yellow-orange-thumbnail.png" />
+      </image>
+   </ImageView>
+     <Button alignment="TOP_CENTER" contentDisplay="CENTER" layoutX="160.0" layoutY="16.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#playClicked" prefHeight="210.0" prefWidth="160.0" rotate="-12.5" style="-fx-background-color: transparent;" text="Play" textFill="WHITE">
          <opaqueInsets>
              <Insets />
          </opaqueInsets>
       <graphic>
-         <ImageView fitHeight="163.0" fitWidth="110.0" onMouseClicked="#playClicked" pickOnBounds="true" preserveRatio="true" style="-fx-background-color: transparent;">
+         <ImageView fitHeight="210.0" fitWidth="160.0" pickOnBounds="true" preserveRatio="true" style="-fx-background-color: transparent;">
             <image>
                <Image url="@../images/back.png" />
             </image>
          </ImageView>
       </graphic>
       <font>
-         <Font name="Impact" size="26.0" />
+         <Font name="Impact" size="40.0" />
       </font>
      </Button>
-     <Button alignment="TOP_CENTER" contentDisplay="CENTER" layoutX="84.0" layoutY="291.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#statsClicked" prefHeight="100.0" prefWidth="100.0" rotate="17.1" style="-fx-background-color: transparent;" text="Stats" textFill="WHITE">
+     <Button fx:id="stats" alignment="TOP_CENTER" contentDisplay="CENTER" layoutX="133.0" layoutY="290.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#statsClicked" onMouseEntered="#statsEntered" onMouseExited="#statsExited" prefHeight="210.0" prefWidth="160.0" rotate="17.1" style="-fx-background-color: transparent;" text="Stats" textFill="WHITE">
       <graphic>
-         <ImageView fitHeight="163.0" fitWidth="110.0" onMouseClicked="#statsClicked" pickOnBounds="true" preserveRatio="true">
+         <ImageView fitHeight="210.0" fitWidth="160.0" pickOnBounds="true" preserveRatio="true">
             <image>
                <Image url="@../images/back.png" />
             </image>
          </ImageView>
       </graphic>
       <font>
-         <Font name="Impact" size="26.0" />
+         <Font name="Impact" size="40.0" />
       </font>
      </Button>
-   <Button alignment="TOP_CENTER" contentDisplay="CENTER" layoutX="358.0" layoutY="282.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#exitClicked" prefHeight="100.0" prefWidth="100.0" rotate="-16.7" style="-fx-background-color: transparent;" text="Exit" textFill="WHITE">
+   <Button alignment="TOP_CENTER" contentDisplay="CENTER" layoutX="555.0" layoutY="281.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#exitClicked" prefHeight="210.0" prefWidth="160.0" rotate="-16.7" style="-fx-background-color: transparent;" text="Exit" textFill="WHITE">
       <graphic>
-         <ImageView fitHeight="163.0" fitWidth="110.0" onMouseClicked="#exitClicked" pickOnBounds="true" preserveRatio="true">
+         <ImageView fitHeight="210.0" fitWidth="160.0" pickOnBounds="true" preserveRatio="true">
             <image>
                <Image url="@../images/back.png" />
             </image>
          </ImageView>
       </graphic>
       <font>
-         <Font name="Impact" size="26.0" />
+         <Font name="Impact" size="40.0" />
       </font>
    </Button>
-   <Button alignment="TOP_CENTER" contentDisplay="CENTER" layoutX="423.0" layoutY="26.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#settingsClicked" prefHeight="100.0" prefWidth="100.0" rotate="18.4" style="-fx-background-color: transparent;" text="Settings" textFill="WHITE">
+   <Button alignment="TOP_CENTER" contentDisplay="CENTER" layoutX="677.0" layoutY="14.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#settingsClicked" prefHeight="210.0" prefWidth="160.0" rotate="18.4" style="-fx-background-color: transparent;" text="Settings" textFill="WHITE">
       <graphic>
-         <ImageView fitHeight="163.0" fitWidth="110.0" onMouseClicked="#settingsClicked" pickOnBounds="true" preserveRatio="true">
+         <ImageView fitHeight="210.0" fitWidth="160.0" pickOnBounds="true" preserveRatio="true">
             <image>
                <Image url="@../images/back.png" />
             </image>
          </ImageView>
       </graphic>
       <font>
-         <Font name="Impact" size="19.0" />
+         <Font name="Impact" size="27.0" />
       </font>
    </Button>
-   <ImageView fitHeight="171.0" fitWidth="236.0" layoutX="189.0" layoutY="152.0" pickOnBounds="true" preserveRatio="true">
-      <image>
-         <Image url="@../images/uno!.png" />
-      </image>
-   </ImageView>
 </Pane>

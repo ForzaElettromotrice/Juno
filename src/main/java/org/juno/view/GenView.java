@@ -64,4 +64,9 @@ public abstract class GenView
 				});
 	}
 
+	public static Scene getLogin()
+	{
+		return null;
+	}
+
 }
