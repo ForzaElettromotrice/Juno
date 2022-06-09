@@ -13,12 +13,27 @@
          <Image url="@../images/pngtree-comic-book-page-background-with-radial-halftone-effects-and-rays-in-image_263217.jpg" />
       </image>
    </ImageView>
-   <ImageView fx:id="lightsStats" fitHeight="170.0" fitWidth="248.0" layoutX="86.0" layoutY="323.0" pickOnBounds="true" rotate="107.7" visible="false">
+   <ImageView fx:id="lightsPlay" fitHeight="166.0" fitWidth="235.0" layoutX="124.0" layoutY="51.0" pickOnBounds="true" rotate="77.9" visible="false">
       <image>
          <Image url="@../images/png-transparent-light-background-frame-decorative-borders-borders-and-frames-film-frame-frames-birthday-yellow-orange-thumbnail.png" />
       </image>
    </ImageView>
-     <Button alignment="TOP_CENTER" contentDisplay="CENTER" layoutX="160.0" layoutY="16.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#playClicked" prefHeight="210.0" prefWidth="160.0" rotate="-12.5" style="-fx-background-color: transparent;" text="Play" textFill="WHITE">
+   <ImageView fx:id="lightsStats" fitHeight="166.0" fitWidth="235.0" layoutX="92.0" layoutY="325.0" pickOnBounds="true" rotate="107.0" visible="false">
+      <image>
+         <Image url="@../images/png-transparent-light-background-frame-decorative-borders-borders-and-frames-film-frame-frames-birthday-yellow-orange-thumbnail.png" />
+      </image>
+   </ImageView>
+   <ImageView fx:id="lightsExit" fitHeight="166.0" fitWidth="235.0" layoutX="522.0" layoutY="315.0" pickOnBounds="true" rotate="73.3" visible="false">
+      <image>
+         <Image url="@../images/png-transparent-light-background-frame-decorative-borders-borders-and-frames-film-frame-frames-birthday-yellow-orange-thumbnail.png" />
+      </image>
+   </ImageView>
+   <ImageView fx:id="lightsSettings" fitHeight="166.0" fitWidth="235.0" layoutX="637.0" layoutY="45.0" pickOnBounds="true" rotate="-71.6" visible="false">
+      <image>
+         <Image url="@../images/png-transparent-light-background-frame-decorative-borders-borders-and-frames-film-frame-frames-birthday-yellow-orange-thumbnail.png" />
+      </image>
+   </ImageView>
+     <Button alignment="TOP_CENTER" contentDisplay="CENTER" layoutX="160.0" layoutY="16.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#playClicked" onMouseEntered="#playEntered" onMouseExited="#playExited" prefHeight="210.0" prefWidth="160.0" rotate="-12.5" style="-fx-background-color: transparent;" text="Play" textFill="WHITE">
          <opaqueInsets>
              <Insets />
          </opaqueInsets>
@@ -45,7 +60,7 @@
          <Font name="Impact" size="40.0" />
       </font>
      </Button>
-   <Button alignment="TOP_CENTER" contentDisplay="CENTER" layoutX="555.0" layoutY="281.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#exitClicked" prefHeight="210.0" prefWidth="160.0" rotate="-16.7" style="-fx-background-color: transparent;" text="Exit" textFill="WHITE">
+   <Button alignment="TOP_CENTER" contentDisplay="CENTER" layoutX="555.0" layoutY="281.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#exitClicked" onMouseEntered="#exitEntered" onMouseExited="#exitExited" prefHeight="210.0" prefWidth="160.0" rotate="-16.7" style="-fx-background-color: transparent;" text="Exit" textFill="WHITE">
       <graphic>
          <ImageView fitHeight="210.0" fitWidth="160.0" pickOnBounds="true" preserveRatio="true">
             <image>
@@ -57,7 +72,7 @@
          <Font name="Impact" size="40.0" />
       </font>
    </Button>
-   <Button alignment="TOP_CENTER" contentDisplay="CENTER" layoutX="677.0" layoutY="14.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#settingsClicked" prefHeight="210.0" prefWidth="160.0" rotate="18.4" style="-fx-background-color: transparent;" text="Settings" textFill="WHITE">
+   <Button alignment="TOP_CENTER" contentDisplay="CENTER" layoutX="677.0" layoutY="14.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#settingsClicked" onMouseEntered="#settingsEntered" onMouseExited="#settingsExited" prefHeight="210.0" prefWidth="160.0" rotate="18.4" style="-fx-background-color: transparent;" text="Settings" textFill="WHITE">
       <graphic>
          <ImageView fitHeight="210.0" fitWidth="160.0" pickOnBounds="true" preserveRatio="true">
             <image>

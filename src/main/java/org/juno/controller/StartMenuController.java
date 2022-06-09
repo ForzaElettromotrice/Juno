@@ -17,10 +17,13 @@ public class StartMenuController
     private static final StartMenuView START_MENU_VIEW = StartMenuView.getINSTANCE();
 
     @FXML
-    public Button stats;
-
-    @FXML
     public ImageView lightsStats;
+    @FXML
+    public ImageView lightsPlay;
+    @FXML
+    public ImageView lightsExit;
+    @FXML
+    public ImageView lightsSettings;
 
     @FXML
     public void playClicked()
@@ -56,5 +59,41 @@ public class StartMenuController
     public void statsExited()
     {
         lightsStats.setVisible(false);
+    }
+
+    @FXML
+    public void playEntered()
+    {
+        lightsPlay.setVisible(true);
+    }
+
+    @FXML
+    public void playExited()
+    {
+        lightsPlay.setVisible(false);
+    }
+
+    @FXML
+    public void settingsEntered()
+    {
+        lightsSettings.setVisible(true);
+    }
+
+    @FXML
+    public void settingsExited()
+    {
+        lightsSettings.setVisible(false);
+    }
+
+    @FXML
+    public void exitEntered()
+    {
+        lightsExit.setVisible(true);
+    }
+
+    @FXML
+    public void exitExited()
+    {
+        lightsExit.setVisible(false);
     }
 }
