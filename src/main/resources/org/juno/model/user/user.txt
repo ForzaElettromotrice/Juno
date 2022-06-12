@@ -1,5 +1,5 @@
-j
-src/main/resources/org/juno/images/icon-256x256.png
+Ele
+src\main\resources\org\juno\images\icon-256x256.png
 0
 0
 1

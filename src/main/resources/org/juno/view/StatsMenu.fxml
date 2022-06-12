@@ -10,7 +10,7 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="backgroundStats" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="540.0" prefWidth="960.0" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.juno.controller.StatsMenuController">
+<AnchorPane id="backgroundStats" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#saveUsername" prefHeight="540.0" prefWidth="960.0" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.juno.controller.StatsMenuController">
    <Circle fx:id="avatar" fill="WHITE" layoutX="194.0" layoutY="199.0" onMouseEntered="#avatarEntered" onMouseExited="#avatarExited" radius="121.0" stroke="BLACK" strokeType="INSIDE" />
    <ImageView fitHeight="160.0" fitWidth="170.0" layoutX="36.0" layoutY="339.0" pickOnBounds="true" preserveRatio="true">
       <Image url="@../images/Golden_star.svg.png" />
@@ -26,7 +26,7 @@
          <Font name="Javanese Text" size="30.0" />
       </font>
    </Label>
-   <TextField fx:id="username" alignment="CENTER_RIGHT" cacheShape="false" centerShape="false" focusTraversable="false" layoutX="389.0" layoutY="58.0" prefHeight="52.0" prefWidth="326.0" promptText="Username" scaleShape="false" style="-fx-background-color: transparent;">
+   <TextField fx:id="username" alignment="CENTER_RIGHT" cacheShape="false" centerShape="false" focusTraversable="false" layoutX="389.0" layoutY="58.0" onKeyPressed="#keyPressed" prefHeight="52.0" prefWidth="326.0" promptText="Username" scaleShape="false" style="-fx-background-color: transparent;">
       <font>
          <Font name="Javanese Text" size="30.0" />
       </font>

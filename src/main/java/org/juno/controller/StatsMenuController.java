@@ -1,7 +1,10 @@
 package org.juno.controller;
 
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.ProgressBar;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
@@ -10,15 +13,19 @@ import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import javafx.stage.FileChooser;
 import org.juno.model.user.User;
+import org.juno.view.GenView;
 import org.juno.view.NonexistingSceneException;
 import org.juno.view.StatsMenuView;
+
+import java.net.URL;
+import java.util.ResourceBundle;
 
 /**
  * Defines: StatsMenuController, class
  *
  * @author R0n3l, ForzaElettromotrice
  */
-public class StatsMenuController
+public class StatsMenuController implements Initializable
 {
     private static final StatsMenuView STATS_MENU_VIEW = StatsMenuView.getINSTANCE();
     private static final User USER = User.getINSTANCE();
@@ -32,6 +39,17 @@ public class StatsMenuController
     public Circle avatar;
     @FXML
     public TextField username;
+
+    @FXML
+    public Label victories;
+    @FXML
+    public Label defeats;
+    @FXML
+    public Label matches;
+    @FXML
+    public Label level;
+    @FXML
+    public ProgressBar progressBar;
 
     @FXML
     public void avatarEntered()
@@ -86,13 +104,26 @@ public class StatsMenuController
     @FXML
     public void saveUsername()
     {
+        if (!username.isFocused()) return;
         USER.setNickname(username.getCharacters().toString());
         USER.save();
+        back.requestFocus();
     }
 
     @FXML
     public void keyPressed(KeyEvent key)
     {
         if (key.getCode() == KeyCode.ENTER) saveUsername();
+    }
+    @Override
+    public void initialize(URL location, ResourceBundle resources)
+    {
+        username.setText(USER.getNickname());
+        victories.setText("" + USER.getVictories());
+        defeats.setText("" + USER.getDefeats());
+        matches.setText("" + USER.getTotalMatches());
+        level.setText("" + USER.getLevel());
+        progressBar.setProgress(USER.getProgress());
+        avatar.setFill(new ImagePattern(new Image("" + System.getProperty("user.dir") + "\\" + USER.getAvatar())));
     }
 }
