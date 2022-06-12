@@ -69,7 +69,7 @@
          </font>
       </Label>
         <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
-            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onMouseClicked="#saveClicked" text="Salva">
+            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onKeyPressed="#keyPressed" onMouseClicked="#saveClicked" text="Salva">
                 <font>
                     <Font size="15.0" />
                 </font>

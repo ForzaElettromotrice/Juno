@@ -1,5 +1,5 @@
-Federico
-src/main/resources/org/juno/images/user-icon-trendy-flat-style-isolated-grey-background-user-symbol-user-icon-trendy-flat-style-isolated-grey-background-123663211.jpg
+j
+src/main/resources/org/juno/images/icon-256x256.png
 0
 0
 1
