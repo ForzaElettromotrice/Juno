@@ -9,7 +9,7 @@ import java.util.Collections;
  *
  * @author R0n3l, ForzaElettromotrice
  */
-public class DrawPile extends Deck
+public class DrawPile extends GenDeck
 {
     private static final DrawPile INSTANCE = new DrawPile();
 

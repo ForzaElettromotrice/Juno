@@ -3,7 +3,6 @@ package org.juno.view;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import org.juno.Juno;
 
 import java.io.IOException;
 
@@ -19,7 +18,7 @@ public abstract class GenView
 	protected static Scene login;
 	protected static Scene startMenu;
 	protected static Scene chooseMode;
-	protected static Scene play;
+	protected static Scene gameplay;
 	protected static Scene stats;
 	protected static Scene settings;
 
@@ -34,10 +33,10 @@ public abstract class GenView
 		login = new Scene(loader.load());
 		loader = new FXMLLoader(GenView.class.getResource("StartMenu.fxml"));
 		startMenu = new Scene(loader.load());
-//		loader = new FXMLLoader(GenView.class.getResource("StartMenu.fxml"));
-//		startMenu = new Scene(loader.load());
-//		loader = new FXMLLoader(GenView.class.getResource("StartMenu.fxml"));
-//		startMenu = new Scene(loader.load());
+//		loader = new FXMLLoader(GenView.class.getResource("ChooseMode.fxml"));
+//		chooseMode = new Scene(loader.load());
+//		loader = new FXMLLoader(GenView.class.getResource("Gameplay.fxml"));
+//		gameplay = new Scene(loader.load());
 		loader = new FXMLLoader(GenView.class.getResource("StatsMenu.fxml"));
 		stats = new Scene(loader.load());
 		loader = new FXMLLoader(GenView.class.getResource("Settings.fxml"));
@@ -54,7 +53,7 @@ public abstract class GenView
 		window.close();
 	}
 
-	public void changeScene(int n)
+	public void changeScene(int n) throws NonexistingSceneException
 	{
 		window.setScene(switch (n)
 				{
@@ -62,8 +61,8 @@ public abstract class GenView
 					case 1 -> chooseMode;
 					case 2 -> stats;
 					case 3 -> settings;
-					case 4 -> play;
-					default -> throw new RuntimeException("Non esiste questa scena");
+					case 4 -> gameplay;
+					default -> throw new NonexistingSceneException("Non esiste questa scena");
 				});
 //		window.setFullScreen(true);
 	}

@@ -6,14 +6,14 @@ import java.util.LinkedList;
  *
  * @author R0n3l, ForzaElettromotrice
  */
-public abstract class Deck
+public abstract class GenDeck
 {
     protected LinkedList<Card> deck;
 
     /**
      * Create the deck to the initial state
      */
-    protected Deck()
+    protected GenDeck()
     {
         deck = new LinkedList<>();
         reset();

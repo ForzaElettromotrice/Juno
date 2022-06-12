@@ -3,6 +3,7 @@ package org.juno.controller;
 import javafx.fxml.FXML;
 import javafx.scene.image.ImageView;
 import org.juno.view.GenView;
+import org.juno.view.NonexistingSceneException;
 import org.juno.view.StartMenuView;
 
 /**
@@ -24,19 +25,19 @@ public class StartMenuController
     public ImageView lightsSettings;
 
     @FXML
-    public void playClicked()
+    public void playClicked() throws NonexistingSceneException
     {
         START_MENU_VIEW.changeScene(1);
     }
 
     @FXML
-    public void statsClicked()
+    public void statsClicked() throws NonexistingSceneException
     {
         START_MENU_VIEW.changeScene(2);
     }
 
     @FXML
-    public void settingsClicked()
+    public void settingsClicked() throws NonexistingSceneException
     {
         START_MENU_VIEW.changeScene(3);
     }

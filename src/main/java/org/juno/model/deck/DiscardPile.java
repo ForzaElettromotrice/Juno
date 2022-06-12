@@ -8,7 +8,7 @@ import java.util.LinkedList;
  *
  * @author R0n3l, ForzaElettromotrice
  */
-public class DiscardPile extends Deck
+public class DiscardPile extends GenDeck
 {
     private static final DiscardPile INSTANCE = new DiscardPile();
 
