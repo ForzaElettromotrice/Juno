@@ -1,1 +1,6 @@
-sss
+hgewg
+src\main\resources\org\juno\images\icon1.png
+0
+0
+1
+0

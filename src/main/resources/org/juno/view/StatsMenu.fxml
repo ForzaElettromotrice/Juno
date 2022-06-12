@@ -13,7 +13,7 @@
 <AnchorPane id="backgroundStats" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#saveUsername" prefHeight="540.0" prefWidth="960.0" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.juno.controller.StatsMenuController">
    <Circle fx:id="avatar" fill="WHITE" layoutX="194.0" layoutY="199.0" onMouseEntered="#avatarEntered" onMouseExited="#avatarExited" radius="121.0" stroke="BLACK" strokeType="INSIDE" />
    <ImageView fitHeight="160.0" fitWidth="170.0" layoutX="36.0" layoutY="339.0" pickOnBounds="true" preserveRatio="true">
-      <Image url="@../images/Golden_star.svg.png" />
+      <Image url="@../images/levelStar.png" />
    </ImageView>
    <Label fx:id="level" alignment="CENTER" contentDisplay="CENTER" layoutX="76.0" layoutY="391.0" prefHeight="73.0" prefWidth="87.0" text="1">
       <font>
@@ -35,10 +35,10 @@
       <Image url="@../images/cards.png" />
    </ImageView>
    <ImageView fitHeight="63.0" fitWidth="52.0" layoutX="434.0" layoutY="199.0" pickOnBounds="true" preserveRatio="true">
-      <Image url="@../images/trophy.png" />
+      <Image url="@../images/victories.png" />
    </ImageView>
    <ImageView fitHeight="63.0" fitWidth="118.0" layoutX="428.0" layoutY="294.0" pickOnBounds="true" preserveRatio="true">
-      <Image url="@../images/skull.png" />
+      <Image url="@../images/defeats.png" />
    </ImageView>
    <Label fx:id="victories" alignment="CENTER" contentDisplay="CENTER" layoutX="518.0" layoutY="211.0" prefHeight="39.0" prefWidth="218.0" text="0">
       <font>
