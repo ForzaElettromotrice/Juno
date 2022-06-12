@@ -15,18 +15,18 @@
    <ImageView fitHeight="160.0" fitWidth="170.0" layoutX="36.0" layoutY="339.0" pickOnBounds="true" preserveRatio="true">
       <Image url="@../images/Golden_star.svg.png" />
    </ImageView>
-   <TextField fx:id="level" alignment="CENTER" editable="false" layoutX="76.0" layoutY="390.0" prefHeight="73.0" prefWidth="87.0" promptText="1" style="-fx-background-color: transparent;">
+   <Label fx:id="level" alignment="CENTER" contentDisplay="CENTER" layoutX="76.0" layoutY="391.0" prefHeight="73.0" prefWidth="87.0" text="1">
       <font>
-         <Font name="System Bold Italic" size="29.0" />
+         <Font name="System Bold Italic" size="51.0" />
       </font>
-   </TextField>
+   </Label>
    <ProgressBar fx:id="progressBar" layoutX="166.0" layoutY="427.0" prefHeight="30.0" prefWidth="200.0" progress="0.0" />
    <Label alignment="TOP_LEFT" layoutX="715.0" layoutY="71.0" prefHeight="98.0" prefWidth="156.0" text="STATS">
       <font>
          <Font name="Javanese Text" size="30.0" />
       </font>
    </Label>
-   <TextField fx:id="username" alignment="CENTER_RIGHT" layoutX="389.0" layoutY="58.0" prefHeight="52.0" prefWidth="326.0" promptText="Username" style="-fx-background-color: transparent;">
+   <TextField fx:id="username" alignment="CENTER_RIGHT" cacheShape="false" centerShape="false" focusTraversable="false" layoutX="389.0" layoutY="58.0" prefHeight="52.0" prefWidth="326.0" promptText="Username" scaleShape="false" style="-fx-background-color: transparent;">
       <font>
          <Font name="Javanese Text" size="30.0" />
       </font>
@@ -40,21 +40,11 @@
    <ImageView fitHeight="63.0" fitWidth="118.0" layoutX="428.0" layoutY="294.0" pickOnBounds="true" preserveRatio="true">
       <Image url="@../images/skull.png" />
    </ImageView>
-   <TextField fx:id="victories" alignment="CENTER" editable="false" layoutX="518.0" layoutY="198.0" prefHeight="39.0" prefWidth="218.0" promptText="00000000000" style="-fx-background-color: transparent;">
+   <Label fx:id="victories" alignment="CENTER" contentDisplay="CENTER" layoutX="518.0" layoutY="211.0" prefHeight="39.0" prefWidth="218.0" text="0">
       <font>
-         <Font size="30.0" />
+         <Font name="System Bold Italic" size="30.0" />
       </font>
-   </TextField>
-   <TextField fx:id="defeats" alignment="CENTER" editable="false" layoutX="518.0" layoutY="293.0" prefHeight="39.0" prefWidth="218.0" promptText="00000000000" style="-fx-background-color: transparent;">
-      <font>
-         <Font size="30.0" />
-      </font>
-   </TextField>
-   <TextField fx:id="matches" alignment="CENTER" editable="false" layoutX="518.0" layoutY="395.0" prefHeight="39.0" prefWidth="218.0" promptText="00000000000" style="-fx-background-color: transparent;">
-      <font>
-         <Font size="30.0" />
-      </font>
-   </TextField>
+   </Label>
    <Label alignment="TOP_LEFT" layoutX="743.0" layoutY="189.0" prefHeight="98.0" prefWidth="181.0" text="VICTORIES">
       <font>
          <Font name="Javanese Text" size="30.0" />
@@ -80,4 +70,14 @@
          <Font name="Javanese Text" size="22.0" />
       </font>
    </Button>
+   <Label fx:id="defeats" alignment="CENTER" contentDisplay="CENTER" layoutX="518.0" layoutY="303.0" prefHeight="39.0" prefWidth="218.0" text="0">
+      <font>
+         <Font name="System Bold Italic" size="30.0" />
+      </font>
+   </Label>
+   <Label fx:id="matches" alignment="CENTER" contentDisplay="CENTER" layoutX="518.0" layoutY="404.0" prefHeight="39.0" prefWidth="218.0" text="0">
+      <font>
+         <Font name="System Bold Italic" size="30.0" />
+      </font>
+   </Label>
 </AnchorPane>

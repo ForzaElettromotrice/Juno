@@ -26,17 +26,22 @@ public class Juno extends Application
 	public void start(Stage stage) throws IOException
 	{
 		stage.setResizable(false);
-		
 		GenView.setWindow(stage);
-		GenView.load();
+		boolean login;
 		try
 		{
 			User.getINSTANCE().load();
-			stage.setScene(GenView.getStartMenu());
+			login = false;
+
 		} catch (DataCorruptedException e)
 		{
-			stage.setScene(GenView.getLogin());
+			login = true;
 		}
+
+		GenView.load();
+
+		stage.setScene(login ? GenView.getLogin() : GenView.getStartMenu());
+
 		stage.setTitle("JUno");
 		stage.getIcons().add(new Image(Objects.requireNonNull(Juno.class.getResourceAsStream("images/icon.png"))));
 		stage.show();

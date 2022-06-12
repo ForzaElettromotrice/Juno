@@ -47,9 +47,9 @@ public class LoginController
 		}
 
 		String pathImg;
-		if (firstChoice.isSelected()) pathImg = "src/main/resources/org/juno/images/icon-256x256.png";
+		if (firstChoice.isSelected()) pathImg = "src\\main\\resources\\org\\juno\\images\\icon-256x256.png";
 		else
-			pathImg = secondChoice.isSelected() ? "src/main/resources/org/juno/images/trasferimento.png" : "src/main/resources/org/juno/images/user-icon-trendy-flat-style-isolated-grey-background-user-symbol-user-icon-trendy-flat-style-isolated-grey-background-123663211.jpg";
+			pathImg = secondChoice.isSelected() ? "src\\main\\resources\\org\\juno\\images\\trasferimento.png" : "src\\main\\resources\\org\\juno\\images\\user-icon-trendy-flat-style-isolated-grey-background-user-symbol-user-icon-trendy-flat-style-isolated-grey-background-123663211.jpg";
 
 		saveData(username.getText(), pathImg);
 

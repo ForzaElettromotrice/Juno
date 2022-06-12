@@ -22,6 +22,7 @@ public abstract class GenView
 	protected static Scene stats;
 	protected static Scene settings;
 
+
 	public static void setWindow(Stage window)
 	{
 		GenView.window = window;

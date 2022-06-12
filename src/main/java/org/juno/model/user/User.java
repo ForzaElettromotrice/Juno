@@ -133,6 +133,7 @@ public class User
 
     /**
      * Returns the current level
+     *
      * @return current level
      */
     public int getLevel()
@@ -140,10 +141,16 @@ public class User
         return level.lvl;
     }
 
+    public double getProgress()
+    {
+        return ((double) level.exp) / ((4 + level.lvl) * 500);
+    }
+
     //Setters
 
     /**
      * Set the current nickname to the given value
+     *
      * @param nickname the new nickname
      */
     public void setNickname(String nickname)
