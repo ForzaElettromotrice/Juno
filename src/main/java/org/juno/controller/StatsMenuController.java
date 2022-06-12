@@ -86,8 +86,8 @@ public class StatsMenuController
         final FileChooser fc = new FileChooser();
         fc.setTitle("Apri...");
         fc.getExtensionFilters().addAll(
-                new FileChooser.ExtensionFilter("All Image Files", "*.jpeg", "*.bmp", "*.png", "*.webmp", "*.gif"),
-                new FileChooser.ExtensionFilter("JPEG", "*.jpeg"),
+                new FileChooser.ExtensionFilter("All Image Files", "*.jpeg", "*.bmp", "*.png", "*.webmp", "*.gif", "*.jpg"),
+                new FileChooser.ExtensionFilter("JPEG", "*.jpeg", "*.jpg"),
                 new FileChooser.ExtensionFilter("BMP", "*.bmp"),
                 new FileChooser.ExtensionFilter("PNG", "*.png"),
                 new FileChooser.ExtensionFilter("WEBMP", "*.webmp"),
