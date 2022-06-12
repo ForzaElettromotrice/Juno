@@ -11,7 +11,7 @@
 <?import javafx.scene.text.Font?>
 
 <AnchorPane id="backgroundStats" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#saveUsername" prefHeight="540.0" prefWidth="960.0" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.juno.controller.StatsMenuController">
-   <Circle fx:id="avatar" fill="WHITE" layoutX="194.0" layoutY="199.0" onMouseEntered="#avatarEntered" onMouseExited="#avatarExited" radius="121.0" stroke="BLACK" strokeType="INSIDE" />
+   <Circle fx:id="avatar" fill="WHITE" layoutX="194.0" layoutY="199.0" onMouseEntered="#avatarEntered" onMouseExited="#avatarExited" radius="150.0" stroke="transparent" strokeType="INSIDE" />
    <ImageView fitHeight="160.0" fitWidth="170.0" layoutX="36.0" layoutY="339.0" pickOnBounds="true" preserveRatio="true">
       <Image url="@../images/levelStar.png" />
    </ImageView>
@@ -60,7 +60,7 @@
          <Font name="Javanese Text" size="30.0" />
       </font>
    </Label>
-   <Button fx:id="change" layoutX="103.0" layoutY="162.0" mnemonicParsing="false" onMouseClicked="#changeClicked" onMouseEntered="#avatarEntered" prefHeight="73.0" prefWidth="181.0" style="-fx-background-color: transparent;" text="Change Avatar" textFill="#a4a4a4" visible="false">
+   <Button fx:id="change" layoutX="103.0" layoutY="162.0" mnemonicParsing="false" onMouseClicked="#changeClicked" onMouseEntered="#avatarEntered" prefHeight="73.0" prefWidth="181.0" style="-fx-background-color: transparent; -fx-border-color: BLACK; -fx-border-radius: 90;" text="Change Avatar" textFill="BLACK" visible="false">
       <font>
          <Font name="Javanese Text" size="18.0" />
       </font>

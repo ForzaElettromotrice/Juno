@@ -48,9 +48,9 @@ public class LoginController
 		}
 
 		String pathImg;
-		if (firstChoice.isSelected()) pathImg = "src\\main\\resources\\org\\juno\\images\\icon1.png";
+		if (firstChoice.isSelected()) pathImg = "src\\main\\resources\\org\\juno\\images\\icon1.jpg";
 		else
-			pathImg = secondChoice.isSelected() ? "src\\main\\resources\\org\\juno\\images\\icon2.png" : "src\\main\\resources\\org\\juno\\images\\icon3.jpg";
+			pathImg = secondChoice.isSelected() ? "src\\main\\resources\\org\\juno\\images\\icon2.jpg" : "src\\main\\resources\\org\\juno\\images\\icon3.jpg";
 
 		saveData(username.getText(), pathImg);
 
