@@ -1,6 +1,7 @@
 package org.juno.controller;
 
 import javafx.fxml.FXML;
+import org.juno.view.NonexistingSceneException;
 import org.juno.view.StatsMenuView;
 
 /**
@@ -13,7 +14,7 @@ public class StatsMenuController
     private static final StatsMenuView STATS_MENU_VIEW = StatsMenuView.getINSTANCE();
 
     @FXML
-    public void menuClicked()
+    public void menuClicked() throws NonexistingSceneException
     {
         STATS_MENU_VIEW.changeScene(0);
     }

@@ -3,12 +3,15 @@ package org.juno;
 import javafx.application.Application;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
+import org.juno.model.user.DataCorruptedException;
+import org.juno.model.user.User;
 import org.juno.view.GenView;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.Objects;
 
 
 /**
@@ -29,15 +32,16 @@ public class Juno extends Application
 		
 		GenView.setWindow(stage);
 		GenView.load();
-		try (BufferedReader br = new BufferedReader(new FileReader("src/main/resources/org/juno/model/user/user.txt")))
+		try
 		{
-			if (br.readLine() == null)
-				stage.setScene(GenView.getLogin());
-			else
-				stage.setScene(GenView.getStartMenu());
+			User.getINSTANCE().load();
+			stage.setScene(GenView.getStartMenu());
+		} catch (DataCorruptedException e)
+		{
+			stage.setScene(GenView.getLogin());
 		}
 		stage.setTitle("JUno");
-		stage.getIcons().add(new Image(Juno.class.getResourceAsStream("images/icon.png")));
+		stage.getIcons().add(new Image(Objects.requireNonNull(Juno.class.getResourceAsStream("images/icon.png"))));
 		stage.show();
 	}
 }

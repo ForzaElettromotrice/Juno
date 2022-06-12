@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="540.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.juno.controller.LoginController">
+<AnchorPane onKeyPressed="#keyPressed" prefHeight="540.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.juno.controller.LoginController">
     <VBox layoutX="263.0" layoutY="63.0" prefHeight="414.0" prefWidth="434.0">
         <Label prefHeight="121.0" prefWidth="434.0" text="Sembra che sia la prima volta che accedi al gioco o che i tuoi salvataggi siano corrotti, per favore scegli un username e una immagine profilo per iniziare" wrapText="true">
          <font>
@@ -38,7 +38,7 @@
             <VBox.margin>
                 <Insets bottom="30.0" top="10.0" />
             </VBox.margin>
-         <RadioButton fx:id="firstChoice" mnemonicParsing="false" selected="true">
+         <RadioButton fx:id="firstChoice" mnemonicParsing="false" onKeyPressed="#keyPressed" selected="true">
             <graphic>
                     <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
                         <Image url="@../images/icon-256x256.png" />
@@ -48,14 +48,14 @@
                <ToggleGroup fx:id="icons" />
             </toggleGroup>
          </RadioButton>
-         <RadioButton fx:id="secondChoice" mnemonicParsing="false" toggleGroup="$icons">
+         <RadioButton fx:id="secondChoice" mnemonicParsing="false" onKeyPressed="#keyPressed" toggleGroup="$icons">
             <graphic>
                     <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
                         <Image url="@../images/user-icon-trendy-flat-style-isolated-grey-background-user-symbol-user-icon-trendy-flat-style-isolated-grey-background-123663211.jpg" />
                     </ImageView>
             </graphic>
          </RadioButton>
-         <RadioButton fx:id="thirdChoice" mnemonicParsing="false" toggleGroup="$icons">
+         <RadioButton fx:id="thirdChoice" mnemonicParsing="false" onKeyPressed="#keyPressed" toggleGroup="$icons">
             <graphic>
                     <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
                         <Image url="@../images/trasferimento.png" />

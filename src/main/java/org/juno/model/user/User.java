@@ -1,6 +1,7 @@
 package org.juno.model.user;
 
 import java.io.*;
+import java.util.Objects;
 
 /**
  * Defines: User class,
@@ -9,6 +10,7 @@ import java.io.*;
  */
 public class User
 {
+    private static final User INSTANCE = new User();
     private static final String PATH = "src/main/resources/org/juno/model/user/user.txt";
 
     private String nickname;
@@ -56,13 +58,18 @@ public class User
     public User()
     {
         level = new Level();
-        load();
     }
 
     //Getters
 
+
+    public static User getINSTANCE()
+    {
+        return INSTANCE;
+    }
     /**
      * Returns the current nickname
+     *
      * @return nickname
      */
     public String getNickname()
@@ -185,19 +192,25 @@ public class User
      * <p>
      * 6 Line: exp.
      */
-    public void load()
+    public void load() throws DataCorruptedException
     {
         try (BufferedReader br = new BufferedReader(new FileReader(PATH)))
         {
-            nickname = br.readLine();
-            avatar = br.readLine();
+            nickname = Objects.requireNonNull(br.readLine(), "Invalid Data");
+            avatar = Objects.requireNonNull(br.readLine(), "Invalid Data");
             victories = Integer.parseInt(br.readLine());
             defeats = Integer.parseInt(br.readLine());
             level.lvl = Integer.parseInt(br.readLine());
             level.exp = Integer.parseInt(br.readLine());
-        } catch (IOException e)
+        } catch (IOException err)
         {
-            e.printStackTrace();
+            err.printStackTrace();
+        } catch (NumberFormatException err)
+        {
+            throw new DataCorruptedException("Invalid Data!");
+        } catch (NullPointerException err)
+        {
+            throw new DataCorruptedException(err.getMessage());
         } finally
         {
             level.checkLevel();
