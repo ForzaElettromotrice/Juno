@@ -8,11 +8,8 @@
 <?import javafx.scene.text.Font?>
 
 <AnchorPane id="background" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="540.0" prefWidth="960.0" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.juno.controller.StartMenuController">
-    <ImageView blendMode="MULTIPLY" fitHeight="540.0" fitWidth="960.0" layoutX="10.0" layoutY="10.0" pickOnBounds="true" visible="false">
-        <Image url="@../images/background.jpg" />
-    </ImageView>
     <ImageView fitHeight="247.0" fitWidth="297.0" layoutX="322.0" layoutY="140.0" pickOnBounds="true" preserveRatio="true">
-        <Image url="@../images/icon.png" />
+        <Image url="@../images/logo.png" />
     </ImageView>
     <Button alignment="TOP_CENTER" contentDisplay="CENTER" layoutX="139.0" layoutY="23.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseEntered="#playEntered" prefHeight="180.0" prefWidth="109.0" rotate="-12.5" style="-fx-background-color: transparent;" text="Play" textFill="WHITE">
         <opaqueInsets>
@@ -28,7 +25,7 @@
         </font>
     </Button>
     <ImageView fx:id="lightsPlay" fitHeight="146.0" fitWidth="218.0" layoutX="87.0" layoutY="58.0" onMouseClicked="#playClicked" onMouseExited="#playExited" pickOnBounds="true" rotate="77.9" visible="false">
-        <Image url="@../images/png-transparent-light-background-frame-decorative-borders-borders-and-frames-film-frame-frames-birthday-yellow-orange-thumbnail.png" />
+        <Image url="@../images/selected.png" />
     </ImageView>
     <Button fx:id="stats" alignment="TOP_CENTER" contentDisplay="CENTER" layoutX="159.0" layoutY="301.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseEntered="#statsEntered" prefHeight="180.0" prefWidth="109.0" rotate="17.1" style="-fx-background-color: transparent;" text="Stats" textFill="WHITE">
         <graphic>
@@ -41,7 +38,7 @@
         </font>
     </Button>
     <ImageView fx:id="lightsStats" fitHeight="146.0" fitWidth="218.0" layoutX="99.0" layoutY="332.0" onMouseClicked="#statsClicked" onMouseExited="#statsExited" pickOnBounds="true" rotate="107.0" visible="false">
-        <Image url="@../images/png-transparent-light-background-frame-decorative-borders-borders-and-frames-film-frame-frames-birthday-yellow-orange-thumbnail.png" />
+        <Image url="@../images/selected.png" />
     </ImageView>
     <Button alignment="TOP_CENTER" contentDisplay="CENTER" layoutX="607.0" layoutY="295.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseEntered="#exitEntered" prefHeight="184.0" prefWidth="109.0" rotate="-16.7" style="-fx-background-color: transparent;" text="Exit" textFill="WHITE">
         <graphic>
@@ -54,7 +51,7 @@
         </font>
     </Button>
     <ImageView fx:id="lightsExit" fitHeight="146.0" fitWidth="218.0" layoutX="555.0" layoutY="328.0" onMouseClicked="#exitClicked" onMouseExited="#exitExited" pickOnBounds="true" rotate="73.3" visible="false">
-        <Image url="@../images/png-transparent-light-background-frame-decorative-borders-borders-and-frames-film-frame-frames-birthday-yellow-orange-thumbnail.png" />
+        <Image url="@../images/selected.png" />
     </ImageView>
     <Button alignment="TOP_CENTER" contentDisplay="CENTER" layoutX="701.0" layoutY="29.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseEntered="#settingsEntered" prefHeight="180.0" prefWidth="109.0" rotate="18.4" style="-fx-background-color: transparent;" text="Settings" textFill="WHITE">
         <graphic>
@@ -67,6 +64,6 @@
         </font>
     </Button>
     <ImageView fx:id="lightsSettings" fitHeight="146.0" fitWidth="218.0" layoutX="641.0" layoutY="58.0" onMouseClicked="#settingsClicked" onMouseExited="#settingsExited" pickOnBounds="true" rotate="-71.6" visible="false">
-        <Image url="@../images/png-transparent-light-background-frame-decorative-borders-borders-and-frames-film-frame-frames-birthday-yellow-orange-thumbnail.png" />
+        <Image url="@../images/selected.png" />
     </ImageView>
 </AnchorPane>

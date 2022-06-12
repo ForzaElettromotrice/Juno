@@ -3,6 +3,8 @@ package org.juno.view;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import org.juno.controller.SettingsController;
+import org.juno.controller.StatsMenuController;
 
 import java.io.IOException;
 
@@ -27,27 +29,64 @@ public abstract class GenView
 	{
 		GenView.window = window;
 	}
+	public Stage getWindow()
+	{
+		return window;
+	}
+
+	public static Scene getLogin()
+	{
+		return login;
+	}
+	public static Scene getStartMenu()
+	{
+		return startMenu;
+	}
+	public static Scene getChooseMode()
+	{
+		return chooseMode;
+	}
+	public static Scene getGameplay()
+	{
+		return gameplay;
+	}
+	public static Scene getStats()
+	{
+		return stats;
+	}
+	public static Scene getSettings()
+	{
+		return settings;
+	}
+
 
 	public static void load() throws IOException
 	{
 		FXMLLoader loader = new FXMLLoader(GenView.class.getResource("Login.fxml"));
 		login = new Scene(loader.load());
+		login.setUserData(loader.getController());
+
 		loader = new FXMLLoader(GenView.class.getResource("StartMenu.fxml"));
 		startMenu = new Scene(loader.load());
+		startMenu.setUserData(loader.getController());
+
 //		loader = new FXMLLoader(GenView.class.getResource("ChooseMode.fxml"));
 //		chooseMode = new Scene(loader.load());
+//		chooseMode.setUserData(loader.getController());
+
 //		loader = new FXMLLoader(GenView.class.getResource("Gameplay.fxml"));
 //		gameplay = new Scene(loader.load());
+//		gameplay.setUserData(loader.getController());
+		
 		loader = new FXMLLoader(GenView.class.getResource("StatsMenu.fxml"));
 		stats = new Scene(loader.load());
+		stats.setUserData(loader.getController());
+
 		loader = new FXMLLoader(GenView.class.getResource("Settings.fxml"));
 		settings = new Scene(loader.load());
+		settings.setUserData(loader.getController());
 	}
 
-	public static Scene getStartMenu()
-	{
-		return startMenu;
-	}
 
 	public static void closeWindow()
 	{
@@ -68,14 +107,5 @@ public abstract class GenView
 //		window.setFullScreen(true);
 	}
 
-	public static Scene getLogin()
-	{
-		return login;
-	}
-
-	public Stage getWindow()
-	{
-		return window;
-	}
 
 }

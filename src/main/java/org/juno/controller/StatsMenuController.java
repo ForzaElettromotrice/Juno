@@ -13,19 +13,16 @@ import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import javafx.stage.FileChooser;
 import org.juno.model.user.User;
-import org.juno.view.GenView;
 import org.juno.view.NonexistingSceneException;
 import org.juno.view.StatsMenuView;
 
-import java.net.URL;
-import java.util.ResourceBundle;
 
 /**
  * Defines: StatsMenuController, class
  *
  * @author R0n3l, ForzaElettromotrice
  */
-public class StatsMenuController implements Initializable
+public class StatsMenuController
 {
     private static final StatsMenuView STATS_MENU_VIEW = StatsMenuView.getINSTANCE();
     private static final User USER = User.getINSTANCE();
@@ -115,8 +112,8 @@ public class StatsMenuController implements Initializable
     {
         if (key.getCode() == KeyCode.ENTER) saveUsername();
     }
-    @Override
-    public void initialize(URL location, ResourceBundle resources)
+
+    public void load()
     {
         username.setText(USER.getNickname());
         victories.setText("" + USER.getVictories());
@@ -126,4 +123,5 @@ public class StatsMenuController implements Initializable
         progressBar.setProgress(USER.getProgress());
         avatar.setFill(new ImagePattern(new Image("" + System.getProperty("user.dir") + "\\" + USER.getAvatar())));
     }
+
 }

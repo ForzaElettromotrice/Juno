@@ -33,6 +33,7 @@ public class StartMenuController
     @FXML
     public void statsClicked() throws NonexistingSceneException
     {
+        if (GenView.getStats().getUserData() instanceof StatsMenuController smc) smc.load();
         START_MENU_VIEW.changeScene(2);
     }
 

@@ -1,6 +1,4 @@
-Ele
-src\main\resources\org\juno\images\icon-256x256.png
+Federico
+src\main\resources\org\juno\images\trasferimento.png
 0
 0
-1
-1500
