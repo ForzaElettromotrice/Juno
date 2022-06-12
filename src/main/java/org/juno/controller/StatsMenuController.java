@@ -1,12 +1,11 @@
 package org.juno.controller;
 
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ProgressBar;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import javafx.stage.FileChooser;
@@ -14,19 +13,16 @@ import org.juno.model.user.User;
 import org.juno.view.NonexistingSceneException;
 import org.juno.view.StatsMenuView;
 
-import java.net.URL;
-import java.util.ResourceBundle;
-
-
 /**
  * Defines: StatsMenuController, class
  *
  * @author R0n3l, ForzaElettromotrice
  */
-public class StatsMenuController implements Initializable
+public class StatsMenuController
 {
     private static final StatsMenuView STATS_MENU_VIEW = StatsMenuView.getINSTANCE();
     private static final User USER = User.getINSTANCE();
+    private String avatarUrl = USER.getAvatar();
 
     @FXML
     public Button change;
@@ -34,19 +30,8 @@ public class StatsMenuController implements Initializable
     public Button back;
     @FXML
     public Circle avatar;
-
     @FXML
     public TextField username;
-    @FXML
-    public Label victories;
-    @FXML
-    public Label defeats;
-    @FXML
-    public Label matches;
-    @FXML
-    public Label level;
-    @FXML
-    public ProgressBar progressBar;
 
     @FXML
     public void avatarEntered()
@@ -75,8 +60,8 @@ public class StatsMenuController implements Initializable
     @FXML
     public void backClicked() throws NonexistingSceneException
     {
-        //TODO: dare i nuovi valori a User e fare il save()
-
+        USER.setAvatar(avatarUrl);
+        saveUsername();
         STATS_MENU_VIEW.changeScene(0);
     }
 
@@ -85,20 +70,29 @@ public class StatsMenuController implements Initializable
     {
         final FileChooser fc = new FileChooser();
         fc.setTitle("Apri...");
-        //TODO: controlla bene cosa è successo prima di caricare cose(controlla che non sia pedopornografia)
-
-        avatar.setFill(new ImagePattern(new Image(fc.showOpenDialog(STATS_MENU_VIEW.getWindow()).getPath())));
+        fc.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("All Image Files", "*.jpeg", "*.bmp", "*.png", "*.webmp", "*.gif"),
+                new FileChooser.ExtensionFilter("JPEG", "*.jpeg"),
+                new FileChooser.ExtensionFilter("BMP", "*.bmp"),
+                new FileChooser.ExtensionFilter("PNG", "*.png"),
+                new FileChooser.ExtensionFilter("WEBMP", "*.webmp"),
+                new FileChooser.ExtensionFilter("GIF", "*.gif"));
+        String path = fc.showOpenDialog(STATS_MENU_VIEW.getWindow()).getPath();
+        avatar.setFill(new ImagePattern(new Image(path)));
+        avatarUrl=path;
         avatarExited();
     }
-    @Override
-    public void initialize(URL location, ResourceBundle resources)
+
+    @FXML
+    public void saveUsername()
     {
-        username.setText(USER.getNickname());
-        victories.setText("" + USER.getVictories());
-        defeats.setText("" + USER.getDefeats());
-        matches.setText("" + USER.getTotalMatches());
-        level.setText("" + USER.getLevel());
-        avatar.setFill(new ImagePattern(new Image(System.getProperty("user.dir") + "\\" + USER.getAvatar())));
-        progressBar.setProgress(USER.getProgress());
+        USER.setNickname(username.getCharacters().toString());
+        USER.save();
+    }
+
+    @FXML
+    public void keyPressed(KeyEvent key)
+    {
+        if (key.getCode() == KeyCode.ENTER) saveUsername();
     }
 }
