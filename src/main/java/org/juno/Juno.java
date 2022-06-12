@@ -43,7 +43,7 @@ public class Juno extends Application
 		stage.setScene(login ? GenView.getLogin() : GenView.getStartMenu());
 
 		stage.setTitle("JUno");
-		stage.getIcons().add(new Image(Objects.requireNonNull(Juno.class.getResourceAsStream("images/icon.png"))));
+		stage.getIcons().add(new Image(Objects.requireNonNull(Juno.class.getResourceAsStream("images/logo.png"))));
 		stage.show();
 	}
 }

@@ -1,4 +1,1 @@
-Federico
-src\main\resources\org\juno\images\trasferimento.png
-0
-0
+sss

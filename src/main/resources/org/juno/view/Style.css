@@ -1,4 +1,4 @@
-#background
+#backgroundMenu
 {
     -fx-background-image: url('../images/backgroundMenu.jpg');
     -fx-background-size: 100% 100%;
@@ -7,5 +7,11 @@
 #backgroundStats
 {
     -fx-background-image: url('../images/backgroundStats.jpg');
+    -fx-background-size: 100% 100%;
+}
+
+#backgroundLogin
+{
+    -fx-background-image: url('../images/backgroundLogin.jpg');
     -fx-background-size: 100% 100%;
 }
