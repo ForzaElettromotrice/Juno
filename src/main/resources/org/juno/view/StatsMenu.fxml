@@ -10,84 +10,74 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="540.0"
-            prefWidth="960.0"
-            xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
-   <ImageView fitHeight="546.0" fitWidth="960.0" layoutY="-3.0" pickOnBounds="true">
-      <Image url="@../images/gradient-dynamic-blue-lines-background_23-2148995756.jpg"/>
+<AnchorPane id="backgroundStats" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="540.0" prefWidth="960.0" stylesheets="Style.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.juno.controller.StatsMenuController">
+   <Circle fx:id="avatar" fill="WHITE" layoutX="194.0" layoutY="199.0" radius="121.0" stroke="BLACK" strokeType="INSIDE" />
+   <ImageView fitHeight="160.0" fitWidth="170.0" layoutX="36.0" layoutY="339.0" pickOnBounds="true" preserveRatio="true">
+      <Image url="@../images/Golden_star.svg.png" />
    </ImageView>
-   <Circle fx:id="avatar" fill="WHITE" layoutX="194.0" layoutY="199.0" radius="121.0" stroke="BLACK"
-           strokeType="INSIDE"/>
-   <ImageView fitHeight="160.0" fitWidth="170.0" layoutX="36.0" layoutY="339.0" pickOnBounds="true"
-              preserveRatio="true">
-      <Image url="@../images/Golden_star.svg.png"/>
-   </ImageView>
-   <TextField fx:id="level" alignment="CENTER" layoutX="76.0" layoutY="390.0" prefHeight="73.0" prefWidth="87.0"
-              promptText="1" style="-fx-background-color: transparent;">
+   <TextField fx:id="level" alignment="CENTER" editable="false" layoutX="76.0" layoutY="390.0" prefHeight="73.0" prefWidth="87.0" promptText="1" style="-fx-background-color: transparent;">
       <font>
-         <Font name="System Bold Italic" size="29.0"/>
+         <Font name="System Bold Italic" size="29.0" />
       </font>
    </TextField>
-   <ProgressBar fx:id="progressBar" layoutX="166.0" layoutY="427.0" prefHeight="30.0" prefWidth="200.0" progress="0.0"/>
+   <ProgressBar fx:id="progressBar" layoutX="166.0" layoutY="427.0" prefHeight="30.0" prefWidth="200.0" progress="0.0" />
    <Label alignment="TOP_LEFT" layoutX="715.0" layoutY="71.0" prefHeight="98.0" prefWidth="156.0" text="STATS">
       <font>
-         <Font name="Javanese Text" size="30.0"/>
+         <Font name="Javanese Text" size="30.0" />
       </font>
    </Label>
-   <TextField fx:id="username" layoutX="389.0" layoutY="58.0" prefHeight="52.0" prefWidth="326.0" promptText="Username"
-              style="-fx-background-color: transparent;">
+   <TextField fx:id="username" alignment="CENTER_RIGHT" layoutX="389.0" layoutY="58.0" prefHeight="52.0" prefWidth="326.0" promptText="Username" style="-fx-background-color: transparent;">
       <font>
-         <Font name="Javanese Text" size="30.0"/>
+         <Font name="Javanese Text" size="30.0" />
       </font>
    </TextField>
    <ImageView fitHeight="63.0" fitWidth="63.0" layoutX="434.0" layoutY="389.0" pickOnBounds="true" preserveRatio="true">
-      <Image url="@../images/cards.png"/>
+      <Image url="@../images/cards.png" />
    </ImageView>
    <ImageView fitHeight="63.0" fitWidth="52.0" layoutX="434.0" layoutY="199.0" pickOnBounds="true" preserveRatio="true">
-      <Image url="@../images/trophy.png"/>
+      <Image url="@../images/trophy.png" />
    </ImageView>
-   <ImageView fitHeight="63.0" fitWidth="118.0" layoutX="428.0" layoutY="294.0" pickOnBounds="true"
-              preserveRatio="true">
-      <Image url="@../images/skull.png"/>
+   <ImageView fitHeight="63.0" fitWidth="118.0" layoutX="428.0" layoutY="294.0" pickOnBounds="true" preserveRatio="true">
+      <Image url="@../images/skull.png" />
    </ImageView>
-   <TextField fx:id="victories" alignment="CENTER" layoutX="518.0" layoutY="198.0" prefHeight="39.0" prefWidth="218.0"
-              promptText="00000000000" style="-fx-background-color: transparent;">
+   <TextField fx:id="victories" alignment="CENTER" editable="false" layoutX="518.0" layoutY="198.0" prefHeight="39.0" prefWidth="218.0" promptText="00000000000" style="-fx-background-color: transparent;">
       <font>
-         <Font size="30.0"/>
+         <Font size="30.0" />
       </font>
    </TextField>
-   <TextField fx:id="defeats" alignment="CENTER" layoutX="518.0" layoutY="293.0" prefHeight="39.0" prefWidth="218.0"
-              promptText="00000000000" style="-fx-background-color: transparent;">
+   <TextField fx:id="defeats" alignment="CENTER" editable="false" layoutX="518.0" layoutY="293.0" prefHeight="39.0" prefWidth="218.0" promptText="00000000000" style="-fx-background-color: transparent;">
       <font>
-         <Font size="30.0"/>
+         <Font size="30.0" />
       </font>
    </TextField>
-   <TextField fx:id="matches" alignment="CENTER" layoutX="518.0" layoutY="395.0" prefHeight="39.0" prefWidth="218.0"
-              promptText="00000000000" style="-fx-background-color: transparent;">
+   <TextField fx:id="matches" alignment="CENTER" editable="false" layoutX="518.0" layoutY="395.0" prefHeight="39.0" prefWidth="218.0" promptText="00000000000" style="-fx-background-color: transparent;">
       <font>
-         <Font size="30.0"/>
+         <Font size="30.0" />
       </font>
    </TextField>
    <Label alignment="TOP_LEFT" layoutX="743.0" layoutY="189.0" prefHeight="98.0" prefWidth="181.0" text="VICTORIES">
       <font>
-         <Font name="Javanese Text" size="30.0"/>
+         <Font name="Javanese Text" size="30.0" />
       </font>
    </Label>
    <Label alignment="TOP_LEFT" layoutX="743.0" layoutY="287.0" prefHeight="98.0" prefWidth="181.0" text="DEFEATS">
       <font>
-         <Font name="Javanese Text" size="30.0"/>
+         <Font name="Javanese Text" size="30.0" />
       </font>
    </Label>
    <Label alignment="TOP_LEFT" layoutX="743.0" layoutY="385.0" prefHeight="98.0" prefWidth="181.0" text="MATCHES">
       <font>
-         <Font name="Javanese Text" size="30.0"/>
+         <Font name="Javanese Text" size="30.0" />
       </font>
    </Label>
-   <Button fx:id="change" layoutX="103.0" layoutY="162.0" mnemonicParsing="false" onMouseEntered="#changeEntered"
-           onMouseExited="#changeExited" prefHeight="73.0" prefWidth="181.0" style="-fx-background-color: transparent;"
-           text="Change Avatar" textFill="#a4a4a4" visible="false">
+   <Button fx:id="change" layoutX="103.0" layoutY="162.0" mnemonicParsing="false" onMouseEntered="#changeEntered" onMouseExited="#changeExited" prefHeight="73.0" prefWidth="181.0" style="-fx-background-color: transparent;" text="Change Avatar" textFill="#a4a4a4" visible="false">
       <font>
-         <Font name="Javanese Text" size="18.0"/>
+         <Font name="Javanese Text" size="18.0" />
+      </font>
+   </Button>
+   <Button fx:id="back" layoutX="809.0" layoutY="455.0" mnemonicParsing="false" onMouseClicked="#backClicked" onMouseEntered="#backEntered" onMouseExited="#backExited" prefHeight="76.0" prefWidth="140.0" style="-fx-background-color: transparent; -fx-border-radius: 90;" text="Back" textFill="#0d0404">
+      <font>
+         <Font name="Javanese Text" size="22.0" />
       </font>
    </Button>
 </AnchorPane>
