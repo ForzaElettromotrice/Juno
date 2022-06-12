@@ -25,6 +25,8 @@ public class Juno extends Application
 	@Override
 	public void start(Stage stage) throws IOException
 	{
+		stage.setResizable(false);
+		
 		GenView.setWindow(stage);
 		GenView.load();
 		try (BufferedReader br = new BufferedReader(new FileReader("src/main/resources/org/juno/model/user/user.txt")))

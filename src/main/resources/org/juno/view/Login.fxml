@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="540.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.juno.controller.LoginController">
+    <VBox layoutX="263.0" layoutY="63.0" prefHeight="414.0" prefWidth="434.0">
+        <Label prefHeight="121.0" prefWidth="434.0" text="Sembra che sia la prima volta che accedi al gioco o che i tuoi salvataggi siano corrotti, per favore scegli un username e una immagine profilo per iniziare" wrapText="true">
+         <font>
+            <Font size="16.0" />
+         </font></Label>
+        <Label text="Username">
+            <VBox.margin>
+                <Insets bottom="10.0" />
+            </VBox.margin>
+        </Label>
+        <TextField fx:id="username" promptText="Username">
+            <VBox.margin>
+                <Insets bottom="10.0" />
+            </VBox.margin>
+        </TextField>
+        <Label text="Foto profilo">
+            <VBox.margin>
+                <Insets bottom="10.0" />
+            </VBox.margin>
+        </Label>
+        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+            <VBox.margin>
+                <Insets bottom="30.0" top="10.0" />
+            </VBox.margin>
+         <RadioButton fx:id="firstChoice" mnemonicParsing="false" selected="true">
+            <graphic>
+                    <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
+                        <Image url="@../images/icon-256x256.png" />
+                    </ImageView>
+            </graphic>
+            <toggleGroup>
+               <ToggleGroup fx:id="icons" />
+            </toggleGroup>
+         </RadioButton>
+         <RadioButton fx:id="secondChoice" mnemonicParsing="false" toggleGroup="$icons">
+            <graphic>
+                    <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
+                        <Image url="@../images/user-icon-trendy-flat-style-isolated-grey-background-user-symbol-user-icon-trendy-flat-style-isolated-grey-background-123663211.jpg" />
+                    </ImageView>
+            </graphic>
+         </RadioButton>
+         <RadioButton fx:id="thirdChoice" mnemonicParsing="false" toggleGroup="$icons">
+            <graphic>
+                    <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
+                        <Image url="@../images/trasferimento.png" />
+                    </ImageView>
+            </graphic>
+         </RadioButton>
+        </HBox>
+      <Label fx:id="alert" alignment="CENTER" prefHeight="18.0" prefWidth="400.0" text="Devi inserire un username!" textFill="RED" visible="false">
+         <font>
+            <Font size="21.0" />
+         </font>
+      </Label>
+        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onMouseClicked="#saveClicked" text="Salva">
+                <font>
+                    <Font size="15.0" />
+                </font>
+            </Button>
+        </HBox>
+    </VBox>
+</AnchorPane>

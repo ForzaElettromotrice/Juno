@@ -16,6 +16,7 @@ public abstract class GenView
 {
 	protected static Stage window;
 
+	protected static Scene login;
 	protected static Scene startMenu;
 	protected static Scene chooseMode;
 	protected static Scene play;
@@ -29,15 +30,17 @@ public abstract class GenView
 
 	public static void load() throws IOException
 	{
-		FXMLLoader loaderStart = new FXMLLoader(GenView.class.getResource("StartMenu.fxml"));
-		startMenu = new Scene(loaderStart.load());
-//		FXMLLoader loader = new FXMLLoader(GenView.class.getResource("StartMenu.fxml"));
+		FXMLLoader loader = new FXMLLoader(GenView.class.getResource("Login.fxml"));
+		login = new Scene(loader.load());
+		loader = new FXMLLoader(GenView.class.getResource("StartMenu.fxml"));
+		startMenu = new Scene(loader.load());
+//		loader = new FXMLLoader(GenView.class.getResource("StartMenu.fxml"));
 //		startMenu = new Scene(loader.load());
-//		FXMLLoader loader = new FXMLLoader(GenView.class.getResource("StartMenu.fxml"));
+//		loader = new FXMLLoader(GenView.class.getResource("StartMenu.fxml"));
 //		startMenu = new Scene(loader.load());
-		FXMLLoader loaderStats = new FXMLLoader(GenView.class.getResource("StatsMenu.fxml"));
-		stats = new Scene(loaderStats.load());
-		FXMLLoader loader = new FXMLLoader(GenView.class.getResource("Settings.fxml"));
+		loader = new FXMLLoader(GenView.class.getResource("StatsMenu.fxml"));
+		stats = new Scene(loader.load());
+		loader = new FXMLLoader(GenView.class.getResource("Settings.fxml"));
 		settings = new Scene(loader.load());
 	}
 
@@ -62,11 +65,12 @@ public abstract class GenView
 					case 4 -> play;
 					default -> throw new RuntimeException("Non esiste questa scena");
 				});
+//		window.setFullScreen(true);
 	}
 
 	public static Scene getLogin()
 	{
-		return null;
+		return login;
 	}
 
 }
