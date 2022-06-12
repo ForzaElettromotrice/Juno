@@ -7,9 +7,6 @@ import org.juno.model.user.DataCorruptedException;
 import org.juno.model.user.User;
 import org.juno.view.GenView;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.FileReader;
 import java.io.IOException;
 import java.util.Objects;
 

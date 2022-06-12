@@ -72,4 +72,9 @@ public abstract class GenView
 		return login;
 	}
 
+	public Stage getWindow()
+	{
+		return window;
+	}
+
 }
