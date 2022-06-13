@@ -15,3 +15,9 @@
     -fx-background-image: url('../images/backgroundLogin.jpg');
     -fx-background-size: 100% 100%;
 }
+
+#backgroundSettings
+{
+    -fx-background-image: url('../images/backgroundSettings.jpg');
+    -fx-background-size: 100% 100%;
+}

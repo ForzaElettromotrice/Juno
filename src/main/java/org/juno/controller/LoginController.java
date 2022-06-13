@@ -7,6 +7,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import org.juno.model.user.DataCorruptedException;
 import org.juno.model.user.User;
 import org.juno.view.LoginView;
@@ -38,6 +39,9 @@ public class LoginController
 
 	@FXML
 	public Label alert;
+
+	@FXML
+	public Button save;
 
 	@FXML
 	public void saveClicked() throws NonexistingSceneException, DataCorruptedException {
@@ -75,5 +79,15 @@ public class LoginController
 		{
 			User.getINSTANCE().load();
 		}
+	}
+
+	public void saveEntered()
+	{
+		save.setStyle("-fx-border-color: BLACK; -fx-background-color: WHITE; -fx-border-radius: 90; -fx-background-radius: 90;");
+	}
+
+	public void saveExited()
+	{
+		save.setStyle("-fx-border-color: transparent; -fx-background-color: transparent;");
 	}
 }

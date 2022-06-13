@@ -2,11 +2,14 @@ package org.juno;
 
 import javafx.application.Application;
 import javafx.scene.image.Image;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 import org.juno.model.user.DataCorruptedException;
 import org.juno.model.user.User;
 import org.juno.view.GenView;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.Objects;
 

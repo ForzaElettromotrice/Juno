@@ -2,9 +2,14 @@ package org.juno.controller;
 
 import javafx.fxml.FXML;
 import javafx.scene.image.ImageView;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import org.juno.view.GenView;
 import org.juno.view.NonexistingSceneException;
 import org.juno.view.StartMenuView;
+
+import java.io.File;
+import java.net.URL;
 
 /**
  * Defines: startMenu, class
