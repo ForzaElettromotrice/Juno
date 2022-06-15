@@ -31,5 +31,6 @@
     <orderEntry type="library" name="Maven: com.beust:jcommander:1.82" level="project" />
     <orderEntry type="library" scope="RUNTIME" name="Maven: org.webjars:jquery:3.6.0" level="project" />
     <orderEntry type="library" name="charm-glisten-4.4.1-javadoc" level="project" />
+    <orderEntry type="library" name="openjfx.javafx.media" level="project" />
   </component>
 </module>

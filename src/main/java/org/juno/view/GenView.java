@@ -95,6 +95,7 @@ public abstract class GenView
 
 	public void changeScene(int n) throws NonexistingSceneException
 	{
+		boolean fullscreen = window.isFullScreen();
 		window.setScene(switch (n)
 				{
 					case 0 -> startMenu;
@@ -104,6 +105,7 @@ public abstract class GenView
 					case 4 -> gameplay;
 					default -> throw new NonexistingSceneException("Non esiste questa scena");
 				});
+		window.setFullScreen(fullscreen);
 //		window.setFullScreen(true);
 	}
 

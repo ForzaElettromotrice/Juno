@@ -12,66 +12,51 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="backgroundSettings" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
-            minWidth="-Infinity" prefHeight="540.0" prefWidth="960.0" stylesheets="@Style.css"
-            xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="org.juno.controller.SettingsController">
-    <GridPane alignment="CENTER" layoutX="99.0" layoutY="53.0" prefHeight="196.0" prefWidth="763.0"
-              AnchorPane.bottomAnchor="291.0">
+<AnchorPane id="backgroundSettings" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="540.0" prefWidth="960.0" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.juno.controller.SettingsController">
+    <GridPane alignment="CENTER" layoutX="99.0" layoutY="53.0" prefHeight="196.0" prefWidth="763.0" AnchorPane.bottomAnchor="291.0" AnchorPane.leftAnchor="99.0" AnchorPane.rightAnchor="97.79999999999995" AnchorPane.topAnchor="53.0">
         <columnConstraints>
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="469.0" minWidth="0.0" prefWidth="382.0"/>
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="381.0" minWidth="0.0" prefWidth="381.0"/>
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="469.0" minWidth="0.0" prefWidth="382.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="381.0" minWidth="0.0" prefWidth="381.0" />
         </columnConstraints>
         <rowConstraints>
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
-        <CheckBox alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" GridPane.columnIndex="1"
-                  GridPane.halignment="CENTER" GridPane.valignment="CENTER"/>
-        <Slider maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
-                prefHeight="24.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.halignment="CENTER"
-                GridPane.rowIndex="1" GridPane.valignment="CENTER"/>
-        <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="266.0" prefWidth="688.0" text="Sound effects"
-               GridPane.rowIndex="1">
+        <CheckBox alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+        <Slider maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="24.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+        <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="266.0" prefWidth="688.0" text="Sound effects" GridPane.rowIndex="1">
             <font>
-                <Font name="Javanese Text" size="39.0"/>
+                <Font name="Javanese Text" size="39.0" />
             </font>
         </Label>
         <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="266.0" prefWidth="688.0" text="Fullscreen">
             <font>
-                <Font name="Javanese Text" size="39.0"/>
+                <Font name="Javanese Text" size="39.0" />
             </font>
         </Label>
-        <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="266.0" prefWidth="688.0" text="Sound music"
-               GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+        <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="266.0" prefWidth="688.0" text="Sound music" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
             <font>
-                <Font name="Javanese Text" size="39.0"/>
+                <Font name="Javanese Text" size="39.0" />
             </font>
         </Label>
-        <Slider maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
-                prefHeight="24.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.halignment="CENTER"
-                GridPane.rowIndex="2" GridPane.valignment="CENTER"/>
+        <Slider maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="24.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
     </GridPane>
-    <HBox alignment="CENTER" layoutX="159.0" layoutY="418.0" prefHeight="66.0" prefWidth="644.0">
-        <Button fx:id="save" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false"
-                onAction="#savePressed" onMouseEntered="#saveEntered" onMouseExited="#saveExited" prefHeight="70.0"
-                prefWidth="200.0" style="-fx-background-color: transparent;" text="Save">
+    <HBox alignment="CENTER" layoutX="159.0" layoutY="418.0" prefHeight="66.0" prefWidth="644.0" AnchorPane.bottomAnchor="30.799999999999997" AnchorPane.leftAnchor="159.0" AnchorPane.rightAnchor="157.0">
+        <Button fx:id="save" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#savePressed" onMouseEntered="#saveEntered" onMouseExited="#saveExited" prefHeight="70.0" prefWidth="200.0" style="-fx-background-color: transparent;" text="Save">
             <HBox.margin>
-                <Insets right="10.0"/>
+                <Insets right="10.0" />
             </HBox.margin>
             <font>
-                <Font name="Javanese Text" size="26.0"/>
+                <Font name="Javanese Text" size="26.0" />
             </font>
         </Button>
-        <Button fx:id="back" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false"
-                onAction="#backPressed" onMouseEntered="#backEntered" onMouseExited="#backExited" prefHeight="70.0"
-                prefWidth="200.0" style="-fx-background-color: transparent;" text="Back">
+        <Button fx:id="back" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#backPressed" onMouseEntered="#backEntered" onMouseExited="#backExited" prefHeight="70.0" prefWidth="200.0" style="-fx-background-color: transparent;" text="Back">
             <HBox.margin>
-                <Insets left="10.0"/>
+                <Insets left="10.0" />
             </HBox.margin>
             <font>
-                <Font name="Javanese Text" size="26.0"/>
+                <Font name="Javanese Text" size="26.0" />
             </font>
         </Button>
     </HBox>

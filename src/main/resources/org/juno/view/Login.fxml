@@ -14,15 +14,18 @@
 <?import javafx.scene.text.Font?>
 
 <AnchorPane id="backgroundLogin" onKeyPressed="#keyPressed" prefHeight="540.0" prefWidth="960.0" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.juno.controller.LoginController">
-     <Label alignment="CENTER" contentDisplay="CENTER" layoutX="147.0" prefHeight="142.0" prefWidth="666.0" text="It looks like this is the first time you play the game, or that your game files are corrupted.&#10;Please choose a username and an avatar to start (you can change them later)." wrapText="true">
-      <font>
-         <Font name="Javanese Text" size="16.0" />
-      </font>
-   </Label>
-    <VBox layoutX="258.0" layoutY="129.0" prefHeight="361.0" prefWidth="434.0">
+    <VBox prefHeight="540.0" prefWidth="960.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <Label alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" prefHeight="178.0" prefWidth="960.0" text="It looks like this is the first time you play the game, or that your game files are corrupted.&#10;Please choose a username and an avatar to start (you can change them later)." wrapText="true" VBox.vgrow="ALWAYS">
+         <font>
+            <Font name="Javanese Text" size="25.0" />
+         </font>
+         <VBox.margin>
+            <Insets />
+         </VBox.margin>
+      </Label>
         <Label text="Type a username">
             <VBox.margin>
-                <Insets bottom="10.0" />
+                <Insets bottom="10.0" left="300.0" />
             </VBox.margin>
          <font>
             <Font name="Javanese Text" size="21.0" />
@@ -30,24 +33,24 @@
         </Label>
         <TextField fx:id="username" promptText="Username">
             <VBox.margin>
-                <Insets bottom="10.0" />
+                <Insets bottom="10.0" left="300.0" right="300.0" />
             </VBox.margin>
         </TextField>
         <Label text="Choose an avatar">
             <VBox.margin>
-                <Insets bottom="10.0" />
+                <Insets bottom="10.0" left="300.0" right="300.0" />
             </VBox.margin>
          <font>
             <Font name="Javanese Text" size="21.0" />
          </font>
         </Label>
-        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
+        <HBox alignment="CENTER" prefHeight="249.0" prefWidth="960.0" spacing="20.0">
             <VBox.margin>
                 <Insets bottom="30.0" top="10.0" />
             </VBox.margin>
          <RadioButton fx:id="firstChoice" mnemonicParsing="false" onKeyPressed="#keyPressed" selected="true">
             <graphic>
-                    <ImageView fitHeight="111.0" fitWidth="105.0" pickOnBounds="true" preserveRatio="true">
+                    <ImageView fitHeight="188.0" fitWidth="173.0" pickOnBounds="true" preserveRatio="true">
                         <Image url="@../images/icon1.jpg" />
                     </ImageView>
             </graphic>
@@ -57,25 +60,25 @@
          </RadioButton>
          <RadioButton fx:id="secondChoice" mnemonicParsing="false" onKeyPressed="#keyPressed" toggleGroup="$icons">
             <graphic>
-                    <ImageView fitHeight="111.0" fitWidth="105.0" pickOnBounds="true" preserveRatio="true">
+                    <ImageView fitHeight="200.0" fitWidth="205.0" pickOnBounds="true" preserveRatio="true">
                         <Image url="@../images/icon2.jpg" />
                     </ImageView>
             </graphic>
          </RadioButton>
          <RadioButton fx:id="thirdChoice" mnemonicParsing="false" onKeyPressed="#keyPressed" toggleGroup="$icons">
             <graphic>
-                    <ImageView fitHeight="111.0" fitWidth="105.0" pickOnBounds="true" preserveRatio="true">
+                    <ImageView fitHeight="174.0" fitWidth="169.0" pickOnBounds="true" preserveRatio="true">
                         <Image url="@../images/icon3.jpg" />
                     </ImageView>
             </graphic>
          </RadioButton>
         </HBox>
-      <Label fx:id="alert" alignment="CENTER" prefHeight="31.0" prefWidth="439.0" text="Devi inserire uno username!" textFill="RED" visible="false">
+      <Label fx:id="alert" alignment="CENTER" maxWidth="1.7976931348623157E308" prefHeight="31.0" prefWidth="1233.0" text="You must insert an username first!" textFill="RED" visible="false">
          <font>
             <Font size="21.0" />
          </font>
       </Label>
-        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
             <Button fx:id="save" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#saveClicked" onKeyPressed="#keyPressed" onMouseEntered="#saveEntered" onMouseExited="#saveExited" prefHeight="47.0" prefWidth="120.0" style="-fx-background-color: transparent;" text="Save">
                 <font>
                     <Font size="21.0" />
