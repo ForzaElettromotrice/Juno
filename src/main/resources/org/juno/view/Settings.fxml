@@ -18,7 +18,7 @@
                 <Insets right="10.0" />
             </HBox.margin>
             <font>
-                <Font name="Javanese Text" size="26.0" />
+                <Font name="Anime Ace 2.0 BB" size="26.0" />
             </font>
         </Button>
         <Button fx:id="back" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#backPressed" onMouseEntered="#backEntered" onMouseExited="#backExited" prefHeight="70.0" prefWidth="200.0" style="-fx-background-color: transparent;" text="Back">
@@ -26,7 +26,7 @@
                 <Insets left="10.0" />
             </HBox.margin>
             <font>
-                <Font name="Javanese Text" size="26.0" />
+                <Font name="Anime Ace 2.0 BB" size="26.0" />
             </font>
         </Button>
     </HBox>
@@ -43,23 +43,23 @@
         <Slider fx:id="effectsBar" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="24.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
         <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="134.0" prefWidth="382.0" text="Sound effects">
             <font>
-                <Font name="Javanese Text" size="28.0" />
+                <Font name="Anime Ace 2.0 BB" size="28.0" />
             </font>
         </Label>
         <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="266.0" prefWidth="688.0" text="Sound music" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
             <font>
-                <Font name="Javanese Text" size="28.0" />
+                <Font name="Anime Ace 2.0 BB" size="29.0" />
             </font>
         </Label>
         <Slider fx:id="musicBar" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="24.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
         <Button fx:id="reset" mnemonicParsing="false" onAction="#resetClicked" onMouseEntered="#resetEntered" onMouseExited="#resetExited" prefHeight="138.0" prefWidth="385.0" style="-fx-background-color: transparent; -fx-border-color: transparent; -fx-border-width: 5;" text="Reset Account" textFill="RED" GridPane.rowIndex="2">
             <font>
-                <Font name="Javanese Text" size="28.0" />
+                <Font name="Anime Ace 2.0 BB" size="27.0" />
             </font>
         </Button>
         <Button fx:id="delete" mnemonicParsing="false" onAction="#deleteClicked" onMouseEntered="#deleteEntered" onMouseExited="#deleteExited" prefHeight="246.0" prefWidth="470.0" style="-fx-background-color: transparent; -fx-border-color: transparent; -fx-border-width: 5;" text="Delete Account" textFill="RED" GridPane.columnIndex="1" GridPane.rowIndex="2">
             <font>
-                <Font name="Javanese Text" size="28.0" />
+                <Font name="Anime Ace 2.0 BB" size="28.0" />
             </font>
         </Button>
     </GridPane>

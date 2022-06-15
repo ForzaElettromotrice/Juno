@@ -21,12 +21,12 @@
       </font>
    </Label>
    <ProgressBar fx:id="progressBar" layoutX="166.0" layoutY="427.0" prefHeight="30.0" prefWidth="200.0" progress="0.0" AnchorPane.bottomAnchor="83.0" AnchorPane.leftAnchor="166.0" AnchorPane.rightAnchor="594.0" AnchorPane.topAnchor="427.0" />
-   <Label alignment="TOP_LEFT" layoutX="715.0" layoutY="71.0" prefHeight="98.0" prefWidth="156.0" text="STATS" AnchorPane.bottomAnchor="371.0" AnchorPane.leftAnchor="715.0" AnchorPane.rightAnchor="89.0" AnchorPane.topAnchor="71.0">
+   <Label contentDisplay="CENTER" layoutX="715.0" layoutY="71.0" prefHeight="98.0" prefWidth="156.0" text="STATS" AnchorPane.bottomAnchor="371.0" AnchorPane.leftAnchor="715.0" AnchorPane.rightAnchor="89.0" AnchorPane.topAnchor="71.0">
       <font>
-         <Font name="Javanese Text" size="30.0" />
+         <Font name="Anime Ace 2.0 BB" size="30.0" />
       </font>
    </Label>
-   <TextField fx:id="username" alignment="CENTER_RIGHT" cacheShape="false" centerShape="false" focusTraversable="false" layoutX="389.0" layoutY="58.0" onKeyPressed="#keyPressed" prefHeight="52.0" prefWidth="326.0" promptText="Username" scaleShape="false" style="-fx-background-color: transparent;" AnchorPane.bottomAnchor="378.0" AnchorPane.leftAnchor="389.0" AnchorPane.rightAnchor="245.0" AnchorPane.topAnchor="58.0">
+   <TextField fx:id="username" alignment="CENTER_RIGHT" cacheShape="false" centerShape="false" focusTraversable="false" layoutX="389.0" layoutY="66.0" onKeyPressed="#keyPressed" prefHeight="52.0" prefWidth="326.0" promptText="Username" scaleShape="false" style="-fx-background-color: transparent;" AnchorPane.bottomAnchor="370.0" AnchorPane.leftAnchor="389.0" AnchorPane.rightAnchor="245.0" AnchorPane.topAnchor="66.0">
       <font>
          <Font name="Javanese Text" size="30.0" />
       </font>
@@ -45,19 +45,19 @@
          <Font name="System Bold Italic" size="30.0" />
       </font>
    </Label>
-   <Label alignment="TOP_LEFT" layoutX="743.0" layoutY="189.0" prefHeight="98.0" prefWidth="181.0" text="VICTORIES" AnchorPane.bottomAnchor="253.0" AnchorPane.leftAnchor="743.0" AnchorPane.rightAnchor="36.0" AnchorPane.topAnchor="189.0">
+   <Label layoutX="743.0" layoutY="184.0" prefHeight="98.0" prefWidth="181.0" text="VICTORIES" AnchorPane.bottomAnchor="258.0" AnchorPane.leftAnchor="743.0" AnchorPane.rightAnchor="36.0" AnchorPane.topAnchor="184.0">
       <font>
-         <Font name="Javanese Text" size="30.0" />
+         <Font name="Anime Ace 2.0 BB" size="27.0" />
       </font>
    </Label>
-   <Label alignment="TOP_LEFT" layoutX="743.0" layoutY="287.0" prefHeight="98.0" prefWidth="181.0" text="DEFEATS" AnchorPane.bottomAnchor="155.0" AnchorPane.leftAnchor="743.0" AnchorPane.rightAnchor="36.0" AnchorPane.topAnchor="287.0">
+   <Label layoutX="743.0" layoutY="274.0" prefHeight="98.0" prefWidth="181.0" text="DEFEATS" AnchorPane.bottomAnchor="168.0" AnchorPane.leftAnchor="743.0" AnchorPane.rightAnchor="36.0" AnchorPane.topAnchor="274.0">
       <font>
-         <Font name="Javanese Text" size="30.0" />
+         <Font name="Anime Ace 2.0 BB" size="30.0" />
       </font>
    </Label>
-   <Label alignment="TOP_LEFT" layoutX="743.0" layoutY="385.0" prefHeight="98.0" prefWidth="181.0" text="MATCHES" AnchorPane.bottomAnchor="57.0" AnchorPane.leftAnchor="743.0" AnchorPane.rightAnchor="36.0" AnchorPane.topAnchor="385.0">
+   <Label layoutX="743.0" layoutY="380.0" prefHeight="98.0" prefWidth="181.0" text="MATCHES" AnchorPane.bottomAnchor="62.0" AnchorPane.leftAnchor="743.0" AnchorPane.rightAnchor="36.0" AnchorPane.topAnchor="380.0">
       <font>
-         <Font name="Javanese Text" size="30.0" />
+         <Font name="Anime Ace 2.0 BB" size="30.0" />
       </font>
    </Label>
    <Button fx:id="change" layoutX="103.0" layoutY="162.0" mnemonicParsing="false" onAction="#changeClicked" onMouseEntered="#avatarEntered" prefHeight="73.0" prefWidth="181.0" style="-fx-background-color: transparent; -fx-border-color: BLACK; -fx-border-radius: 90;" text="Change Avatar" textFill="BLACK" visible="false">
@@ -67,7 +67,7 @@
    </Button>
    <Button fx:id="back" layoutX="809.0" layoutY="455.0" mnemonicParsing="false" onAction="#backClicked" onMouseEntered="#backEntered" onMouseExited="#backExited" prefHeight="76.0" prefWidth="140.0" style="-fx-background-color: transparent; -fx-border-radius: 90;" text="Back" textFill="#0d0404" AnchorPane.bottomAnchor="9.0" AnchorPane.leftAnchor="809.0" AnchorPane.rightAnchor="11.0" AnchorPane.topAnchor="455.0">
       <font>
-         <Font name="Javanese Text" size="22.0" />
+         <Font name="Anime Ace 2.0 BB" size="21.0" />
       </font>
    </Button>
    <Label fx:id="defeats" alignment="CENTER" contentDisplay="CENTER" layoutX="518.0" layoutY="303.0" prefHeight="39.0" prefWidth="218.0" text="0" AnchorPane.bottomAnchor="192.0" AnchorPane.leftAnchor="518.0" AnchorPane.rightAnchor="224.0" AnchorPane.topAnchor="303.0">

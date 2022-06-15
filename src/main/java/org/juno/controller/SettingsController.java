@@ -64,6 +64,7 @@ public class SettingsController
 	{
 		Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to exit without saving?", ButtonType.YES, ButtonType.NO);
 		alert.setTitle("Confirm");
+		alert.setHeaderText("Confirm");
 		alert.showAndWait();
 		if (alert.getResult()==ButtonType.YES)
 			GEN_VIEW.changeScene(0);
@@ -92,12 +93,12 @@ public class SettingsController
 		if (alert.getResult() == ButtonType.YES)
 		{
 			User.getINSTANCE().reset();
+			alert = new Alert(Alert.AlertType.INFORMATION, "Data resetted!");
+			alert.setTitle("Success");
+			alert.setHeaderText("Success!");
+			alert.showAndWait();
 		} else
 			alert.close();
-		alert = new Alert(Alert.AlertType.INFORMATION, "Data resetted!");
-		alert.setTitle("Success");
-		alert.setHeaderText("Success!");
-		alert.showAndWait();
 	}
 	@FXML
 	public void deleteClicked(ActionEvent actionEvent) throws NonexistingSceneException

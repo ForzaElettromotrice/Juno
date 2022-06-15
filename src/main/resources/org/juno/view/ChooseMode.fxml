@@ -8,6 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane id="backgroundChooseMode" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="540.0" prefWidth="960.0" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.juno.controller.ChooseModeController">
@@ -15,32 +16,10 @@
       <top>
          <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="99.0" prefWidth="953.0" text="Choose game mode:" textAlignment="CENTER" textFill="WHITE" BorderPane.alignment="CENTER">
             <font>
-               <Font name="Javanese Text" size="41.0" />
+               <Font name="Anime Ace 2.0 BB" size="41.0" />
             </font>
          </Label>
       </top>
-      <bottom>
-         <HBox prefHeight="142.0" prefWidth="1127.0" spacing="30.0" BorderPane.alignment="CENTER">
-            <Label fx:id="classicLabel" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="143.0" prefWidth="241.0" text="The beloved classic! Play &#10;against three opponents &#10;following standard Uno rules!" textAlignment="CENTER" textFill="WHITE" visible="false">
-               <HBox.margin>
-                  <Insets left="40.0" />
-               </HBox.margin>
-               <font>
-                  <Font name="Javanese Text" size="16.0" />
-               </font>
-            </Label>
-            <Label fx:id="reflexLabel" prefHeight="143.0" prefWidth="367.0" text="Think fast! In this mode you can play cards even &#10;if it's not your turn, and if you don't draw a &#10;playable card, you'll have to continue drawing!" textAlignment="CENTER" textFill="WHITE" visible="false">
-               <font>
-                  <Font name="Javanese Text" size="16.0" />
-               </font>
-            </Label>
-            <Label fx:id="tradeLabel" prefHeight="147.0" prefWidth="275.0" text="Be strategic! In this mode 0s trade&#10;cards between all players, while 7s &#10;trade cards between two players! " textAlignment="CENTER" textFill="WHITE" visible="false">
-               <font>
-                  <Font name="Javanese Text" size="16.0" />
-               </font>
-            </Label>
-         </HBox>
-      </bottom>
       <left>
          <Button fx:id="classic" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#classicClicked" onMouseEntered="#classicEntered" onMouseExited="#classicExited" prefHeight="207.0" prefWidth="252.0" style="-fx-background-color: transparent;" BorderPane.alignment="CENTER">
             <BorderPane.margin>
@@ -70,10 +49,48 @@
             </BorderPane.margin>
             <graphic>
                <ImageView fitHeight="204.0" fitWidth="247.0" pickOnBounds="true" preserveRatio="true">
-                  <Image url="@../images/logoTrade.png"/>
+                  <Image url="@../images/logoTrade.png" />
                </ImageView>
             </graphic>
          </Button>
       </right>
+      <bottom>
+         <Pane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+            <children>
+               <HBox prefHeight="142.0" prefWidth="1127.0" spacing="30.0">
+                  <Label fx:id="classicLabel" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="143.0" prefWidth="241.0" text="The beloved classic! Play &#10;against three opponents &#10;following standard (J)Uno rules!" textAlignment="CENTER" textFill="WHITE" visible="false">
+                     <HBox.margin>
+                        <Insets left="40.0" />
+                     </HBox.margin>
+                     <font>
+                        <Font name="Javanese Text" size="16.0" />
+                     </font>
+                  </Label>
+               </HBox>
+               <HBox layoutX="10.0" layoutY="10.0" prefHeight="142.0" prefWidth="1127.0" spacing="30.0">
+                  <children>
+                     <Label fx:id="reflexLabel" prefHeight="143.0" prefWidth="367.0" text="Think fast! In this mode you can play cards even &#10;if it's not your turn, and if you don't draw a &#10;playable card, you'll have to continue drawing!" textAlignment="CENTER" textFill="WHITE" visible="false">
+                        <font>
+                           <Font name="Javanese Text" size="16.0" />
+                        </font>
+                     </Label>
+                  </children>
+               </HBox>
+               <HBox layoutX="10.0" layoutY="10.0" prefHeight="142.0" prefWidth="1127.0" spacing="30.0">
+                  <children>
+                     <Label fx:id="tradeLabel" prefHeight="147.0" prefWidth="275.0" text="Be strategic! In this mode 0s trade&#10;cards between all players, while 7s &#10;trade cards between two players! " textAlignment="CENTER" textFill="WHITE" visible="false">
+                        <font>
+                           <Font name="Javanese Text" size="16.0" />
+                        </font>
+                     </Label>
+                  </children>
+               </HBox>
+            </children>
+         </Pane>
+      </bottom>
    </BorderPane>
+   <Button fx:id="back" layoutX="16.0" layoutY="7.0" mnemonicParsing="false" onAction="#backClicked" onMouseEntered="#backEntered" onMouseExited="#backExited" prefHeight="66.0" prefWidth="124.0" style="-fx-background-color: transparent;" text="←" textFill="WHITE">
+      <font>
+         <Font name="Anime Ace 2.0 BB" size="41.0" />
+      </font></Button>
 </AnchorPane>

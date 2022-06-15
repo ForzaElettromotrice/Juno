@@ -2,8 +2,11 @@ package org.juno.controller;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.input.MouseEvent;
 import org.juno.view.GenView;
+import org.juno.view.NonexistingSceneException;
 
 /**
  * Defines: ChooseModeController, class
@@ -20,6 +23,8 @@ public class ChooseModeController
     public Label reflexLabel;
     @FXML
     public Label tradeLabel;
+    @FXML
+    public Button back;
 
     @FXML
     public void classicClicked(ActionEvent actionEvent)
@@ -73,5 +78,21 @@ public class ChooseModeController
     public void reflexExited()
     {
         reflexLabel.setVisible(false);
+    }
+
+    @FXML
+    public void backClicked() throws NonexistingSceneException {
+        GEN_VIEW.changeScene(0);
+    }
+
+    @FXML
+    public void backExited()
+    {
+        back.setStyle("-fx-background-color:transparent;");
+    }
+
+    public void backEntered()
+    {
+        back.setStyle("-fx-background-color:transparent; -fx-border-color:BLACK; -fx-border-radius:90; -fx-border-width:3;");
     }
 }
