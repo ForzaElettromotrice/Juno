@@ -27,7 +27,6 @@ public class Juno extends Application
 	public void start(Stage stage) throws IOException
 	{
 		stage.setResizable(true);
-		stage.setFullScreen(true);
 		GenView.setWindow(stage);
 		boolean login;
 		try

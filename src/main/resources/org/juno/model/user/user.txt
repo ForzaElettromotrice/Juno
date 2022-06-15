@@ -1,4 +1,4 @@
-n
+zzzz
 src\main\resources\org\juno\images\icon1.jpg
 0
 0
