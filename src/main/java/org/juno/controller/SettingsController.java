@@ -2,7 +2,6 @@ package org.juno.controller;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
@@ -10,11 +9,9 @@ import javafx.scene.control.Slider;
 import javafx.scene.input.MouseEvent;
 import org.juno.model.user.User;
 import org.juno.view.AudioPlayer;
+import org.juno.view.GenView;
 import org.juno.view.NonexistingSceneException;
-import org.juno.view.SettingsView;
 
-import java.net.URL;
-import java.util.ResourceBundle;
 
 
 /**
@@ -24,7 +21,7 @@ import java.util.ResourceBundle;
  */
 public class SettingsController
 {
-	private static final SettingsView SETTINGS_VIEW = SettingsView.getINSTANCE();
+	private static final GenView GEN_VIEW = GenView.getINSTANCE();
 	private static final AudioPlayer AUDIO_PLAYER = AudioPlayer.getINSTANCE();
 	@FXML
 	public Slider effectsBar;
@@ -44,7 +41,7 @@ public class SettingsController
 	{
 		AUDIO_PLAYER.setMusicVolume(musicBar.getValue() / 100);
 		AUDIO_PLAYER.setEffectsVolume(effectsBar.getValue() / 100);
-		SETTINGS_VIEW.changeScene(0);
+		GEN_VIEW.changeScene(0);
 	}
 
 	@FXML
@@ -66,7 +63,7 @@ public class SettingsController
 		alert.setTitle("Confirm");
 		alert.showAndWait();
 		if (alert.getResult()==ButtonType.YES)
-			SETTINGS_VIEW.changeScene(0);
+			GEN_VIEW.changeScene(0);
 		else
 			alert.close();
 	}
@@ -108,7 +105,7 @@ public class SettingsController
 		alert.showAndWait();
 		if (alert.getResult() == ButtonType.YES)
 		{
-			SETTINGS_VIEW.changeScene(-1);
+			GEN_VIEW.changeScene(-1);
 		} else
 			alert.close();
 	}

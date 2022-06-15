@@ -13,21 +13,31 @@ import java.io.IOException;
  *
  * @author ForzaElettromotrice, R0n3l
  */
-public abstract class GenView
+public class GenView
 {
-	protected static Stage window;
+	private static final GenView INSTANCE = new GenView();
+	private static Stage window;
 
-	protected static Scene login;
-	protected static Scene startMenu;
-	protected static Scene chooseMode;
-	protected static Scene gameplay;
-	protected static Scene stats;
-	protected static Scene settings;
+	private static Scene login;
+	private static Scene startMenu;
+	private static Scene chooseMode;
+	private static Scene gameplay;
+	private static Scene stats;
+	private static Scene settings;
+
+
+	private GenView()
+	{
+	}
 
 
 	public static void setWindow(Stage window)
 	{
 		GenView.window = window;
+	}
+	public static GenView getINSTANCE()
+	{
+		return INSTANCE;
 	}
 	public Stage getWindow()
 	{

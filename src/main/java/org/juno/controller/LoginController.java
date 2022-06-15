@@ -1,16 +1,13 @@
 package org.juno.controller;
 
-import javafx.event.Event;
-import javafx.event.EventTarget;
-import javafx.event.EventType;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseEvent;
 import org.juno.model.user.DataCorruptedException;
 import org.juno.model.user.User;
-import org.juno.view.LoginView;
+import org.juno.view.GenView;
 import org.juno.view.NonexistingSceneException;
 
 import java.io.BufferedWriter;
@@ -25,7 +22,7 @@ import java.util.Objects;
  */
 public class LoginController
 {
-	private static final LoginView LOGIN_VIEW = LoginView.getINSTANCE();
+	private static final GenView GEN_VIEW = GenView.getINSTANCE();
 
 	@FXML
 	public TextField username;
@@ -59,7 +56,7 @@ public class LoginController
 		saveData(username.getText(), pathImg);
 
 
-		LOGIN_VIEW.changeScene(0);
+		GEN_VIEW.changeScene(0);
 	}
 
 	@FXML

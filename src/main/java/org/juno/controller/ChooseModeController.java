@@ -3,6 +3,7 @@ package org.juno.controller;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import org.juno.view.GenView;
 
 /**
  * Defines: ChooseModeController, class
@@ -11,6 +12,8 @@ import javafx.scene.control.Label;
  */
 public class ChooseModeController
 {
+    private static final GenView GEN_VIEW = GenView.getINSTANCE();
+
     @FXML
     public Label classicLabel;
     @FXML

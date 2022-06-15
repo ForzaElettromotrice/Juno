@@ -1,7 +1,6 @@
 package org.juno.controller;
 
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
@@ -13,8 +12,8 @@ import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import javafx.stage.FileChooser;
 import org.juno.model.user.User;
+import org.juno.view.GenView;
 import org.juno.view.NonexistingSceneException;
-import org.juno.view.StatsMenuView;
 
 
 /**
@@ -24,7 +23,7 @@ import org.juno.view.StatsMenuView;
  */
 public class StatsMenuController
 {
-    private static final StatsMenuView STATS_MENU_VIEW = StatsMenuView.getINSTANCE();
+    private static final GenView GEN_VIEW = GenView.getINSTANCE();
     private static final User USER = User.getINSTANCE();
     private String avatarUrl = USER.getAvatar();
 
@@ -77,7 +76,7 @@ public class StatsMenuController
     {
         USER.setAvatar(avatarUrl);
         saveUsername();
-        STATS_MENU_VIEW.changeScene(0);
+        GEN_VIEW.changeScene(0);
     }
 
     @FXML
@@ -92,7 +91,7 @@ public class StatsMenuController
                 new FileChooser.ExtensionFilter("PNG", "*.png"),
                 new FileChooser.ExtensionFilter("WEBMP", "*.webmp"),
                 new FileChooser.ExtensionFilter("GIF", "*.gif"));
-        String path = fc.showOpenDialog(STATS_MENU_VIEW.getWindow()).getPath();
+        String path = fc.showOpenDialog(GEN_VIEW.getWindow()).getPath();
         avatar.setFill(new ImagePattern(new Image(path)));
         avatarUrl=path;
         avatarExited();

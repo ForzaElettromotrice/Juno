@@ -2,6 +2,7 @@ package org.juno.view;
 
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
+import javafx.util.Duration;
 
 import java.io.File;
 
@@ -35,8 +36,24 @@ public class AudioPlayer
     {
         switch (n)
         {
-            case 0 -> menuMusic.play();
-            case 1 -> gameMusic.play();
+            case 0 ->
+            {
+                menuMusic.play();
+                menuMusic.setOnEndOfMedia(() ->
+                {
+                    menuMusic.seek(Duration.ZERO);
+                    menuMusic.play();
+                });
+            }
+            case 1 ->
+            {
+                gameMusic.play();
+                gameMusic.setOnEndOfMedia(() ->
+                {
+                    gameMusic.seek(Duration.ZERO);
+                    gameMusic.play();
+                });
+            }
             case 2 -> buttonClick.play();
             case 3 -> cursorSelect.play();
             case 4 -> cardFlip.play();
