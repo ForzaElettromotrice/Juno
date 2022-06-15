@@ -21,3 +21,9 @@
     -fx-background-image: url('../images/backgroundSettings.jpg');
     -fx-background-size: 100% 100%;
 }
+
+#backgroundChooseMode
+{
+    -fx-background-image: url('../images/backgroundChooseMode.jpg');
+    -fx-background-size: 100% 100%;
+}

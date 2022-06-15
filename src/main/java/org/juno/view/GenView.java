@@ -70,9 +70,9 @@ public abstract class GenView
 		startMenu = new Scene(loader.load());
 		startMenu.setUserData(loader.getController());
 
-//		loader = new FXMLLoader(GenView.class.getResource("ChooseMode.fxml"));
-//		chooseMode = new Scene(loader.load());
-//		chooseMode.setUserData(loader.getController());
+		loader = new FXMLLoader(GenView.class.getResource("ChooseMode.fxml"));
+		chooseMode = new Scene(loader.load());
+		chooseMode.setUserData(loader.getController());
 
 //		loader = new FXMLLoader(GenView.class.getResource("Gameplay.fxml"));
 //		gameplay = new Scene(loader.load());
