@@ -7,4 +7,6 @@ module org.juno
 	opens org.juno to javafx.fxml;
 	exports org.juno;
 	exports org.juno.controller;
+	exports org.juno.view;
+	opens org.juno.view to javafx.fxml;
 }

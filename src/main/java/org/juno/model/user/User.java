@@ -253,10 +253,18 @@ public class User
 
     /**
      * Add the given Exp to the total exp
+     *
      * @param e Exp gained
      */
     public void addExp(int e)
     {
         level.addExp(e);
+    }
+
+    public void reset()
+    {
+        level.lvl = 1;
+        level.exp = 0;
+        save();
     }
 }

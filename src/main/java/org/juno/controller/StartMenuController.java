@@ -2,14 +2,10 @@ package org.juno.controller;
 
 import javafx.fxml.FXML;
 import javafx.scene.image.ImageView;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
 import org.juno.view.GenView;
 import org.juno.view.NonexistingSceneException;
 import org.juno.view.StartMenuView;
 
-import java.io.File;
-import java.net.URL;
 
 /**
  * Defines: startMenu, class
@@ -45,6 +41,7 @@ public class StartMenuController
     @FXML
     public void settingsClicked() throws NonexistingSceneException
     {
+        if (GenView.getSettings().getUserData() instanceof SettingsController sc) sc.load();
         START_MENU_VIEW.changeScene(3);
     }
 

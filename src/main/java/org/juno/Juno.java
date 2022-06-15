@@ -5,7 +5,9 @@ import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import org.juno.model.user.DataCorruptedException;
 import org.juno.model.user.User;
+import org.juno.view.AudioPlayer;
 import org.juno.view.GenView;
+import org.juno.view.NotExistingSoundException;
 
 
 import java.io.IOException;
@@ -24,9 +26,9 @@ public class Juno extends Application
 		launch(args);
 	}
 	@Override
-	public void start(Stage stage) throws IOException
+	public void start(Stage stage) throws IOException, NotExistingSoundException
 	{
-		stage.setResizable(true);
+		stage.setResizable(false);
 		GenView.setWindow(stage);
 		boolean login;
 		try
@@ -45,6 +47,8 @@ public class Juno extends Application
 
 		stage.setTitle("JUno");
 		stage.getIcons().add(new Image(Objects.requireNonNull(Juno.class.getResourceAsStream("images/logo.png"))));
+		AudioPlayer.getINSTANCE().play(0);
 		stage.show();
+
 	}
 }

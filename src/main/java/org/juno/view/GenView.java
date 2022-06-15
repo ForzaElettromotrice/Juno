@@ -95,9 +95,9 @@ public abstract class GenView
 
 	public void changeScene(int n) throws NonexistingSceneException
 	{
-		boolean fullscreen = window.isFullScreen();
 		window.setScene(switch (n)
 				{
+					case -1 -> login;
 					case 0 -> startMenu;
 					case 1 -> chooseMode;
 					case 2 -> stats;
@@ -105,7 +105,8 @@ public abstract class GenView
 					case 4 -> gameplay;
 					default -> throw new NonexistingSceneException("Non esiste questa scena");
 				});
-		window.setFullScreen(fullscreen);
+
+//		window.setMaximized(true);
 //		window.setFullScreen(true);
 	}
 
