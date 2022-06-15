@@ -1,9 +1,14 @@
 package org.juno.view;
 
+import javafx.animation.FadeTransition;
+import javafx.animation.RotateTransition;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import org.juno.controller.SettingsController;
+import org.juno.controller.StartMenuController;
 import org.juno.controller.StatsMenuController;
 
 import java.io.IOException;
@@ -105,7 +110,7 @@ public class GenView
 
 	public void changeScene(int n) throws NonexistingSceneException
 	{
-		window.setScene(switch (n)
+		Scene scene = (switch (n)
 				{
 					case -1 -> login;
 					case 0 -> startMenu;
@@ -115,6 +120,10 @@ public class GenView
 					case 4 -> gameplay;
 					default -> throw new NonexistingSceneException("Non esiste questa scena");
 				});
+		
+
+		window.setScene(scene);
+
 
 //		window.setMaximized(true);
 //		window.setFullScreen(true);

@@ -7,11 +7,11 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Slider;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import org.juno.model.user.User;
 import org.juno.view.AudioPlayer;
 import org.juno.view.GenView;
 import org.juno.view.NonexistingSceneException;
-
 
 
 /**
@@ -23,6 +23,9 @@ public class SettingsController
 {
 	private static final GenView GEN_VIEW = GenView.getINSTANCE();
 	private static final AudioPlayer AUDIO_PLAYER = AudioPlayer.getINSTANCE();
+
+	@FXML
+	public AnchorPane anchor;
 	@FXML
 	public Slider effectsBar;
 	@FXML

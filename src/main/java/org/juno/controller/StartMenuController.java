@@ -2,6 +2,7 @@ package org.juno.controller;
 
 import javafx.fxml.FXML;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import org.juno.view.GenView;
 import org.juno.view.NonexistingSceneException;
 
@@ -15,6 +16,8 @@ public class StartMenuController
 {
     private static final GenView GEN_VIEW = GenView.getINSTANCE();
 
+    @FXML
+    public AnchorPane anchor;
     @FXML
     public ImageView lightsStats;
     @FXML
