@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.AnchorPane;
 import org.juno.model.user.DataCorruptedException;
 import org.juno.model.user.User;
 import org.juno.view.GenView;
@@ -39,6 +40,8 @@ public class LoginController
 
 	@FXML
 	public Button save;
+	@FXML
+	public AnchorPane loginAnchor;
 
 	@FXML
 	public void saveClicked() throws NonexistingSceneException, DataCorruptedException {
@@ -56,7 +59,7 @@ public class LoginController
 		saveData(username.getText(), pathImg);
 
 
-		GEN_VIEW.changeScene(0);
+		GEN_VIEW.changeScene(0, loginAnchor);
 	}
 
 	@FXML

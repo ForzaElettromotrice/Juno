@@ -2,9 +2,12 @@ package org.juno.view;
 
 import javafx.animation.FadeTransition;
 import javafx.animation.RotateTransition;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import org.juno.controller.SettingsController;
@@ -29,7 +32,6 @@ public class GenView
 	private static Scene gameplay;
 	private static Scene stats;
 	private static Scene settings;
-
 
 	private GenView()
 	{
@@ -101,14 +103,12 @@ public class GenView
 		settings = new Scene(loader.load());
 		settings.setUserData(loader.getController());
 	}
-
-
 	public static void closeWindow()
 	{
 		window.close();
 	}
 
-	public void changeScene(int n) throws NonexistingSceneException
+	public void changeScene(int n, AnchorPane anchor) throws NonexistingSceneException
 	{
 		Scene scene = (switch (n)
 				{
@@ -120,14 +120,28 @@ public class GenView
 					case 4 -> gameplay;
 					default -> throw new NonexistingSceneException("Non esiste questa scena");
 				});
-		
-
-		window.setScene(scene);
-
-
+		makeFadeOut(scene, anchor);
 //		window.setMaximized(true);
 //		window.setFullScreen(true);
 	}
 
+	public void makeFadeOut(Scene scene, AnchorPane anchor) {
+		FadeTransition fadeTransition = new FadeTransition(Duration.millis(100), anchor);
+		fadeTransition.setFromValue(1);
+		fadeTransition.setToValue(0);
+		fadeTransition.setOnFinished((ActionEvent event) ->
+		{
+			window.setScene(scene);
+			makeFadeIn(scene.getRoot());
+		});
+		fadeTransition.play();
+	}
 
+	public void makeFadeIn(Node node)
+	{
+		FadeTransition fadeTransition=new FadeTransition(Duration.millis(100), node);
+		fadeTransition.setFromValue(0);
+		fadeTransition.setToValue(1);
+		fadeTransition.play();
+	}
 }

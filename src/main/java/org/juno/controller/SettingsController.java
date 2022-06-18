@@ -23,9 +23,6 @@ public class SettingsController
 {
 	private static final GenView GEN_VIEW = GenView.getINSTANCE();
 	private static final AudioPlayer AUDIO_PLAYER = AudioPlayer.getINSTANCE();
-
-	@FXML
-	public AnchorPane anchor;
 	@FXML
 	public Slider effectsBar;
 	@FXML
@@ -40,11 +37,14 @@ public class SettingsController
 	public Button back;
 
 	@FXML
+    public AnchorPane settingsAnchor;
+
+    @FXML
 	public void savePressed() throws NonexistingSceneException
 	{
 		AUDIO_PLAYER.setMusicVolume(musicBar.getValue() / 100);
 		AUDIO_PLAYER.setEffectsVolume(effectsBar.getValue() / 100);
-		GEN_VIEW.changeScene(0);
+		GEN_VIEW.changeScene(0, settingsAnchor);
 	}
 
 	@FXML
@@ -67,7 +67,7 @@ public class SettingsController
 		alert.setHeaderText("Confirm");
 		alert.showAndWait();
 		if (alert.getResult()==ButtonType.YES)
-			GEN_VIEW.changeScene(0);
+			GEN_VIEW.changeScene(0, settingsAnchor);
 		else
 			alert.close();
 	}
@@ -109,7 +109,7 @@ public class SettingsController
 		alert.showAndWait();
 		if (alert.getResult() == ButtonType.YES)
 		{
-			GEN_VIEW.changeScene(-1);
+			GEN_VIEW.changeScene(-1, settingsAnchor);
 		} else
 			alert.close();
 	}

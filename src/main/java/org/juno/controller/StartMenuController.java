@@ -15,9 +15,6 @@ import org.juno.view.NonexistingSceneException;
 public class StartMenuController
 {
     private static final GenView GEN_VIEW = GenView.getINSTANCE();
-
-    @FXML
-    public AnchorPane anchor;
     @FXML
     public ImageView lightsStats;
     @FXML
@@ -26,25 +23,26 @@ public class StartMenuController
     public ImageView lightsExit;
     @FXML
     public ImageView lightsSettings;
+    public AnchorPane menuAnchor;
 
     @FXML
     public void playClicked() throws NonexistingSceneException
     {
-        GEN_VIEW.changeScene(1);
+        GEN_VIEW.changeScene(1, menuAnchor);
     }
 
     @FXML
     public void statsClicked() throws NonexistingSceneException
     {
         if (GenView.getStats().getUserData() instanceof StatsMenuController smc) smc.load();
-        GEN_VIEW.changeScene(2);
+        GEN_VIEW.changeScene(2, menuAnchor);
     }
 
     @FXML
     public void settingsClicked() throws NonexistingSceneException
     {
         if (GenView.getSettings().getUserData() instanceof SettingsController sc) sc.load();
-        GEN_VIEW.changeScene(3);
+        GEN_VIEW.changeScene(3, menuAnchor);
     }
 
     @FXML

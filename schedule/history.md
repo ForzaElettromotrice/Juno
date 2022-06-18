@@ -162,10 +162,16 @@
 
 ##12-13/05/2022
 
-
+##15/05/2022
 
 
 ##TODO:
 
-1. GUI
+1. history.md
+2. change 'change avatar' in Stats
+3. transitions between scenes
+4. add images in hboxes in ChooseMode
+5. add sound effects
+6. add animations
+7. gui of the game
 

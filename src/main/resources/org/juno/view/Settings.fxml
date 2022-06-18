@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="backgroundSettings" fx:id="anchor" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="540.0" prefWidth="960.0" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.juno.controller.SettingsController">
+<AnchorPane id="backgroundSettings" fx:id="settingsAnchor" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="540.0" prefWidth="960.0" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.juno.controller.SettingsController">
     <HBox alignment="CENTER" layoutX="159.0" layoutY="418.0" prefHeight="66.0" prefWidth="644.0" AnchorPane.bottomAnchor="30.799999999999997" AnchorPane.leftAnchor="159.0" AnchorPane.rightAnchor="157.0">
         <Button fx:id="save" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#savePressed" onMouseEntered="#saveEntered" onMouseExited="#saveExited" prefHeight="70.0" prefWidth="200.0" style="-fx-background-color: transparent;" text="Save">
             <HBox.margin>

@@ -10,7 +10,7 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="backgroundStats" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#saveUsername" prefHeight="540.0" prefWidth="960.0" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.juno.controller.StatsMenuController">
+<AnchorPane id="backgroundStats" fx:id="statsAnchor" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#saveUsername" prefHeight="540.0" prefWidth="960.0" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.juno.controller.StatsMenuController">
    <Circle fx:id="avatar" fill="WHITE" layoutX="194.0" layoutY="199.0" onMouseEntered="#avatarEntered" onMouseExited="#avatarExited" radius="150.0" stroke="transparent" strokeType="INSIDE" AnchorPane.bottomAnchor="191.0" AnchorPane.leftAnchor="44.0" AnchorPane.rightAnchor="616.0" AnchorPane.topAnchor="49.0" />
    <ImageView fitHeight="160.0" fitWidth="170.0" layoutX="36.0" layoutY="339.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="41.0" AnchorPane.leftAnchor="36.0" AnchorPane.rightAnchor="756.8940887451172" AnchorPane.topAnchor="339.0">
       <Image url="@../images/levelStar.png" />

@@ -8,6 +8,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import javafx.stage.FileChooser;
@@ -25,6 +26,9 @@ public class StatsMenuController
 {
     private static final GenView GEN_VIEW = GenView.getINSTANCE();
     private static final User USER = User.getINSTANCE();
+
+    @FXML
+    public AnchorPane statsAnchor;
     private String avatarUrl = USER.getAvatar();
 
     @FXML
@@ -76,7 +80,7 @@ public class StatsMenuController
     {
         USER.setAvatar(avatarUrl);
         saveUsername();
-        GEN_VIEW.changeScene(0);
+        GEN_VIEW.changeScene(0, statsAnchor);
     }
 
     @FXML

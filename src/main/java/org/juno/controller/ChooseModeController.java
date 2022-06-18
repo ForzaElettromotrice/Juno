@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import org.juno.view.GenView;
 import org.juno.view.NonexistingSceneException;
 
@@ -25,6 +26,8 @@ public class ChooseModeController
     public Label tradeLabel;
     @FXML
     public Button back;
+    @FXML
+    public AnchorPane modeAnchor;
 
     @FXML
     public void classicClicked(ActionEvent actionEvent)
@@ -82,7 +85,7 @@ public class ChooseModeController
 
     @FXML
     public void backClicked() throws NonexistingSceneException {
-        GEN_VIEW.changeScene(0);
+        GEN_VIEW.changeScene(0, modeAnchor);
     }
 
     @FXML
