@@ -158,11 +158,47 @@
         
 ##07-08/05/2022
 
+1. Started working on the GUI: created controllers, view and FXML files for the various menus.
+2. Designed Start menu and implemented exit, stats and settings buttons: the last two change scene,
+    the first one closes the game.
+3. Designed stats menu with back button and created the GenView: it is a class that includes
+    the methods shared between the various views, such as change scene and the loader.
+4. Started designing settings with back button.
+
 ##09-11/05/2022
 
-##12-13/05/2022
+1. Chosen images to use in StartMenu layout, for example the background.
+2. Designed the game logo.
+3. Finished designing StartMenu layout: four buttons (exit, stats, settings and play) that have
+    a lights border appearing on mouse passing.
 
-##15/05/2022
+##12/05/2022
+
+1. Created the login scene: if it is the first access or if data is corrupted, it will ask to 
+    choose a username and a standard avatar. It also saves them in user.txt.
+2. Created NonExistingSceneException and DataCorruptedException.
+3. Finished designing StatsMenu layout: it shows and lets you change avatar and username; it
+    also shows victories, defeats, total matches, current level and experience gained. The avatar
+    can be chosen from the images on your pc, and you can't choose other types of file.
+4. Created a stylesheet to set backgrounds.
+5. Made border appear when mouse passes on buttons in all menus.
+6. Finished designing Login layout.
+
+##13-15/05/2022
+
+1. Finished designing Settings layout: it lets you change music and sound volume; delete your
+    account; reset your level.
+2. Created the AudioPlayer class that onluy has the method to play sounds and music.
+3. Chose music and sounds and implemented music menu.
+4. Designed the ChooseMode layout: it lets you choose between classic, trade and reflex modes.
+    On mouse passing, it shows a brief description of modes.
+5. Removed the various views since we only need GenView for now.
+6. Added a new font to be used in the whole project.
+
+##18/05/2022
+
+1. Added transitions between scenes when changed.
+2. Added some decorative images on mouse passing in ChooseMode.
 
 
 ##TODO:
