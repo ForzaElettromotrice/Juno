@@ -3,9 +3,8 @@ package org.juno.controller;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
 import org.juno.view.GenView;
 import org.juno.view.NonexistingSceneException;
 
@@ -19,11 +18,11 @@ public class ChooseModeController
     private static final GenView GEN_VIEW = GenView.getINSTANCE();
 
     @FXML
-    public Label classicLabel;
+    public HBox classicBox;
     @FXML
-    public Label reflexLabel;
+    public HBox reflexBox;
     @FXML
-    public Label tradeLabel;
+    public HBox tradeBox;
     @FXML
     public Button back;
     @FXML
@@ -38,13 +37,13 @@ public class ChooseModeController
     @FXML
     public void classicEntered()
     {
-        classicLabel.setVisible(true);
+        classicBox.setVisible(true);
     }
 
     @FXML
     public void classicExited()
     {
-        classicLabel.setVisible(false);
+        classicBox.setVisible(false);
     }
 
     @FXML
@@ -56,13 +55,13 @@ public class ChooseModeController
     @FXML
     public void tradeEntered()
     {
-        tradeLabel.setVisible(true);
+        tradeBox.setVisible(true);
     }
 
     @FXML
     public void tradeExited()
     {
-        tradeLabel.setVisible(false);
+        tradeBox.setVisible(false);
     }
 
     @FXML
@@ -74,13 +73,13 @@ public class ChooseModeController
     @FXML
     public void reflexEntered()
     {
-        reflexLabel.setVisible(true);
+        reflexBox.setVisible(true);
     }
 
     @FXML
     public void reflexExited()
     {
-        reflexLabel.setVisible(false);
+        reflexBox.setVisible(false);
     }
 
     @FXML

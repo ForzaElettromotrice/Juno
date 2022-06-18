@@ -169,9 +169,7 @@
 
 1. history.md
 2. change 'change avatar' in Stats
-3. transitions between scenes
-4. add images in hboxes in ChooseMode
-5. add sound effects
-6. add animations
-7. gui of the game
+3. add sound effects
+4. add animations
+5. gui of the game
 

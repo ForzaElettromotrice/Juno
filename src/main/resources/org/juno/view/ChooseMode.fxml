@@ -12,7 +12,7 @@
 <?import javafx.scene.text.Font?>
 
 <AnchorPane id="backgroundChooseMode" fx:id="modeAnchor" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="540.0" prefWidth="960.0" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.juno.controller.ChooseModeController">
-   <BorderPane prefHeight="540.0" prefWidth="953.0">
+   <BorderPane layoutY="-14.0" prefHeight="540.0" prefWidth="953.0">
       <top>
          <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="99.0" prefWidth="953.0" text="Choose game mode:" textAlignment="CENTER" textFill="WHITE" BorderPane.alignment="CENTER">
             <font>
@@ -56,36 +56,77 @@
       </right>
       <bottom>
          <Pane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-            <children>
-               <HBox prefHeight="142.0" prefWidth="1127.0" spacing="30.0">
-                  <Label fx:id="classicLabel" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="143.0" prefWidth="241.0" text="The beloved classic! Play &#10;against three opponents &#10;following standard (J)Uno rules!" textAlignment="CENTER" textFill="WHITE" visible="false">
-                     <HBox.margin>
-                        <Insets left="40.0" />
-                     </HBox.margin>
-                     <font>
-                        <Font name="Javanese Text" size="16.0" />
-                     </font>
-                  </Label>
-               </HBox>
-               <HBox layoutX="10.0" layoutY="10.0" prefHeight="142.0" prefWidth="1127.0" spacing="30.0">
-                  <children>
-                     <Label fx:id="reflexLabel" prefHeight="143.0" prefWidth="367.0" text="Think fast! In this mode you can play cards even &#10;if it's not your turn, and if you don't draw a &#10;playable card, you'll have to continue drawing!" textAlignment="CENTER" textFill="WHITE" visible="false">
-                        <font>
-                           <Font name="Javanese Text" size="16.0" />
-                        </font>
-                     </Label>
-                  </children>
-               </HBox>
-               <HBox layoutX="10.0" layoutY="10.0" prefHeight="142.0" prefWidth="1127.0" spacing="30.0">
-                  <children>
-                     <Label fx:id="tradeLabel" prefHeight="147.0" prefWidth="275.0" text="Be strategic! In this mode 0s trade&#10;cards between all players, while 7s &#10;trade cards between two players! " textAlignment="CENTER" textFill="WHITE" visible="false">
-                        <font>
-                           <Font name="Javanese Text" size="16.0" />
-                        </font>
-                     </Label>
-                  </children>
-               </HBox>
-            </children>
+            <HBox fx:id="classicBox" prefHeight="142.0" prefWidth="1127.0" spacing="110.0" visible="false">
+               <Label maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+                      prefHeight="143.0" prefWidth="241.0"
+                      text="The beloved classic! Play &#10;against three opponents &#10;following standard (J)Uno rules!"
+                      textAlignment="CENTER" textFill="WHITE">
+                  <HBox.margin>
+                     <Insets left="40.0"/>
+                  </HBox.margin>
+                  <font>
+                     <Font name="Javanese Text" size="16.0"/>
+                  </font>
+               </Label>
+               <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                  <image>
+                     <Image url="@../images/cards.png"/>
+                  </image>
+               </ImageView>
+               <ImageView fitHeight="186.0" fitWidth="223.0" pickOnBounds="true" preserveRatio="true">
+                  <Image url="@../images/classicImage.jpg"/>
+               </ImageView>
+            </HBox>
+            <HBox fx:id="reflexBox" layoutX="10.0" layoutY="10.0" prefHeight="142.0" prefWidth="1127.0" spacing="60.0"
+                  visible="false">
+               <ImageView fitHeight="176.0" fitWidth="208.0" pickOnBounds="true" preserveRatio="true">
+                  <image>
+                     <Image url="@../images/reflexImage.jpg"/>
+                  </image>
+                  <HBox.margin>
+                     <Insets left="50.0"/>
+                  </HBox.margin>
+               </ImageView>
+               <Label prefHeight="143.0" prefWidth="367.0"
+                      text="Think fast! In this mode you can play cards even &#10;if it's not your turn, and if you don't draw a &#10;playable card, you'll have to continue drawing!"
+                      textAlignment="CENTER" textFill="WHITE">
+                  <font>
+                     <Font name="Javanese Text" size="16.0"/>
+                  </font>
+               </Label>
+               <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                  <HBox.margin>
+                     <Insets/>
+                  </HBox.margin>
+                  <Image url="@../images/cards.png"/>
+               </ImageView>
+            </HBox>
+            <HBox fx:id="tradeBox" layoutX="10.0" layoutY="2.0" prefHeight="142.0" prefWidth="1127.0" spacing="80.0"
+                  visible="false">
+               <ImageView fitHeight="183.0" fitWidth="209.0" pickOnBounds="true" preserveRatio="true">
+                  <image>
+                     <Image url="@../images/cards.png"/>
+                  </image>
+                  <HBox.margin>
+                     <Insets left="50.0"/>
+                  </HBox.margin>
+               </ImageView>
+               <ImageView fitHeight="183.0" fitWidth="231.0" pickOnBounds="true" preserveRatio="true">
+                  <image>
+                     <Image url="@../images/tradeImage.jpg"/>
+                  </image>
+                  <HBox.margin>
+                     <Insets left="50.0"/>
+                  </HBox.margin>
+               </ImageView>
+               <Label prefHeight="147.0" prefWidth="275.0"
+                      text="Be strategic! In this mode 0s trade&#10;cards between all players, while 7s &#10;trade cards between two players! "
+                      textAlignment="CENTER" textFill="WHITE">
+                  <font>
+                     <Font name="Javanese Text" size="16.0"/>
+                  </font>
+               </Label>
+            </HBox>
          </Pane>
       </bottom>
    </BorderPane>
