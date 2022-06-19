@@ -1,14 +1,14 @@
 package org.juno.controller;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ProgressBar;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import javafx.stage.FileChooser;
@@ -29,6 +29,8 @@ public class StatsMenuController
 
     @FXML
     public AnchorPane statsAnchor;
+    @FXML
+    public Pane avatarBox;
     private String avatarUrl = USER.getAvatar();
 
     @FXML
@@ -39,6 +41,14 @@ public class StatsMenuController
     public Circle avatar;
     @FXML
     public TextField username;
+    @FXML
+    public RadioButton option1;
+    @FXML
+    public RadioButton option2;
+    @FXML
+    public RadioButton option3;
+    @FXML
+    public Button open;
 
     @FXML
     public Label victories;
@@ -79,31 +89,20 @@ public class StatsMenuController
     public void backClicked() throws NonexistingSceneException
     {
         USER.setAvatar(avatarUrl);
-        saveUsername();
+        save();
         GEN_VIEW.changeScene(0, statsAnchor);
     }
 
     @FXML
     public void changeClicked()
     {
-        final FileChooser fc = new FileChooser();
-        fc.setTitle("Apri...");
-        fc.getExtensionFilters().addAll(
-                new FileChooser.ExtensionFilter("All Image Files", "*.jpeg", "*.bmp", "*.png", "*.webmp", "*.gif", "*.jpg"),
-                new FileChooser.ExtensionFilter("JPEG", "*.jpeg", "*.jpg"),
-                new FileChooser.ExtensionFilter("BMP", "*.bmp"),
-                new FileChooser.ExtensionFilter("PNG", "*.png"),
-                new FileChooser.ExtensionFilter("WEBMP", "*.webmp"),
-                new FileChooser.ExtensionFilter("GIF", "*.gif"));
-        String path = fc.showOpenDialog(GEN_VIEW.getWindow()).getPath();
-        avatar.setFill(new ImagePattern(new Image(path)));
-        avatarUrl=path;
-        avatarExited();
+        avatarBox.setVisible(true);
     }
 
     @FXML
-    public void saveUsername()
+    public void save()
     {
+        avatarBox.setVisible(false);
         if (!username.isFocused()) return;
         USER.setNickname(username.getCharacters().toString());
         USER.save();
@@ -113,7 +112,7 @@ public class StatsMenuController
     @FXML
     public void keyPressed(KeyEvent key)
     {
-        if (key.getCode() == KeyCode.ENTER) saveUsername();
+        if (key.getCode() == KeyCode.ENTER) save();
     }
 
     public void load()
@@ -127,4 +126,45 @@ public class StatsMenuController
         avatar.setFill(new ImagePattern(new Image("" + System.getProperty("user.dir") + "\\" + USER.getAvatar())));
     }
 
+    public void option1Clicked()
+    {
+        avatar.setFill(new ImagePattern(new Image("C:\\Users\\Eleonora\\Desktop\\Programming\\JUno\\src\\main\\resources\\org\\juno\\images\\icon1.jpg")));
+    }
+
+    public void option2Clicked()
+    {
+        avatar.setFill(new ImagePattern(new Image("C:\\Users\\Eleonora\\Desktop\\Programming\\JUno\\src\\main\\resources\\org\\juno\\images\\icon2.jpg")));
+    }
+
+    public void option3Clicked()
+    {
+        avatar.setFill(new ImagePattern(new Image("C:\\Users\\Eleonora\\Desktop\\Programming\\JUno\\src\\main\\resources\\org\\juno\\images\\icon3.jpg")));
+    }
+
+    public void openEntered()
+    {
+        open.setStyle("-fx-border-color: #a00303; -fx-background-color: transparent; -fx-border-radius: 90;");
+    }
+
+    public void openClicked()
+    {
+        final FileChooser fc = new FileChooser();
+        fc.setTitle("Apri...");
+        fc.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("All Image Files", "*.jpeg", "*.bmp", "*.png", "*.webmp", "*.gif", "*.jpg"),
+                new FileChooser.ExtensionFilter("JPEG", "*.jpeg", "*.jpg"),
+                new FileChooser.ExtensionFilter("BMP", "*.bmp"),
+                new FileChooser.ExtensionFilter("PNG", "*.png"),
+                new FileChooser.ExtensionFilter("WEBMP", "*.webmp"),
+                new FileChooser.ExtensionFilter("GIF", "*.gif"));
+        String path = fc.showOpenDialog(GEN_VIEW.getWindow()).getPath();
+        avatar.setFill(new ImagePattern(new Image(path)));
+        avatarUrl=path;
+        save();
+    }
+
+    public void openExited()
+    {
+        open.setStyle("-fx-border-color: transparent; -fx-background-color: transparent");
+    }
 }

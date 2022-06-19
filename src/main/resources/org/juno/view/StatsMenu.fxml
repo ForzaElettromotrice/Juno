@@ -3,14 +3,18 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="backgroundStats" fx:id="statsAnchor" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#saveUsername" prefHeight="540.0" prefWidth="960.0" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.juno.controller.StatsMenuController">
+<?import javafx.scene.control.ToggleGroup?>
+<AnchorPane id="backgroundStats" fx:id="statsAnchor" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#save" prefHeight="540.0" prefWidth="960.0" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.juno.controller.StatsMenuController">
    <Circle fx:id="avatar" fill="WHITE" layoutX="194.0" layoutY="199.0" onMouseEntered="#avatarEntered" onMouseExited="#avatarExited" radius="150.0" stroke="transparent" strokeType="INSIDE" AnchorPane.bottomAnchor="191.0" AnchorPane.leftAnchor="44.0" AnchorPane.rightAnchor="616.0" AnchorPane.topAnchor="49.0" />
    <ImageView fitHeight="160.0" fitWidth="170.0" layoutX="36.0" layoutY="339.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="41.0" AnchorPane.leftAnchor="36.0" AnchorPane.rightAnchor="756.8940887451172" AnchorPane.topAnchor="339.0">
       <Image url="@../images/levelStar.png" />
@@ -31,13 +35,13 @@
          <Font name="Javanese Text" size="30.0" />
       </font>
    </TextField>
-   <ImageView fitHeight="63.0" fitWidth="63.0" layoutX="434.0" layoutY="389.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="90.01063919067383" AnchorPane.leftAnchor="434.0" AnchorPane.rightAnchor="463.0" AnchorPane.topAnchor="389.0">
+   <ImageView fitHeight="63.0" fitWidth="63.0" layoutX="512.0" layoutY="389.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="90.01063919067383" AnchorPane.leftAnchor="512.0" AnchorPane.rightAnchor="385.0" AnchorPane.topAnchor="389.0">
       <Image url="@../images/cards.png" />
    </ImageView>
-   <ImageView fitHeight="63.0" fitWidth="52.0" layoutX="434.0" layoutY="199.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="278.0" AnchorPane.leftAnchor="433.7145652770996" AnchorPane.rightAnchor="474.2854347229004" AnchorPane.topAnchor="199.0">
+   <ImageView fitHeight="63.0" fitWidth="52.0" layoutX="518.0" layoutY="204.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="273.0" AnchorPane.leftAnchor="518.0" AnchorPane.rightAnchor="390.2854347229004" AnchorPane.topAnchor="204.0">
       <Image url="@../images/victories.png" />
    </ImageView>
-   <ImageView fitHeight="63.0" fitWidth="118.0" layoutX="428.0" layoutY="294.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="183.0" AnchorPane.leftAnchor="428.0" AnchorPane.rightAnchor="469.0" AnchorPane.topAnchor="294.0">
+   <ImageView fitHeight="63.0" fitWidth="118.0" layoutX="512.0" layoutY="295.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="182.0" AnchorPane.leftAnchor="512.0" AnchorPane.rightAnchor="385.0" AnchorPane.topAnchor="295.0">
       <Image url="@../images/defeats.png" />
    </ImageView>
    <Label fx:id="victories" alignment="CENTER" contentDisplay="CENTER" layoutX="518.0" layoutY="211.0" prefHeight="39.0" prefWidth="218.0" text="0" AnchorPane.bottomAnchor="284.0" AnchorPane.leftAnchor="518.0" AnchorPane.rightAnchor="224.0" AnchorPane.topAnchor="211.0">
@@ -80,4 +84,39 @@
          <Font name="System Bold Italic" size="30.0" />
       </font>
    </Label>
+   <Pane fx:id="avatarBox" layoutX="356.0" layoutY="49.0" prefHeight="366.0" prefWidth="140.0" visible="false">
+      <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0">
+         <RadioButton fx:id="option1" mnemonicParsing="false" onAction="#option1Clicked">
+            <graphic>
+               <ImageView fitHeight="115.0" fitWidth="94.0" pickOnBounds="true" preserveRatio="true">
+                  <Image url="@../images/icon1.jpg"/>
+               </ImageView>
+            </graphic>
+            <toggleGroup>
+               <ToggleGroup fx:id="icons" />
+            </toggleGroup>
+         </RadioButton>
+         <RadioButton fx:id="option2" mnemonicParsing="false" onAction="#option2Clicked" toggleGroup="$icons">
+            <graphic>
+               <ImageView fitHeight="115.0" fitWidth="94.0" pickOnBounds="true" preserveRatio="true">
+                  <Image url="@../images/icon2.jpg"/>
+               </ImageView>
+            </graphic>
+         </RadioButton>
+         <RadioButton fx:id="option3" mnemonicParsing="false" onAction="#option3Clicked" toggleGroup="$icons">
+            <graphic>
+               <ImageView fitHeight="115.0" fitWidth="94.0" pickOnBounds="true" preserveRatio="true">
+                  <Image url="@../images/icon3.jpg"/>
+               </ImageView>
+            </graphic>
+         </RadioButton>
+         <Button fx:id="open" alignment="BOTTOM_RIGHT" mnemonicParsing="false" onAction="#openClicked"
+                 onMouseEntered="#openEntered" onMouseExited="#openExited" style="-fx-background-color: transparent;"
+                 text="Open..." textFill="#790404">
+            <font>
+               <Font name="Javanese Text" size="17.0"/>
+            </font>
+         </Button>
+      </VBox>
+   </Pane>
 </AnchorPane>
