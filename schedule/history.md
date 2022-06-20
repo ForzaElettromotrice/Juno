@@ -195,17 +195,19 @@
 5. Removed the various views since we only need GenView for now.
 6. Added a new font to be used in the whole project.
 
-##18-19/05/2022
+##18 to 20/05/2022
 
 1. Added transitions between scenes when changed.
 2. Added some decorative images on mouse passing in ChooseMode.
 3. Now the user can set the avatar in stats as one of the default avatars or choose one
     from their pc.
+4. Added sounds to menus.
+5. Converted sound compendium to enum.
 
 
 ##TODO:
 
-1. add sound effects
+1. add sound effects to game
 2. add animations
 3. gui of the game
 
