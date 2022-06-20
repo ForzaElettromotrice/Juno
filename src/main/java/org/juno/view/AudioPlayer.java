@@ -15,13 +15,38 @@ public class AudioPlayer
 {
     private static final AudioPlayer INSTANCE = new AudioPlayer();
 
-    private final MediaPlayer menuMusic = new MediaPlayer(new Media(new File("src/main/resources/org/juno/sounds/menuMusic.mp3").toURI().toString()));
-    private final MediaPlayer gameMusic = new MediaPlayer(new Media(new File("src/main/resources/org/juno/sounds/gameMusic.mp3").toURI().toString()));
-    private final MediaPlayer buttonClick = new MediaPlayer(new Media(new File("src/main/resources/org/juno/sounds/buttonClick.mp3").toURI().toString()));
-    private final MediaPlayer cursorSelect = new MediaPlayer(new Media(new File("src/main/resources/org/juno/sounds/cursorSelect.mp3").toURI().toString()));
-    private final MediaPlayer alertBeep = new MediaPlayer(new Media(new File("src/main/resources/org/juno/sounds/alertBeep.mp3").toURI().toString()));
-    private final MediaPlayer cardFlip = new MediaPlayer(new Media(new File("src/main/resources/org/juno/sounds/cardFlip.mp3").toURI().toString()));
+    public enum Sounds
+    {
+        MENUMUSIC(0),
+        GAMEMUSIC(1),
+        BUTTONCLICK(2),
+        CURSORSELECT(3),
+        ALERTBEEP(4),
+        CARDFLIP(5);
 
+        private final MediaPlayer sound;
+
+        Sounds(int val)
+        {
+            sound = new MediaPlayer(new Media(new File(
+                    switch(val)
+                            {
+                                case 0 -> "src/main/resources/org/juno/sounds/menuMusic.mp3";
+                                case 1 -> "src/main/resources/org/juno/sounds/gameMusic.mp3";
+                                case 2 -> "src/main/resources/org/juno/sounds/buttonClick.mp3";
+                                case 3 -> "src/main/resources/org/juno/sounds/cursorSelect.mp3";
+                                case 4 -> "src/main/resources/org/juno/sounds/alertBeep.mp3";
+                                case 5 -> "src/main/resources/org/juno/sounds/cardFlip.mp3";
+                                default -> "";
+                            }
+            ).toURI().toString()));
+        }
+
+        public MediaPlayer getSound()
+        {
+            return sound;
+        }
+    }
 
     private AudioPlayer()
     {
@@ -32,75 +57,45 @@ public class AudioPlayer
         return INSTANCE;
     }
 
-    public void play(int n) throws NotExistingSoundException
+    public void play(Sounds s)
     {
-        switch (n)
+        s.getSound().play();
+        s.getSound().setOnEndOfMedia(() ->
         {
-            case 0 ->
-            {
-                menuMusic.play();
-                menuMusic.setOnEndOfMedia(() ->
-                {
-                    menuMusic.seek(Duration.ZERO);
-                    menuMusic.play();
-                });
-            }
-            case 1 ->
-            {
-                gameMusic.play();
-                gameMusic.setOnEndOfMedia(() ->
-                {
-                    gameMusic.seek(Duration.ZERO);
-                    gameMusic.play();
-                });
-            }
-            case 2 -> buttonClick.play();
-            case 3 -> cursorSelect.play();
-            case 4 -> cardFlip.play();
-            case 5 -> alertBeep.play();
-            default -> throw new NotExistingSoundException("This sounds not exist!");
-        }
+            s.getSound().seek(Duration.ZERO);
+            s.getSound().play();
+        });
     }
 
-    public void stop(int n) throws NotExistingSoundException
+    public void stop(Sounds s)
     {
-        switch (n)
-        {
-            case 0 -> menuMusic.stop();
-            case 1 -> gameMusic.stop();
-            case 2 -> buttonClick.stop();
-            case 3 -> cursorSelect.stop();
-            case 4 -> cardFlip.stop();
-            case 5 -> alertBeep.stop();
-            default -> throw new NotExistingSoundException("This sounds not exist!");
-        }
+        s.getSound().stop();
     }
 
     public void setMusicVolume(double n)
     {
-        menuMusic.setVolume(n);
-        gameMusic.setVolume(n);
+        Sounds.MENUMUSIC.getSound().setVolume(n);
+        Sounds.GAMEMUSIC.getSound().setVolume(n);
     }
     public void setEffectsVolume(double n)
     {
-        buttonClick.setVolume(n);
-        cursorSelect.setVolume(n);
-        cardFlip.setVolume(n);
-        alertBeep.setVolume(n);
+        Sounds.BUTTONCLICK.getSound().setVolume(n);
+        Sounds.CURSORSELECT.getSound().setVolume(n);
+        Sounds.ALERTBEEP.getSound().setVolume(n);
+        Sounds.CARDFLIP.getSound().setVolume(n);
     }
     public double getMusicVolume()
     {
-        return gameMusic.getVolume();
+        return Sounds.MENUMUSIC.getSound().getVolume();
     }
     public double getEffectsVolume()
     {
-        return alertBeep.getVolume();
+        return Sounds.ALERTBEEP.getSound().getVolume();
     }
-    public static void playSound(String sound)
+    public static void playSound(Sounds s)
     {
-        Media music = new Media(new File(sound).toURI().toString());
-        MediaPlayer mediaPlayer = new MediaPlayer(music);
-        mediaPlayer.play();
+        s.getSound().play();
+        s.getSound().seek(Duration.ZERO);
     }
 
 

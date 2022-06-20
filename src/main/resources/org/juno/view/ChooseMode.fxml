@@ -57,73 +57,64 @@
       <bottom>
          <Pane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
             <HBox fx:id="classicBox" prefHeight="142.0" prefWidth="1127.0" spacing="110.0" visible="false">
-               <Label maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
-                      prefHeight="143.0" prefWidth="241.0"
-                      text="The beloved classic! Play &#10;against three opponents &#10;following standard (J)Uno rules!"
-                      textAlignment="CENTER" textFill="WHITE">
+               <Label maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="186.0" prefWidth="244.0" text="The beloved classic! &#10;Play against three &#10;opponents following &#10;standard (J)Uno&#10;rules!" textAlignment="CENTER" textFill="WHITE">
                   <HBox.margin>
-                     <Insets left="40.0"/>
+                     <Insets left="40.0" />
                   </HBox.margin>
                   <font>
-                     <Font name="Javanese Text" size="16.0"/>
+                     <Font name="Anime Ace 2.0 BB" size="16.0" />
                   </font>
                </Label>
                <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                   <image>
-                     <Image url="@../images/cards.png"/>
+                     <Image url="@../images/cards.png" />
                   </image>
                </ImageView>
                <ImageView fitHeight="186.0" fitWidth="223.0" pickOnBounds="true" preserveRatio="true">
-                  <Image url="@../images/classicImage.jpg"/>
+                  <Image url="@../images/classicImage.jpg" />
                </ImageView>
             </HBox>
-            <HBox fx:id="reflexBox" layoutX="10.0" layoutY="10.0" prefHeight="142.0" prefWidth="1127.0" spacing="60.0"
-                  visible="false">
+            <HBox fx:id="reflexBox" layoutX="10.0" layoutY="10.0" prefHeight="142.0" prefWidth="1127.0" spacing="60.0" visible="false">
                <ImageView fitHeight="176.0" fitWidth="208.0" pickOnBounds="true" preserveRatio="true">
                   <image>
-                     <Image url="@../images/reflexImage.jpg"/>
+                     <Image url="@../images/reflexImage.jpg" />
                   </image>
                   <HBox.margin>
-                     <Insets left="50.0"/>
+                     <Insets left="50.0" />
                   </HBox.margin>
                </ImageView>
-               <Label prefHeight="143.0" prefWidth="367.0"
-                      text="Think fast! In this mode you can play cards even &#10;if it's not your turn, and if you don't draw a &#10;playable card, you'll have to continue drawing!"
-                      textAlignment="CENTER" textFill="WHITE">
+               <Label prefHeight="143.0" prefWidth="367.0" text="Think fast! In this mode you &#10;can play cards even if it's not &#10;your turn, and if you don't &#10;draw a playable card, you'll &#10;have to continue drawing!" textAlignment="CENTER" textFill="WHITE">
                   <font>
-                     <Font name="Javanese Text" size="16.0"/>
+                     <Font name="Anime Ace 2.0 BB" size="16.0" />
                   </font>
                </Label>
                <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                   <HBox.margin>
-                     <Insets/>
+                     <Insets />
                   </HBox.margin>
-                  <Image url="@../images/cards.png"/>
+                  <Image url="@../images/cards.png" />
                </ImageView>
             </HBox>
-            <HBox fx:id="tradeBox" layoutX="10.0" layoutY="2.0" prefHeight="142.0" prefWidth="1127.0" spacing="80.0"
-                  visible="false">
+            <HBox fx:id="tradeBox" layoutX="10.0" layoutY="2.0" prefHeight="142.0" prefWidth="1127.0" spacing="80.0" visible="false">
                <ImageView fitHeight="183.0" fitWidth="209.0" pickOnBounds="true" preserveRatio="true">
                   <image>
-                     <Image url="@../images/cards.png"/>
+                     <Image url="@../images/cards.png" />
                   </image>
                   <HBox.margin>
-                     <Insets left="50.0"/>
+                     <Insets left="50.0" />
                   </HBox.margin>
                </ImageView>
                <ImageView fitHeight="183.0" fitWidth="231.0" pickOnBounds="true" preserveRatio="true">
                   <image>
-                     <Image url="@../images/tradeImage.jpg"/>
+                     <Image url="@../images/tradeImage.jpg" />
                   </image>
                   <HBox.margin>
-                     <Insets left="50.0"/>
+                     <Insets left="50.0" />
                   </HBox.margin>
                </ImageView>
-               <Label prefHeight="147.0" prefWidth="275.0"
-                      text="Be strategic! In this mode 0s trade&#10;cards between all players, while 7s &#10;trade cards between two players! "
-                      textAlignment="CENTER" textFill="WHITE">
+               <Label prefHeight="183.0" prefWidth="275.0" text="Be strategic! In this &#10;mode 0s trade cards &#10;between all players, &#10;while 7s trade cards &#10;between two players! " textAlignment="CENTER" textFill="WHITE">
                   <font>
-                     <Font name="Javanese Text" size="16.0"/>
+                     <Font name="Anime Ace 2.0 BB" size="16.0" />
                   </font>
                </Label>
             </HBox>

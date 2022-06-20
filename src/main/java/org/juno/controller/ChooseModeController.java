@@ -1,10 +1,10 @@
 package org.juno.controller;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
+import org.juno.view.AudioPlayer;
 import org.juno.view.GenView;
 import org.juno.view.NonexistingSceneException;
 
@@ -29,14 +29,16 @@ public class ChooseModeController
     public AnchorPane modeAnchor;
 
     @FXML
-    public void classicClicked(ActionEvent actionEvent)
+    public void classicClicked()
     {
-
+        AudioPlayer.playSound(AudioPlayer.Sounds.BUTTONCLICK);
+        //TODO
     }
 
     @FXML
     public void classicEntered()
     {
+        AudioPlayer.playSound(AudioPlayer.Sounds.CURSORSELECT);
         classicBox.setVisible(true);
     }
 
@@ -49,12 +51,14 @@ public class ChooseModeController
     @FXML
     public void tradeClicked()
     {
-
+        AudioPlayer.playSound(AudioPlayer.Sounds.BUTTONCLICK);
+        //  TODO
     }
 
     @FXML
     public void tradeEntered()
     {
+        AudioPlayer.playSound(AudioPlayer.Sounds.CURSORSELECT);
         tradeBox.setVisible(true);
     }
 
@@ -67,12 +71,14 @@ public class ChooseModeController
     @FXML
     public void reflexClicked()
     {
-
+        AudioPlayer.playSound(AudioPlayer.Sounds.BUTTONCLICK);
+        //TODO
     }
 
     @FXML
     public void reflexEntered()
     {
+        AudioPlayer.playSound(AudioPlayer.Sounds.CURSORSELECT);
         reflexBox.setVisible(true);
     }
 
@@ -83,7 +89,9 @@ public class ChooseModeController
     }
 
     @FXML
-    public void backClicked() throws NonexistingSceneException {
+    public void backClicked() throws NonexistingSceneException
+    {
+        AudioPlayer.playSound(AudioPlayer.Sounds.BUTTONCLICK);
         GEN_VIEW.changeScene(0, modeAnchor);
     }
 
@@ -95,6 +103,7 @@ public class ChooseModeController
 
     public void backEntered()
     {
+        AudioPlayer.playSound(AudioPlayer.Sounds.CURSORSELECT);
         back.setStyle("-fx-background-color:transparent; -fx-border-color:BLACK; -fx-border-radius:90; -fx-border-width:3;");
     }
 }

@@ -1,12 +1,10 @@
 package org.juno.controller;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Slider;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import org.juno.model.user.User;
 import org.juno.view.AudioPlayer;
@@ -42,6 +40,7 @@ public class SettingsController
     @FXML
 	public void savePressed() throws NonexistingSceneException
 	{
+		AudioPlayer.playSound(AudioPlayer.Sounds.BUTTONCLICK);
 		AUDIO_PLAYER.setMusicVolume(musicBar.getValue() / 100);
 		AUDIO_PLAYER.setEffectsVolume(effectsBar.getValue() / 100);
 		GEN_VIEW.changeScene(0, settingsAnchor);
@@ -50,6 +49,7 @@ public class SettingsController
 	@FXML
 	public void saveEntered()
 	{
+		AudioPlayer.playSound(AudioPlayer.Sounds.CURSORSELECT);
 		save.setStyle("-fx-border-color: BLACK; -fx-background-color: transparent; -fx-border-radius: 90;");
 	}
 
@@ -62,6 +62,7 @@ public class SettingsController
 	@FXML
 	public void backPressed() throws NonexistingSceneException
 	{
+		AudioPlayer.playSound(AudioPlayer.Sounds.BUTTONCLICK);
 		Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to exit without saving?", ButtonType.YES, ButtonType.NO);
 		alert.setTitle("Confirm");
 		alert.setHeaderText("Confirm");
@@ -75,6 +76,7 @@ public class SettingsController
 	@FXML
 	public void backEntered()
 	{
+		AudioPlayer.playSound(AudioPlayer.Sounds.CURSORSELECT);
 		back.setStyle("-fx-border-color: BLACK; -fx-background-color: transparent; -fx-border-radius: 90;");
 	}
 
@@ -84,8 +86,9 @@ public class SettingsController
 		back.setStyle("-fx-border-color: transparent; -fx-background-color: transparent");
 	}
 	@FXML
-	public void resetClicked(ActionEvent actionEvent) throws NonexistingSceneException
+	public void resetClicked() throws NonexistingSceneException
 	{
+		AudioPlayer.playSound(AudioPlayer.Sounds.BUTTONCLICK);
 		Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to reset your data?", ButtonType.YES, ButtonType.NO);
 		alert.setTitle("Confirm");
 		alert.setHeaderText("Warning!");
@@ -101,8 +104,9 @@ public class SettingsController
 			alert.close();
 	}
 	@FXML
-	public void deleteClicked(ActionEvent actionEvent) throws NonexistingSceneException
+	public void deleteClicked() throws NonexistingSceneException
 	{
+		AudioPlayer.playSound(AudioPlayer.Sounds.BUTTONCLICK);
 		Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to delete your data?", ButtonType.YES, ButtonType.NO);
 		alert.setTitle("Confirm");
 		alert.setHeaderText("Warning!");
@@ -114,22 +118,24 @@ public class SettingsController
 			alert.close();
 	}
 	@FXML
-	public void resetEntered(MouseEvent mouseEvent)
+	public void resetEntered()
 	{
+		AudioPlayer.playSound(AudioPlayer.Sounds.CURSORSELECT);
 		reset.setStyle("-fx-background-color: transparent; -fx-border-color: RED; -fx-border-width: 5;");
 	}
 	@FXML
-	public void deleteEntered(MouseEvent mouseEvent)
+	public void deleteEntered()
 	{
+		AudioPlayer.playSound(AudioPlayer.Sounds.CURSORSELECT);
 		delete.setStyle("-fx-background-color: transparent; -fx-border-color: RED; -fx-border-width: 5;");
 	}
 	@FXML
-	public void resetExited(MouseEvent mouseEvent)
+	public void resetExited()
 	{
 		reset.setStyle("-fx-background-color: transparent; -fx-border-color: transparent; -fx-border-width: 5;");
 	}
 	@FXML
-	public void deleteExited(MouseEvent mouseEvent)
+	public void deleteExited()
 	{
 		delete.setStyle("-fx-background-color: transparent; -fx-border-color: transparent; -fx-border-width: 5;");
 	}

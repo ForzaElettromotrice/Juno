@@ -47,7 +47,7 @@ public class Juno extends Application
 
 		stage.setTitle("JUno");
 		stage.getIcons().add(new Image(Objects.requireNonNull(Juno.class.getResourceAsStream("images/logo.png"))));
-		AudioPlayer.getINSTANCE().play(0);
+		AudioPlayer.getINSTANCE().play(AudioPlayer.Sounds.MENUMUSIC);
 		stage.show();
 
 	}

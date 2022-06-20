@@ -1,18 +1,17 @@
 package org.juno.controller;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import javafx.stage.FileChooser;
 import org.juno.model.user.User;
+import org.juno.view.AudioPlayer;
 import org.juno.view.GenView;
 import org.juno.view.NonexistingSceneException;
 
@@ -64,6 +63,7 @@ public class StatsMenuController
     @FXML
     public void avatarEntered()
     {
+        AudioPlayer.playSound(AudioPlayer.Sounds.CURSORSELECT);
         change.setVisible(true);
     }
 
@@ -76,6 +76,7 @@ public class StatsMenuController
     @FXML
     public void backEntered()
     {
+        AudioPlayer.playSound(AudioPlayer.Sounds.CURSORSELECT);
         back.setStyle("-fx-border-color: BLACK; -fx-background-color: transparent; -fx-border-radius: 90;");
     }
 
@@ -88,6 +89,7 @@ public class StatsMenuController
     @FXML
     public void backClicked() throws NonexistingSceneException
     {
+        AudioPlayer.playSound(AudioPlayer.Sounds.BUTTONCLICK);
         USER.setAvatar(avatarUrl);
         save();
         GEN_VIEW.changeScene(0, statsAnchor);
@@ -96,6 +98,7 @@ public class StatsMenuController
     @FXML
     public void changeClicked()
     {
+        AudioPlayer.playSound(AudioPlayer.Sounds.BUTTONCLICK);
         avatarBox.setVisible(true);
     }
 
@@ -128,22 +131,29 @@ public class StatsMenuController
 
     public void option1Clicked()
     {
+        AudioPlayer.playSound(AudioPlayer.Sounds.BUTTONCLICK);
         avatar.setFill(new ImagePattern(new Image("C:\\Users\\Eleonora\\Desktop\\Programming\\JUno\\src\\main\\resources\\org\\juno\\images\\icon1.jpg")));
     }
 
     public void option2Clicked()
     {
+        AudioPlayer.playSound(AudioPlayer.Sounds.BUTTONCLICK);
         avatar.setFill(new ImagePattern(new Image("C:\\Users\\Eleonora\\Desktop\\Programming\\JUno\\src\\main\\resources\\org\\juno\\images\\icon2.jpg")));
     }
 
     public void option3Clicked()
     {
+        AudioPlayer.playSound(AudioPlayer.Sounds.BUTTONCLICK);
         avatar.setFill(new ImagePattern(new Image("C:\\Users\\Eleonora\\Desktop\\Programming\\JUno\\src\\main\\resources\\org\\juno\\images\\icon3.jpg")));
     }
 
     public void openEntered()
     {
-        open.setStyle("-fx-border-color: #a00303; -fx-background-color: transparent; -fx-border-radius: 90;");
+        if(open.isVisible())
+        {
+            AudioPlayer.playSound(AudioPlayer.Sounds.CURSORSELECT);
+            open.setStyle("-fx-border-color: #a00303; -fx-background-color: transparent; -fx-border-radius: 90;");
+        }
     }
 
     public void openClicked()

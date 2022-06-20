@@ -73,7 +73,7 @@
             </graphic>
          </RadioButton>
         </HBox>
-      <Label fx:id="alert" alignment="CENTER" maxWidth="1.7976931348623157E308" prefHeight="31.0" prefWidth="1233.0" text="You must insert a username first!" textFill="RED">
+      <Label fx:id="alert" alignment="CENTER" maxWidth="1.7976931348623157E308" prefHeight="31.0" prefWidth="1233.0" text="You must insert a username first!" textFill="RED" visible="false">
          <font>
             <Font name="Anime Ace 2.0 BB" size="21.0" />
          </font>
