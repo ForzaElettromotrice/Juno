@@ -22,31 +22,51 @@ public class GameplayController
     @FXML
     public HBox botHand3;
 
+    @FXML
+    public ImageView topDrawCard;
+    @FXML
+    public ImageView middleDrawCard;
+    @FXML
+    ImageView bottomDrawCard;
+
     private static final int CARD_WIDTH = 352;
     private static final int CARD_HEIGHT = 500;
     private static final int CARD_WIDTH_SCALED = 189;
     private static final int CARD_HEIGHT_SCALED = 264;
+    private static final double RATIO_FACTOR = 0.536931818;
 
     @FXML
     public void cardAdded()
     {
-        addCardBig(userHand);
-        addCardBig(botHand1);
-        addCardBig(botHand2);
-        addCardBig(botHand3);
+        addCard(userHand);
+        addCard(botHand1);
+        addCard(botHand2);
+        addCard(botHand3);
     }
 
-    public void addCardBig(HBox box)
+    public void addCard(HBox box)
     {
 
         double space = (box.getChildren().size() * CARD_WIDTH_SCALED) - (box.getWidth());
         space = space / box.getChildren().size();
-        space = space / 0.536931818;
+        space = space / RATIO_FACTOR;
         if (space < 0) space = 0;
         for (Node child : box.getChildren())
         {
             if (child instanceof ImageView imageView)
                 imageView.setViewport(new Rectangle2D(0, 0, CARD_WIDTH - space, CARD_HEIGHT));
         }
+    }
+
+    @FXML
+    public void middleReached()
+    {
+        topDrawCard.setVisible(false);
+    }
+
+    @FXML
+    public void quarterReached()
+    {
+        middleDrawCard.setVisible(false);
     }
 }
