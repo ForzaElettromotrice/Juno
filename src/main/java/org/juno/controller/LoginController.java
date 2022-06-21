@@ -11,6 +11,7 @@ import org.juno.model.user.User;
 import org.juno.view.AudioPlayer;
 import org.juno.view.GenView;
 import org.juno.view.NonexistingSceneException;
+import org.juno.view.NotExistingSoundException;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
@@ -25,6 +26,7 @@ import java.util.Objects;
 public class LoginController
 {
 	private static final GenView GEN_VIEW = GenView.getINSTANCE();
+	private static final AudioPlayer AUDIO_PLAYER = AudioPlayer.getINSTANCE();
 
 	@FXML
 	public TextField username;
@@ -45,9 +47,9 @@ public class LoginController
 	public AnchorPane loginAnchor;
 
 	@FXML
-	public void saveClicked() throws NonexistingSceneException, DataCorruptedException
+	public void saveClicked() throws NonexistingSceneException, DataCorruptedException, NotExistingSoundException
 	{
-		AudioPlayer.playSound(AudioPlayer.Sounds.BUTTONCLICK);
+		AUDIO_PLAYER.play(AudioPlayer.Sounds.BUTTONCLICK);
 		if (Objects.equals(username.getText(), ""))
 		{
 			alert.setVisible(true);
@@ -66,7 +68,7 @@ public class LoginController
 	}
 
 	@FXML
-	public void keyPressed(KeyEvent key) throws NonexistingSceneException, DataCorruptedException
+	public void keyPressed(KeyEvent key) throws NonexistingSceneException, DataCorruptedException, NotExistingSoundException
 	{
 		if (key.getCode() == KeyCode.ENTER) saveClicked();
 	}
@@ -86,9 +88,9 @@ public class LoginController
 		}
 	}
 
-	public void saveEntered()
+	public void saveEntered() throws NotExistingSoundException
 	{
-		AudioPlayer.playSound(AudioPlayer.Sounds.CURSORSELECT);
+		AUDIO_PLAYER.play(AudioPlayer.Sounds.CURSORSELECT);
 		save.setStyle("-fx-border-color: BLACK; -fx-background-color: WHITE; -fx-border-radius: 90; -fx-background-radius: 90;");
 	}
 

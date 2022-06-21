@@ -7,6 +7,7 @@ import javafx.scene.layout.HBox;
 import org.juno.view.AudioPlayer;
 import org.juno.view.GenView;
 import org.juno.view.NonexistingSceneException;
+import org.juno.view.NotExistingSoundException;
 
 /**
  * Defines: ChooseModeController, class
@@ -16,6 +17,7 @@ import org.juno.view.NonexistingSceneException;
 public class ChooseModeController
 {
     private static final GenView GEN_VIEW = GenView.getINSTANCE();
+    private static final AudioPlayer AUDIO_PLAYER = AudioPlayer.getINSTANCE();
 
     @FXML
     public HBox classicBox;
@@ -29,16 +31,16 @@ public class ChooseModeController
     public AnchorPane modeAnchor;
 
     @FXML
-    public void classicClicked()
+    public void classicClicked() throws NotExistingSoundException
     {
-        AudioPlayer.playSound(AudioPlayer.Sounds.BUTTONCLICK);
+        AUDIO_PLAYER.play(AudioPlayer.Sounds.BUTTONCLICK);
         //TODO
     }
 
     @FXML
-    public void classicEntered()
+    public void classicEntered() throws NotExistingSoundException
     {
-        AudioPlayer.playSound(AudioPlayer.Sounds.CURSORSELECT);
+        AUDIO_PLAYER.play(AudioPlayer.Sounds.CURSORSELECT);
         classicBox.setVisible(true);
     }
 
@@ -49,16 +51,16 @@ public class ChooseModeController
     }
 
     @FXML
-    public void tradeClicked()
+    public void tradeClicked() throws NotExistingSoundException
     {
-        AudioPlayer.playSound(AudioPlayer.Sounds.BUTTONCLICK);
+        AUDIO_PLAYER.play(AudioPlayer.Sounds.BUTTONCLICK);
         //  TODO
     }
 
     @FXML
-    public void tradeEntered()
+    public void tradeEntered() throws NotExistingSoundException
     {
-        AudioPlayer.playSound(AudioPlayer.Sounds.CURSORSELECT);
+        AUDIO_PLAYER.play(AudioPlayer.Sounds.CURSORSELECT);
         tradeBox.setVisible(true);
     }
 
@@ -69,16 +71,16 @@ public class ChooseModeController
     }
 
     @FXML
-    public void reflexClicked()
+    public void reflexClicked() throws NotExistingSoundException
     {
-        AudioPlayer.playSound(AudioPlayer.Sounds.BUTTONCLICK);
+        AUDIO_PLAYER.play(AudioPlayer.Sounds.BUTTONCLICK);
         //TODO
     }
 
     @FXML
-    public void reflexEntered()
+    public void reflexEntered() throws NotExistingSoundException
     {
-        AudioPlayer.playSound(AudioPlayer.Sounds.CURSORSELECT);
+        AUDIO_PLAYER.play(AudioPlayer.Sounds.CURSORSELECT);
         reflexBox.setVisible(true);
     }
 
@@ -89,9 +91,9 @@ public class ChooseModeController
     }
 
     @FXML
-    public void backClicked() throws NonexistingSceneException
+    public void backClicked() throws NonexistingSceneException, NotExistingSoundException
     {
-        AudioPlayer.playSound(AudioPlayer.Sounds.BUTTONCLICK);
+        AUDIO_PLAYER.play(AudioPlayer.Sounds.BUTTONCLICK);
         GEN_VIEW.changeScene(0, modeAnchor);
     }
 
@@ -101,9 +103,9 @@ public class ChooseModeController
         back.setStyle("-fx-background-color:transparent;");
     }
 
-    public void backEntered()
+    public void backEntered() throws NotExistingSoundException
     {
-        AudioPlayer.playSound(AudioPlayer.Sounds.CURSORSELECT);
+        AUDIO_PLAYER.play(AudioPlayer.Sounds.CURSORSELECT);
         back.setStyle("-fx-background-color:transparent; -fx-border-color:BLACK; -fx-border-radius:90; -fx-border-width:3;");
     }
 }

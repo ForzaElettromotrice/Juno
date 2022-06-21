@@ -14,6 +14,7 @@ import org.juno.model.user.User;
 import org.juno.view.AudioPlayer;
 import org.juno.view.GenView;
 import org.juno.view.NonexistingSceneException;
+import org.juno.view.NotExistingSoundException;
 
 
 /**
@@ -25,6 +26,7 @@ public class StatsController
 {
     private static final GenView GEN_VIEW = GenView.getINSTANCE();
     private static final User USER = User.getINSTANCE();
+    private static final AudioPlayer AUDIO_PLAYER = AudioPlayer.getINSTANCE();
 
     @FXML
     public AnchorPane statsAnchor;
@@ -61,9 +63,9 @@ public class StatsController
     public ProgressBar progressBar;
 
     @FXML
-    public void avatarEntered()
+    public void avatarEntered() throws NotExistingSoundException
     {
-        AudioPlayer.playSound(AudioPlayer.Sounds.CURSORSELECT);
+        AUDIO_PLAYER.play(AudioPlayer.Sounds.CURSORSELECT);
         change.setVisible(true);
     }
 
@@ -74,9 +76,9 @@ public class StatsController
     }
 
     @FXML
-    public void backEntered()
+    public void backEntered() throws NotExistingSoundException
     {
-        AudioPlayer.playSound(AudioPlayer.Sounds.CURSORSELECT);
+        AUDIO_PLAYER.play(AudioPlayer.Sounds.CURSORSELECT);
         back.setStyle("-fx-border-color: BLACK; -fx-background-color: transparent; -fx-border-radius: 90;");
     }
 
@@ -87,18 +89,18 @@ public class StatsController
     }
 
     @FXML
-    public void backClicked() throws NonexistingSceneException
+    public void backClicked() throws NonexistingSceneException, NotExistingSoundException
     {
-        AudioPlayer.playSound(AudioPlayer.Sounds.BUTTONCLICK);
+        AUDIO_PLAYER.play(AudioPlayer.Sounds.BUTTONCLICK);
         USER.setAvatar(avatarUrl);
         save();
         GEN_VIEW.changeScene(0, statsAnchor);
     }
 
     @FXML
-    public void changeClicked()
+    public void changeClicked() throws NotExistingSoundException
     {
-        AudioPlayer.playSound(AudioPlayer.Sounds.BUTTONCLICK);
+        AUDIO_PLAYER.play(AudioPlayer.Sounds.BUTTONCLICK);
         avatarBox.setVisible(true);
     }
 
@@ -129,29 +131,29 @@ public class StatsController
         avatar.setFill(new ImagePattern(new Image("" + System.getProperty("user.dir") + "\\" + USER.getAvatar())));
     }
 
-    public void option1Clicked()
+    public void option1Clicked() throws NotExistingSoundException
     {
-        AudioPlayer.playSound(AudioPlayer.Sounds.BUTTONCLICK);
+        AUDIO_PLAYER.play(AudioPlayer.Sounds.BUTTONCLICK);
         avatar.setFill(new ImagePattern(new Image(System.getProperty("user.dir") + "\\src\\main\\resources\\org\\juno\\images\\icon1.jpg")));
     }
 
-    public void option2Clicked()
+    public void option2Clicked() throws NotExistingSoundException
     {
-        AudioPlayer.playSound(AudioPlayer.Sounds.BUTTONCLICK);
+        AUDIO_PLAYER.play(AudioPlayer.Sounds.BUTTONCLICK);
         avatar.setFill(new ImagePattern(new Image(System.getProperty("user.dir") + "\\src\\main\\resources\\org\\juno\\images\\icon2.jpg")));
     }
 
-    public void option3Clicked()
+    public void option3Clicked() throws NotExistingSoundException
     {
-        AudioPlayer.playSound(AudioPlayer.Sounds.BUTTONCLICK);
+        AUDIO_PLAYER.play(AudioPlayer.Sounds.BUTTONCLICK);
         avatar.setFill(new ImagePattern(new Image(System.getProperty("user.dir") + "\\src\\main\\resources\\org\\juno\\images\\icon3.jpg")));
     }
 
-    public void openEntered()
+    public void openEntered() throws NotExistingSoundException
     {
-        if(open.isVisible())
+        if (open.isVisible())
         {
-            AudioPlayer.playSound(AudioPlayer.Sounds.CURSORSELECT);
+            AUDIO_PLAYER.play(AudioPlayer.Sounds.CURSORSELECT);
             open.setStyle("-fx-border-color: #a00303; -fx-background-color: transparent; -fx-border-radius: 90;");
         }
     }
