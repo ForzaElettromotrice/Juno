@@ -31,10 +31,9 @@ public class ChooseModeController
     public AnchorPane modeAnchor;
 
     @FXML
-    public void classicClicked() throws NotExistingSoundException
-    {
+    public void classicClicked() throws NotExistingSoundException, NonexistingSceneException {
         AUDIO_PLAYER.play(AudioPlayer.Sounds.BUTTONCLICK);
-        //TODO
+        GEN_VIEW.changeScene(4, modeAnchor);
     }
 
     @FXML

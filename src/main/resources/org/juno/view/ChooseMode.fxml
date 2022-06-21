@@ -66,9 +66,7 @@
                   </font>
                </Label>
                <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
-                  <image>
-                     <Image url="@../images/cards.png" />
-                  </image>
+                  <Image url="@../images/cards.png"/>
                </ImageView>
                <ImageView fitHeight="186.0" fitWidth="223.0" pickOnBounds="true" preserveRatio="true">
                   <Image url="@../images/classicImage.jpg" />
@@ -76,12 +74,10 @@
             </HBox>
             <HBox fx:id="reflexBox" layoutX="10.0" layoutY="10.0" prefHeight="142.0" prefWidth="1127.0" spacing="60.0" visible="false">
                <ImageView fitHeight="176.0" fitWidth="208.0" pickOnBounds="true" preserveRatio="true">
-                  <image>
-                     <Image url="@../images/reflexImage.jpg" />
-                  </image>
                   <HBox.margin>
-                     <Insets left="50.0" />
+                     <Insets left="50.0"/>
                   </HBox.margin>
+                  <Image url="@../images/reflexImage.jpg"/>
                </ImageView>
                <Label prefHeight="143.0" prefWidth="367.0" text="Think fast! In this mode you &#10;can play cards even if it's not &#10;your turn, and if you don't &#10;draw a playable card, you'll &#10;have to continue drawing!" textAlignment="CENTER" textFill="WHITE">
                   <font>
@@ -97,20 +93,16 @@
             </HBox>
             <HBox fx:id="tradeBox" layoutX="10.0" layoutY="2.0" prefHeight="142.0" prefWidth="1127.0" spacing="80.0" visible="false">
                <ImageView fitHeight="183.0" fitWidth="209.0" pickOnBounds="true" preserveRatio="true">
-                  <image>
-                     <Image url="@../images/cards.png" />
-                  </image>
                   <HBox.margin>
-                     <Insets left="50.0" />
+                     <Insets left="50.0"/>
                   </HBox.margin>
+                  <Image url="@../images/cards.png"/>
                </ImageView>
                <ImageView fitHeight="183.0" fitWidth="231.0" pickOnBounds="true" preserveRatio="true">
-                  <image>
-                     <Image url="@../images/tradeImage.jpg" />
-                  </image>
                   <HBox.margin>
-                     <Insets left="50.0" />
+                     <Insets left="50.0"/>
                   </HBox.margin>
+                  <Image url="@../images/tradeImage.jpg"/>
                </ImageView>
                <Label prefHeight="183.0" prefWidth="275.0" text="Be strategic! In this &#10;mode 0s trade cards &#10;between all players, &#10;while 7s trade cards &#10;between two players! " textAlignment="CENTER" textFill="WHITE">
                   <font>

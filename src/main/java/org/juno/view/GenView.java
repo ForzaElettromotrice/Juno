@@ -86,9 +86,9 @@ public class GenView
 		chooseMode = new Scene(loader.load());
 		chooseMode.setUserData(loader.getController());
 
-//		loader = new FXMLLoader(GenView.class.getResource("Gameplay.fxml"));
-//		gameplay = new Scene(loader.load());
-//		gameplay.setUserData(loader.getController());
+		loader = new FXMLLoader(GenView.class.getResource("Gameplay.fxml"));
+		gameplay = new Scene(loader.load());
+		gameplay.setUserData(loader.getController());
 		
 		loader = new FXMLLoader(GenView.class.getResource("Stats.fxml"));
 		stats = new Scene(loader.load());
