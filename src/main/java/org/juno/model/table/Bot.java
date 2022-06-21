@@ -1,6 +1,7 @@
 package org.juno.model.table;
 
 import org.juno.datapackage.BuildMP;
+import org.juno.datapackage.MessagePackageTypeNotExistsException;
 import org.juno.model.deck.Card;
 import org.juno.model.deck.DiscardPile;
 import org.juno.model.deck.WildCard;
@@ -54,11 +55,11 @@ public class Bot extends Player
 	}
 
 	@Override
-	public boolean saidUno()
+	public boolean saidUno() throws MessagePackageTypeNotExistsException
 	{
 		if (RANDOMIZER.nextInt(100) > 20)
 		{
-			saidUno = true;
+			sayUno();
 		}
 		return super.saidUno();
 	}

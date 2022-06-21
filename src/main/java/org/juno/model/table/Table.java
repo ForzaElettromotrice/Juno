@@ -101,7 +101,7 @@ public class Table extends Observable
         updatePoints(currentPlayer);
     }
 
-    private void checkEffect(Card card)
+    private void checkEffect(Card card) throws MessagePackageTypeNotExistsException
     {
         switch (card.getValue().getVal())
         {
@@ -109,17 +109,25 @@ public class Table extends Observable
             {
                 plus2 = true;
                 stop = true;
+                notifyObservers(BUILD_MP.createMP(BuildMP.Actions.EFFECTS, BuildMP.Effects.PLUSTWO));
             }
-            case 11 -> TURN_ORDER.reverseTurnOrder();
-            case 12 -> stop = true;
+            case 11 ->
+            {
+                TURN_ORDER.reverseTurnOrder();
+                notifyObservers(BUILD_MP.createMP(BuildMP.Actions.EFFECTS, BuildMP.Effects.REVERSE));
+            }
+            case 12 ->
+            {
+                stop = true;
+                notifyObservers(BUILD_MP.createMP(BuildMP.Actions.EFFECTS, BuildMP.Effects.STOP));
+            }
             case 14 ->
             {
                 plus4 = true;
                 stop = true;
+                notifyObservers(BUILD_MP.createMP(BuildMP.Actions.EFFECTS, BuildMP.Effects.PLUSFOUR));
             }
-            default ->
-            {
-            }
+            default -> notifyObservers(BUILD_MP.createMP(BuildMP.Actions.EFFECTS, BuildMP.Effects.JOLLY));
         }
 
     }
@@ -162,7 +170,11 @@ public class Table extends Observable
             {
                 throw new RuntimeException(e);
             }
-            if (!player.saidUno()) player.draw(2);
+            if (!player.saidUno())
+            {
+                notifyObservers(BUILD_MP.createMP(BuildMP.Actions.EFFECTS, BuildMP.Effects.DIDNTSAYUNO));
+                player.draw(2);
+            }
         }
         return player.getSizeHand() == 0;
     }
