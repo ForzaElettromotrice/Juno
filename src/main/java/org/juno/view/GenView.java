@@ -9,7 +9,10 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import org.juno.controller.GameplayController;
+import org.juno.datapackage.DiscardData;
 import org.juno.datapackage.DrawData;
+import org.juno.datapackage.EffectData;
+import org.juno.datapackage.TurnData;
 
 import java.io.IOException;
 import java.util.Observable;
@@ -147,10 +150,12 @@ public class GenView implements Observer
 	@Override
 	public void update(Observable o, Object arg)
 	{
-		GameplayController gameplayController = null;
-		if (gameplay.getUserData() instanceof GameplayController gc) gameplayController = gc;
+		GameplayController gameplayController = (GameplayController) gameplay.getUserData();
 
-		if (arg instanceof DrawData DrD) gameplayController.draw(DrD);
+		if (arg instanceof DrawData drawDataD) gameplayController.draw(drawDataD);
+		else if (arg instanceof DiscardData discardData) gameplayController.discard(discardData);
+		else if (arg instanceof TurnData turnData) gameplayController.turn(turnData);
+		else if (arg instanceof EffectData effectData) gameplayController.effect(effectData);
 
 	}
 }
