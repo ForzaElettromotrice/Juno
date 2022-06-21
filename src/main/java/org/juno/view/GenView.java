@@ -8,15 +8,19 @@ import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import org.juno.controller.GameplayController;
+import org.juno.datapackage.DrawData;
 
 import java.io.IOException;
+import java.util.Observable;
+import java.util.Observer;
 
 /**
  * Defines GenView class,
  *
  * @author ForzaElettromotrice, R0n3l
  */
-public class GenView
+public class GenView implements Observer
 {
 	private static final GenView INSTANCE = new GenView();
 	private static Stage window;
@@ -137,5 +141,16 @@ public class GenView
 		fadeTransition.setFromValue(0);
 		fadeTransition.setToValue(1);
 		fadeTransition.play();
+	}
+
+
+	@Override
+	public void update(Observable o, Object arg)
+	{
+		GameplayController gameplayController = null;
+		if (gameplay.getUserData() instanceof GameplayController gc) gameplayController = gc;
+
+		if (arg instanceof DrawData DrD) gameplayController.draw(DrD);
+
 	}
 }

@@ -9,5 +9,4 @@ import java.util.Map;
  */
 public interface Data
 {
-	<T> Map<String, T> getData();
 }
