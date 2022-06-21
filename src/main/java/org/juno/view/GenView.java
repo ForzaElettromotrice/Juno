@@ -152,7 +152,7 @@ public class GenView implements Observer
 	{
 		GameplayController gameplayController = (GameplayController) gameplay.getUserData();
 
-		if (arg instanceof DrawData drawDataD) gameplayController.draw(drawDataD);
+		if (arg instanceof DrawData drawData) gameplayController.draw(drawData);
 		else if (arg instanceof DiscardData discardData) gameplayController.discard(discardData);
 		else if (arg instanceof TurnData turnData) gameplayController.turn(turnData);
 		else if (arg instanceof EffectData effectData) gameplayController.effect(effectData);
