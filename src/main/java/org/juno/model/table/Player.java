@@ -1,20 +1,26 @@
 package org.juno.model.table;
 
+import org.juno.datapackage.BuildMP;
+import org.juno.datapackage.MessagePackageTypeNotExistsException;
 import org.juno.model.deck.Card;
 import org.juno.model.deck.DrawPile;
 import org.juno.model.deck.WildCard;
 
 import java.util.Comparator;
 import java.util.LinkedList;
+import java.util.Observable;
 
 /**
  * Defines: Player class,
  *
  * @author ForzaElettromotrice, R0n3l
  */
-public class Player
+public class Player extends Observable
 {
 	protected static final DrawPile DRAW_PILE = DrawPile.getINSTANCE();
+	protected static final BuildMP BUILD_MP = BuildMP.getINSTANCE();
+
+	private final BuildMP.PG ID;
 
 	protected final LinkedList<Card> hand;
 	protected int points;
@@ -23,21 +29,34 @@ public class Player
 	protected boolean hasPassed;
 	protected boolean saidUno;
 
-	public Player()
+	public Player(int n)
 	{
+		ID = switch (n)
+				{
+					case 1 -> BuildMP.PG.BOT1;
+					case 2 -> BuildMP.PG.BOT2;
+					case 3 -> BuildMP.PG.BOT3;
+					default -> BuildMP.PG.PLAYER;
+				};
 		hand = new LinkedList<>();
 	}
 
+	public BuildMP.PG getID()
+	{
+		return ID;
+	}
 	public int getSizeHand()
 	{
 		return hand.size();
 	}
 
-	public void draw(int n)
+	public void draw(int n) throws MessagePackageTypeNotExistsException
 	{
 		for (int i = 0; i < n; i++)
 		{
-			hand.add(DRAW_PILE.draw());
+			Card card = DRAW_PILE.draw();
+			hand.add(card);
+			notifyObservers(BUILD_MP.createMP(BuildMP.Actions.DRAW, BuildMP.PG.PLAYER, card.getColor(), card.getValue()));
 		}
 
 		sort();
@@ -117,4 +136,5 @@ public class Player
 		resetMatch();
 		points = 0;
 	}
+
 }

@@ -1,5 +1,6 @@
 package org.juno.model.table;
 
+import org.juno.datapackage.BuildMP;
 import org.juno.model.deck.Card;
 import org.juno.model.deck.DiscardPile;
 import org.juno.model.deck.WildCard;
@@ -16,9 +17,10 @@ public class Bot extends Player
 	private static final DiscardPile DISCARD_PILE = DiscardPile.getINSTANCE();
 	private static final Random RANDOMIZER = new Random();
 
-	public Bot()
+
+	public Bot(int n)
 	{
-		super();
+		super(n);
 	}
 
 	@Override

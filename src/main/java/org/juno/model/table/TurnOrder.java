@@ -22,9 +22,9 @@ public class TurnOrder
 	{
 		for (int i = 0; i < 3; i++)
 		{
-			players[i] = new Bot();
+			players[i] = new Bot(i + 1);
 		}
-		players[3] = new Player();
+		players[3] = new Player(0);
 	}
 
 	public static TurnOrder getINSTANCE()

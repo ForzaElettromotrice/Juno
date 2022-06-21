@@ -50,12 +50,25 @@ public class Card
 
         Color(int val)
         {
-            this.val=val;
+            this.val = val;
         }
 
         public int getVal()
         {
             return val;
+        }
+
+        @Override
+        public String toString()
+        {
+            return switch (getVal())
+                    {
+                        case 0 -> "r";
+                        case 1 -> "b";
+                        case 2 -> "g";
+                        case 3 -> "y";
+                        default -> "";
+                    };
         }
     }
 

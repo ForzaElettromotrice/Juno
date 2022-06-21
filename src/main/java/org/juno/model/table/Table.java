@@ -1,21 +1,26 @@
 package org.juno.model.table;
 
+import org.juno.datapackage.BuildMP;
+import org.juno.datapackage.MessagePackageTypeNotExistsException;
 import org.juno.model.deck.Card;
 import org.juno.model.deck.DiscardPile;
 import org.juno.model.deck.DrawPile;
 import org.juno.model.deck.WildCard;
+
+import java.util.Observable;
 
 /**
  * Defines: Table class,
  *
  * @author R0n3l, ForzaElettromotrice
  */
-public class Table
+public class Table extends Observable
 {
     private static final Table INSTANCE = new Table();
     private static final DiscardPile DISCARD_PILE = DiscardPile.getINSTANCE();
     private static final DrawPile DRAW_PILE = DrawPile.getINSTANCE();
     private static final TurnOrder TURN_ORDER = TurnOrder.getINSTANCE();
+    private static final BuildMP BUILD_MP = BuildMP.getINSTANCE();
 
 
     private boolean plus2;
@@ -33,7 +38,7 @@ public class Table
         return INSTANCE;
     }
 
-    public void startGame()
+    public void startGame() throws MessagePackageTypeNotExistsException
     {
         reset();
         boolean endGame = false;
@@ -57,7 +62,7 @@ public class Table
         return false;
     }
 
-    public void startMatch()
+    public void startMatch() throws MessagePackageTypeNotExistsException
     {
         TURN_ORDER.resetMatch();
         DISCARD_PILE.reset();
@@ -80,6 +85,7 @@ public class Table
         while (!endMatch)
         {
             currentPlayer = TURN_ORDER.nextPlayer();
+            notifyObservers(BUILD_MP.createMP(BuildMP.Actions.TURN, currentPlayer.getID()));
 
             if (plus2) currentPlayer.draw(2);
             if (plus4) currentPlayer.draw(4);
@@ -118,7 +124,7 @@ public class Table
 
     }
 
-    public boolean turn(Player player)
+    public boolean turn(Player player) throws MessagePackageTypeNotExistsException
     {
         boolean endTurn = false;
 
@@ -129,7 +135,7 @@ public class Table
             if (player.hasChosen())
             {
                 Card chosenCard = player.getChosenCard();
-
+                notifyObservers(BUILD_MP.createMP(BuildMP.Actions.DISCARD, player.getID(), chosenCard.getColor(), chosenCard.getValue()));
 
                 if (chosenCard instanceof WildCard wildCard)
                 {
