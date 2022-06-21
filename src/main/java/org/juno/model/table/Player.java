@@ -61,8 +61,8 @@ public class Player extends Observable
 
 			System.out.println(card.getValue());
 			System.out.println(card.getColor());
-			setChanged();
 
+			setChanged();
 			notifyObservers(BUILD_MP.createMP(BuildMP.Actions.DRAW, ID, card.getColor(), card.getValue()));
 		}
 

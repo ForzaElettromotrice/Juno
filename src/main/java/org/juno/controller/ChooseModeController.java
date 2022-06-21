@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
+import org.juno.datapackage.MessagePackageTypeNotExistsException;
 import org.juno.model.table.Table;
 import org.juno.view.AudioPlayer;
 import org.juno.view.GenView;
@@ -33,7 +34,7 @@ public class ChooseModeController
     public AnchorPane modeAnchor;
 
     @FXML
-    public void classicClicked() throws NotExistingSoundException, NonexistingSceneException
+    public void classicClicked() throws NotExistingSoundException, NonexistingSceneException, MessagePackageTypeNotExistsException
     {
         AUDIO_PLAYER.play(AudioPlayer.Sounds.BUTTONCLICK);
         Thread game = new Thread(Table.getINSTANCE());
@@ -112,4 +113,6 @@ public class ChooseModeController
         AUDIO_PLAYER.play(AudioPlayer.Sounds.CURSORSELECT);
         back.setStyle("-fx-background-color:transparent; -fx-border-color:BLACK; -fx-border-radius:90; -fx-border-width:3;");
     }
+
+
 }

@@ -1,7 +1,6 @@
 package org.juno.controller;
 
 import javafx.fxml.FXML;
-import javafx.geometry.Rectangle2D;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -9,6 +8,8 @@ import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import org.juno.datapackage.*;
+
+
 /**
  * Defines: GameplayController, class
  *
@@ -96,7 +97,7 @@ public class GameplayController
         {
             case PLAYER ->
             {
-                ImageView iv = new ImageView(new Image(String.format("%s\\src\\main\\resources\\org\\juno\\images\\%s%d.png", System.getProperty("user.dir"), drawData.color().toString(), drawData.value().getVal())));
+                ImageView iv = new ImageView(new Image(String.format("file:\\%s\\src\\main\\resources\\org\\juno\\images\\%s%d.png", System.getProperty("user.dir"), drawData.color().toString(), drawData.value().getVal())));
                 iv.setFitWidth(CARD_WIDTH_SCALED);
                 iv.setFitHeight(CARD_HEIGHT_SCALED);
                 userHand.getChildren().add(iv);
@@ -111,7 +112,7 @@ public class GameplayController
     }
     private void test(HBox botHand)
     {
-        ImageView iv = new ImageView(new Image(String.format("%s\\src\\main\\resources\\org\\juno\\images\\bempty.png", System.getProperty("user.dir"))));
+        ImageView iv = new ImageView(new Image(String.format("file:\\%s\\src\\main\\resources\\org\\juno\\images\\bempty.png", System.getProperty("user.dir"))));
         iv.setFitWidth(CARD_WIDTH_SCALED);
         iv.setFitHeight(CARD_HEIGHT_SCALED);
         botHand.getChildren().add(iv);
@@ -138,7 +139,7 @@ public class GameplayController
             case BOT2 -> botHand2.getChildren().remove(0);
             case BOT3 -> botHand3.getChildren().remove(0);
         }
-        cardDiscarded.setImage(new Image(String.format("%s\\src\\main\\resources\\org\\juno\\images\\%s%d.png", System.getProperty("user.dir"), discardData.color().toString(), discardData.value().getVal())));
+        cardDiscarded.setImage(new Image(String.format("file:\\%s\\src\\main\\resources\\org\\juno\\images\\%s%d.png", System.getProperty("user.dir"), discardData.color().toString(), discardData.value().getVal())));
     }
 
     public void turn(TurnData turnData)
@@ -156,4 +157,5 @@ public class GameplayController
     {
 
     }
+
 }
