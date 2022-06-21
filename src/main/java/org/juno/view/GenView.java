@@ -150,6 +150,7 @@ public class GenView implements Observer
 	@Override
 	public void update(Observable o, Object arg)
 	{
+		System.out.println("MESSAGGINO ARRIVATO EDDAJE");
 		GameplayController gameplayController = (GameplayController) gameplay.getUserData();
 
 		if (arg instanceof DrawData drawData) gameplayController.draw(drawData);

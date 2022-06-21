@@ -1,6 +1,7 @@
 package org.juno.model.table;
 
 import org.juno.datapackage.BuildMP;
+import org.juno.datapackage.Data;
 import org.juno.datapackage.MessagePackageTypeNotExistsException;
 import org.juno.model.deck.Card;
 import org.juno.model.deck.DrawPile;
@@ -56,7 +57,13 @@ public class Player extends Observable
 		{
 			Card card = DRAW_PILE.draw();
 			hand.add(card);
-			notifyObservers(BUILD_MP.createMP(BuildMP.Actions.DRAW, BuildMP.PG.PLAYER, card.getColor(), card.getValue()));
+			System.out.println("MESSAGGINO");
+
+			System.out.println(card.getValue());
+			System.out.println(card.getColor());
+			setChanged();
+
+			notifyObservers(BUILD_MP.createMP(BuildMP.Actions.DRAW, ID, card.getColor(), card.getValue()));
 		}
 
 		sort();
@@ -141,5 +148,6 @@ public class Player extends Observable
 		resetMatch();
 		points = 0;
 	}
+
 
 }

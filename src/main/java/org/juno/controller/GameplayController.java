@@ -7,11 +7,8 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
-import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import org.juno.datapackage.*;
-import org.juno.model.deck.Card;
-
 /**
  * Defines: GameplayController, class
  *
@@ -52,27 +49,33 @@ public class GameplayController
     private static final int CARD_HEIGHT_SCALED = 264;
     private static final double RATIO_FACTOR = 0.536931818;
 
-    @FXML
-    public void cardAdded()
-    {
-        addCard(userHand);
-        addCard(botHand1);
-        addCard(botHand2);
-        addCard(botHand3);
-    }
-
-    public void addCard(HBox box)
+    public void fixWidth(HBox box)
     {
 
-        double space = (box.getChildren().size() * CARD_WIDTH_SCALED) - (box.getWidth());
-        space = space / box.getChildren().size();
-        space = space / RATIO_FACTOR;
-        if (space < 0) space = 0;
-        for (Node child : box.getChildren())
-        {
-            if (child instanceof ImageView imageView)
-                imageView.setViewport(new Rectangle2D(0, 0, CARD_WIDTH - space, CARD_HEIGHT));
-        }
+//        double space = (box.getChildren().size() * CARD_WIDTH_SCALED) - (box.getMaxWidth());
+//        System.out.println(space);
+//        space = space / box.getChildren().size();
+//        System.out.println(space);
+//
+//        System.out.println(box.getMaxWidth());
+//
+//        double scaledspace = space / RATIO_FACTOR;
+//
+//        System.out.println(space);
+//        if (space < 0) space = 0;
+//        System.out.println(CARD_WIDTH - space);
+//
+//        for (Node child : box.getChildren())
+//        {
+//            if (child instanceof ImageView imageView)
+//            {
+//                imageView.setViewport(new Rectangle2D(0, 0, CARD_WIDTH - scaledspace, CARD_HEIGHT));
+//                imageView.setFitWidth(space);
+//            }
+//        }
+        //TODO  rifai sto metodo di merda
+
+
     }
 
     @FXML
@@ -92,14 +95,27 @@ public class GameplayController
         switch (drawData.player())
         {
             case PLAYER ->
-                    userHand.getChildren().add(new ImageView(new Image(String.format("%s\\src\\main\\resources\\org\\juno\\images\\%s%d.png", System.getProperty("user.dir"), drawData.color().toString(), drawData.value().getVal()))));
-            case BOT1 ->
-                    botHand1.getChildren().add(new ImageView(new Image(String.format("%s\\src\\main\\resources\\org\\juno\\images\\backcard.jpg", System.getProperty("user.dir")))));
-            case BOT2 ->
-                    botHand2.getChildren().add(new ImageView(new Image(String.format("%s\\src\\main\\resources\\org\\juno\\images\\backcard.jpg", System.getProperty("user.dir")))));
-            case BOT3 ->
-                    botHand3.getChildren().add(new ImageView(new Image(String.format("%s\\src\\main\\resources\\org\\juno\\images\\backcard.jpg", System.getProperty("user.dir")))));
+            {
+                ImageView iv = new ImageView(new Image(String.format("%s\\src\\main\\resources\\org\\juno\\images\\%s%d.png", System.getProperty("user.dir"), drawData.color().toString(), drawData.value().getVal())));
+                iv.setFitWidth(CARD_WIDTH_SCALED);
+                iv.setFitHeight(CARD_HEIGHT_SCALED);
+                userHand.getChildren().add(iv);
+                fixWidth(userHand);
+            }
+            case BOT1 -> test(botHand1);
+            case BOT2 -> test(botHand2);
+            case BOT3 -> test(botHand3);
         }
+
+
+    }
+    private void test(HBox botHand)
+    {
+        ImageView iv = new ImageView(new Image(String.format("%s\\src\\main\\resources\\org\\juno\\images\\bempty.png", System.getProperty("user.dir"))));
+        iv.setFitWidth(CARD_WIDTH_SCALED);
+        iv.setFitHeight(CARD_HEIGHT_SCALED);
+        botHand.getChildren().add(iv);
+        fixWidth(botHand);
     }
 
     public void discard(DiscardData discardData)
@@ -109,7 +125,7 @@ public class GameplayController
             case PLAYER ->
             {
                 String name = String.format("%s%d.png", discardData.color().toString(), discardData.value().getVal());
-                for (Node node: userHand.getChildren())
+                for (Node node : userHand.getChildren())
                 {
                     if (node instanceof ImageView iV && iV.getImage().getUrl().endsWith(name))
                     {

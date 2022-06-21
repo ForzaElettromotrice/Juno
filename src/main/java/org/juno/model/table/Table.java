@@ -14,7 +14,7 @@ import java.util.Observable;
  *
  * @author R0n3l, ForzaElettromotrice
  */
-public class Table extends Observable
+public class Table extends Observable implements Runnable
 {
     private static final Table INSTANCE = new Table();
     private static final DiscardPile DISCARD_PILE = DiscardPile.getINSTANCE();
@@ -71,6 +71,7 @@ public class Table extends Observable
         boolean endMatch = false;
         Player currentPlayer = null;
 
+        System.out.println("sono qui");
         for (int i = 0; i < 4; i++)
         {
             currentPlayer = TURN_ORDER.nextPlayer();
@@ -194,5 +195,17 @@ public class Table extends Observable
         plus2 = false;
         plus4 = false;
         stop = false;
+    }
+    @Override
+    public void run()
+    {
+        try
+        {
+            System.out.println("starto");
+            startGame();
+        } catch (MessagePackageTypeNotExistsException e)
+        {
+            throw new RuntimeException(e);
+        }
     }
 }
