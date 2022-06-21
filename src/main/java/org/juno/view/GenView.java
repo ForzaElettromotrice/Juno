@@ -116,6 +116,7 @@ public class GenView
 					default -> throw new NonexistingSceneException("Non esiste questa scena");
 				});
 		makeFadeOut(scene, anchor);
+		window.setMaximized(true);
 	}
 
 	public void makeFadeOut(Scene scene, AnchorPane anchor) {

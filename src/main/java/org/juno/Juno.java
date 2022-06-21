@@ -28,7 +28,7 @@ public class Juno extends Application
 	@Override
 	public void start(Stage stage) throws IOException, NotExistingSoundException
 	{
-		stage.setResizable(true);
+		stage.setResizable(false);
 		GenView.setWindow(stage);
 		boolean login;
 		try

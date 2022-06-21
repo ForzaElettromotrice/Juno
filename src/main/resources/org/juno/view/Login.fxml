@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="backgroundLogin" fx:id="loginAnchor" onKeyPressed="#keyPressed" prefHeight="540.0" prefWidth="960.0" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.juno.controller.LoginController">
+<AnchorPane id="backgroundLogin" fx:id="loginAnchor" onKeyPressed="#keyPressed" prefHeight="1080.0" prefWidth="1920.0" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.juno.controller.LoginController">
     <VBox prefHeight="540.0" prefWidth="960.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <Label alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" prefHeight="151.0" prefWidth="960.0" text="It looks like this is the first time you play the game, &#10;or that your game files are corrupted.&#10;Please choose a username and an avatar to start &#10;(you can change them later)." textAlignment="CENTER" wrapText="true" VBox.vgrow="ALWAYS">
          <font>
@@ -81,7 +81,7 @@
         <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
             <Button fx:id="save" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#saveClicked" onKeyPressed="#keyPressed" onMouseEntered="#saveEntered" onMouseExited="#saveExited" prefHeight="47.0" prefWidth="120.0" style="-fx-background-color: transparent;" text="Save">
                 <font>
-                    <Font size="21.0" />
+                    <Font size="20.0" />
                 </font>
             </Button>
         </HBox>

@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="backgroundMenu" fx:id="menuAnchor" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="540.0" prefWidth="960.0" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.juno.controller.StartMenuController">
+<AnchorPane id="backgroundMenu" fx:id="menuAnchor" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="938.0" prefWidth="1771.0" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.juno.controller.StartMenuController">
    <GridPane layoutX="-1.0" prefHeight="540.0" prefWidth="960.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
      <columnConstraints>
        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -23,86 +23,86 @@
          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
      </rowConstraints>
       <children>
-          <Button alignment="TOP_CENTER" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseEntered="#playEntered" prefHeight="180.0" prefWidth="109.0" rotate="-12.5" style="-fx-background-color: transparent;" text="Play" textFill="WHITE">
+          <Button alignment="TOP_CENTER" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseEntered="#playEntered" prefHeight="361.0" prefWidth="284.0" rotate="-12.5" style="-fx-background-color: transparent;" text="Play" textFill="WHITE">
               <opaqueInsets>
                   <Insets />
               </opaqueInsets>
               <graphic>
-                  <ImageView fitHeight="190.0" fitWidth="115.0" pickOnBounds="true" style="-fx-background-color: transparent;">
+                  <ImageView fitHeight="437.0" fitWidth="270.0" pickOnBounds="true" style="-fx-background-color: transparent;">
                       <Image url="@../images/back.png" />
                   </ImageView>
               </graphic>
               <font>
-                  <Font name="Impact" size="35.0" />
+                  <Font name="Impact" size="78.0" />
               </font>
             <GridPane.margin>
                <Insets left="165.0" top="57.0" />
             </GridPane.margin>
           </Button>
-          <ImageView fx:id="lightsPlay" fitHeight="146.0" fitWidth="218.0" onMouseClicked="#playClicked" onMouseExited="#playExited" pickOnBounds="true" rotate="77.9" visible="false">
+          <ImageView fx:id="lightsPlay" fitHeight="312.0" fitWidth="488.0" onMouseClicked="#playClicked" onMouseExited="#playExited" pickOnBounds="true" rotate="77.9" visible="false">
               <Image url="@../images/selected.png" />
             <GridPane.margin>
                <Insets left="113.0" top="87.0" />
             </GridPane.margin>
           </ImageView>
-          <Button fx:id="stats" alignment="TOP_CENTER" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseEntered="#statsEntered" prefHeight="180.0" prefWidth="109.0" rotate="17.1" style="-fx-background-color: transparent;" text="Stats" textFill="WHITE" GridPane.rowIndex="2">
+          <Button fx:id="stats" alignment="TOP_CENTER" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseEntered="#statsEntered" prefHeight="418.0" prefWidth="272.0" rotate="17.1" style="-fx-background-color: transparent;" text="Stats" textFill="WHITE" GridPane.rowIndex="2">
               <graphic>
-                  <ImageView fitHeight="190.0" fitWidth="115.0" pickOnBounds="true">
+                  <ImageView fitHeight="445.0" fitWidth="292.0" pickOnBounds="true">
                       <Image url="@../images/back.png" />
                   </ImageView>
               </graphic>
               <font>
-                  <Font name="Impact" size="30.0" />
+                  <Font name="Impact" size="77.0" />
               </font>
             <GridPane.margin>
-               <Insets bottom="108.0" left="146.0" />
+               <Insets bottom="182.0" left="317.0" />
             </GridPane.margin>
           </Button>
-          <ImageView fx:id="lightsStats" fitHeight="146.0" fitWidth="218.0" onMouseClicked="#statsClicked" onMouseExited="#statsExited" pickOnBounds="true" rotate="107.0" visible="false" GridPane.rowIndex="2">
+          <ImageView fx:id="lightsStats" fitHeight="357.0" fitWidth="502.0" onMouseClicked="#statsClicked" onMouseExited="#statsExited" pickOnBounds="true" rotate="107.0" visible="false" GridPane.rowIndex="2">
               <Image url="@../images/selected.png" />
             <GridPane.margin>
                <Insets bottom="79.0" left="84.0" />
             </GridPane.margin>
           </ImageView>
-          <Button alignment="TOP_CENTER" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseEntered="#exitEntered" prefHeight="184.0" prefWidth="109.0" rotate="-16.7" style="-fx-background-color: transparent;" text="Exit" textFill="WHITE" GridPane.columnIndex="2" GridPane.rowIndex="2">
+          <Button alignment="TOP_CENTER" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseEntered="#exitEntered" prefHeight="465.0" prefWidth="301.0" rotate="-16.7" style="-fx-background-color: transparent;" text="Exit" textFill="WHITE" GridPane.columnIndex="2" GridPane.rowIndex="2">
               <graphic>
-                  <ImageView fitHeight="190.0" fitWidth="115.0" pickOnBounds="true">
+                  <ImageView fitHeight="476.0" fitWidth="308.0" pickOnBounds="true">
                       <Image url="@../images/back.png" />
                   </ImageView>
               </graphic>
               <font>
-                  <Font name="Impact" size="39.0" />
+                  <Font name="Impact" size="89.0" />
               </font>
             <GridPane.margin>
-               <Insets bottom="134.0" left="30.0" />
+               <Insets bottom="256.0" left="-12.0" />
             </GridPane.margin>
           </Button>
-          <ImageView fx:id="lightsExit" fitHeight="146.0" fitWidth="218.0" onMouseClicked="#exitClicked" onMouseExited="#exitExited" pickOnBounds="true" rotate="73.3" visible="false" GridPane.columnIndex="2" GridPane.rowIndex="2">
+          <ImageView fx:id="lightsExit" fitHeight="298.0" fitWidth="562.0" onMouseClicked="#exitClicked" onMouseExited="#exitExited" pickOnBounds="true" rotate="73.3" visible="false" GridPane.columnIndex="2" GridPane.rowIndex="2">
               <Image url="@../images/selected.png" />
             <GridPane.margin>
                <Insets bottom="103.0" left="-21.0" />
             </GridPane.margin>
           </ImageView>
-          <Button alignment="TOP_CENTER" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseEntered="#settingsEntered" prefHeight="180.0" prefWidth="109.0" rotate="18.4" style="-fx-background-color: transparent;" text="Settings" textFill="WHITE" GridPane.columnIndex="2">
+          <Button alignment="TOP_CENTER" contentDisplay="CENTER" layoutX="1.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseEntered="#settingsEntered" prefHeight="467.0" prefWidth="276.0" rotate="18.4" style="-fx-background-color: transparent;" text="Settings" textFill="WHITE" GridPane.columnIndex="2">
               <graphic>
-                  <ImageView fitHeight="190.0" fitWidth="115.0" pickOnBounds="true">
+                  <ImageView fitHeight="444.0" fitWidth="274.0" pickOnBounds="true">
                       <Image url="@../images/back.png" />
                   </ImageView>
               </graphic>
               <font>
-                  <Font name="Impact" size="23.0" />
+                  <Font name="Impact" size="55.0" />
               </font>
             <GridPane.margin>
-               <Insets bottom="-35.0" left="75.0" />
+               <Insets bottom="-102.0" left="75.0" />
             </GridPane.margin>
           </Button>
-          <ImageView fx:id="lightsSettings" fitHeight="146.0" fitWidth="218.0" onMouseClicked="#settingsClicked" onMouseExited="#settingsExited" pickOnBounds="true" rotate="-71.6" visible="false" GridPane.columnIndex="2">
+          <ImageView fx:id="lightsSettings" fitHeight="320.0" fitWidth="457.0" onMouseClicked="#settingsClicked" onMouseExited="#settingsExited" pickOnBounds="true" rotate="-71.6" visible="false" GridPane.columnIndex="2">
               <Image url="@../images/selected.png" />
             <GridPane.margin>
                <Insets bottom="-62.0" left="14.0" />
             </GridPane.margin>
           </ImageView>
-          <ImageView fitHeight="247.0" fitWidth="297.0" pickOnBounds="true" GridPane.columnIndex="1" GridPane.rowIndex="1">
+          <ImageView fitHeight="365.0" fitWidth="623.0" pickOnBounds="true" GridPane.columnIndex="1" GridPane.rowIndex="1">
               <Image url="@../images/logo.png" />
             <GridPane.margin>
                <Insets left="15.0" />

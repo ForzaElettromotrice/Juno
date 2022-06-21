@@ -22,8 +22,10 @@ public class GameplayController
     @FXML
     public HBox botHand3;
 
-    private static final int CARD_WIDTH=352;
-    private static final int CARD_HEIGHT=500;
+    private static final int CARD_WIDTH = 352;
+    private static final int CARD_HEIGHT = 500;
+    private static final int CARD_WIDTH_SCALED = 189;
+    private static final int CARD_HEIGHT_SCALED = 264;
 
     @FXML
     public void cardAdded()
@@ -36,12 +38,15 @@ public class GameplayController
 
     public void addCardBig(HBox box)
     {
-        double space = (box.getChildren().size()*CARD_WIDTH)-(box.getWidth());
-        space = space/box.getChildren().size();
-        for (Node child:box.getChildren())
+
+        double space = (box.getChildren().size() * CARD_WIDTH_SCALED) - (box.getWidth());
+        space = space / box.getChildren().size();
+        space = space / 0.536931818;
+        if (space < 0) space = 0;
+        for (Node child : box.getChildren())
         {
             if (child instanceof ImageView imageView)
-                imageView.setViewport(new Rectangle2D(0, 0, CARD_WIDTH-space, CARD_HEIGHT));
+                imageView.setViewport(new Rectangle2D(0, 0, CARD_WIDTH - space, CARD_HEIGHT));
         }
     }
 }
