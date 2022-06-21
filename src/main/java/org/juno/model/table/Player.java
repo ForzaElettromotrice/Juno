@@ -88,7 +88,12 @@ public class Player extends Observable
 			wildCard.setColor(color);
 	}
 
-	public boolean saidUno()
+	public void sayUno() throws MessagePackageTypeNotExistsException
+	{
+		saidUno = true;
+		notifyObservers(BUILD_MP.createMP(BuildMP.Actions.EFFECTS, BuildMP.Effects.SAIDUNO));
+	}
+	public boolean saidUno() throws MessagePackageTypeNotExistsException
 	{
 		return saidUno;
 	}
