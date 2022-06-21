@@ -23,13 +23,13 @@
          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
      </rowConstraints>
       <children>
-          <Button alignment="TOP_CENTER" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseEntered="#playEntered" prefHeight="361.0" prefWidth="284.0" rotate="-12.5" style="-fx-background-color: transparent;" text="Play" textFill="WHITE">
+          <Button alignment="TOP_CENTER" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseEntered="#playEntered" prefHeight="361.0" prefWidth="284.0" rotate="-12.5" style="-fx-background-color: transparent;" text="Play" textFill="#bf0000">
               <opaqueInsets>
                   <Insets />
               </opaqueInsets>
               <graphic>
                   <ImageView fitHeight="437.0" fitWidth="270.0" pickOnBounds="true" style="-fx-background-color: transparent;">
-                      <Image url="@../images/back.png" />
+                      <Image url="@../images/rempty.png" />
                   </ImageView>
               </graphic>
               <font>
@@ -45,10 +45,10 @@
                <Insets left="113.0" top="87.0" />
             </GridPane.margin>
           </ImageView>
-          <Button fx:id="stats" alignment="TOP_CENTER" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseEntered="#statsEntered" prefHeight="418.0" prefWidth="272.0" rotate="17.1" style="-fx-background-color: transparent;" text="Stats" textFill="WHITE" GridPane.rowIndex="2">
+          <Button fx:id="stats" alignment="TOP_CENTER" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseEntered="#statsEntered" prefHeight="418.0" prefWidth="272.0" rotate="17.1" style="-fx-background-color: transparent;" text="Stats" textFill="#5043ff" GridPane.rowIndex="2">
               <graphic>
                   <ImageView fitHeight="445.0" fitWidth="292.0" pickOnBounds="true">
-                      <Image url="@../images/back.png" />
+                      <Image url="@../images/bempty.png" />
                   </ImageView>
               </graphic>
               <font>
@@ -64,10 +64,10 @@
                <Insets bottom="79.0" left="84.0" />
             </GridPane.margin>
           </ImageView>
-          <Button alignment="TOP_CENTER" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseEntered="#exitEntered" prefHeight="465.0" prefWidth="301.0" rotate="-16.7" style="-fx-background-color: transparent;" text="Exit" textFill="WHITE" GridPane.columnIndex="2" GridPane.rowIndex="2">
+          <Button alignment="TOP_CENTER" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseEntered="#exitEntered" prefHeight="465.0" prefWidth="301.0" rotate="-16.7" style="-fx-background-color: transparent;" text="Exit" textFill="#4aff56" GridPane.columnIndex="2" GridPane.rowIndex="2">
               <graphic>
                   <ImageView fitHeight="476.0" fitWidth="308.0" pickOnBounds="true">
-                      <Image url="@../images/back.png" />
+                      <Image url="@../images/gempty.png" />
                   </ImageView>
               </graphic>
               <font>
@@ -83,10 +83,10 @@
                <Insets bottom="103.0" left="-21.0" />
             </GridPane.margin>
           </ImageView>
-          <Button alignment="TOP_CENTER" contentDisplay="CENTER" layoutX="1.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseEntered="#settingsEntered" prefHeight="467.0" prefWidth="276.0" rotate="18.4" style="-fx-background-color: transparent;" text="Settings" textFill="WHITE" GridPane.columnIndex="2">
+          <Button alignment="TOP_CENTER" contentDisplay="CENTER" layoutX="1.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseEntered="#settingsEntered" prefHeight="467.0" prefWidth="276.0" rotate="18.4" style="-fx-background-color: transparent;" text="Settings" textFill="#f2ff60" GridPane.columnIndex="2">
               <graphic>
                   <ImageView fitHeight="444.0" fitWidth="274.0" pickOnBounds="true">
-                      <Image url="@../images/back.png" />
+                      <Image url="@../images/yempty.png" />
                   </ImageView>
               </graphic>
               <font>
