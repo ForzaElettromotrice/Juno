@@ -1,18 +1,13 @@
 package org.juno.view;
 
 import javafx.animation.FadeTransition;
-import javafx.animation.RotateTransition;
 import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import org.juno.controller.SettingsController;
-import org.juno.controller.StartMenuController;
-import org.juno.controller.StatsMenuController;
 
 import java.io.IOException;
 
@@ -95,7 +90,7 @@ public class GenView
 //		gameplay = new Scene(loader.load());
 //		gameplay.setUserData(loader.getController());
 		
-		loader = new FXMLLoader(GenView.class.getResource("StatsMenu.fxml"));
+		loader = new FXMLLoader(GenView.class.getResource("Stats.fxml"));
 		stats = new Scene(loader.load());
 		stats.setUserData(loader.getController());
 
@@ -121,12 +116,10 @@ public class GenView
 					default -> throw new NonexistingSceneException("Non esiste questa scena");
 				});
 		makeFadeOut(scene, anchor);
-//		window.setMaximized(true);
-//		window.setFullScreen(true);
 	}
 
 	public void makeFadeOut(Scene scene, AnchorPane anchor) {
-		FadeTransition fadeTransition = new FadeTransition(Duration.millis(100), anchor);
+		FadeTransition fadeTransition = new FadeTransition(Duration.millis(250), anchor);
 		fadeTransition.setFromValue(1);
 		fadeTransition.setToValue(0);
 		fadeTransition.setOnFinished((ActionEvent event) ->
@@ -139,7 +132,7 @@ public class GenView
 
 	public void makeFadeIn(Node node)
 	{
-		FadeTransition fadeTransition=new FadeTransition(Duration.millis(100), node);
+		FadeTransition fadeTransition = new FadeTransition(Duration.millis(250), node);
 		fadeTransition.setFromValue(0);
 		fadeTransition.setToValue(1);
 		fadeTransition.play();

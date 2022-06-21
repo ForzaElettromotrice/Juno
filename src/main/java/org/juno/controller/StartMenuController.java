@@ -39,7 +39,7 @@ public class StartMenuController
     public void statsClicked() throws NonexistingSceneException
     {
         AudioPlayer.playSound(AudioPlayer.Sounds.BUTTONCLICK);
-        if (GenView.getStats().getUserData() instanceof StatsMenuController smc) smc.load();
+        if (GenView.getStats().getUserData() instanceof StatsController smc) smc.load();
         GEN_VIEW.changeScene(2, menuAnchor);
     }
 

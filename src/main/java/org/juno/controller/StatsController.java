@@ -21,7 +21,7 @@ import org.juno.view.NonexistingSceneException;
  *
  * @author R0n3l, ForzaElettromotrice
  */
-public class StatsMenuController
+public class StatsController
 {
     private static final GenView GEN_VIEW = GenView.getINSTANCE();
     private static final User USER = User.getINSTANCE();
@@ -132,19 +132,19 @@ public class StatsMenuController
     public void option1Clicked()
     {
         AudioPlayer.playSound(AudioPlayer.Sounds.BUTTONCLICK);
-        avatar.setFill(new ImagePattern(new Image("C:\\Users\\Eleonora\\Desktop\\Programming\\JUno\\src\\main\\resources\\org\\juno\\images\\icon1.jpg")));
+        avatar.setFill(new ImagePattern(new Image(System.getProperty("user.dir") + "\\src\\main\\resources\\org\\juno\\images\\icon1.jpg")));
     }
 
     public void option2Clicked()
     {
         AudioPlayer.playSound(AudioPlayer.Sounds.BUTTONCLICK);
-        avatar.setFill(new ImagePattern(new Image("C:\\Users\\Eleonora\\Desktop\\Programming\\JUno\\src\\main\\resources\\org\\juno\\images\\icon2.jpg")));
+        avatar.setFill(new ImagePattern(new Image(System.getProperty("user.dir") + "\\src\\main\\resources\\org\\juno\\images\\icon2.jpg")));
     }
 
     public void option3Clicked()
     {
         AudioPlayer.playSound(AudioPlayer.Sounds.BUTTONCLICK);
-        avatar.setFill(new ImagePattern(new Image("C:\\Users\\Eleonora\\Desktop\\Programming\\JUno\\src\\main\\resources\\org\\juno\\images\\icon3.jpg")));
+        avatar.setFill(new ImagePattern(new Image(System.getProperty("user.dir") + "\\src\\main\\resources\\org\\juno\\images\\icon3.jpg")));
     }
 
     public void openEntered()

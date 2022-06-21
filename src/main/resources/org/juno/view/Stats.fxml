@@ -14,32 +14,54 @@
 <?import javafx.scene.text.Font?>
 
 <?import javafx.scene.control.ToggleGroup?>
-<AnchorPane id="backgroundStats" fx:id="statsAnchor" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#save" prefHeight="540.0" prefWidth="960.0" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.juno.controller.StatsMenuController">
-   <Circle fx:id="avatar" fill="WHITE" layoutX="194.0" layoutY="199.0" onMouseEntered="#avatarEntered" onMouseExited="#avatarExited" radius="150.0" stroke="transparent" strokeType="INSIDE" AnchorPane.bottomAnchor="191.0" AnchorPane.leftAnchor="44.0" AnchorPane.rightAnchor="616.0" AnchorPane.topAnchor="49.0" />
-   <ImageView fitHeight="160.0" fitWidth="170.0" layoutX="36.0" layoutY="339.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="41.0" AnchorPane.leftAnchor="36.0" AnchorPane.rightAnchor="756.8940887451172" AnchorPane.topAnchor="339.0">
-      <Image url="@../images/levelStar.png" />
+<AnchorPane id="backgroundStats" fx:id="statsAnchor" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
+            minWidth="-Infinity" onMouseClicked="#save" prefHeight="540.0" prefWidth="960.0" stylesheets="@Style.css"
+            xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="org.juno.controller.StatsController">
+   <Circle fx:id="avatar" fill="WHITE" layoutX="194.0" layoutY="199.0" onMouseEntered="#avatarEntered"
+           onMouseExited="#avatarExited" radius="150.0" stroke="transparent" strokeType="INSIDE"
+           AnchorPane.bottomAnchor="191.0" AnchorPane.leftAnchor="44.0" AnchorPane.rightAnchor="616.0"
+           AnchorPane.topAnchor="49.0"/>
+   <ImageView fitHeight="160.0" fitWidth="170.0" layoutX="36.0" layoutY="339.0" pickOnBounds="true" preserveRatio="true"
+              AnchorPane.bottomAnchor="41.0" AnchorPane.leftAnchor="36.0" AnchorPane.rightAnchor="756.8940887451172"
+              AnchorPane.topAnchor="339.0">
+      <Image url="@../images/levelStar.png"/>
    </ImageView>
-   <Label fx:id="level" alignment="CENTER" contentDisplay="CENTER" layoutX="76.0" layoutY="391.0" prefHeight="73.0" prefWidth="87.0" text="1" AnchorPane.bottomAnchor="75.0" AnchorPane.leftAnchor="76.0" AnchorPane.rightAnchor="797.0" AnchorPane.topAnchor="391.0">
+   <Label fx:id="level" alignment="CENTER" contentDisplay="CENTER" layoutX="76.0" layoutY="391.0" prefHeight="73.0"
+          prefWidth="87.0" text="1" AnchorPane.bottomAnchor="75.0" AnchorPane.leftAnchor="76.0"
+          AnchorPane.rightAnchor="797.0" AnchorPane.topAnchor="391.0">
       <font>
-         <Font name="System Bold Italic" size="51.0" />
+         <Font name="System Bold Italic" size="51.0"/>
       </font>
    </Label>
-   <ProgressBar fx:id="progressBar" layoutX="166.0" layoutY="427.0" prefHeight="30.0" prefWidth="200.0" progress="0.0" AnchorPane.bottomAnchor="83.0" AnchorPane.leftAnchor="166.0" AnchorPane.rightAnchor="594.0" AnchorPane.topAnchor="427.0" />
-   <Label contentDisplay="CENTER" layoutX="715.0" layoutY="71.0" prefHeight="98.0" prefWidth="156.0" text="STATS" AnchorPane.bottomAnchor="371.0" AnchorPane.leftAnchor="715.0" AnchorPane.rightAnchor="89.0" AnchorPane.topAnchor="71.0">
+   <ProgressBar fx:id="progressBar" layoutX="166.0" layoutY="427.0" prefHeight="30.0" prefWidth="200.0" progress="0.0"
+                AnchorPane.bottomAnchor="83.0" AnchorPane.leftAnchor="166.0" AnchorPane.rightAnchor="594.0"
+                AnchorPane.topAnchor="427.0"/>
+   <Label contentDisplay="CENTER" layoutX="715.0" layoutY="71.0" prefHeight="98.0" prefWidth="156.0" text="STATS"
+          AnchorPane.bottomAnchor="371.0" AnchorPane.leftAnchor="715.0" AnchorPane.rightAnchor="89.0"
+          AnchorPane.topAnchor="71.0">
       <font>
-         <Font name="Anime Ace 2.0 BB" size="30.0" />
+         <Font name="Anime Ace 2.0 BB" size="30.0"/>
       </font>
    </Label>
-   <TextField fx:id="username" alignment="CENTER_RIGHT" cacheShape="false" centerShape="false" focusTraversable="false" layoutX="389.0" layoutY="66.0" onKeyPressed="#keyPressed" prefHeight="52.0" prefWidth="326.0" promptText="Username" scaleShape="false" style="-fx-background-color: transparent;" AnchorPane.bottomAnchor="370.0" AnchorPane.leftAnchor="389.0" AnchorPane.rightAnchor="245.0" AnchorPane.topAnchor="66.0">
+   <TextField fx:id="username" alignment="CENTER_RIGHT" cacheShape="false" centerShape="false" focusTraversable="false"
+              layoutX="389.0" layoutY="66.0" onKeyPressed="#keyPressed" prefHeight="52.0" prefWidth="326.0"
+              promptText="Username" scaleShape="false" style="-fx-background-color: transparent;"
+              AnchorPane.bottomAnchor="370.0" AnchorPane.leftAnchor="389.0" AnchorPane.rightAnchor="245.0"
+              AnchorPane.topAnchor="66.0">
       <font>
-         <Font name="Javanese Text" size="30.0" />
+         <Font name="Javanese Text" size="30.0"/>
       </font>
    </TextField>
-   <ImageView fitHeight="63.0" fitWidth="63.0" layoutX="512.0" layoutY="389.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="90.01063919067383" AnchorPane.leftAnchor="512.0" AnchorPane.rightAnchor="385.0" AnchorPane.topAnchor="389.0">
-      <Image url="@../images/cards.png" />
+   <ImageView fitHeight="63.0" fitWidth="63.0" layoutX="512.0" layoutY="389.0" pickOnBounds="true" preserveRatio="true"
+              AnchorPane.bottomAnchor="90.01063919067383" AnchorPane.leftAnchor="512.0" AnchorPane.rightAnchor="385.0"
+              AnchorPane.topAnchor="389.0">
+      <Image url="@../images/cards.png"/>
    </ImageView>
-   <ImageView fitHeight="63.0" fitWidth="52.0" layoutX="518.0" layoutY="204.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="273.0" AnchorPane.leftAnchor="518.0" AnchorPane.rightAnchor="390.2854347229004" AnchorPane.topAnchor="204.0">
-      <Image url="@../images/victories.png" />
+   <ImageView fitHeight="63.0" fitWidth="52.0" layoutX="518.0" layoutY="204.0" pickOnBounds="true" preserveRatio="true"
+              AnchorPane.bottomAnchor="273.0" AnchorPane.leftAnchor="518.0" AnchorPane.rightAnchor="390.2854347229004"
+              AnchorPane.topAnchor="204.0">
+      <Image url="@../images/victories.png"/>
    </ImageView>
    <ImageView fitHeight="63.0" fitWidth="118.0" layoutX="512.0" layoutY="295.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="182.0" AnchorPane.leftAnchor="512.0" AnchorPane.rightAnchor="385.0" AnchorPane.topAnchor="295.0">
       <Image url="@../images/defeats.png" />
