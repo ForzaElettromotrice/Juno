@@ -1,6 +1,7 @@
 package org.juno.view;
 
 import javafx.animation.FadeTransition;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -9,12 +10,11 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import org.juno.controller.GameplayController;
-import org.juno.datapackage.DiscardData;
-import org.juno.datapackage.DrawData;
-import org.juno.datapackage.EffectData;
-import org.juno.datapackage.TurnData;
+import org.juno.datapackage.*;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -34,6 +34,7 @@ public class GenView implements Observer
 	private static Scene gameplay;
 	private static Scene stats;
 	private static Scene settings;
+	
 
 	private GenView()
 	{
@@ -96,7 +97,7 @@ public class GenView implements Observer
 		loader = new FXMLLoader(GenView.class.getResource("Gameplay.fxml"));
 		gameplay = new Scene(loader.load());
 		gameplay.setUserData(loader.getController());
-		
+
 		loader = new FXMLLoader(GenView.class.getResource("Stats.fxml"));
 		stats = new Scene(loader.load());
 		stats.setUserData(loader.getController());
@@ -110,7 +111,7 @@ public class GenView implements Observer
 		window.close();
 	}
 
-	public void changeScene(int n, AnchorPane anchor) throws NonexistingSceneException
+	public void changeScene(int n, AnchorPane anchor) throws NonexistingSceneException, IOException
 	{
 		Scene scene = (switch (n)
 				{
@@ -150,13 +151,14 @@ public class GenView implements Observer
 	@Override
 	public void update(Observable o, Object arg)
 	{
-		System.out.println("MESSAGGINO ARRIVATO EDDAJE");
+
 		GameplayController gameplayController = (GameplayController) gameplay.getUserData();
 
-		if (arg instanceof DrawData drawData) gameplayController.draw(drawData);
-		else if (arg instanceof DiscardData discardData) gameplayController.discard(discardData);
-		else if (arg instanceof TurnData turnData) gameplayController.turn(turnData);
-		else if (arg instanceof EffectData effectData) gameplayController.effect(effectData);
+		if (arg instanceof DrawData drawData) Platform.runLater(() -> gameplayController.draw(drawData));
+		else if (arg instanceof DiscardData discardData)
+			Platform.runLater(() -> gameplayController.discard(discardData));
+		else if (arg instanceof TurnData turnData) Platform.runLater(() -> gameplayController.turn(turnData));
+		else if (arg instanceof EffectData effectData) Platform.runLater(() -> gameplayController.effect(effectData));
 
 	}
 }

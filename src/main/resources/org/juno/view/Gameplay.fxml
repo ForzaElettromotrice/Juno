@@ -1,23 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.shape.Circle?>
+<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.juno.controller.GameplayController">
    <Circle fx:id="circle4" fill="WHITE" layoutX="1642.0" layoutY="613.0" radius="100.0" stroke="BLACK" strokeType="INSIDE" />
-   <Circle fx:id="circle3" fill="WHITE" layoutX="1321.0" layoutY="301.0" radius="100.0" stroke="BLACK" strokeType="INSIDE" />
+   <Circle fx:id="circle3" fill="WHITE" layoutX="1146.0" layoutY="301.0" radius="100.0" stroke="BLACK" strokeType="INSIDE" />
    <Circle fx:id="circle2" fill="WHITE" layoutX="270.0" layoutY="477.0" radius="100.0" stroke="BLACK" strokeType="INSIDE" />
    <Circle fx:id="circle1" fill="WHITE" layoutX="585.0" layoutY="816.0" radius="100.0" stroke="BLACK" strokeType="INSIDE" />
    <HBox fx:id="userHand" alignment="TOP_CENTER" cacheShape="false" centerShape="false" layoutX="289.0" layoutY="805.0" maxHeight="285.0" maxWidth="1325.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="285.0" prefWidth="1325.0" scaleShape="false" AnchorPane.bottomAnchor="-10.0" AnchorPane.leftAnchor="289.0" AnchorPane.rightAnchor="306.0" />
    <HBox fx:id="botHand1" alignment="TOP_CENTER" cacheShape="false" centerShape="false" layoutX="-228.0" layoutY="397.0" maxHeight="285.0" maxWidth="735.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="285.0" prefWidth="735.0" rotate="90.0" scaleShape="false" AnchorPane.bottomAnchor="398.0" AnchorPane.leftAnchor="-228.0" AnchorPane.topAnchor="397.0" />
-   <HBox fx:id="botHand2" alignment="TOP_CENTER" cacheShape="false" centerShape="false" layoutX="1406.0" layoutY="383.0" maxHeight="285.0" maxWidth="735.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="285.0" prefWidth="735.0" rotate="270.0" scaleShape="false" AnchorPane.bottomAnchor="412.0" AnchorPane.rightAnchor="-221.0" AnchorPane.topAnchor="383.0" />
-   <HBox fx:id="botHand3" alignment="TOP_CENTER" cacheShape="false" centerShape="false" layoutX="584.0" layoutY="26.0" maxHeight="285.0" maxWidth="735.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="285.0" prefWidth="735.0" rotate="180.0" scaleShape="false" AnchorPane.leftAnchor="584.0" AnchorPane.rightAnchor="601.0" AnchorPane.topAnchor="26.0" />
-   <HBox layoutX="764.0" layoutY="408.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="264.0" prefWidth="393.0" spacing="100.0">
+   <HBox fx:id="botHand3" alignment="TOP_CENTER" cacheShape="false" centerShape="false" layoutX="1406.0" layoutY="383.0" maxHeight="285.0" maxWidth="735.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="285.0" prefWidth="735.0" rotate="270.0" scaleShape="false" AnchorPane.bottomAnchor="412.0" AnchorPane.rightAnchor="-221.0" AnchorPane.topAnchor="383.0" />
+   <HBox fx:id="botHand2" alignment="TOP_CENTER" cacheShape="false" centerShape="false" layoutX="584.0" layoutY="26.0" maxHeight="285.0" maxWidth="735.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="285.0" prefWidth="735.0" rotate="180.0" scaleShape="false" AnchorPane.leftAnchor="584.0" AnchorPane.rightAnchor="601.0" AnchorPane.topAnchor="26.0" />
+   <HBox layoutX="764.0" layoutY="408.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="264.0" prefWidth="735.0">
       <children>
          <ImageView fx:id="bottomDrawCard" fitHeight="264.0" fitWidth="189.0" pickOnBounds="true">
             <image>
@@ -25,10 +31,25 @@
             </image>
          </ImageView>
          <ImageView fx:id="cardDiscarded" fitHeight="264.0" fitWidth="189.0" pickOnBounds="true" preserveRatio="true">
-            <image>
-               <Image url="@../images/b9.png" />
-            </image>
-         </ImageView>
+            <HBox.margin>
+               <Insets left="100.0" />
+            </HBox.margin></ImageView>
+         <GridPane fx:id="colorGrid" prefHeight="264.0" prefWidth="218.0" visible="false">
+           <columnConstraints>
+             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+           </columnConstraints>
+           <rowConstraints>
+             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+           </rowConstraints>
+            <children>
+               <Rectangle fx:id="red" arcHeight="5.0" arcWidth="5.0" fill="RED" height="134.0" onMouseClicked="#redClicked" stroke="BLACK" strokeType="INSIDE" width="109.0" />
+               <Rectangle fx:id="blue" arcHeight="5.0" arcWidth="5.0" fill="#0045ff" height="134.0" layoutX="10.0" layoutY="7.0" onMouseClicked="#blueClicked" stroke="BLACK" strokeType="INSIDE" width="109.0" GridPane.columnIndex="1" />
+               <Rectangle fx:id="green" arcHeight="5.0" arcWidth="5.0" fill="#00ff1b" height="134.0" layoutX="10.0" layoutY="12.0" onMouseClicked="#greenClicked" stroke="BLACK" strokeType="INSIDE" width="109.0" GridPane.rowIndex="1" />
+               <Rectangle fx:id="yellow" arcHeight="5.0" arcWidth="5.0" fill="#f3ff00" height="134.0" layoutX="10.0" layoutY="144.0" onMouseClicked="#yellowClicked" stroke="BLACK" strokeType="INSIDE" width="109.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            </children>
+         </GridPane>
       </children>
    </HBox>
    <ImageView fx:id="middleDrawCard" fitHeight="264.0" fitWidth="189.0" layoutX="772.0" layoutY="408.0" pickOnBounds="true">
@@ -36,7 +57,7 @@
          <Image url="@../images/backcard.jpg" />
       </image>
    </ImageView>
-   <ImageView fx:id="topDrawCard" fitHeight="264.0" fitWidth="189.0" layoutX="782.0" layoutY="407.0" pickOnBounds="true">
+   <ImageView fx:id="topDrawCard" fitHeight="264.0" fitWidth="189.0" layoutX="782.0" layoutY="407.0" onMouseClicked="#drawClicked" pickOnBounds="true">
       <image>
          <Image url="@../images/backcard.jpg" />
       </image>
@@ -51,7 +72,7 @@
          <Font name="Anime Ace 2.0 BB" size="45.0" />
       </font>
    </Label>
-   <Label alignment="CENTER" contentDisplay="CENTER" layoutX="1282.0" layoutY="317.0" prefHeight="57.0" prefWidth="82.0" text="3">
+   <Label alignment="CENTER" contentDisplay="CENTER" layoutX="1105.0" layoutY="317.0" prefHeight="57.0" prefWidth="82.0" text="3">
       <font>
          <Font name="Anime Ace 2.0 BB" size="45.0" />
       </font>
@@ -61,4 +82,13 @@
          <Font name="Anime Ace 2.0 BB" size="45.0" />
       </font>
    </Label>
+   <Button fx:id="pass" disable="true" layoutX="545.0" layoutY="469.0" mnemonicParsing="false" onAction="#passClicked" prefHeight="142.0" prefWidth="150.0" style="-fx-background-color: transparent; -fx-border-color: BLACK; -fx-border-radius: 40;" text="PASS">
+      <font>
+         <Font name="Javanese Text" size="36.0" />
+      </font></Button>
+   <Button fx:id="juno" layoutX="1444.0" layoutY="904.0" mnemonicParsing="false" onAction="#sayUno" prefHeight="112.0" prefWidth="176.0" style="-fx-background-color: transparent; -fx-border-color: RED; -fx-border-radius: 40; -fx-border-width: 3;" text="(J)UNO!" textFill="RED" visible="false">
+      <font>
+         <Font name="Javanese Text" size="31.0" />
+      </font>
+   </Button>
 </AnchorPane>

@@ -12,6 +12,8 @@ import org.juno.view.GenView;
 import org.juno.view.NonexistingSceneException;
 import org.juno.view.NotExistingSoundException;
 
+import java.io.IOException;
+
 
 /**
  * Defines SettingsController class,
@@ -39,7 +41,7 @@ public class SettingsController
     public AnchorPane settingsAnchor;
 
 	@FXML
-	public void savePressed() throws NonexistingSceneException, NotExistingSoundException
+	public void savePressed() throws NonexistingSceneException, NotExistingSoundException, IOException
 	{
 		AUDIO_PLAYER.play(AudioPlayer.Sounds.BUTTONCLICK);
 		AUDIO_PLAYER.setMusicVolume(musicBar.getValue() / 100);
@@ -61,7 +63,7 @@ public class SettingsController
 	}
 
 	@FXML
-	public void backPressed() throws NonexistingSceneException, NotExistingSoundException
+	public void backPressed() throws NonexistingSceneException, NotExistingSoundException, IOException
 	{
 		AUDIO_PLAYER.play(AudioPlayer.Sounds.BUTTONCLICK);
 		Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to exit without saving?", ButtonType.YES, ButtonType.NO);
@@ -105,7 +107,7 @@ public class SettingsController
 			alert.close();
 	}
 	@FXML
-	public void deleteClicked() throws NonexistingSceneException, NotExistingSoundException
+	public void deleteClicked() throws NonexistingSceneException, NotExistingSoundException, IOException
 	{
 		AUDIO_PLAYER.play(AudioPlayer.Sounds.BUTTONCLICK);
 		Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to delete your data?", ButtonType.YES, ButtonType.NO);

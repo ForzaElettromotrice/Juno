@@ -47,7 +47,7 @@ public class LoginController
 	public AnchorPane loginAnchor;
 
 	@FXML
-	public void saveClicked() throws NonexistingSceneException, DataCorruptedException, NotExistingSoundException
+	public void saveClicked() throws NonexistingSceneException, DataCorruptedException, NotExistingSoundException, IOException
 	{
 		AUDIO_PLAYER.play(AudioPlayer.Sounds.BUTTONCLICK);
 		if (Objects.equals(username.getText(), ""))
@@ -68,7 +68,7 @@ public class LoginController
 	}
 
 	@FXML
-	public void keyPressed(KeyEvent key) throws NonexistingSceneException, DataCorruptedException, NotExistingSoundException
+	public void keyPressed(KeyEvent key) throws NonexistingSceneException, DataCorruptedException, NotExistingSoundException, IOException
 	{
 		if (key.getCode() == KeyCode.ENTER) saveClicked();
 	}

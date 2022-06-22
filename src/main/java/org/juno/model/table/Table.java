@@ -1,6 +1,8 @@
 package org.juno.model.table;
 
+import javafx.event.ActionEvent;
 import org.juno.datapackage.BuildMP;
+import org.juno.datapackage.Data;
 import org.juno.datapackage.MessagePackageTypeNotExistsException;
 import org.juno.model.deck.Card;
 import org.juno.model.deck.DiscardPile;
@@ -22,6 +24,7 @@ public class Table extends Observable implements Runnable
     private static final TurnOrder TURN_ORDER = TurnOrder.getINSTANCE();
     private static final BuildMP BUILD_MP = BuildMP.getINSTANCE();
 
+    private boolean canStart = true;
 
     private boolean plus2;
     private boolean plus4;
@@ -45,8 +48,12 @@ public class Table extends Observable implements Runnable
 
         while (!endGame)
         {
-            startMatch();
-            endGame = checkPoints();
+            if (canStart)
+            {
+                canStart = false;
+                startMatch();
+                endGame = checkPoints();
+            }
         }
     }
     private boolean checkPoints()
@@ -71,7 +78,6 @@ public class Table extends Observable implements Runnable
         boolean endMatch = false;
         Player currentPlayer = null;
 
-        System.out.println("sono qui");
         for (int i = 0; i < 4; i++)
         {
             currentPlayer = TURN_ORDER.nextPlayer();
@@ -82,15 +88,26 @@ public class Table extends Observable implements Runnable
         if (firstCard instanceof WildCard wildCard) wildCard.setColor(Card.Color.RED);
 
         DISCARD_PILE.discard(firstCard);
+        setChanged();
+        notifyObservers(BUILD_MP.createMP(BuildMP.Actions.DISCARD, null, firstCard.getColor(), firstCard.getValue()));
+        clearChanged();
 
         while (!endMatch)
         {
             currentPlayer = TURN_ORDER.nextPlayer();
+            setChanged();
             notifyObservers(BUILD_MP.createMP(BuildMP.Actions.TURN, currentPlayer.getID()));
+            clearChanged();
 
             if (plus2) currentPlayer.draw(2);
             if (plus4) currentPlayer.draw(4);
-            if (stop) currentPlayer = TURN_ORDER.nextPlayer();
+            if (stop)
+            {
+                currentPlayer = TURN_ORDER.nextPlayer();
+                setChanged();
+                notifyObservers(BUILD_MP.createMP(BuildMP.Actions.TURN, currentPlayer.getID()));
+                clearChanged();
+            }
 
             plus2 = false;
             plus4 = false;
@@ -100,6 +117,9 @@ public class Table extends Observable implements Runnable
         }
 
         updatePoints(currentPlayer);
+        setChanged();
+        notifyObservers(BUILD_MP.createMP(BuildMP.Actions.EFFECTS, BuildMP.Effects.RESETMATCH));
+        clearChanged();
     }
 
     private void checkEffect(Card card) throws MessagePackageTypeNotExistsException
@@ -110,25 +130,38 @@ public class Table extends Observable implements Runnable
             {
                 plus2 = true;
                 stop = true;
+                setChanged();
                 notifyObservers(BUILD_MP.createMP(BuildMP.Actions.EFFECTS, BuildMP.Effects.PLUSTWO));
+                clearChanged();
             }
             case 11 ->
             {
                 TURN_ORDER.reverseTurnOrder();
+                setChanged();
                 notifyObservers(BUILD_MP.createMP(BuildMP.Actions.EFFECTS, BuildMP.Effects.REVERSE));
+                clearChanged();
             }
             case 12 ->
             {
                 stop = true;
+                setChanged();
                 notifyObservers(BUILD_MP.createMP(BuildMP.Actions.EFFECTS, BuildMP.Effects.STOP));
+                clearChanged();
             }
             case 14 ->
             {
                 plus4 = true;
                 stop = true;
+                setChanged();
                 notifyObservers(BUILD_MP.createMP(BuildMP.Actions.EFFECTS, BuildMP.Effects.PLUSFOUR));
+                clearChanged();
             }
-            default -> notifyObservers(BUILD_MP.createMP(BuildMP.Actions.EFFECTS, BuildMP.Effects.JOLLY));
+            default ->
+            {
+                setChanged();
+                notifyObservers(BUILD_MP.createMP(BuildMP.Actions.EFFECTS, BuildMP.Effects.JOLLY));
+                clearChanged();
+            }
         }
 
     }
@@ -139,12 +172,20 @@ public class Table extends Observable implements Runnable
 
         while (!endTurn)
         {
-
+            try
+            {
+                Thread.sleep(1000);
+            } catch (InterruptedException e)
+            {
+                throw new RuntimeException(e);
+            }
 
             if (player.hasChosen())
             {
                 Card chosenCard = player.getChosenCard();
+                setChanged();
                 notifyObservers(BUILD_MP.createMP(BuildMP.Actions.DISCARD, player.getID(), chosenCard.getColor(), chosenCard.getValue()));
+                clearChanged();
 
                 if (chosenCard instanceof WildCard wildCard)
                 {
@@ -154,12 +195,12 @@ public class Table extends Observable implements Runnable
 
                 }
                 checkEffect(chosenCard);
+                DISCARD_PILE.discard(chosenCard);
                 endTurn = true;
             } else if (player.hasPassed()) endTurn = true;
 
-        }
 
-        player.resetTurn();
+        }
 
         if (player.getSizeHand() == 1)
         {
@@ -173,10 +214,13 @@ public class Table extends Observable implements Runnable
             }
             if (!player.saidUno())
             {
+                setChanged();
                 notifyObservers(BUILD_MP.createMP(BuildMP.Actions.EFFECTS, BuildMP.Effects.DIDNTSAYUNO));
+                clearChanged();
                 player.draw(2);
             }
         }
+        player.resetTurn();
         return player.getSizeHand() == 0;
     }
 
@@ -196,16 +240,21 @@ public class Table extends Observable implements Runnable
         plus4 = false;
         stop = false;
     }
+
     @Override
     public void run()
     {
         try
         {
-            System.out.println("starto");
             startGame();
         } catch (MessagePackageTypeNotExistsException e)
         {
             throw new RuntimeException(e);
         }
+    }
+
+    public void canStart()
+    {
+        canStart = true;
     }
 }

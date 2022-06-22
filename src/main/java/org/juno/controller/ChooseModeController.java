@@ -12,6 +12,8 @@ import org.juno.view.GenView;
 import org.juno.view.NonexistingSceneException;
 import org.juno.view.NotExistingSoundException;
 
+import java.io.IOException;
+
 /**
  * Defines: ChooseModeController, class
  *
@@ -34,11 +36,13 @@ public class ChooseModeController
     public AnchorPane modeAnchor;
 
     @FXML
-    public void classicClicked() throws NotExistingSoundException, NonexistingSceneException, MessagePackageTypeNotExistsException
+    public void classicClicked() throws NotExistingSoundException, NonexistingSceneException, MessagePackageTypeNotExistsException, IOException
     {
         AUDIO_PLAYER.play(AudioPlayer.Sounds.BUTTONCLICK);
         Thread game = new Thread(Table.getINSTANCE());
         GEN_VIEW.changeScene(4, modeAnchor);
+        AUDIO_PLAYER.stop(AudioPlayer.Sounds.MENUMUSIC);
+        AUDIO_PLAYER.play(AudioPlayer.Sounds.GAMEMUSIC);
         game.start();
     }
 
@@ -96,7 +100,7 @@ public class ChooseModeController
     }
 
     @FXML
-    public void backClicked() throws NonexistingSceneException, NotExistingSoundException
+    public void backClicked() throws NonexistingSceneException, NotExistingSoundException, IOException
     {
         AUDIO_PLAYER.play(AudioPlayer.Sounds.BUTTONCLICK);
         GEN_VIEW.changeScene(0, modeAnchor);

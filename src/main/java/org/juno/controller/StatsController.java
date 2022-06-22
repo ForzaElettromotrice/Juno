@@ -16,6 +16,8 @@ import org.juno.view.GenView;
 import org.juno.view.NonexistingSceneException;
 import org.juno.view.NotExistingSoundException;
 
+import java.io.IOException;
+
 
 /**
  * Defines: StatsMenuController, class
@@ -89,7 +91,7 @@ public class StatsController
     }
 
     @FXML
-    public void backClicked() throws NonexistingSceneException, NotExistingSoundException
+    public void backClicked() throws NonexistingSceneException, NotExistingSoundException, IOException
     {
         AUDIO_PLAYER.play(AudioPlayer.Sounds.BUTTONCLICK);
         USER.setAvatar(avatarUrl);

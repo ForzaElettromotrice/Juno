@@ -8,6 +8,8 @@ import org.juno.view.GenView;
 import org.juno.view.NonexistingSceneException;
 import org.juno.view.NotExistingSoundException;
 
+import java.io.IOException;
+
 
 /**
  * Defines: startMenu, class
@@ -30,7 +32,7 @@ public class StartMenuController
     public AnchorPane menuAnchor;
 
     @FXML
-    public void playClicked() throws NonexistingSceneException, NotExistingSoundException
+    public void playClicked() throws NonexistingSceneException, NotExistingSoundException, IOException
     {
         AUDIO_PLAYER.play(AudioPlayer.Sounds.BUTTONCLICK);
         GEN_VIEW.changeScene(1, menuAnchor);
@@ -38,7 +40,7 @@ public class StartMenuController
     }
 
     @FXML
-    public void statsClicked() throws NonexistingSceneException, NotExistingSoundException
+    public void statsClicked() throws NonexistingSceneException, NotExistingSoundException, IOException
     {
         AUDIO_PLAYER.play(AudioPlayer.Sounds.BUTTONCLICK);
         if (GenView.getStats().getUserData() instanceof StatsController smc) smc.load();
@@ -46,7 +48,7 @@ public class StartMenuController
     }
 
     @FXML
-    public void settingsClicked() throws NonexistingSceneException, NotExistingSoundException
+    public void settingsClicked() throws NonexistingSceneException, NotExistingSoundException, IOException
     {
         AUDIO_PLAYER.play(AudioPlayer.Sounds.BUTTONCLICK);
         if (GenView.getSettings().getUserData() instanceof SettingsController sc) sc.load();

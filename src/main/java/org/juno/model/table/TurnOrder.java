@@ -75,4 +75,9 @@ public class TurnOrder
 	{
 		return players;
 	}
+
+	public Player getCurrentPlayer()
+	{
+		return players[currentPlayer];
+	}
 }

@@ -1,9 +1,7 @@
 package org.juno.model.table;
 
-import org.juno.datapackage.BuildMP;
 import org.juno.datapackage.MessagePackageTypeNotExistsException;
 import org.juno.model.deck.Card;
-import org.juno.model.deck.DiscardPile;
 import org.juno.model.deck.WildCard;
 
 import java.util.Random;
@@ -15,7 +13,7 @@ import java.util.Random;
  */
 public class Bot extends Player
 {
-	private static final DiscardPile DISCARD_PILE = DiscardPile.getINSTANCE();
+
 	private static final Random RANDOMIZER = new Random();
 
 
@@ -25,7 +23,7 @@ public class Bot extends Player
 	}
 
 	@Override
-	public boolean hasChosen()
+	public boolean hasChosen() throws MessagePackageTypeNotExistsException
 	{
 		Card first = DISCARD_PILE.getFirst();
 		for (Card card : hand)
@@ -33,6 +31,7 @@ public class Bot extends Player
 			if (card.isValid(first))
 			{
 				chosenCard = card;
+				hand.remove(card);
 				break;
 			}
 		}
@@ -40,8 +39,10 @@ public class Bot extends Player
 		{
 			Card drawn = draw();
 			if (drawn.isValid(first))
+			{
 				chosenCard = drawn;
-			else
+				hand.remove(drawn);
+			} else
 			{
 				hasPassed = true;
 				return false;
@@ -64,11 +65,5 @@ public class Bot extends Player
 		return super.saidUno();
 	}
 
-	public Card draw()
-	{
-		Card card = DRAW_PILE.draw();
-		hand.add(card);
-		sort();
-		return card;
-	}
+
 }

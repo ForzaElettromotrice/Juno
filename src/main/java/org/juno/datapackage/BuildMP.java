@@ -40,10 +40,9 @@ public class BuildMP
 		JOLLY,
 		SAIDUNO,
 		DIDNTSAYUNO,
-		SAYRED,
-		SAYGREEN,
-		SAYBLUE,
-		SAYYELLOW
+		ONECARD,
+		RESETMATCH
+
 	}
 
 	private BuildMP()

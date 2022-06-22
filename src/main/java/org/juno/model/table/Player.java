@@ -1,9 +1,9 @@
 package org.juno.model.table;
 
 import org.juno.datapackage.BuildMP;
-import org.juno.datapackage.Data;
 import org.juno.datapackage.MessagePackageTypeNotExistsException;
 import org.juno.model.deck.Card;
+import org.juno.model.deck.DiscardPile;
 import org.juno.model.deck.DrawPile;
 import org.juno.model.deck.WildCard;
 
@@ -18,15 +18,17 @@ import java.util.Observable;
  */
 public class Player extends Observable
 {
+	protected static final DiscardPile DISCARD_PILE = DiscardPile.getINSTANCE();
 	protected static final DrawPile DRAW_PILE = DrawPile.getINSTANCE();
 	protected static final BuildMP BUILD_MP = BuildMP.getINSTANCE();
 
-	private final BuildMP.PG ID;
+	protected final BuildMP.PG ID;
 
 	protected final LinkedList<Card> hand;
 	protected int points;
 
 	protected Card chosenCard;
+	protected boolean hasDrawn;
 	protected boolean hasPassed;
 	protected boolean saidUno;
 
@@ -57,16 +59,35 @@ public class Player extends Observable
 		{
 			Card card = DRAW_PILE.draw();
 			hand.add(card);
-			System.out.println("MESSAGGINO");
 
-			System.out.println(card.getValue());
-			System.out.println(card.getColor());
 
 			setChanged();
 			notifyObservers(BUILD_MP.createMP(BuildMP.Actions.DRAW, ID, card.getColor(), card.getValue()));
+			clearChanged();
 		}
 
 		sort();
+	}
+
+
+	public void chooseCard(Card.Color color, Card.Value value) throws MessagePackageTypeNotExistsException
+	{
+		for (Card card : hand)
+		{
+			if (card.getValue() == value && card.getColor() == color && card.isValid(DISCARD_PILE.getFirst()))
+			{
+				chosenCard = card;
+				hand.remove(card);
+				if (hand.size() == 1)
+				{
+					setChanged();
+					notifyObservers(BUILD_MP.createMP(BuildMP.Actions.EFFECTS, BuildMP.Effects.ONECARD));
+					clearChanged();
+				}
+
+				break;
+			}
+		}
 	}
 
 	protected void sort()
@@ -74,7 +95,7 @@ public class Player extends Observable
 		hand.sort(Comparator.comparingInt(o -> o.getValue().getVal()));
 	}
 
-	public boolean hasChosen()
+	public boolean hasChosen() throws MessagePackageTypeNotExistsException
 	{
 		return chosenCard != null;
 	}
@@ -135,6 +156,7 @@ public class Player extends Observable
 		chosenCard = null;
 		hasPassed = false;
 		saidUno = false;
+		hasDrawn = false;
 	}
 
 	public void resetMatch()
@@ -149,5 +171,30 @@ public class Player extends Observable
 		points = 0;
 	}
 
+	public Card draw() throws MessagePackageTypeNotExistsException
+	{
+		if (hasDrawn) return null;
+
+		Card card = DRAW_PILE.draw();
+		hand.add(card);
+		sort();
+		hasDrawn = true;
+
+		setChanged();
+		notifyObservers(BUILD_MP.createMP(BuildMP.Actions.DRAW, ID, card.getColor(), card.getValue()));
+		clearChanged();
+
+		return card;
+	}
+
+	public boolean hasDrawn()
+	{
+		return hasDrawn;
+	}
+
+	public void setHasPassed()
+	{
+		hasPassed = true;
+	}
 
 }
