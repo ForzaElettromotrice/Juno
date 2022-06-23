@@ -55,6 +55,7 @@ public class Player extends Observable
 
 	public void draw(int n) throws MessagePackageTypeNotExistsException
 	{
+		System.out.println("IO SONO " + ID + " E STO PESCANDO " + n + " CARTE");
 		for (int i = 0; i < n; i++)
 		{
 			Card card = DRAW_PILE.draw();

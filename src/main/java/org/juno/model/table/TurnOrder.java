@@ -15,6 +15,8 @@ public class TurnOrder
 
 	private Player[] players = new Player[4];
 
+	private Player user;
+
 	private int currentPlayer;
 	private boolean isInverted;
 
@@ -24,15 +26,18 @@ public class TurnOrder
 		{
 			players[i] = new Bot(i + 1);
 		}
-		players[3] = new Player(0);
+		user = new Player(0);
+		players[3] = user;
 	}
 
 	public static TurnOrder getINSTANCE()
 	{
 		return INSTANCE;
 	}
-
-
+	public Player getUser()
+	{
+		return user;
+	}
 
 	public Player nextPlayer()
 	{
@@ -45,6 +50,7 @@ public class TurnOrder
 
 		return players[currentPlayer];
 	}
+
 
 	public void reverseTurnOrder()
 	{

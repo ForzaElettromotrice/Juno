@@ -91,12 +91,12 @@ public class StatsController
     }
 
     @FXML
-    public void backClicked() throws NonexistingSceneException, NotExistingSoundException, IOException
+    public void backClicked() throws NonexistingSceneException, NotExistingSoundException
     {
         AUDIO_PLAYER.play(AudioPlayer.Sounds.BUTTONCLICK);
         USER.setAvatar(avatarUrl);
         save();
-        GEN_VIEW.changeScene(0, statsAnchor);
+        GEN_VIEW.changeScene(GenView.SCENES.STARTMENU, statsAnchor);
     }
 
     @FXML
@@ -130,25 +130,25 @@ public class StatsController
         matches.setText("" + USER.getTotalMatches());
         level.setText("" + USER.getLevel());
         progressBar.setProgress(USER.getProgress());
-        avatar.setFill(new ImagePattern(new Image("" + System.getProperty("user.dir") + "\\" + USER.getAvatar())));
+        avatar.setFill(new ImagePattern(new Image("file:\\" + System.getProperty("user.dir") + "\\" + USER.getAvatar())));
     }
 
     public void option1Clicked() throws NotExistingSoundException
     {
         AUDIO_PLAYER.play(AudioPlayer.Sounds.BUTTONCLICK);
-        avatar.setFill(new ImagePattern(new Image(System.getProperty("user.dir") + "\\src\\main\\resources\\org\\juno\\images\\icon1.jpg")));
+        avatar.setFill(new ImagePattern(new Image("file:\\" + System.getProperty("user.dir") + "\\src\\main\\resources\\org\\juno\\images\\icon1.jpg")));
     }
 
     public void option2Clicked() throws NotExistingSoundException
     {
         AUDIO_PLAYER.play(AudioPlayer.Sounds.BUTTONCLICK);
-        avatar.setFill(new ImagePattern(new Image(System.getProperty("user.dir") + "\\src\\main\\resources\\org\\juno\\images\\icon2.jpg")));
+        avatar.setFill(new ImagePattern(new Image("file:\\" + System.getProperty("user.dir") + "\\src\\main\\resources\\org\\juno\\images\\icon2.jpg")));
     }
 
     public void option3Clicked() throws NotExistingSoundException
     {
         AUDIO_PLAYER.play(AudioPlayer.Sounds.BUTTONCLICK);
-        avatar.setFill(new ImagePattern(new Image(System.getProperty("user.dir") + "\\src\\main\\resources\\org\\juno\\images\\icon3.jpg")));
+        avatar.setFill(new ImagePattern(new Image("file:\\" + System.getProperty("user.dir") + "\\src\\main\\resources\\org\\juno\\images\\icon3.jpg")));
     }
 
     public void openEntered() throws NotExistingSoundException

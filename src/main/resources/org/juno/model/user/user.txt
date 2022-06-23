@@ -1,5 +1,5 @@
 Federico
-src\main\resources\org\juno\images\icon1.jpg
+src\main\resources\org\juno\images\icon2.jpg
 0
 0
 1

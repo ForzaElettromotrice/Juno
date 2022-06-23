@@ -46,7 +46,7 @@ public class SettingsController
 		AUDIO_PLAYER.play(AudioPlayer.Sounds.BUTTONCLICK);
 		AUDIO_PLAYER.setMusicVolume(musicBar.getValue() / 100);
 		AUDIO_PLAYER.setEffectsVolume(effectsBar.getValue() / 100);
-		GEN_VIEW.changeScene(0, settingsAnchor);
+		GEN_VIEW.changeScene(GenView.SCENES.STARTMENU, settingsAnchor);
 	}
 
 	@FXML
@@ -71,7 +71,7 @@ public class SettingsController
 		alert.setHeaderText("Confirm");
 		alert.showAndWait();
 		if (alert.getResult() == ButtonType.YES)
-			GEN_VIEW.changeScene(0, settingsAnchor);
+			GEN_VIEW.changeScene(GenView.SCENES.STARTMENU, settingsAnchor);
 		else
 			alert.close();
 	}
@@ -116,7 +116,7 @@ public class SettingsController
 		alert.showAndWait();
 		if (alert.getResult() == ButtonType.YES)
 		{
-			GEN_VIEW.changeScene(-1, settingsAnchor);
+			GEN_VIEW.changeScene(GenView.SCENES.LOGIN, settingsAnchor);
 		} else
 			alert.close();
 	}

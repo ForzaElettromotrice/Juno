@@ -34,7 +34,30 @@ public class GenView implements Observer
 	private static Scene gameplay;
 	private static Scene stats;
 	private static Scene settings;
-	
+	private static Scene endgame;
+
+	public enum SCENES
+	{
+		LOGIN(-1),
+		STARTMENU(0),
+		CHOOSEMODE(1),
+		STATS(2),
+		SETTINGS(3),
+		GAMEPLAY(4),
+		ENDGAME(5);
+
+		private final int value;
+
+		SCENES(int i)
+		{
+			value = i;
+		}
+		public int getValue()
+		{
+			return value;
+		}
+	}
+
 
 	private GenView()
 	{
@@ -78,6 +101,10 @@ public class GenView implements Observer
 	{
 		return settings;
 	}
+	public static Scene getEndgame()
+	{
+		return endgame;
+	}
 
 
 	public static void load() throws IOException
@@ -105,13 +132,17 @@ public class GenView implements Observer
 		loader = new FXMLLoader(GenView.class.getResource("Settings.fxml"));
 		settings = new Scene(loader.load());
 		settings.setUserData(loader.getController());
+
+		loader = new FXMLLoader(GenView.class.getResource("Endgame.fxml"));
+		endgame = new Scene(loader.load());
+		endgame.setUserData(loader.getController());
 	}
 	public static void closeWindow()
 	{
 		window.close();
 	}
 
-	public void changeScene(int n, AnchorPane anchor) throws NonexistingSceneException, IOException
+	private void changeScene(int n, AnchorPane anchor) throws NonexistingSceneException
 	{
 		Scene scene = (switch (n)
 				{
@@ -121,13 +152,20 @@ public class GenView implements Observer
 					case 2 -> stats;
 					case 3 -> settings;
 					case 4 -> gameplay;
+					case 5 -> endgame;
 					default -> throw new NonexistingSceneException("Non esiste questa scena");
 				});
 		makeFadeOut(scene, anchor);
 		window.setMaximized(true);
 	}
 
-	public void makeFadeOut(Scene scene, AnchorPane anchor) {
+	public void changeScene(SCENES scene, AnchorPane anchor) throws NonexistingSceneException
+	{
+		changeScene(scene.getValue(), anchor);
+	}
+
+	public void makeFadeOut(Scene scene, AnchorPane anchor)
+	{
 		FadeTransition fadeTransition = new FadeTransition(Duration.millis(250), anchor);
 		fadeTransition.setFromValue(1);
 		fadeTransition.setToValue(0);
@@ -158,7 +196,16 @@ public class GenView implements Observer
 		else if (arg instanceof DiscardData discardData)
 			Platform.runLater(() -> gameplayController.discard(discardData));
 		else if (arg instanceof TurnData turnData) Platform.runLater(() -> gameplayController.turn(turnData));
-		else if (arg instanceof EffectData effectData) Platform.runLater(() -> gameplayController.effect(effectData));
+		else if (arg instanceof EffectData effectData) Platform.runLater(() ->
+		{
+			try
+			{
+				gameplayController.effect(effectData);
+			} catch (NonexistingSceneException e)
+			{
+				throw new RuntimeException(e);
+			}
+		});
 
 	}
 }

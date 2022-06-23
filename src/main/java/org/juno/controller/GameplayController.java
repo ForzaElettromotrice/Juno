@@ -9,6 +9,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -23,6 +24,8 @@ import org.juno.model.deck.WildCard;
 import org.juno.model.table.Player;
 import org.juno.model.table.Table;
 import org.juno.model.table.TurnOrder;
+import org.juno.view.GenView;
+import org.juno.view.NonexistingSceneException;
 
 import java.io.File;
 import java.net.URI;
@@ -39,13 +42,14 @@ public class GameplayController
 {
 
     @FXML
+    public AnchorPane anchorPane;
+
+    @FXML
     public Button pass;
     @FXML
     public GridPane colorGrid;
     @FXML
     public Button juno;
-
-    private boolean end;
 
 
     @FXML
@@ -75,11 +79,8 @@ public class GameplayController
     @FXML
     public ImageView cardDiscarded;
 
-    private static final int CARD_WIDTH = 352;
-    private static final int CARD_HEIGHT = 500;
     private static final int CARD_WIDTH_SCALED = 189;
     private static final int CARD_HEIGHT_SCALED = 264;
-    private static final double RATIO_FACTOR = 0.536931818;
 
     public void fixWidth(HBox box)
     {
@@ -121,9 +122,9 @@ public class GameplayController
                 userHand.getChildren().add(iv);
                 fixWidth(userHand);
             }
-            case BOT1 -> test(botHand1);
-            case BOT2 -> test(botHand2);
-            case BOT3 -> test(botHand3);
+            case BOT1 -> drawBot(botHand1);
+            case BOT2 -> drawBot(botHand2);
+            case BOT3 -> drawBot(botHand3);
         }
     }
 
@@ -148,8 +149,6 @@ public class GameplayController
                     default -> Card.Color.BLACK;
                 };
 
-        if (color == Card.Color.BLACK)
-            colorGrid.setVisible(true);
 
         Card.Value value = color == Card.Color.BLACK ? switch (name.substring(0, 2))
                 {
@@ -179,13 +178,15 @@ public class GameplayController
         {
             throw new RuntimeException(e);
         }
+        if (color == Card.Color.BLACK && TurnOrder.getINSTANCE().getCurrentPlayer().getID() == BuildMP.PG.PLAYER)
+            colorGrid.setVisible(true);
 
     }
 
 
-    private void test(HBox botHand)
+    private void drawBot(HBox botHand)
     {
-        ImageView iv = new ImageView(new Image(String.format("file:\\%s\\src\\main\\resources\\org\\juno\\images\\bempty.png", System.getProperty("user.dir"))));
+        ImageView iv = new ImageView(new Image(String.format("file:\\%s\\src\\main\\resources\\org\\juno\\images\\back.png", System.getProperty("user.dir"))));
         iv.setFitWidth(CARD_WIDTH_SCALED);
         iv.setFitHeight(CARD_HEIGHT_SCALED);
         botHand.getChildren().add(iv);
@@ -214,10 +215,23 @@ public class GameplayController
                         break;
                     }
                 }
+                fixWidth(userHand);
             }
-            case BOT1 -> botHand1.getChildren().remove(0);
-            case BOT2 -> botHand2.getChildren().remove(0);
-            case BOT3 -> botHand3.getChildren().remove(0);
+            case BOT1 ->
+            {
+                botHand1.getChildren().remove(0);
+                fixWidth(botHand1);
+            }
+            case BOT2 ->
+            {
+                botHand2.getChildren().remove(0);
+                fixWidth(botHand2);
+            }
+            case BOT3 ->
+            {
+                botHand3.getChildren().remove(0);
+                fixWidth(botHand3);
+            }
         }
         cardDiscarded.setImage(new Image(String.format("file:\\%s\\src\\main\\resources\\org\\juno\\images\\%s%d.png", System.getProperty("user.dir"), discardData.color().toString(), discardData.value().getVal())));
     }
@@ -238,12 +252,14 @@ public class GameplayController
         }
     }
 
-    public void effect(EffectData effectData)
+    public void effect(EffectData effectData) throws NonexistingSceneException
     {
         switch (effectData.effect())
         {
             case ONECARD -> juno.setVisible(true);
-            case RESETMATCH -> reset();
+            case RESETMATCH -> nextMatch();
+            case ENDGAME -> goEndgame();
+            case DIDNTSAYUNO -> juno.setVisible(false);
         }
     }
 
@@ -303,10 +319,8 @@ public class GameplayController
         juno.setVisible(false);
     }
 
-    public boolean nextMatch()
+    public void nextMatch()
     {
-        AtomicBoolean out = new AtomicBoolean(true);
-
         Stage win = new Stage();
         win.initModality(Modality.APPLICATION_MODAL);
         win.setTitle("End-match points");
@@ -330,10 +344,28 @@ public class GameplayController
         Button exit = new Button("Exit game");
         next.setMinSize(250, 100);
         next.setStyle("-fx-background-color: transparent; -fx-border-color: RED; -fx-border-width: 3");
-        next.setOnAction(x -> out.set(true));
+        next.setOnAction(x ->
+        {
+            win.close();
+            reset();
+        });
         exit.setMinSize(250, 100);
         exit.setStyle("-fx-background-color: transparent; -fx-border-color: RED; -fx-border-width: 3");
-        exit.setOnAction(x -> out.set(false));
+        exit.setOnAction(x ->
+        {
+            win.close();
+            Table.getINSTANCE().stopEarlier();
+            reset();
+
+            try
+            {
+                goEndgame();
+            } catch (NonexistingSceneException e)
+            {
+                throw new RuntimeException(e);
+            }
+
+        });
         next.setFont(new Font(25));
         exit.setFont(new Font(25));
         HBox buttons = new HBox(exit, next);
@@ -343,22 +375,20 @@ public class GameplayController
         Scene scene = new Scene(layout);
         win.setScene(scene);
         win.showAndWait();
-
-        return out.get();
     }
 
     public void reset()
     {
-        if (nextMatch())
-        {
-            Table.getINSTANCE().canStart();
-            userHand.getChildren().clear();
-            botHand1.getChildren().clear();
-            botHand2.getChildren().clear();
-            botHand3.getChildren().clear();
-            return;
-        }
+        Table.getINSTANCE().canStart();
+        userHand.getChildren().clear();
+        botHand1.getChildren().clear();
+        botHand2.getChildren().clear();
+        botHand3.getChildren().clear();
+    }
 
-        //TODO: nextmatch is false: go to main menu and add exp
+    public void goEndgame() throws NonexistingSceneException
+    {
+        GenView.getINSTANCE().changeScene(GenView.SCENES.ENDGAME, anchorPane);
+        ((EndgameController) (GenView.getEndgame().getUserData())).load();
     }
 }

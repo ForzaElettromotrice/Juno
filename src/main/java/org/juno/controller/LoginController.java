@@ -64,7 +64,7 @@ public class LoginController
 		saveData(username.getText(), pathImg);
 
 
-		GEN_VIEW.changeScene(0, loginAnchor);
+		GEN_VIEW.changeScene(GenView.SCENES.STARTMENU, loginAnchor);
 	}
 
 	@FXML

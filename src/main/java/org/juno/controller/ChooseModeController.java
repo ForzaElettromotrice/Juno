@@ -40,7 +40,7 @@ public class ChooseModeController
     {
         AUDIO_PLAYER.play(AudioPlayer.Sounds.BUTTONCLICK);
         Thread game = new Thread(Table.getINSTANCE());
-        GEN_VIEW.changeScene(4, modeAnchor);
+        GEN_VIEW.changeScene(GenView.SCENES.GAMEPLAY, modeAnchor);
         AUDIO_PLAYER.stop(AudioPlayer.Sounds.MENUMUSIC);
         AUDIO_PLAYER.play(AudioPlayer.Sounds.GAMEMUSIC);
         game.start();
@@ -103,7 +103,7 @@ public class ChooseModeController
     public void backClicked() throws NonexistingSceneException, NotExistingSoundException, IOException
     {
         AUDIO_PLAYER.play(AudioPlayer.Sounds.BUTTONCLICK);
-        GEN_VIEW.changeScene(0, modeAnchor);
+        GEN_VIEW.changeScene(GenView.SCENES.STARTMENU, modeAnchor);
     }
 
     @FXML

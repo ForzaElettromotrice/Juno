@@ -41,8 +41,8 @@ public class BuildMP
 		SAIDUNO,
 		DIDNTSAYUNO,
 		ONECARD,
-		RESETMATCH
-
+		RESETMATCH,
+		ENDGAME
 	}
 
 	private BuildMP()

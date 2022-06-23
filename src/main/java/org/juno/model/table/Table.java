@@ -25,6 +25,7 @@ public class Table extends Observable implements Runnable
     private static final BuildMP BUILD_MP = BuildMP.getINSTANCE();
 
     private boolean canStart = true;
+    private boolean stopEarlier;
 
     private boolean plus2;
     private boolean plus4;
@@ -46,15 +47,23 @@ public class Table extends Observable implements Runnable
         reset();
         boolean endGame = false;
 
-        while (!endGame)
+        System.out.println("GAME STARTED");
+
+        while (!endGame && !stopEarlier)
         {
+
             if (canStart)
             {
                 canStart = false;
                 startMatch();
                 endGame = checkPoints();
+                System.out.println("SONO QUI");
             }
         }
+        setChanged();
+        notifyObservers(BUILD_MP.createMP(BuildMP.Actions.EFFECTS, BuildMP.Effects.ENDGAME));
+        clearChanged();
+        System.out.println("GAME FINISHED");
     }
     private boolean checkPoints()
     {
@@ -81,7 +90,7 @@ public class Table extends Observable implements Runnable
         for (int i = 0; i < 4; i++)
         {
             currentPlayer = TURN_ORDER.nextPlayer();
-            currentPlayer.draw(7);
+            currentPlayer.draw(2);
         }
 
         Card firstCard = DRAW_PILE.draw();
@@ -170,11 +179,28 @@ public class Table extends Observable implements Runnable
     {
         boolean endTurn = false;
 
+        int delay;
+        int delayUno;
+
+        System.out.println("SONO NEL TURNO DI " + player.getID());
+
+        if (player.getID() == BuildMP.PG.PLAYER)
+        {
+            delay = 100;
+            delayUno = 2000;
+        } else
+        {
+            delay = 1000;
+            delayUno = 100;
+        }
+
         while (!endTurn)
         {
+
+
             try
             {
-                Thread.sleep(1000);
+                Thread.sleep(delay);
             } catch (InterruptedException e)
             {
                 throw new RuntimeException(e);
@@ -191,6 +217,13 @@ public class Table extends Observable implements Runnable
                 {
                     while (wildCard.getColor().getVal() == 4)
                     {
+                        try
+                        {
+                            Thread.sleep(100);
+                        } catch (InterruptedException e)
+                        {
+                            throw new RuntimeException(e);
+                        }
                     }
 
                 }
@@ -207,7 +240,7 @@ public class Table extends Observable implements Runnable
 
             try
             {
-                Thread.sleep(2000);
+                Thread.sleep(delayUno);
             } catch (InterruptedException e)
             {
                 throw new RuntimeException(e);
@@ -218,6 +251,9 @@ public class Table extends Observable implements Runnable
                 notifyObservers(BUILD_MP.createMP(BuildMP.Actions.EFFECTS, BuildMP.Effects.DIDNTSAYUNO));
                 clearChanged();
                 player.draw(2);
+                setChanged();
+                notifyObservers(BUILD_MP.createMP(BuildMP.Actions.EFFECTS, BuildMP.Effects.DIDNTSAYUNO));
+                clearChanged();
             }
         }
         player.resetTurn();
@@ -239,6 +275,17 @@ public class Table extends Observable implements Runnable
         plus2 = false;
         plus4 = false;
         stop = false;
+        canStart = true;
+        stopEarlier = false;
+    }
+    public void canStart()
+    {
+        canStart = true;
+    }
+
+    public void stopEarlier()
+    {
+        stopEarlier = true;
     }
 
     @Override
@@ -251,10 +298,7 @@ public class Table extends Observable implements Runnable
         {
             throw new RuntimeException(e);
         }
+        System.out.println("THREAD IN TEORIA MORTO");
     }
 
-    public void canStart()
-    {
-        canStart = true;
-    }
 }

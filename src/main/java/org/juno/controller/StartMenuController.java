@@ -35,7 +35,7 @@ public class StartMenuController
     public void playClicked() throws NonexistingSceneException, NotExistingSoundException, IOException
     {
         AUDIO_PLAYER.play(AudioPlayer.Sounds.BUTTONCLICK);
-        GEN_VIEW.changeScene(1, menuAnchor);
+        GEN_VIEW.changeScene(GenView.SCENES.CHOOSEMODE, menuAnchor);
 
     }
 
@@ -44,7 +44,7 @@ public class StartMenuController
     {
         AUDIO_PLAYER.play(AudioPlayer.Sounds.BUTTONCLICK);
         if (GenView.getStats().getUserData() instanceof StatsController smc) smc.load();
-        GEN_VIEW.changeScene(2, menuAnchor);
+        GEN_VIEW.changeScene(GenView.SCENES.STATS, menuAnchor);
     }
 
     @FXML
@@ -52,7 +52,7 @@ public class StartMenuController
     {
         AUDIO_PLAYER.play(AudioPlayer.Sounds.BUTTONCLICK);
         if (GenView.getSettings().getUserData() instanceof SettingsController sc) sc.load();
-        GEN_VIEW.changeScene(3, menuAnchor);
+        GEN_VIEW.changeScene(GenView.SCENES.SETTINGS, menuAnchor);
     }
 
     @FXML

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="anchorPane" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.juno.controller.EndgameController">
+    <Circle fx:id="avatar" fill="TRANSPARENT" layoutX="960.0" layoutY="491.0" radius="176.0" stroke="BLACK" strokeType="INSIDE" />
+    <ProgressBar fx:id="progressBar" cacheShape="false" centerShape="false" layoutX="408.0" layoutY="752.0" prefHeight="126.0" prefWidth="1105.0" progress="0.0" scaleShape="false" />
+    <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="251.0" layoutY="740.0" pickOnBounds="true" preserveRatio="true">
+        <Image url="@../images/levelStar.png" />
+    </ImageView>
+    <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="1513.0" layoutY="740.0" pickOnBounds="true" preserveRatio="true">
+        <Image url="@../images/levelStar.png" />
+    </ImageView>
+    <Label fx:id="actualLevel" alignment="CENTER" cacheShape="false" centerShape="false" contentDisplay="CENTER" layoutX="311.0" layoutY="792.0" prefHeight="47.0" prefWidth="36.0" scaleShape="false" text="1">
+        <font>
+            <Font size="32.0" />
+        </font>
+    </Label>
+    <Label fx:id="nextLevel" alignment="CENTER" cacheShape="false" centerShape="false" contentDisplay="CENTER" layoutX="1574.0" layoutY="792.0" prefHeight="46.0" prefWidth="36.0" scaleShape="false" text="2">
+        <font>
+            <Font size="31.0" />
+        </font>
+    </Label>
+    <Label fx:id="expMessage" alignment="CENTER" contentDisplay="CENTER" layoutX="308.0" layoutY="92.0" prefHeight="107.0" prefWidth="1304.0" text="YOU GAINED RRR EXP!">
+        <font>
+            <Font size="66.0" />
+        </font>
+    </Label>
+    <HBox layoutX="710.0" layoutY="906.0" prefHeight="100.0" prefWidth="500.0" spacing="50.0">
+        <Button mnemonicParsing="false" onAction="#mainMenu" prefHeight="100.0" prefWidth="225.0" style="-fx-background-color: transparent; -fx-border-color: BLACK; -fx-border-radius: 40;" text="Main Menu">
+            <font>
+                <Font size="28.0" />
+            </font>
+        </Button>
+        <Button mnemonicParsing="false" onAction="#newMatch" prefHeight="100.0" prefWidth="225.0" style="-fx-background-color: transparent; -fx-border-color: BLACK; -fx-border-radius: 40;" text="New Match">
+            <font>
+                <Font size="28.0" />
+            </font>
+        </Button>
+    </HBox>
+</AnchorPane>

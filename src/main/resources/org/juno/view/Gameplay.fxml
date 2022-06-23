@@ -14,7 +14,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.juno.controller.GameplayController">
+<AnchorPane id="backgroundGameplay" fx:id="anchorPane" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.juno.controller.GameplayController">
    <Circle fx:id="circle4" fill="WHITE" layoutX="1642.0" layoutY="613.0" radius="100.0" stroke="BLACK" strokeType="INSIDE" />
    <Circle fx:id="circle3" fill="WHITE" layoutX="1146.0" layoutY="301.0" radius="100.0" stroke="BLACK" strokeType="INSIDE" />
    <Circle fx:id="circle2" fill="WHITE" layoutX="270.0" layoutY="477.0" radius="100.0" stroke="BLACK" strokeType="INSIDE" />
@@ -82,11 +82,11 @@
          <Font name="Anime Ace 2.0 BB" size="45.0" />
       </font>
    </Label>
-   <Button fx:id="pass" disable="true" layoutX="545.0" layoutY="469.0" mnemonicParsing="false" onAction="#passClicked" prefHeight="142.0" prefWidth="150.0" style="-fx-background-color: transparent; -fx-border-color: BLACK; -fx-border-radius: 40;" text="PASS">
+   <Button fx:id="pass" disable="true" layoutX="545.0" layoutY="469.0" mnemonicParsing="false" onAction="#passClicked" prefHeight="142.0" prefWidth="150.0" style="-fx-background-color: WHITE; -fx-background-radius: 40; -fx-border-color: BLACK; -fx-border-radius: 40;" text="PASS">
       <font>
          <Font name="Javanese Text" size="36.0" />
       </font></Button>
-   <Button fx:id="juno" layoutX="1444.0" layoutY="904.0" mnemonicParsing="false" onAction="#sayUno" prefHeight="112.0" prefWidth="176.0" style="-fx-background-color: transparent; -fx-border-color: RED; -fx-border-radius: 40; -fx-border-width: 3;" text="(J)UNO!" textFill="RED" visible="false">
+   <Button fx:id="juno" layoutX="1444.0" layoutY="904.0" mnemonicParsing="false" onAction="#sayUno" prefHeight="112.0" prefWidth="176.0" style="-fx-background-color: WHITE; -fx-background-radius: 40; -fx-border-color: RED; -fx-border-radius: 40; -fx-border-width: 3;" text="(J)UNO!" textFill="RED" visible="false">
       <font>
          <Font name="Javanese Text" size="31.0" />
       </font>
