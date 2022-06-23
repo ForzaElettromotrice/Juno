@@ -42,7 +42,7 @@ public class Table extends Observable implements Runnable
         return INSTANCE;
     }
 
-    public void startGame() throws MessagePackageTypeNotExistsException
+    public void startGame() throws MessagePackageTypeNotExistsException, InterruptedException
     {
         reset();
         boolean endGame = false;
@@ -59,7 +59,9 @@ public class Table extends Observable implements Runnable
                 endGame = checkPoints();
                 System.out.println("SONO QUI");
             }
+            Thread.sleep(100);
         }
+        System.out.println("FUORI DAL WHILE");
         setChanged();
         notifyObservers(BUILD_MP.createMP(BuildMP.Actions.EFFECTS, BuildMP.Effects.ENDGAME));
         clearChanged();
@@ -78,8 +80,14 @@ public class Table extends Observable implements Runnable
         return false;
     }
 
+    public Player getWinner()
+    {
+        return winner;
+    }
     public void startMatch() throws MessagePackageTypeNotExistsException
     {
+        if (stopEarlier) return;
+
         TURN_ORDER.resetMatch();
         DISCARD_PILE.reset();
         DRAW_PILE.reset();
@@ -101,7 +109,7 @@ public class Table extends Observable implements Runnable
         notifyObservers(BUILD_MP.createMP(BuildMP.Actions.DISCARD, null, firstCard.getColor(), firstCard.getValue()));
         clearChanged();
 
-        while (!endMatch)
+        while (!endMatch && !stopEarlier)
         {
             currentPlayer = TURN_ORDER.nextPlayer();
             setChanged();
@@ -194,7 +202,7 @@ public class Table extends Observable implements Runnable
             delayUno = 100;
         }
 
-        while (!endTurn)
+        while (!endTurn && !stopEarlier)
         {
 
 
@@ -288,6 +296,11 @@ public class Table extends Observable implements Runnable
         stopEarlier = true;
     }
 
+    public boolean getStopEarlier()
+    {
+        return stopEarlier;
+    }
+
     @Override
     public void run()
     {
@@ -297,8 +310,15 @@ public class Table extends Observable implements Runnable
         } catch (MessagePackageTypeNotExistsException e)
         {
             throw new RuntimeException(e);
+        } catch (InterruptedException e)
+        {
+            throw new RuntimeException(e);
         }
         System.out.println("THREAD IN TEORIA MORTO");
     }
 
+    public boolean getCanStart()
+    {
+        return canStart;
+    }
 }

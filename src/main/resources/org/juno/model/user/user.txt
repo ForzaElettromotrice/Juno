@@ -1,6 +1,6 @@
 Federico
 src\main\resources\org\juno\images\icon2.jpg
 0
-0
+4
 1
-0
+849

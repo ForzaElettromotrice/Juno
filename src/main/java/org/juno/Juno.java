@@ -58,7 +58,11 @@ public class Juno extends Application
 			player.addObserver(GenView.getINSTANCE());
 		}
 		AudioPlayer.getINSTANCE().play(AudioPlayer.Sounds.MENUMUSIC);
+
+		stage.setOnCloseRequest(x -> User.getINSTANCE().save());
+
 		stage.show();
+
 
 	}
 }

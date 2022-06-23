@@ -357,14 +357,6 @@ public class GameplayController
             Table.getINSTANCE().stopEarlier();
             reset();
 
-            try
-            {
-                goEndgame();
-            } catch (NonexistingSceneException e)
-            {
-                throw new RuntimeException(e);
-            }
-
         });
         next.setFont(new Font(25));
         exit.setFont(new Font(25));
@@ -379,11 +371,11 @@ public class GameplayController
 
     public void reset()
     {
-        Table.getINSTANCE().canStart();
         userHand.getChildren().clear();
         botHand1.getChildren().clear();
         botHand2.getChildren().clear();
         botHand3.getChildren().clear();
+        Table.getINSTANCE().canStart();
     }
 
     public void goEndgame() throws NonexistingSceneException

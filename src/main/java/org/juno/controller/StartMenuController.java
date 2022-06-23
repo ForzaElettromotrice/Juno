@@ -3,6 +3,7 @@ package org.juno.controller;
 import javafx.fxml.FXML;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import org.juno.model.user.User;
 import org.juno.view.AudioPlayer;
 import org.juno.view.GenView;
 import org.juno.view.NonexistingSceneException;
@@ -58,6 +59,7 @@ public class StartMenuController
     @FXML
     public void exitClicked()
     {
+        User.getINSTANCE().save();
         GenView.closeWindow();
     }
 
