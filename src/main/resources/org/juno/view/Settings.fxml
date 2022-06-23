@@ -1,36 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Slider?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane id="backgroundSettings" fx:id="settingsAnchor" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="540.0" prefWidth="960.0" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.juno.controller.SettingsController">
-    <HBox alignment="CENTER" layoutX="159.0" layoutY="418.0" prefHeight="66.0" prefWidth="644.0" AnchorPane.bottomAnchor="30.799999999999997" AnchorPane.leftAnchor="159.0" AnchorPane.rightAnchor="157.0">
-        <Button fx:id="save" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#savePressed" onMouseEntered="#saveEntered" onMouseExited="#saveExited" prefHeight="70.0" prefWidth="200.0" style="-fx-background-color: transparent;" text="Save">
-            <HBox.margin>
-                <Insets right="10.0" />
-            </HBox.margin>
-            <font>
-                <Font name="Anime Ace 2.0 BB" size="26.0" />
-            </font>
-        </Button>
-        <Button fx:id="back" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#backPressed" onMouseEntered="#backEntered" onMouseExited="#backExited" prefHeight="70.0" prefWidth="200.0" style="-fx-background-color: transparent;" text="Back">
-            <HBox.margin>
-                <Insets left="10.0" />
-            </HBox.margin>
-            <font>
-                <Font name="Anime Ace 2.0 BB" size="26.0" />
-            </font>
-        </Button>
-    </HBox>
-    <GridPane alignment="CENTER" gridLinesVisible="true" layoutX="99.0" layoutY="53.0" prefHeight="330.0" prefWidth="763.0" AnchorPane.bottomAnchor="157.0" AnchorPane.leftAnchor="99.0" AnchorPane.rightAnchor="98.0" AnchorPane.topAnchor="53.0">
+    <GridPane alignment="CENTER" gridLinesVisible="true" layoutX="99.0" layoutY="81.0" prefHeight="330.0" prefWidth="763.0" AnchorPane.bottomAnchor="129.0" AnchorPane.leftAnchor="99.0" AnchorPane.rightAnchor="98.0" AnchorPane.topAnchor="81.0">
         <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" maxWidth="469.0" minWidth="0.0" prefWidth="382.0" />
             <ColumnConstraints hgrow="SOMETIMES" maxWidth="381.0" minWidth="0.0" prefWidth="381.0" />
@@ -63,4 +43,14 @@
             </font>
         </Button>
     </GridPane>
+     <Button fx:id="save" alignment="CENTER" contentDisplay="CENTER" layoutX="381.0" layoutY="446.0" mnemonicParsing="false" onAction="#savePressed" onMouseEntered="#saveEntered" onMouseExited="#saveExited" prefHeight="70.0" prefWidth="200.0" style="-fx-background-color: transparent;" text="Save">
+         <font>
+             <Font name="Anime Ace 2.0 BB" size="26.0" />
+         </font>
+     </Button>
+     <Button fx:id="back" alignment="CENTER" contentDisplay="CENTER" layoutX="14.0" layoutY="6.0" mnemonicParsing="false" onAction="#backClicked" onMouseEntered="#backEntered" onMouseExited="#backExited" prefHeight="63.0" prefWidth="101.0" style="-fx-background-color: transparent;" text="←" textFill="WHITE">
+         <font>
+             <Font name="Anime Ace 2.0 BB" size="37.0" />
+         </font>
+   </Button>
 </AnchorPane>

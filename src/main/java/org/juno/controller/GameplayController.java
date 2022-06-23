@@ -24,8 +24,10 @@ import org.juno.model.deck.WildCard;
 import org.juno.model.table.Player;
 import org.juno.model.table.Table;
 import org.juno.model.table.TurnOrder;
+import org.juno.view.AudioPlayer;
 import org.juno.view.GenView;
 import org.juno.view.NonexistingSceneException;
+import org.juno.view.NotExistingSoundException;
 
 import java.io.File;
 import java.net.URI;
@@ -43,6 +45,9 @@ public class GameplayController
 
     @FXML
     public AnchorPane anchorPane;
+
+     @FXML
+     public AudioPlayer AUDIO_PLAYER = AudioPlayer.getINSTANCE();
 
     @FXML
     public Button pass;
@@ -109,6 +114,11 @@ public class GameplayController
 
     public void draw(DrawData drawData)
     {
+        try {
+            AUDIO_PLAYER.play(AudioPlayer.Sounds.CARDFLIP);
+        } catch (NotExistingSoundException e) {
+            throw new RuntimeException(e);
+        }
         switch (drawData.player())
         {
             case PLAYER ->
@@ -118,6 +128,8 @@ public class GameplayController
                 iv.setFitHeight(CARD_HEIGHT_SCALED);
 
                 iv.setOnMouseClicked(this::cardClicked);
+                iv.setOnMouseEntered(this::cardEntered);
+                iv.setOnMouseExited(this::cardExited);
 
                 userHand.getChildren().add(iv);
                 fixWidth(userHand);
@@ -125,6 +137,30 @@ public class GameplayController
             case BOT1 -> drawBot(botHand1);
             case BOT2 -> drawBot(botHand2);
             case BOT3 -> drawBot(botHand3);
+        }
+    }
+
+    private void cardExited(MouseEvent mouseEvent)
+    {
+        if (TurnOrder.getINSTANCE().getCurrentPlayer().getID()== BuildMP.PG.PLAYER)
+        {
+            ImageView card = (ImageView) mouseEvent.getSource();
+            card.setTranslateY(30);
+        }
+    }
+
+    private void cardEntered(MouseEvent mouseEvent)
+    {
+        if (TurnOrder.getINSTANCE().getCurrentPlayer().getID()== BuildMP.PG.PLAYER)
+        {
+            try {
+                AUDIO_PLAYER.play(AudioPlayer.Sounds.CARDFLIP);
+            } catch (NotExistingSoundException e) {
+                throw new RuntimeException(e);
+            }
+
+            ImageView card = (ImageView) mouseEvent.getSource();
+            card.setTranslateY(-30);
         }
     }
 
@@ -195,6 +231,11 @@ public class GameplayController
 
     public void discard(DiscardData discardData)
     {
+        try {
+            AUDIO_PLAYER.play(AudioPlayer.Sounds.ALERTBEEP);
+        } catch (NotExistingSoundException e) {
+            throw new RuntimeException(e);
+        }
         if (discardData.player() == null)
         {
             cardDiscarded.setImage(new Image(String.format("file:\\%s\\src\\main\\resources\\org\\juno\\images\\%s%d.png", System.getProperty("user.dir"), discardData.color().toString(), discardData.value().getVal())));
@@ -279,6 +320,11 @@ public class GameplayController
     @FXML
     public void passClicked()
     {
+        try {
+            AUDIO_PLAYER.play(AudioPlayer.Sounds.ALERTBEEP);
+        } catch (NotExistingSoundException e) {
+            throw new RuntimeException(e);
+        }
         Player player = TurnOrder.getINSTANCE().getCurrentPlayer();
         player.setHasPassed();
         pass.setDisable(true);
@@ -287,6 +333,11 @@ public class GameplayController
     @FXML
     public void redClicked()
     {
+        try {
+            AUDIO_PLAYER.play(AudioPlayer.Sounds.ALERTBEEP);
+        } catch (NotExistingSoundException e) {
+            throw new RuntimeException(e);
+        }
         ((WildCard) TurnOrder.getINSTANCE().getCurrentPlayer().getChosenCard()).setColor(Card.Color.RED);
         colorGrid.setVisible(false);
     }
@@ -294,6 +345,11 @@ public class GameplayController
     @FXML
     public void blueClicked()
     {
+        try {
+            AUDIO_PLAYER.play(AudioPlayer.Sounds.ALERTBEEP);
+        } catch (NotExistingSoundException e) {
+            throw new RuntimeException(e);
+        }
         ((WildCard) TurnOrder.getINSTANCE().getCurrentPlayer().getChosenCard()).setColor(Card.Color.BLUE);
         colorGrid.setVisible(false);
     }
@@ -301,6 +357,11 @@ public class GameplayController
     @FXML
     public void greenClicked()
     {
+        try {
+            AUDIO_PLAYER.play(AudioPlayer.Sounds.ALERTBEEP);
+        } catch (NotExistingSoundException e) {
+            throw new RuntimeException(e);
+        }
         ((WildCard) TurnOrder.getINSTANCE().getCurrentPlayer().getChosenCard()).setColor(Card.Color.GREEN);
         colorGrid.setVisible(false);
     }
@@ -308,6 +369,11 @@ public class GameplayController
     @FXML
     public void yellowClicked()
     {
+        try {
+            AUDIO_PLAYER.play(AudioPlayer.Sounds.ALERTBEEP);
+        } catch (NotExistingSoundException e) {
+            throw new RuntimeException(e);
+        }
         ((WildCard) TurnOrder.getINSTANCE().getCurrentPlayer().getChosenCard()).setColor(Card.Color.YELLOW);
         colorGrid.setVisible(false);
     }
@@ -327,6 +393,11 @@ public class GameplayController
         win.setMinHeight(500);
         win.setMinWidth(500);
         win.setResizable(false);
+        win.setOnCloseRequest(x->
+        {
+            win.close();
+            reset();
+        });
 
         Label label;
 
@@ -346,6 +417,11 @@ public class GameplayController
         next.setStyle("-fx-background-color: transparent; -fx-border-color: RED; -fx-border-width: 3");
         next.setOnAction(x ->
         {
+            try {
+                AUDIO_PLAYER.play(AudioPlayer.Sounds.BUTTONCLICK);
+            } catch (NotExistingSoundException e) {
+                throw new RuntimeException(e);
+            }
             win.close();
             reset();
         });
@@ -353,6 +429,11 @@ public class GameplayController
         exit.setStyle("-fx-background-color: transparent; -fx-border-color: RED; -fx-border-width: 3");
         exit.setOnAction(x ->
         {
+            try {
+                AUDIO_PLAYER.play(AudioPlayer.Sounds.BUTTONCLICK);
+            } catch (NotExistingSoundException e) {
+                throw new RuntimeException(e);
+            }
             win.close();
             Table.getINSTANCE().stopEarlier();
             reset();

@@ -25,7 +25,7 @@ public class Table extends Observable implements Runnable
     private static final BuildMP BUILD_MP = BuildMP.getINSTANCE();
 
     private boolean canStart = true;
-    private boolean stopEarlier;
+    private boolean stopEarlier = false;
 
     private boolean plus2;
     private boolean plus4;
@@ -51,7 +51,6 @@ public class Table extends Observable implements Runnable
 
         while (!endGame && !stopEarlier)
         {
-
             if (canStart)
             {
                 canStart = false;
