@@ -204,10 +204,45 @@
 4. Added sounds to menus.
 5. Converted sound compendium to enum.
 
+##21/05/2022
+
+1. Changed cards design.
+2. Renamed and refactored some files.
+3. Modified AudioPlayer as a Singleton and added some useful methods (stop, setVolume etc).
+4. Created the gameplay classic scene: it only shows the user cards, while bots cards are 
+    shown backwards. In the center there are the discard and draw pile. The players hands 
+    automatically resize when a card is addded and when it is a player's turn the corrispondent
+    circle is colored with yellow.
+5. Created the datapackage: it contains various classes and records that deliver different messages
+    from model to view. The Data interface models a general message; DiscardData is a record that 
+    says a card has been discarded; and so on. Every record has different arguments to show
+    what the view needs to change. Then there is the BuildMP that is the constructor of the records:
+    it has three enums for the current player, for actions and for card effects, and it is a Singleton.
+6. Now GenView is Observer: when it receives a message it updates the view transferring the message
+    to the Gameplay Controller.
+7. Player, Bot and Table are Observable: when something changes inside them, they send a message
+    to GenView with notifyObservers.
+8. Now the game plays on multiple threads. It is starting to work!
+
+##22/05/2022
+
+1. Changed music when the game starts.
+2. Created the methods that change the view on notify: turn, discard, draw, effect (effects are for 
+    example when the user has only one card or when the match has ended), choosing a color when a 
+    +4 or a jolly are played, pass and say Uno. Also created methods for when a card is clicked.
+3. Created the points overview for when a match has ended, and you can start the next match or go to
+    main menu.
+4. Created missing methods and fields in Bot, Player, TurnOrder and Table.
+5. Resolved some bugs: added a Platform.runLater to remove problems with different threads, added a 
+    thread sleep to give time to the observers to notify the view of card played, etc.
+6. Now the game works fine!!
 
 ##TODO:
 
 1. add sound effects to game
 2. add animations
-3. gui of the game
+3. change back cards and colored wild cards
+4. add different modes
+5. gameplay background
+6. make the buttons in points overview work...!
 
