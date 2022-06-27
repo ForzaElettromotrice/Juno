@@ -1,7 +1,6 @@
 package org.juno;
 
 import javafx.application.Application;
-import javafx.scene.control.Tab;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import org.juno.model.table.Player;

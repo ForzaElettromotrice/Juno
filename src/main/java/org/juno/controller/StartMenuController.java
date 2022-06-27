@@ -9,7 +9,6 @@ import org.juno.view.GenView;
 import org.juno.view.NonexistingSceneException;
 import org.juno.view.NotExistingSoundException;
 
-import java.io.IOException;
 
 
 /**
@@ -22,18 +21,18 @@ public class StartMenuController
     private static final GenView GEN_VIEW = GenView.getINSTANCE();
     private static final AudioPlayer AUDIO_PLAYER = AudioPlayer.getINSTANCE();
     @FXML
-    public ImageView lightsStats;
+    public ImageView blueFrame;
     @FXML
-    public ImageView lightsPlay;
+    public ImageView redFrame;
     @FXML
-    public ImageView lightsExit;
+    public ImageView greenFrame;
     @FXML
-    public ImageView lightsSettings;
+    public ImageView yellowFrame;
     @FXML
     public AnchorPane menuAnchor;
 
     @FXML
-    public void playClicked() throws NonexistingSceneException, NotExistingSoundException, IOException
+    public void playClicked() throws NonexistingSceneException, NotExistingSoundException
     {
         AUDIO_PLAYER.play(AudioPlayer.Sounds.BUTTONCLICK);
         GEN_VIEW.changeScene(GenView.SCENES.CHOOSEMODE, menuAnchor);
@@ -41,7 +40,7 @@ public class StartMenuController
     }
 
     @FXML
-    public void statsClicked() throws NonexistingSceneException, NotExistingSoundException, IOException
+    public void statsClicked() throws NonexistingSceneException, NotExistingSoundException
     {
         AUDIO_PLAYER.play(AudioPlayer.Sounds.BUTTONCLICK);
         if (GenView.getStats().getUserData() instanceof StatsController smc) smc.load();
@@ -49,7 +48,7 @@ public class StartMenuController
     }
 
     @FXML
-    public void settingsClicked() throws NonexistingSceneException, NotExistingSoundException, IOException
+    public void settingsClicked() throws NonexistingSceneException, NotExistingSoundException
     {
         AUDIO_PLAYER.play(AudioPlayer.Sounds.BUTTONCLICK);
         if (GenView.getSettings().getUserData() instanceof SettingsController sc) sc.load();
@@ -67,52 +66,52 @@ public class StartMenuController
     public void statsEntered() throws NotExistingSoundException
     {
         AUDIO_PLAYER.play(AudioPlayer.Sounds.CURSORSELECT);
-        lightsStats.setVisible(true);
+        blueFrame.setVisible(true);
     }
 
     @FXML
     public void statsExited()
     {
-        lightsStats.setVisible(false);
+        blueFrame.setVisible(false);
     }
 
     @FXML
     public void playEntered() throws NotExistingSoundException
     {
         AUDIO_PLAYER.play(AudioPlayer.Sounds.CURSORSELECT);
-        lightsPlay.setVisible(true);
+        redFrame.setVisible(true);
     }
 
     @FXML
     public void playExited()
     {
-        lightsPlay.setVisible(false);
+        redFrame.setVisible(false);
     }
 
     @FXML
     public void settingsEntered() throws NotExistingSoundException
     {
         AUDIO_PLAYER.play(AudioPlayer.Sounds.CURSORSELECT);
-        lightsSettings.setVisible(true);
+        yellowFrame.setVisible(true);
     }
 
     @FXML
     public void settingsExited()
     {
-        lightsSettings.setVisible(false);
+        yellowFrame.setVisible(false);
     }
 
     @FXML
     public void exitEntered() throws NotExistingSoundException
     {
         AUDIO_PLAYER.play(AudioPlayer.Sounds.CURSORSELECT);
-        lightsExit.setVisible(true);
+        greenFrame.setVisible(true);
     }
 
     @FXML
     public void exitExited()
     {
-        lightsExit.setVisible(false);
+        greenFrame.setVisible(false);
     }
 
 }
