@@ -36,9 +36,8 @@
          <Button fx:id="reflex" mnemonicParsing="false" onAction="#reflexClicked" onMouseEntered="#reflexEntered" onMouseExited="#reflexExited" style="-fx-background-color: transparent;" BorderPane.alignment="CENTER">
             <graphic>
                <ImageView fitHeight="204.0" fitWidth="247.0" pickOnBounds="true" preserveRatio="true">
-                  <image>
-                     <Image url="@../images/logoReflex.png" />
-                  </image></ImageView>
+                  <Image url="@../images/logoReflex.png"/>
+               </ImageView>
             </graphic>
          </Button>
       </center>

@@ -135,20 +135,23 @@ public class StatsController
 
     public void option1Clicked() throws NotExistingSoundException
     {
+        avatarUrl= "src\\main\\resources\\org\\juno\\images\\icon1.jpg";
         AUDIO_PLAYER.play(AudioPlayer.Sounds.BUTTONCLICK);
-        avatar.setFill(new ImagePattern(new Image("file:\\" + System.getProperty("user.dir") + "\\src\\main\\resources\\org\\juno\\images\\icon1.jpg")));
+        avatar.setFill(new ImagePattern(new Image(String.format("file:\\%s\\%s", System.getProperty("user.dir"), avatarUrl))));
     }
 
     public void option2Clicked() throws NotExistingSoundException
     {
+        avatarUrl= "src\\main\\resources\\org\\juno\\images\\icon2.jpg";
         AUDIO_PLAYER.play(AudioPlayer.Sounds.BUTTONCLICK);
-        avatar.setFill(new ImagePattern(new Image("file:\\" + System.getProperty("user.dir") + "\\src\\main\\resources\\org\\juno\\images\\icon2.jpg")));
+        avatar.setFill(new ImagePattern(new Image(String.format("file:\\%s\\%s", System.getProperty("user.dir"), avatarUrl))));
     }
 
     public void option3Clicked() throws NotExistingSoundException
     {
+        avatarUrl= "src\\main\\resources\\org\\juno\\images\\icon3.jpg";
         AUDIO_PLAYER.play(AudioPlayer.Sounds.BUTTONCLICK);
-        avatar.setFill(new ImagePattern(new Image("file:\\" + System.getProperty("user.dir") + "\\src\\main\\resources\\org\\juno\\images\\icon3.jpg")));
+        avatar.setFill(new ImagePattern(new Image(String.format("file:\\%s\\%s", System.getProperty("user.dir"), avatarUrl))));
     }
 
     public void openEntered() throws NotExistingSoundException

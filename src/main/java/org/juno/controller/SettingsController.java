@@ -63,7 +63,7 @@ public class SettingsController
 	}
 
 	@FXML
-	public void backPressed() throws NonexistingSceneException, NotExistingSoundException, IOException
+	public void backClicked() throws NonexistingSceneException, NotExistingSoundException, IOException
 	{
 		AUDIO_PLAYER.play(AudioPlayer.Sounds.BUTTONCLICK);
 		Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to exit without saving?", ButtonType.YES, ButtonType.NO);
@@ -80,7 +80,7 @@ public class SettingsController
 	public void backEntered() throws NotExistingSoundException
 	{
 		AUDIO_PLAYER.play(AudioPlayer.Sounds.CURSORSELECT);
-		back.setStyle("-fx-border-color: BLACK; -fx-background-color: transparent; -fx-border-radius: 90;");
+		back.setStyle("-fx-border-color: BLACK; -fx-background-color: transparent; -fx-border-radius: 40;");
 	}
 
 	@FXML
