@@ -12,4 +12,6 @@ public class BotReflex extends PlayerReflex
 	{
 		super(i);
 	}
+
+	//TODO DAJE
 }
