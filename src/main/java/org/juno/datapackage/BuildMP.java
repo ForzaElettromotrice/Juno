@@ -41,8 +41,13 @@ public class BuildMP
 		SAIDUNO,
 		DIDNTSAYUNO,
 		ONECARD,
-		RESETMATCH,
-		ENDGAME
+		STARTGAME,
+		ENDMATCH,
+		ENDGAME,
+		YELLOW,
+		BLUE,
+		RED,
+		GREEN
 	}
 
 	private BuildMP()

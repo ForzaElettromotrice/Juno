@@ -1,29 +1,25 @@
 package org.juno.model.table;
 
-import org.juno.datapackage.MessagePackageTypeNotExistsException;
 import org.juno.model.deck.Card;
-import org.juno.model.deck.WildCard;
 
 import java.util.Random;
 
 /**
- * Defines: Bot class,
+ * Defines Bot class,
  *
  * @author ForzaElettromotrice, R0n3l
  */
 public class Bot extends Player
 {
-
 	private static final Random RANDOMIZER = new Random();
 
-
-	public Bot(int n)
+	public Bot(int i)
 	{
-		super(n);
+		super(i);
 	}
 
 	@Override
-	public boolean hasChosen() throws MessagePackageTypeNotExistsException
+	public boolean hasChosen()
 	{
 		Card first = DISCARD_PILE.getFirst();
 		for (Card card : hand)
@@ -48,22 +44,14 @@ public class Bot extends Player
 				return false;
 			}
 		}
-
-		if (chosenCard instanceof WildCard)
-			chooseColor(Card.Color.RED);
-
+		chooseColor(Card.Color.RED);
 		return true;
 	}
 
 	@Override
-	public boolean saidUno() throws MessagePackageTypeNotExistsException
+	public boolean saidUno()
 	{
-		if (RANDOMIZER.nextInt(100) > 20)
-		{
-			sayUno();
-		}
+		if (RANDOMIZER.nextInt(100) > 20) sayUno();
 		return super.saidUno();
 	}
-
-
 }

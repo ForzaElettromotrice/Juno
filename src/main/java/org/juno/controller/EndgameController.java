@@ -14,10 +14,11 @@ import javafx.scene.shape.Circle;
 import javafx.util.Duration;
 import org.juno.datapackage.BuildMP;
 import org.juno.model.table.Table;
-import org.juno.model.table.TurnOrder;
 import org.juno.model.user.User;
+import org.juno.view.AudioPlayer;
 import org.juno.view.GenView;
 import org.juno.view.NonexistingSceneException;
+import org.juno.view.NotExistingSoundException;
 
 
 /**
@@ -31,7 +32,7 @@ public class EndgameController
 	private static final GenView GEN_VIEW = GenView.getINSTANCE();
 	private static final Table TABLE = Table.getINSTANCE();
 	private static final User USER = User.getINSTANCE();
-	private static final TurnOrder TURN_ORDER = TurnOrder.getINSTANCE();
+	private static final AudioPlayer AUDIO_PLAYER = AudioPlayer.getINSTANCE();
 
 	@FXML
 	public AnchorPane anchorPane;
@@ -48,9 +49,11 @@ public class EndgameController
 
 
 	@FXML
-	public void mainMenu() throws NonexistingSceneException
+	public void mainMenu() throws NonexistingSceneException, NotExistingSoundException
 	{
 		GEN_VIEW.changeScene(GenView.SCENES.STARTMENU, anchorPane);
+		AUDIO_PLAYER.stop(AudioPlayer.Sounds.GAMEMUSIC);
+		AUDIO_PLAYER.play(AudioPlayer.Sounds.MENUMUSIC);
 	}
 
 
@@ -73,12 +76,12 @@ public class EndgameController
 		progressBar.setProgress(USER.getProgress());
 
 
-		int points = TURN_ORDER.getUser().getPoints();
+		int points = TABLE.getUser().getPoints();
 
 		expMessage.setText(String.format("You gained %d exp!", points));
 
 
-		if (!TABLE.getStopEarlier() && TABLE.getWinner().getID() == BuildMP.PG.PLAYER)
+		if (!TABLE.getStopEarlier() && TABLE.getWinner().getId() == BuildMP.PG.PLAYER)
 			USER.addVictories();
 		else
 			USER.addDefeats();

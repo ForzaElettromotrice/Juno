@@ -1,6 +1,6 @@
 Ele
 src\main\resources\org\juno\images\icon3.jpg
 0
-0
+11
 1
-0
+950

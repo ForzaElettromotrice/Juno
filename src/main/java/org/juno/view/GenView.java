@@ -11,6 +11,7 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 import org.juno.controller.GameplayController;
 import org.juno.datapackage.*;
+import org.juno.model.table.Table;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -196,16 +197,7 @@ public class GenView implements Observer
 		else if (arg instanceof DiscardData discardData)
 			Platform.runLater(() -> gameplayController.discard(discardData));
 		else if (arg instanceof TurnData turnData) Platform.runLater(() -> gameplayController.turn(turnData));
-		else if (arg instanceof EffectData effectData) Platform.runLater(() ->
-		{
-			try
-			{
-				gameplayController.effect(effectData);
-			} catch (NonexistingSceneException e)
-			{
-				throw new RuntimeException(e);
-			}
-		});
+		else if (arg instanceof EffectData effectData) Platform.runLater(() -> gameplayController.effect(effectData));
 
 	}
 }

@@ -1,81 +1,52 @@
 package org.juno.model.table;
 
-
-import java.util.Random;
+import org.juno.model.table.reflex.BotReflex;
+import org.juno.model.table.reflex.PlayerReflex;
+import org.juno.model.table.trade.BotTrade;
+import org.juno.model.table.trade.PlayerTrade;
 
 /**
- * Defines: CircularLinkedList class,
+ * Defines TurnOrder class,
  *
  * @author ForzaElettromotrice, R0n3l
  */
 public class TurnOrder
 {
-	private static final TurnOrder INSTANCE = new TurnOrder();
-	private static final Random RANDOMIZER = new Random();
-
-	private Player[] players = new Player[4];
-
-	private Player user;
-
+	private final Player[] players = new Player[4];
 	private int currentPlayer;
+
 	private boolean isInverted;
 
-	private TurnOrder()
+
+	public enum MODALITY
 	{
-		for (int i = 0; i < 3; i++)
-		{
-			players[i] = new Bot(i + 1);
-		}
-		user = new Player(0);
-		players[3] = user;
+		CLASSIC,
+		REFLEX,
+		TRADE
 	}
 
-	public static TurnOrder getINSTANCE()
+	public TurnOrder(MODALITY modality)
 	{
-		return INSTANCE;
-	}
-	public Player getUser()
-	{
-		return user;
-	}
-
-	public Player nextPlayer()
-	{
-		currentPlayer = switch (currentPlayer)
+		players[0] = switch (modality)
 				{
-					case 0 -> isInverted ? 3 : currentPlayer + 1;
-					case 3 -> isInverted ? currentPlayer - 1 : 0;
-					default -> isInverted ? currentPlayer - 1 : currentPlayer + 1;
+					case CLASSIC -> new Player(0);
+					case REFLEX -> new PlayerReflex(0);
+					case TRADE -> new PlayerTrade(0);
 				};
 
-		return players[currentPlayer];
-	}
-
-
-	public void reverseTurnOrder()
-	{
-		isInverted = !isInverted;
-	}
-
-	public void resetMatch()
-	{
-		for (Player player : players)
+		for (int i = 1; i < 4; i++)
 		{
-			player.resetMatch();
-		}
-		isInverted = false;
-		nextPlayer(); // Serve per scegliere come giocatore corrente il successivo
-	}
-
-	public void resetGame()
-	{
-		for (Player player : players)
-		{
-			player.resetGame();
+			players[i] = switch (modality)
+					{
+						case CLASSIC -> new Bot(i);
+						case REFLEX -> new BotReflex(i);
+						case TRADE -> new BotTrade(i);
+					};
 		}
 
-		currentPlayer = RANDOMIZER.nextInt(4);
+
 	}
+
 
 	public Player[] getPlayers()
 	{
@@ -86,4 +57,56 @@ public class TurnOrder
 	{
 		return players[currentPlayer];
 	}
+
+	public Player getUser()
+	{
+		return players[0];
+	}
+
+
+	public Player nextPlayer()
+	{
+		currentPlayer = switch (currentPlayer)
+				{
+					case 0 -> isInverted ? 3 : currentPlayer + 1;
+					case 3 -> isInverted ? currentPlayer - 1 : 0;
+					default -> isInverted ? currentPlayer - 1 : currentPlayer + 1;
+				};
+		return players[currentPlayer];
+	}
+
+	public void reverse()
+	{
+		isInverted = !isInverted;
+	}
+
+
+	public void updatePoints(Player winner)
+	{
+		for (Player player : players)
+		{
+			winner.addPoints(player.calculatePoints());
+		}
+	}
+
+
+	public void resetGame()
+	{
+		for (Player player : players)
+		{
+			player.resetGame();
+		}
+	}
+
+	public void resetMatch()
+	{
+		for (Player player : players)
+		{
+			player.resetMatch();
+			player.draw(2);
+		}
+		isInverted = false;
+	}
+
+
 }

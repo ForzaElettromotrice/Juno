@@ -5,7 +5,6 @@ import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import org.juno.model.table.Player;
 import org.juno.model.table.Table;
-import org.juno.model.table.TurnOrder;
 import org.juno.model.user.DataCorruptedException;
 import org.juno.model.user.User;
 import org.juno.view.AudioPlayer;
@@ -52,7 +51,7 @@ public class Juno extends Application
 		stage.getIcons().add(new Image(Objects.requireNonNull(Juno.class.getResourceAsStream("images/logo.png"))));
 
 		Table.getINSTANCE().addObserver(GenView.getINSTANCE());
-		for (Player player : TurnOrder.getINSTANCE().getPlayers())
+		for (Player player : Table.getINSTANCE().getPlayers())
 		{
 			player.addObserver(GenView.getINSTANCE());
 		}
@@ -61,7 +60,6 @@ public class Juno extends Application
 		stage.setOnCloseRequest(x -> User.getINSTANCE().save());
 
 		stage.show();
-
 
 	}
 }
