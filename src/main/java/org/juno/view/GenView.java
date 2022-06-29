@@ -11,11 +11,8 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 import org.juno.controller.GameplayController;
 import org.juno.datapackage.*;
-import org.juno.model.table.Table;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -27,15 +24,16 @@ import java.util.Observer;
 public class GenView implements Observer
 {
 	private static final GenView INSTANCE = new GenView();
-	private static Stage window;
+	private Stage window;
 
-	private static Scene login;
-	private static Scene startMenu;
-	private static Scene chooseMode;
-	private static Scene gameplay;
-	private static Scene stats;
-	private static Scene settings;
-	private static Scene endgame;
+	private Scene login;
+	private Scene startMenu;
+	private Scene chooseMode;
+	private Scene gameplay;
+	private Scene gameplayReflex;
+	private Scene stats;
+	private Scene settings;
+	private Scene endgame;
 
 	public enum SCENES
 	{
@@ -45,7 +43,8 @@ public class GenView implements Observer
 		STATS(2),
 		SETTINGS(3),
 		GAMEPLAY(4),
-		ENDGAME(5);
+		ENDGAME(5),
+		GAMEPLAYREFLEX(6);
 
 		private final int value;
 
@@ -65,50 +64,56 @@ public class GenView implements Observer
 	}
 
 
-	public static void setWindow(Stage window)
-	{
-		GenView.window = window;
-	}
 	public static GenView getINSTANCE()
 	{
 		return INSTANCE;
+	}
+
+
+	public void setWindow(Stage window)
+	{
+		this.window = window;
 	}
 	public Stage getWindow()
 	{
 		return window;
 	}
 
-	public static Scene getLogin()
+	public Scene getLogin()
 	{
 		return login;
 	}
-	public static Scene getStartMenu()
+	public Scene getStartMenu()
 	{
 		return startMenu;
 	}
-	public static Scene getChooseMode()
+	public Scene getChooseMode()
 	{
 		return chooseMode;
 	}
-	public static Scene getGameplay()
+	public Scene getGameplay()
 	{
 		return gameplay;
 	}
-	public static Scene getStats()
+	public Scene getGameplayReflex()
+	{
+		return gameplayReflex;
+	}
+	public Scene getStats()
 	{
 		return stats;
 	}
-	public static Scene getSettings()
+	public Scene getSettings()
 	{
 		return settings;
 	}
-	public static Scene getEndgame()
+	public Scene getEndgame()
 	{
 		return endgame;
 	}
 
 
-	public static void load() throws IOException
+	public void load() throws IOException
 	{
 		FXMLLoader loader = new FXMLLoader(GenView.class.getResource("Login.fxml"));
 		login = new Scene(loader.load());
@@ -126,6 +131,10 @@ public class GenView implements Observer
 		gameplay = new Scene(loader.load());
 		gameplay.setUserData(loader.getController());
 
+		loader = new FXMLLoader(GenView.class.getResource("GameplayReflex.fxml"));
+		gameplayReflex = new Scene(loader.load());
+		gameplayReflex.setUserData(loader.getController());
+
 		loader = new FXMLLoader(GenView.class.getResource("Stats.fxml"));
 		stats = new Scene(loader.load());
 		stats.setUserData(loader.getController());
@@ -138,7 +147,7 @@ public class GenView implements Observer
 		endgame = new Scene(loader.load());
 		endgame.setUserData(loader.getController());
 	}
-	public static void closeWindow()
+	public void closeWindow()
 	{
 		window.close();
 	}
@@ -154,6 +163,7 @@ public class GenView implements Observer
 					case 3 -> settings;
 					case 4 -> gameplay;
 					case 5 -> endgame;
+					case 6 -> gameplayReflex;
 					default -> throw new NonexistingSceneException("Non esiste questa scena");
 				});
 		makeFadeOut(scene, anchor);

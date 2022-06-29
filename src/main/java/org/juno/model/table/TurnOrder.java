@@ -1,5 +1,6 @@
 package org.juno.model.table;
 
+import org.juno.datapackage.BuildMP;
 import org.juno.model.table.reflex.BotReflex;
 import org.juno.model.table.reflex.PlayerReflex;
 import org.juno.model.table.trade.BotTrade;
@@ -45,6 +46,17 @@ public class TurnOrder
 		}
 
 
+	}
+
+	public void setPlayer(BuildMP.PG player)
+	{
+		currentPlayer = switch (player)
+				{
+					case PLAYER -> 0;
+					case BOT1 -> 1;
+					case BOT2 -> 2;
+					case BOT3 -> 3;
+				};
 	}
 
 

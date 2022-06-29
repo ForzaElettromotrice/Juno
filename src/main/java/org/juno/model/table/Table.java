@@ -33,7 +33,7 @@ public class Table extends Observable implements Runnable
 	protected boolean stop;
 
 
-	private Table()
+	protected Table()
 	{
 	}
 
@@ -155,7 +155,7 @@ public class Table extends Observable implements Runnable
 		clearChanged();
 
 	}
-	private boolean startTurn(Player currentPlayer)
+	protected boolean startTurn(Player currentPlayer)
 	{
 		System.out.println("TURNO DI " + currentPlayer.getId());
 
@@ -223,7 +223,7 @@ public class Table extends Observable implements Runnable
 	}
 
 
-	private boolean checkUno(Player currentPlayer, int delayUno)
+	protected boolean checkUno(Player currentPlayer, int delayUno)
 	{
 		int sizeHand = currentPlayer.getSizeHand();
 		if (sizeHand == 0)
@@ -257,7 +257,7 @@ public class Table extends Observable implements Runnable
 		}
 		return false;
 	}
-	private void checkEffects(Card chosenCard)
+	protected void checkEffects(Card chosenCard)
 	{
 		setChanged();
 		try
@@ -303,7 +303,7 @@ public class Table extends Observable implements Runnable
 	}
 
 
-	private Player applyEffects(Player currentPlayer)
+	protected Player applyEffects(Player currentPlayer)
 	{
 		if (plus2) currentPlayer.draw(2);
 		else if (plus4) currentPlayer.draw(4);
@@ -341,7 +341,7 @@ public class Table extends Observable implements Runnable
 		}
 		clearChanged();
 	}
-	private void resetMatch()
+	protected void resetMatch()
 	{
 		turnOrder.resetMatch();
 		DRAW_PILE.reset();
@@ -361,7 +361,7 @@ public class Table extends Observable implements Runnable
 		}
 		clearChanged();
 	}
-	private void resetTurn()
+	protected void resetTurn()
 	{
 		plus2 = false;
 		plus4 = false;

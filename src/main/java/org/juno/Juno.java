@@ -23,6 +23,9 @@ import java.util.Objects;
  */
 public class Juno extends Application
 {
+	private static final GenView GEN_VIEW = GenView.getINSTANCE();
+
+
 	public static void main(String[] args)
 	{
 		launch(args);
@@ -31,7 +34,7 @@ public class Juno extends Application
 	public void start(Stage stage) throws IOException, NotExistingSoundException
 	{
 		stage.setResizable(false);
-		GenView.setWindow(stage);
+		GEN_VIEW.setWindow(stage);
 		boolean login;
 		try
 		{
@@ -43,9 +46,9 @@ public class Juno extends Application
 			login = true;
 		}
 
-		GenView.load();
+		GEN_VIEW.load();
 
-		stage.setScene(login ? GenView.getLogin() : GenView.getStartMenu());
+		stage.setScene(login ? GEN_VIEW.getLogin() : GEN_VIEW.getStartMenu());
 
 		stage.setTitle("JUno");
 		stage.getIcons().add(new Image(Objects.requireNonNull(Juno.class.getResourceAsStream("images/logo.png"))));

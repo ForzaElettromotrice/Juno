@@ -7,6 +7,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import org.juno.datapackage.MessagePackageTypeNotExistsException;
 import org.juno.model.table.Table;
+import org.juno.model.table.reflex.TableReflex;
 import org.juno.view.AudioPlayer;
 import org.juno.view.GenView;
 import org.juno.view.NonexistingSceneException;
@@ -22,6 +23,7 @@ import java.io.IOException;
 public class ChooseModeController
 {
     private static final GenView GEN_VIEW = GenView.getINSTANCE();
+    private static final TableReflex TABLE_REFLEX = TableReflex.getINSTANCE();
     private static final AudioPlayer AUDIO_PLAYER = AudioPlayer.getINSTANCE();
 
     @FXML
@@ -36,7 +38,7 @@ public class ChooseModeController
     public AnchorPane modeAnchor;
 
     @FXML
-    public void classicClicked() throws NotExistingSoundException, NonexistingSceneException, MessagePackageTypeNotExistsException, IOException
+    public void classicClicked() throws NotExistingSoundException, NonexistingSceneException
     {
         AUDIO_PLAYER.play(AudioPlayer.Sounds.BUTTONCLICK);
         Thread game = new Thread(Table.getINSTANCE());
@@ -80,10 +82,14 @@ public class ChooseModeController
     }
 
     @FXML
-    public void reflexClicked() throws NotExistingSoundException
+    public void reflexClicked() throws NotExistingSoundException, NonexistingSceneException
     {
         AUDIO_PLAYER.play(AudioPlayer.Sounds.BUTTONCLICK);
-        //TODO
+        Thread game = new Thread(TABLE_REFLEX);
+        GEN_VIEW.changeScene(GenView.SCENES.GAMEPLAY, modeAnchor);
+        AUDIO_PLAYER.stop(AudioPlayer.Sounds.MENUMUSIC);
+        AUDIO_PLAYER.play(AudioPlayer.Sounds.GAMEMUSIC);
+        game.start();
     }
 
     @FXML

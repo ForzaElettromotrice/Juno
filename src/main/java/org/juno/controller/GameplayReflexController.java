@@ -1,5 +1,6 @@
 package org.juno.controller;
 
+
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
@@ -23,6 +24,7 @@ import org.juno.model.deck.Card;
 import org.juno.model.deck.WildCard;
 import org.juno.model.table.Player;
 import org.juno.model.table.Table;
+import org.juno.model.table.reflex.PlayerReflex;
 import org.juno.view.AudioPlayer;
 import org.juno.view.GenView;
 import org.juno.view.NonexistingSceneException;
@@ -33,11 +35,11 @@ import java.net.URI;
 import java.net.URISyntaxException;
 
 /**
- * Defines GameplayControllerNew class,
+ * Defines GameplayReflexController class,
  *
  * @author ForzaElettromotrice, R0n3l
  */
-public class GameplayController
+public class GameplayReflexController
 {
 	protected static final Table TABLE = Table.getINSTANCE();
 	protected static final GenView GEN_VIEW = GenView.getINSTANCE();
@@ -86,75 +88,120 @@ public class GameplayController
 	@FXML
 	public void cardEntered(MouseEvent mouseEvent)
 	{
-		if (TABLE.getCurrentPlayer().getId() != BuildMP.PG.PLAYER) return;
-
+		System.out.println("Entrato");
 		cardFlip();
 		ImageView card = (ImageView) mouseEvent.getSource();
 		card.setTranslateY(-30);
 	}
+
 	@FXML
 	public void cardExited(MouseEvent mouseEvent)
 	{
-		if (TABLE.getCurrentPlayer().getId() != BuildMP.PG.PLAYER) return;
-
 		ImageView card = (ImageView) mouseEvent.getSource();
 		card.setTranslateY(0);
 	}
+
 	@FXML
 	public void cardClicked(MouseEvent mouseEvent)
 	{
-		System.out.println("CLICK");
-		ImageView imageView = (ImageView) mouseEvent.getSource();
-
-		String name = "";
-
-		try
+		if (TABLE.getCurrentPlayer().getId() == BuildMP.PG.PLAYER)
 		{
-			name = new File(new URI(imageView.getImage().getUrl())).getName();
-		} catch (URISyntaxException err)
+			ImageView imageView = (ImageView) mouseEvent.getSource();
+
+			String name = "";
+
+			try
+			{
+				name = new File(new URI(imageView.getImage().getUrl())).getName();
+			} catch (URISyntaxException err)
+			{
+				System.out.println(err.getMessage());
+				err.printStackTrace();
+			}
+
+			Card.Color color = switch (name.charAt(0))
+					{
+						case 'r' -> Card.Color.RED;
+						case 'b' -> Card.Color.BLUE;
+						case 'g' -> Card.Color.GREEN;
+						case 'y' -> Card.Color.YELLOW;
+						default -> Card.Color.BLACK;
+					};
+
+			Card.Value value = color == Card.Color.BLACK ? switch (name.substring(0, 2))
+					{
+						case "13" -> Card.Value.JOLLY;
+						default -> Card.Value.PLUSFOUR;
+					} :
+					switch (name.substring(1, 3))
+							{
+								case "0." -> Card.Value.ZERO;
+								case "1." -> Card.Value.ONE;
+								case "2." -> Card.Value.TWO;
+								case "3." -> Card.Value.THREE;
+								case "4." -> Card.Value.FOUR;
+								case "5." -> Card.Value.FIVE;
+								case "6." -> Card.Value.SIX;
+								case "7." -> Card.Value.SEVEN;
+								case "8." -> Card.Value.EIGHT;
+								case "9." -> Card.Value.NINE;
+								case "10" -> Card.Value.PLUSTWO;
+								case "11" -> Card.Value.REVERSE;
+								default -> Card.Value.STOP;
+							};
+
+			System.out.println(color + " " + value);
+			TABLE.getCurrentPlayer().chooseCard(color, value);
+			if (color == Card.Color.BLACK && TABLE.getCurrentPlayer().getId() == BuildMP.PG.PLAYER)
+				colorGrid.setVisible(true);
+		} else
 		{
-			System.out.println(err.getMessage());
-			err.printStackTrace();
+			ImageView imageView = (ImageView) mouseEvent.getSource();
+
+			String name = "";
+
+			try
+			{
+				name = new File(new URI(imageView.getImage().getUrl())).getName();
+			} catch (URISyntaxException err)
+			{
+				System.out.println(err.getMessage());
+				err.printStackTrace();
+			}
+
+			Card.Color color = switch (name.charAt(0))
+					{
+						case 'r' -> Card.Color.RED;
+						case 'b' -> Card.Color.BLUE;
+						case 'g' -> Card.Color.GREEN;
+						case 'y' -> Card.Color.YELLOW;
+						default -> Card.Color.BLACK;
+					};
+
+			if (color == Card.Color.BLACK) return;
+
+
+			Card.Value value = switch (name.substring(1, 3))
+					{
+						case "0." -> Card.Value.ZERO;
+						case "1." -> Card.Value.ONE;
+						case "2." -> Card.Value.TWO;
+						case "3." -> Card.Value.THREE;
+						case "4." -> Card.Value.FOUR;
+						case "5." -> Card.Value.FIVE;
+						case "6." -> Card.Value.SIX;
+						case "7." -> Card.Value.SEVEN;
+						case "8." -> Card.Value.EIGHT;
+						case "9." -> Card.Value.NINE;
+						case "10" -> Card.Value.PLUSTWO;
+						case "11" -> Card.Value.REVERSE;
+						default -> Card.Value.STOP;
+					};
+
+			((PlayerReflex) TABLE.getUser()).jumpIn(color, value);
+
 		}
-
-		Card.Color color = switch (name.charAt(0))
-				{
-					case 'r' -> Card.Color.RED;
-					case 'b' -> Card.Color.BLUE;
-					case 'g' -> Card.Color.GREEN;
-					case 'y' -> Card.Color.YELLOW;
-					default -> Card.Color.BLACK;
-				};
-
-		Card.Value value = color == Card.Color.BLACK ? switch (name.substring(0, 2))
-				{
-					case "13" -> Card.Value.JOLLY;
-					default -> Card.Value.PLUSFOUR;
-				} :
-				switch (name.substring(1, 3))
-						{
-							case "0." -> Card.Value.ZERO;
-							case "1." -> Card.Value.ONE;
-							case "2." -> Card.Value.TWO;
-							case "3." -> Card.Value.THREE;
-							case "4." -> Card.Value.FOUR;
-							case "5." -> Card.Value.FIVE;
-							case "6." -> Card.Value.SIX;
-							case "7." -> Card.Value.SEVEN;
-							case "8." -> Card.Value.EIGHT;
-							case "9." -> Card.Value.NINE;
-							case "10" -> Card.Value.PLUSTWO;
-							case "11" -> Card.Value.REVERSE;
-							default -> Card.Value.STOP;
-						};
-
-		System.out.println(color + " " + value);
-		TABLE.getCurrentPlayer().chooseCard(color, value);
-		if (color == Card.Color.BLACK && TABLE.getCurrentPlayer().getId() == BuildMP.PG.PLAYER)
-			colorGrid.setVisible(true);
-
 	}
-
 
 	@FXML
 	public void drawClicked()
@@ -449,5 +496,6 @@ public class GameplayController
 			err.printStackTrace();
 		}
 	}
+
 
 }

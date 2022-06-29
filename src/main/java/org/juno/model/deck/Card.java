@@ -1,5 +1,7 @@
 package org.juno.model.deck;
 
+import java.util.Objects;
+
 /**
  * Defines: Card Class,
  *
@@ -118,11 +120,27 @@ public class Card
 
     /**
      * Check if the current card can be played on the given card
+     *
      * @param c The card u want to play on
      * @return True if valid else False
      */
     public boolean isValid(Card c)
     {
         return color.equals(Color.BLACK) || color.equals(c.getColor()) || value.equals(c.getValue());
+    }
+
+    @Override
+    public boolean equals(Object toCompare)
+    {
+        if (toCompare instanceof Card card)
+        {
+            return this.hashCode() == card.hashCode();
+        } else return false;
+    }
+
+    @Override
+    public int hashCode()
+    {
+        return Objects.hash(getColor(), getValue());
     }
 }

@@ -31,3 +31,14 @@
     -fx-background-size: 100% 100%;
 }
 
+
+.slider .track {
+    -fx-pref-height: 25px;
+    -fx-background-color: linear-gradient(from 0% 100% to 250px 250px, white, black);
+}
+
+.slider .thumb {
+    -fx-pref-height: 50px;
+    -fx-pref-width: 15px;
+}
+

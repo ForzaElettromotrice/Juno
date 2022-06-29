@@ -43,7 +43,7 @@ public class StartMenuController
     public void statsClicked() throws NonexistingSceneException, NotExistingSoundException
     {
         AUDIO_PLAYER.play(AudioPlayer.Sounds.BUTTONCLICK);
-        if (GenView.getStats().getUserData() instanceof StatsController smc) smc.load();
+        if (GEN_VIEW.getStats().getUserData() instanceof StatsController smc) smc.load();
         GEN_VIEW.changeScene(GenView.SCENES.STATS, menuAnchor);
     }
 
@@ -51,7 +51,7 @@ public class StartMenuController
     public void settingsClicked() throws NonexistingSceneException, NotExistingSoundException
     {
         AUDIO_PLAYER.play(AudioPlayer.Sounds.BUTTONCLICK);
-        if (GenView.getSettings().getUserData() instanceof SettingsController sc) sc.load();
+        if (GEN_VIEW.getSettings().getUserData() instanceof SettingsController sc) sc.load();
         GEN_VIEW.changeScene(GenView.SCENES.SETTINGS, menuAnchor);
     }
 
@@ -59,7 +59,7 @@ public class StartMenuController
     public void exitClicked()
     {
         User.getINSTANCE().save();
-        GenView.closeWindow();
+        GEN_VIEW.closeWindow();
     }
 
     @FXML
