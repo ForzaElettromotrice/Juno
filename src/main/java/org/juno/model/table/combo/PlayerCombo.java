@@ -75,6 +75,7 @@ public class PlayerCombo extends Player
 	@Override
 	public Card draw()
 	{
+		System.out.println("COMINCIO A PESCARE");
 		Card first = DISCARD_PILE.getFirst();
 
 
@@ -82,7 +83,7 @@ public class PlayerCombo extends Player
 
 		while (true)
 		{
-			System.out.println("COMINCIO A PESCARE");
+
 			cardDrawn = super.draw();
 			System.out.println("HO PESCATO " + cardDrawn);
 			if (cardDrawn == null) return null;
