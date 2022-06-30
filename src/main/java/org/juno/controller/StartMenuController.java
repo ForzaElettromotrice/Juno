@@ -6,8 +6,6 @@ import javafx.scene.layout.AnchorPane;
 import org.juno.model.user.User;
 import org.juno.view.AudioPlayer;
 import org.juno.view.GenView;
-import org.juno.view.NonexistingSceneException;
-import org.juno.view.NotExistingSoundException;
 
 
 
@@ -32,15 +30,14 @@ public class StartMenuController
     public AnchorPane menuAnchor;
 
     @FXML
-    public void playClicked() throws NonexistingSceneException, NotExistingSoundException
+    public void playClicked()
     {
         AUDIO_PLAYER.play(AudioPlayer.Sounds.BUTTONCLICK);
         GEN_VIEW.changeScene(GenView.SCENES.CHOOSEMODE, menuAnchor);
-
     }
 
     @FXML
-    public void statsClicked() throws NonexistingSceneException, NotExistingSoundException
+    public void statsClicked()
     {
         AUDIO_PLAYER.play(AudioPlayer.Sounds.BUTTONCLICK);
         if (GEN_VIEW.getStats().getUserData() instanceof StatsController smc) smc.load();
@@ -48,7 +45,7 @@ public class StartMenuController
     }
 
     @FXML
-    public void settingsClicked() throws NonexistingSceneException, NotExistingSoundException
+    public void settingsClicked()
     {
         AUDIO_PLAYER.play(AudioPlayer.Sounds.BUTTONCLICK);
         if (GEN_VIEW.getSettings().getUserData() instanceof SettingsController sc) sc.load();
@@ -63,7 +60,7 @@ public class StartMenuController
     }
 
     @FXML
-    public void statsEntered() throws NotExistingSoundException
+    public void statsEntered()
     {
         AUDIO_PLAYER.play(AudioPlayer.Sounds.CURSORSELECT);
         blueFrame.setVisible(true);
@@ -76,7 +73,7 @@ public class StartMenuController
     }
 
     @FXML
-    public void playEntered() throws NotExistingSoundException
+    public void playEntered()
     {
         AUDIO_PLAYER.play(AudioPlayer.Sounds.CURSORSELECT);
         redFrame.setVisible(true);
@@ -89,7 +86,7 @@ public class StartMenuController
     }
 
     @FXML
-    public void settingsEntered() throws NotExistingSoundException
+    public void settingsEntered()
     {
         AUDIO_PLAYER.play(AudioPlayer.Sounds.CURSORSELECT);
         yellowFrame.setVisible(true);
@@ -102,7 +99,7 @@ public class StartMenuController
     }
 
     @FXML
-    public void exitEntered() throws NotExistingSoundException
+    public void exitEntered()
     {
         AUDIO_PLAYER.play(AudioPlayer.Sounds.CURSORSELECT);
         greenFrame.setVisible(true);

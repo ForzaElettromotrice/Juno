@@ -11,8 +11,8 @@ import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import javafx.stage.FileChooser;
 import org.juno.model.user.User;
+import org.juno.view.AudioPlayer;
 import org.juno.view.GenView;
-import org.juno.view.NonexistingSceneException;
 
 import java.io.File;
 
@@ -25,6 +25,7 @@ public class StatsController
 {
 
 	private static final GenView GEN_VIEW = GenView.getINSTANCE();
+	private static final AudioPlayer AUDIO_PLAYER = AudioPlayer.getINSTANCE();
 	private static final User USER = User.getINSTANCE();
 
 	private static final String USER_DIR = System.getProperty("user.dir");
@@ -85,11 +86,6 @@ public class StatsController
 
 
 	@FXML
-	public void backEntered()
-	{
-		backButton.setStyle("-fx-background-color: transparent; -fx-border-color: BLACK; -fx-border-radius: 100");
-	}
-	@FXML
 	public void openEntered()
 	{
 		openButton.setUnderline(true);
@@ -102,11 +98,6 @@ public class StatsController
 	}
 
 
-	@FXML
-	public void backExited()
-	{
-		backButton.setStyle("-fx-background-color: transparent; -fx-border-color: transparent");
-	}
 	@FXML
 	public void openExited()
 	{
@@ -123,37 +114,35 @@ public class StatsController
 	@FXML
 	public void backClicked()
 	{
+		AUDIO_PLAYER.play(AudioPlayer.Sounds.BUTTONCLICK);
 		saveData();
-		try
-		{
-			GEN_VIEW.changeScene(GenView.SCENES.STARTMENU, anchor);
-		} catch (NonexistingSceneException err)
-		{
-			System.out.println(err.getMessage());
-			err.printStackTrace();
-		}
+		GEN_VIEW.changeScene(GenView.SCENES.STARTMENU, anchor);
 	}
 	@FXML
 	public void avatar1Clicked()
 	{
+		AUDIO_PLAYER.play(AudioPlayer.Sounds.BUTTONCLICK);
 		circle.setFill(new ImagePattern(new Image(String.format("file:\\%s\\src\\main\\resources\\org\\juno\\images\\icon1.png", USER_DIR))));
 		avatarBox.setVisible(false);
 	}
 	@FXML
 	public void avatar2Clicked()
 	{
+		AUDIO_PLAYER.play(AudioPlayer.Sounds.BUTTONCLICK);
 		circle.setFill(new ImagePattern(new Image(String.format("file:\\%s\\src\\main\\resources\\org\\juno\\images\\icon2.png", USER_DIR))));
 		avatarBox.setVisible(false);
 	}
 	@FXML
 	public void avatar3Clicked()
 	{
+		AUDIO_PLAYER.play(AudioPlayer.Sounds.BUTTONCLICK);
 		circle.setFill(new ImagePattern(new Image(String.format("file:\\%s\\src\\main\\resources\\org\\juno\\images\\icon3.png", USER_DIR))));
 		avatarBox.setVisible(false);
 	}
 	@FXML
 	public void openClicked()
 	{
+		AUDIO_PLAYER.play(AudioPlayer.Sounds.BUTTONCLICK);
 		final FileChooser fc = new FileChooser();
 		fc.setTitle("Apri...");
 		fc.getExtensionFilters().addAll(
@@ -172,6 +161,7 @@ public class StatsController
 	@FXML
 	public void changeAvatarClicked()
 	{
+		AUDIO_PLAYER.play(AudioPlayer.Sounds.BUTTONCLICK);
 		avatarBox.setVisible(true);
 	}
 

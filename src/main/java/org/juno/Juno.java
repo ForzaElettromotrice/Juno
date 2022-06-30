@@ -9,7 +9,6 @@ import org.juno.model.user.DataCorruptedException;
 import org.juno.model.user.User;
 import org.juno.view.AudioPlayer;
 import org.juno.view.GenView;
-import org.juno.view.NotExistingSoundException;
 
 
 import java.io.IOException;
@@ -24,18 +23,34 @@ import java.util.Objects;
 public class Juno extends Application
 {
 	private static final GenView GEN_VIEW = GenView.getINSTANCE();
+	private static final AudioPlayer AUDIO_PLAYER = AudioPlayer.getINSTANCE();
+	private static final Table TABLE = Table.getINSTANCE();
 
-
-	public static void main(String[] args)
-	{
-		launch(args);
-	}
 	@Override
-	public void start(Stage stage) throws IOException, NotExistingSoundException
+	public void start(Stage stage)
 	{
+		//default stuff
+		stage.setTitle("JUno");
+		stage.getIcons().add(new Image(Objects.requireNonNull(Juno.class.getResourceAsStream("images/logo.png"))));
 		stage.setResizable(false);
+		stage.setOnCloseRequest(x -> User.getINSTANCE().save());
+
+
+		//initializing GenView
 		GEN_VIEW.setWindow(stage);
+		try
+		{
+			GEN_VIEW.load();
+		} catch (IOException err)
+		{
+			System.out.println(err.getMessage());
+			err.printStackTrace();
+			System.out.println("GAME ABORTED");
+			return;
+		}
+
 		boolean login;
+
 		try
 		{
 			User.getINSTANCE().load();
@@ -46,23 +61,39 @@ public class Juno extends Application
 			login = true;
 		}
 
-		GEN_VIEW.load();
+		GEN_VIEW.changeScene(login ? GenView.SCENES.LOGIN : GenView.SCENES.STARTMENU, null);
 
-		stage.setScene(login ? GEN_VIEW.getLogin() : GEN_VIEW.getStartMenu());
 
-		stage.setTitle("JUno");
-		stage.getIcons().add(new Image(Objects.requireNonNull(Juno.class.getResourceAsStream("images/logo.png"))));
+		//adding the observers
+		//CLASSIC
+		TABLE.addObserver(GEN_VIEW);
 
-		Table.getINSTANCE().addObserver(GenView.getINSTANCE());
-		for (Player player : Table.getINSTANCE().getPlayers())
+		for (Player player : TABLE.getPlayers())
 		{
-			player.addObserver(GenView.getINSTANCE());
+			player.addObserver(GEN_VIEW);
 		}
-		AudioPlayer.getINSTANCE().play(AudioPlayer.Sounds.MENUMUSIC);
 
-		stage.setOnCloseRequest(x -> User.getINSTANCE().save());
+
+		//COMBO
+		//TODO
+
+
+		//TRADE
+		//TODO
+
+
+		//Loading and starting the music!
+		AUDIO_PLAYER.load();
+		AUDIO_PLAYER.play(AudioPlayer.Sounds.MENUMUSIC);
+
 
 		stage.show();
 
+	}
+
+
+	public static void main(String[] args)
+	{
+		launch(args);
 	}
 }

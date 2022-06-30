@@ -1,6 +1,6 @@
 ForzaElettromotrice
-file:/C:/Users/minga/OneDrive/Juno/src/main/resources/org/juno/images/icon1.png
-0
-0
+file:/C:/Users/minga/OneDrive/Juno/src/main/resources/org/juno/images/icon2.png
 1
-0
+4
+1
+612

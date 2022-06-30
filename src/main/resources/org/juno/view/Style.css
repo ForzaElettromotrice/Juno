@@ -42,3 +42,13 @@
     -fx-pref-width: 15px;
 }
 
+.button {
+    -fx-background-color: transparent;
+}
+
+.button:hover {
+    -fx-border-color: BLACK;
+    -fx-border-radius: 100;
+}
+
+

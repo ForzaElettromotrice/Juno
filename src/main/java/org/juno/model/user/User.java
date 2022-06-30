@@ -263,8 +263,11 @@ public class User
 
     public void reset()
     {
+        nickname = "";
+        avatar = "";
+        victories = 0;
+        defeats = 0;
         level.lvl = 1;
         level.exp = 0;
-        save();
     }
 }

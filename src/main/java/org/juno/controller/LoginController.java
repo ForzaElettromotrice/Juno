@@ -1,25 +1,18 @@
 package org.juno.controller;
 
-
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
-import org.juno.model.user.DataCorruptedException;
 import org.juno.model.user.User;
 import org.juno.view.AudioPlayer;
 import org.juno.view.GenView;
-import org.juno.view.NonexistingSceneException;
-import org.juno.view.NotExistingSoundException;
 
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.Objects;
 
 /**
- * Defines Login class,
+ * Defines LoginController ,
  *
  * @author ForzaElettromotrice, R0n3l
  */
@@ -27,76 +20,75 @@ public class LoginController
 {
 	private static final GenView GEN_VIEW = GenView.getINSTANCE();
 	private static final AudioPlayer AUDIO_PLAYER = AudioPlayer.getINSTANCE();
+	private static final User USER = User.getINSTANCE();
+
 
 	@FXML
-	public TextField username;
+	public AnchorPane anchor;
+
 
 	@FXML
-	public RadioButton firstChoice;
-	@FXML
-	public RadioButton secondChoice;
-	@FXML
-	public RadioButton thirdChoice;
+	public TextField usernameTextField;
+
 
 	@FXML
-	public Label alert;
+	public ToggleGroup avatar;
+	@FXML
+	public RadioButton avatarRadioButton1;
+	@FXML
+	public RadioButton avatarRadioButton2;
+	@FXML
+	public RadioButton avatarRadioButton3;
+
 
 	@FXML
-	public Button save;
-	@FXML
-	public AnchorPane loginAnchor;
+	public Label alertLabel;
+
 
 	@FXML
-	public void saveClicked() throws NonexistingSceneException, DataCorruptedException, NotExistingSoundException, IOException
+	public Button saveButton;
+
+
+	@FXML
+	public void anchorKeyPressed(KeyEvent keyEvent)
+	{
+		if (keyEvent.getCode() == KeyCode.ENTER)
+		{
+			anchor.requestFocus();
+			saveData();
+		}
+	}
+
+
+	@FXML
+	public void saveClicked()
 	{
 		AUDIO_PLAYER.play(AudioPlayer.Sounds.BUTTONCLICK);
-		if (Objects.equals(username.getText(), ""))
+
+		if (Objects.equals(usernameTextField.getText(), ""))
 		{
-			alert.setVisible(true);
+			alertLabel.setVisible(true);
 			return;
 		}
-
-		String pathImg;
-		if (firstChoice.isSelected())
-			pathImg = String.format("file:\\%s\\src\\main\\resources\\org\\juno\\images\\icon1.png", System.getProperty("user.dir"));
-		else
-			pathImg = secondChoice.isSelected() ? String.format("file:\\%s\\src\\main\\resources\\org\\juno\\images\\icon2.png", System.getProperty("user.dir")) : String.format("file:\\%s\\src\\main\\resources\\org\\juno\\images\\icon3.png", System.getProperty("user.dir"));
-
-		saveData(username.getText(), pathImg);
-
-
-		GEN_VIEW.changeScene(GenView.SCENES.STARTMENU, loginAnchor);
+		saveData();
 	}
 
-	@FXML
-	public void keyPressed(KeyEvent key) throws NonexistingSceneException, DataCorruptedException, NotExistingSoundException, IOException
-	{
-		if (key.getCode() == KeyCode.ENTER) saveClicked();
-	}
 
-	private void saveData(String username, String pathImg) throws DataCorruptedException
+	public void saveData()
 	{
-		try (BufferedWriter bw = new BufferedWriter(new FileWriter("src/main/resources/org/juno/model/user/user.txt")))
-		{
-			bw.write(String.format("%s%n%s%n0%n0%n1%n0", username, pathImg));
-		} catch (IOException e)
-		{
-			throw new RuntimeException(e);
-		}
-		finally
-		{
-			User.getINSTANCE().load();
-		}
-	}
+		USER.reset();
+		USER.setNickname(usernameTextField.getText());
 
-	public void saveEntered() throws NotExistingSoundException
-	{
-		AUDIO_PLAYER.play(AudioPlayer.Sounds.CURSORSELECT);
-		save.setStyle("-fx-border-color: BLACK; -fx-background-color: WHITE; -fx-border-radius: 90; -fx-background-radius: 90;");
-	}
+		StringBuilder path = new StringBuilder("file:\\").append(System.getProperty("user.dir")).append("\\src\\main\\resources\\org\\juno\\images\\");
 
-	public void saveExited()
-	{
-		save.setStyle("-fx-border-color: transparent; -fx-background-color: transparent;");
+		if (avatarRadioButton1.isSelected()) path.append("icon1.png");
+		else if (avatarRadioButton2.isSelected()) path.append("icon2.png");
+		else path.append("icon3.png");
+
+		USER.setAvatar(path.toString());
+		USER.save();
+
+		GEN_VIEW.changeScene(GenView.SCENES.STARTMENU, anchor);
+
 	}
 }

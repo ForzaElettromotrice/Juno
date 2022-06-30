@@ -5,18 +5,15 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Slider;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
-import org.juno.model.user.User;
 import org.juno.view.AudioPlayer;
 import org.juno.view.GenView;
-import org.juno.view.NonexistingSceneException;
-import org.juno.view.NotExistingSoundException;
-
-import java.io.IOException;
-
+//TODO: RIFARE LA GRAFICA DA SCENEBUILDER FATTA MEGLIO
 
 /**
- * Defines SettingsController class,
+ * Defines SettingsNew ,
  *
  * @author ForzaElettromotrice, R0n3l
  */
@@ -24,128 +21,132 @@ public class SettingsController
 {
 	private static final GenView GEN_VIEW = GenView.getINSTANCE();
 	private static final AudioPlayer AUDIO_PLAYER = AudioPlayer.getINSTANCE();
-	@FXML
-	public Slider effectsBar;
-	@FXML
-	public Slider musicBar;
-	@FXML
-	public Button reset;
-	@FXML
-	public Button delete;
-	@FXML
-	public Button save;
-	@FXML
-	public Button back;
+
+	private boolean haveToSave;
+
 
 	@FXML
-    public AnchorPane settingsAnchor;
+	public AnchorPane anchor;
+
 
 	@FXML
-	public void savePressed() throws NonexistingSceneException, NotExistingSoundException, IOException
-	{
-		AUDIO_PLAYER.play(AudioPlayer.Sounds.BUTTONCLICK);
-		AUDIO_PLAYER.setMusicVolume(musicBar.getValue() / 100);
-		AUDIO_PLAYER.setEffectsVolume(effectsBar.getValue() / 100);
-		GEN_VIEW.changeScene(GenView.SCENES.STARTMENU, settingsAnchor);
-	}
+	public Button backButton;
+	@FXML
+	public Button resetButton;
+	@FXML
+	public Button saveButton;
+
 
 	@FXML
-	public void saveEntered() throws NotExistingSoundException
-	{
-		AUDIO_PLAYER.play(AudioPlayer.Sounds.CURSORSELECT);
-		save.setStyle("-fx-border-color: BLACK; -fx-background-color: transparent; -fx-border-radius: 90;");
-	}
+	public Slider musicSlider;
+	@FXML
+	public Slider effectsSlider;
+
+
+	private double musicActual;
+	private double effectsActual;
+
 
 	@FXML
-	public void saveExited()
+	public void anchorKeyPressed(KeyEvent keyEvent)
 	{
-		save.setStyle("-fx-border-color: transparent; -fx-background-color: transparent");
-	}
-
-	@FXML
-	public void backClicked() throws NonexistingSceneException, NotExistingSoundException, IOException
-	{
-		AUDIO_PLAYER.play(AudioPlayer.Sounds.BUTTONCLICK);
-		Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to exit without saving?", ButtonType.YES, ButtonType.NO);
-		alert.setTitle("Confirm");
-		alert.setHeaderText("Confirm");
-		alert.showAndWait();
-		if (alert.getResult() == ButtonType.YES)
-			GEN_VIEW.changeScene(GenView.SCENES.STARTMENU, settingsAnchor);
-		else
-			alert.close();
-	}
-
-	@FXML
-	public void backEntered() throws NotExistingSoundException
-	{
-		AUDIO_PLAYER.play(AudioPlayer.Sounds.CURSORSELECT);
-		back.setStyle("-fx-border-color: BLACK; -fx-background-color: transparent; -fx-border-radius: 40;");
-	}
-
-	@FXML
-	public void backExited()
-	{
-		back.setStyle("-fx-border-color: transparent; -fx-background-color: transparent");
-	}
-	@FXML
-	public void resetClicked() throws NonexistingSceneException, NotExistingSoundException
-	{
-		AUDIO_PLAYER.play(AudioPlayer.Sounds.BUTTONCLICK);
-		Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to reset your data?", ButtonType.YES, ButtonType.NO);
-		alert.setTitle("Confirm");
-		alert.setHeaderText("Warning!");
-		alert.showAndWait();
-		if (alert.getResult() == ButtonType.YES)
+		if (keyEvent.getCode() == KeyCode.ENTER)
 		{
-			User.getINSTANCE().reset();
-			alert = new Alert(Alert.AlertType.INFORMATION, "Data resetted!");
-			alert.setTitle("Success");
-			alert.setHeaderText("Success!");
-			alert.showAndWait();
-		} else
-			alert.close();
+			anchor.requestFocus();
+			saveData();
+		}
 	}
+
+
 	@FXML
-	public void deleteClicked() throws NonexistingSceneException, NotExistingSoundException, IOException
+	public void resetEntered()
 	{
-		AUDIO_PLAYER.play(AudioPlayer.Sounds.BUTTONCLICK);
-		Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to delete your data?", ButtonType.YES, ButtonType.NO);
-		alert.setTitle("Confirm");
-		alert.setHeaderText("Warning!");
-		alert.showAndWait();
-		if (alert.getResult() == ButtonType.YES)
-		{
-			GEN_VIEW.changeScene(GenView.SCENES.LOGIN, settingsAnchor);
-		} else
-			alert.close();
+//		resetButton.setStyle("-fx-background-color: RED;-fx-background-radius: 100; -fx-border-color: RED; -fx-border-radius: 100;");
 	}
-	@FXML
-	public void resetEntered() throws NotExistingSoundException
-	{
-		AUDIO_PLAYER.play(AudioPlayer.Sounds.CURSORSELECT);
-		reset.setStyle("-fx-background-color: transparent; -fx-border-color: RED; -fx-border-width: 5;");
-	}
-	@FXML
-	public void deleteEntered() throws NotExistingSoundException
-	{
-		AUDIO_PLAYER.play(AudioPlayer.Sounds.CURSORSELECT);
-		delete.setStyle("-fx-background-color: transparent; -fx-border-color: RED; -fx-border-width: 5;");
-	}
+
+
 	@FXML
 	public void resetExited()
 	{
-		reset.setStyle("-fx-background-color: transparent; -fx-border-color: transparent; -fx-border-width: 5;");
+//		resetButton.setStyle("-fx-background-color: transparent; -fx-border-color: RED; -fx-border-radius: 100;");
+	}
+
+
+	@FXML
+	public void musicMouseReleased()
+	{
+		haveToSave = true;
+		saveButton.setDisable(false);
+		AUDIO_PLAYER.setMusicVolume(musicSlider.getValue() / 100);
+		//TODO: fare che quando lo muovi cambia colore
 	}
 	@FXML
-	public void deleteExited()
+	public void effectsMouseReleased()
 	{
-		delete.setStyle("-fx-background-color: transparent; -fx-border-color: transparent; -fx-border-width: 5;");
+		haveToSave = true;
+		saveButton.setDisable(false);
+		AUDIO_PLAYER.setEffectsVolume(effectsSlider.getValue() / 100);
+		//TODO: fare che quando lo muovi cambia colore
+	}
+
+
+	@FXML
+	public void backClicked()
+	{
+		AUDIO_PLAYER.play(AudioPlayer.Sounds.BUTTONCLICK);
+		if (haveToSave)
+		{
+			Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to exit without saving?", ButtonType.YES, ButtonType.NO);
+			alert.setTitle("Confirm");
+			alert.setHeaderText("Confirm");
+			alert.showAndWait();
+			if (alert.getResult() == ButtonType.NO) return;
+		}
+
+		AUDIO_PLAYER.setMusicVolume(musicActual);
+		AUDIO_PLAYER.setEffectsVolume(effectsActual);
+
+		GEN_VIEW.changeScene(GenView.SCENES.STARTMENU, anchor);
+
+	}
+	@FXML
+	public void resetClicked()
+	{
+		AUDIO_PLAYER.play(AudioPlayer.Sounds.BUTTONCLICK);
+		Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to reset your account?\nYou will be redirected to the login page", ButtonType.YES, ButtonType.NO);
+		alert.setTitle("Confirm");
+		alert.setHeaderText("Confirm");
+		alert.showAndWait();
+		if (alert.getResult() == ButtonType.NO) return;
+
+		GEN_VIEW.changeScene(GenView.SCENES.LOGIN, anchor);
+
+	}
+	@FXML
+	public void saveClicked()
+	{
+		AUDIO_PLAYER.play(AudioPlayer.Sounds.BUTTONCLICK);
+		saveButton.setDisable(true);
+		saveData();
+	}
+
+
+	private void saveData()
+	{
+		musicActual = musicSlider.getValue() / 100;
+		effectsActual = effectsSlider.getValue() / 100;
+
+		haveToSave = false;
 	}
 	public void load()
 	{
-		musicBar.setValue(AUDIO_PLAYER.getMusicVolume() * 100);
-		effectsBar.setValue(AUDIO_PLAYER.getEffectsVolume() * 100);
+		musicActual = AUDIO_PLAYER.getMusicVolume();
+		effectsActual = AUDIO_PLAYER.getEffectsVolume();
+
+		musicSlider.setValue(musicActual * 100);
+		effectsSlider.setValue(effectsActual * 100);
+
+		saveButton.setDisable(true);
 	}
 
 }

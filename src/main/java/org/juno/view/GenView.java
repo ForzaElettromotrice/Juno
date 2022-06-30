@@ -9,31 +9,38 @@ import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import org.juno.controller.GameplayController;
-import org.juno.datapackage.*;
+import org.juno.controller.Gameplay;
+import org.juno.controller.GameplayClassicController;
+import org.juno.datapackage.DiscardData;
+import org.juno.datapackage.DrawData;
+import org.juno.datapackage.EffectData;
+import org.juno.datapackage.TurnData;
+import org.juno.model.table.TurnOrder;
 
 import java.io.IOException;
 import java.util.Observable;
 import java.util.Observer;
 
 /**
- * Defines GenView class,
+ * Defines Genview class,
  *
  * @author ForzaElettromotrice, R0n3l
  */
 public class GenView implements Observer
 {
 	private static final GenView INSTANCE = new GenView();
+
 	private Stage window;
 
 	private Scene login;
 	private Scene startMenu;
 	private Scene chooseMode;
-	private Scene gameplay;
-	private Scene gameplayReflex;
+	private Scene gameplayClassic;
 	private Scene stats;
 	private Scene settings;
 	private Scene endgame;
+
+	private Gameplay currentGameController;
 
 	public enum SCENES
 	{
@@ -42,7 +49,7 @@ public class GenView implements Observer
 		CHOOSEMODE(1),
 		STATS(2),
 		SETTINGS(3),
-		GAMEPLAY(4),
+		GAMEPLAYCLASSIC(4),
 		ENDGAME(5),
 		GAMEPLAYREFLEX(6);
 
@@ -63,17 +70,11 @@ public class GenView implements Observer
 	{
 	}
 
-
 	public static GenView getINSTANCE()
 	{
 		return INSTANCE;
 	}
 
-
-	public void setWindow(Stage window)
-	{
-		this.window = window;
-	}
 	public Stage getWindow()
 	{
 		return window;
@@ -93,11 +94,7 @@ public class GenView implements Observer
 	}
 	public Scene getGameplay()
 	{
-		return gameplay;
-	}
-	public Scene getGameplayReflex()
-	{
-		return gameplayReflex;
+		return gameplayClassic;
 	}
 	public Scene getStats()
 	{
@@ -110,6 +107,22 @@ public class GenView implements Observer
 	public Scene getEndgame()
 	{
 		return endgame;
+	}
+
+
+	public void setWindow(Stage stage)
+	{
+		window = stage;
+	}
+	public void setCurrentGameController(TurnOrder.MODALITY modality)
+	{
+		currentGameController = switch (modality)
+				{
+
+					case CLASSIC -> (GameplayClassicController) gameplayClassic.getUserData();
+					case COMBO -> null; //TODO
+					case TRADE -> null; //TODO
+				};
 	}
 
 
@@ -127,13 +140,9 @@ public class GenView implements Observer
 		chooseMode = new Scene(loader.load());
 		chooseMode.setUserData(loader.getController());
 
-		loader = new FXMLLoader(GenView.class.getResource("Gameplay.fxml"));
-		gameplay = new Scene(loader.load());
-		gameplay.setUserData(loader.getController());
-
-		loader = new FXMLLoader(GenView.class.getResource("GameplayReflex.fxml"));
-		gameplayReflex = new Scene(loader.load());
-		gameplayReflex.setUserData(loader.getController());
+		loader = new FXMLLoader(GenView.class.getResource("GameplayClassic.fxml"));
+		gameplayClassic = new Scene(loader.load());
+		gameplayClassic.setUserData(loader.getController());
 
 		loader = new FXMLLoader(GenView.class.getResource("Stats.fxml"));
 		stats = new Scene(loader.load());
@@ -152,43 +161,36 @@ public class GenView implements Observer
 		window.close();
 	}
 
-	private void changeScene(int n, AnchorPane anchor) throws NonexistingSceneException
+	public void changeScene(SCENES s, AnchorPane anchor)
 	{
-		Scene scene = (switch (n)
+		Scene scene = (switch (s)
 				{
-					case -1 -> login;
-					case 0 -> startMenu;
-					case 1 -> chooseMode;
-					case 2 -> stats;
-					case 3 -> settings;
-					case 4 -> gameplay;
-					case 5 -> endgame;
-					case 6 -> gameplayReflex;
-					default -> throw new NonexistingSceneException("Non esiste questa scena");
+					case LOGIN -> login;
+					case STARTMENU -> startMenu;
+					case CHOOSEMODE -> chooseMode;
+					case STATS -> stats;
+					case SETTINGS -> settings;
+					case GAMEPLAYCLASSIC -> gameplayClassic;
+					case ENDGAME -> endgame;
+					case GAMEPLAYREFLEX -> null;
 				});
+
 		makeFadeOut(scene, anchor);
-		window.setMaximized(true);
 	}
 
-	public void changeScene(SCENES scene, AnchorPane anchor) throws NonexistingSceneException
+	private void makeFadeOut(Scene newScene, AnchorPane oldAnchor)
 	{
-		changeScene(scene.getValue(), anchor);
-	}
-
-	public void makeFadeOut(Scene scene, AnchorPane anchor)
-	{
-		FadeTransition fadeTransition = new FadeTransition(Duration.millis(250), anchor);
+		FadeTransition fadeTransition = new FadeTransition(Duration.millis(250), oldAnchor);
 		fadeTransition.setFromValue(1);
 		fadeTransition.setToValue(0);
 		fadeTransition.setOnFinished((ActionEvent event) ->
 		{
-			window.setScene(scene);
-			makeFadeIn(scene.getRoot());
+			window.setScene(newScene);
+			makeFadeIn(newScene.getRoot());
 		});
 		fadeTransition.play();
 	}
-
-	public void makeFadeIn(Node node)
+	private void makeFadeIn(Node node)
 	{
 		FadeTransition fadeTransition = new FadeTransition(Duration.millis(250), node);
 		fadeTransition.setFromValue(0);
@@ -196,18 +198,14 @@ public class GenView implements Observer
 		fadeTransition.play();
 	}
 
-
 	@Override
 	public void update(Observable o, Object arg)
 	{
-
-		GameplayController gameplayController = (GameplayController) gameplay.getUserData();
-
-		if (arg instanceof DrawData drawData) Platform.runLater(() -> gameplayController.draw(drawData));
+		if (arg instanceof DrawData drawData) Platform.runLater(() -> currentGameController.draw(drawData));
 		else if (arg instanceof DiscardData discardData)
-			Platform.runLater(() -> gameplayController.discard(discardData));
-		else if (arg instanceof TurnData turnData) Platform.runLater(() -> gameplayController.turn(turnData));
-		else if (arg instanceof EffectData effectData) Platform.runLater(() -> gameplayController.effect(effectData));
-
+			Platform.runLater(() -> currentGameController.discard(discardData));
+		else if (arg instanceof TurnData turnData) Platform.runLater(() -> currentGameController.turn(turnData));
+		else if (arg instanceof EffectData effectData)
+			Platform.runLater(() -> currentGameController.effect(effectData));
 	}
 }

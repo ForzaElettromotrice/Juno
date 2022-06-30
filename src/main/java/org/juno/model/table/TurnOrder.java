@@ -1,8 +1,8 @@
 package org.juno.model.table;
 
 import org.juno.datapackage.BuildMP;
-import org.juno.model.table.reflex.BotReflex;
-import org.juno.model.table.reflex.PlayerReflex;
+import org.juno.model.table.combo.BotCombo;
+import org.juno.model.table.combo.PlayerCombo;
 import org.juno.model.table.trade.BotTrade;
 import org.juno.model.table.trade.PlayerTrade;
 
@@ -22,7 +22,7 @@ public class TurnOrder
 	public enum MODALITY
 	{
 		CLASSIC,
-		REFLEX,
+		COMBO,
 		TRADE
 	}
 
@@ -31,7 +31,7 @@ public class TurnOrder
 		players[0] = switch (modality)
 				{
 					case CLASSIC -> new Player(0);
-					case REFLEX -> new PlayerReflex(0);
+					case COMBO -> new PlayerCombo(0);
 					case TRADE -> new PlayerTrade(0);
 				};
 
@@ -40,7 +40,7 @@ public class TurnOrder
 			players[i] = switch (modality)
 					{
 						case CLASSIC -> new Bot(i);
-						case REFLEX -> new BotReflex(i);
+						case COMBO -> new BotCombo(i);
 						case TRADE -> new BotTrade(i);
 					};
 		}

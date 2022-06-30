@@ -18,24 +18,30 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="backgroundStats" fx:id="anchor" onKeyPressed="#anchorKeyPressed" prefHeight="1080.0" prefWidth="1920.0" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.juno.controller.StatsController">
-   <Circle fx:id="circle" fill="TRANSPARENT" layoutX="400.0" layoutY="400.0" onMouseEntered="#changeAvatarEntered" radius="250.0" stroke="BLACK" strokeType="INSIDE" />
-   <ProgressBar fx:id="levelProgressBar" focusTraversable="false" layoutX="240.0" layoutY="740.0" prefHeight="70.0" prefWidth="400.0" progress="0.0" />
-   <ImageView fitHeight="238.0" fitWidth="215.0" layoutX="100.0" layoutY="650.0" pickOnBounds="true" preserveRatio="true">
-      <Image url="@../images/levelStar.png" />
+<AnchorPane id="backgroundStats" fx:id="anchor" onKeyPressed="#anchorKeyPressed" prefHeight="1080.0" prefWidth="1920.0"
+            stylesheets="@Style.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="org.juno.controller.StatsController">
+   <Circle fx:id="circle" fill="TRANSPARENT" layoutX="400.0" layoutY="400.0" onMouseEntered="#changeAvatarEntered"
+           radius="250.0" stroke="BLACK" strokeType="INSIDE"/>
+   <ProgressBar fx:id="levelProgressBar" layoutX="240.0" layoutY="740.0" prefHeight="70.0"
+                prefWidth="400.0" progress="0.0"/>
+   <ImageView fitHeight="238.0" fitWidth="215.0" layoutX="100.0" layoutY="650.0" pickOnBounds="true"
+              preserveRatio="true">
+      <Image url="@../images/levelStar.png"/>
    </ImageView>
    <HBox layoutX="800.0" layoutY="100.0" prefHeight="250.0" prefWidth="1000.0">
-      <TextField fx:id="nameTextfield" alignment="CENTER_RIGHT" focusTraversable="false" prefHeight="250.0" prefWidth="750.0" style="-fx-background-color: transparent;">
+      <TextField fx:id="nameTextfield" alignment="CENTER_RIGHT" focusTraversable="false" prefHeight="250.0"
+                 prefWidth="750.0" style="-fx-background-color: transparent;">
          <font>
-            <Font name="Javanese Text" size="70.0" />
+            <Font name="Javanese Text" size="70.0"/>
          </font>
          <padding>
-            <Insets right="-1.0" />
+            <Insets right="-1.0"/>
          </padding>
       </TextField>
       <Label prefHeight="250.0" prefWidth="250.0" text="'s Stats">
          <font>
-            <Font name="Javanese Text" size="70.0" />
+            <Font name="Javanese Text" size="70.0"/>
          </font>
       </Label>
    </HBox>
@@ -90,26 +96,30 @@
          </Label>
          <Label fx:id="matchesCountLabel" alignment="CENTER_RIGHT" maxHeight="200.0" maxWidth="200.0" prefHeight="200.0" prefWidth="200.0">
             <font>
-               <Font name="Javanese Text" size="70.0" />
+               <Font name="Javanese Text" size="70.0"/>
             </font>
          </Label>
       </HBox>
    </GridPane>
-   <Label fx:id="levelLabel" alignment="CENTER" focusTraversable="false" layoutX="100.0" layoutY="640.0" prefHeight="238.0" prefWidth="215.0">
+   <Label fx:id="levelLabel" alignment="CENTER" layoutX="100.0" layoutY="640.0" prefHeight="238.0" prefWidth="215.0">
       <font>
-         <Font name="Javanese Text" size="70.0" />
+         <Font name="Javanese Text" size="70.0"/>
       </font>
    </Label>
-   <Button fx:id="backButton" layoutX="20.0" layoutY="20.0" mnemonicParsing="false" onAction="#backClicked" onMouseEntered="#backEntered" onMouseExited="#backExited" prefHeight="150.0" prefWidth="230.0" style="-fx-background-color: transparent;" text="← Back">
+   <Button fx:id="backButton" focusTraversable="false" layoutX="20.0" layoutY="20.0" mnemonicParsing="false"
+           onAction="#backClicked" prefHeight="150.0" prefWidth="230.0" style="-fx-background-color: transparent;"
+           text="← Back">
       <font>
-         <Font size="50.0" />
+         <Font size="50.0"/>
       </font>
    </Button>
-   <VBox fx:id="avatarBox" layoutX="650.0" layoutY="100.0" prefHeight="700.0" prefWidth="250.0" style="-fx-background-color: WHITE; -fx-border-color: BLACK; -fx-border-width: 5;" visible="false">
-      <RadioButton maxHeight="200.0" maxWidth="200.0" mnemonicParsing="false" onAction="#avatar1Clicked" prefHeight="200.0" prefWidth="200.0">
+   <VBox fx:id="avatarBox" layoutX="650.0" layoutY="100.0" prefHeight="700.0" prefWidth="250.0"
+         style="-fx-background-color: WHITE; -fx-border-color: BLACK; -fx-border-width: 5;" visible="false">
+      <RadioButton maxHeight="200.0" maxWidth="200.0" mnemonicParsing="false" onAction="#avatar1Clicked"
+                   prefHeight="200.0" prefWidth="200.0">
          <graphic>
             <ImageView fitHeight="200.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
-               <Image url="@../images/icon1.png" />
+               <Image url="@../images/icon1.png"/>
             </ImageView>
          </graphic>
          <font>

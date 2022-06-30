@@ -17,8 +17,6 @@ import org.juno.model.table.Table;
 import org.juno.model.user.User;
 import org.juno.view.AudioPlayer;
 import org.juno.view.GenView;
-import org.juno.view.NonexistingSceneException;
-import org.juno.view.NotExistingSoundException;
 
 
 /**
@@ -49,8 +47,9 @@ public class EndgameController
 
 
 	@FXML
-	public void mainMenu() throws NonexistingSceneException, NotExistingSoundException
+	public void mainMenu()
 	{
+		AUDIO_PLAYER.play(AudioPlayer.Sounds.BUTTONCLICK);
 		GEN_VIEW.changeScene(GenView.SCENES.STARTMENU, anchorPane);
 		AUDIO_PLAYER.stop(AudioPlayer.Sounds.GAMEMUSIC);
 		AUDIO_PLAYER.play(AudioPlayer.Sounds.MENUMUSIC);
@@ -58,9 +57,10 @@ public class EndgameController
 
 
 	@FXML
-	public void newMatch() throws NonexistingSceneException
+	public void newMatch()
 	{
-		GEN_VIEW.changeScene(GenView.SCENES.GAMEPLAY, anchorPane);
+		AUDIO_PLAYER.play(AudioPlayer.Sounds.BUTTONCLICK);
+		GEN_VIEW.changeScene(GenView.SCENES.GAMEPLAYCLASSIC, anchorPane);
 		new Thread(TABLE).start();
 
 	}
@@ -72,7 +72,7 @@ public class EndgameController
 		actualLevel.setText("" + lvl);
 		nextLevel.setText("" + ++lvl);
 
-		avatar.setFill(new ImagePattern(new Image(String.format("file:\\%s\\%s", System.getProperty("user.dir"), USER.getAvatar()))));
+		avatar.setFill(new ImagePattern(new Image(String.format(USER.getAvatar()))));
 		progressBar.setProgress(USER.getProgress());
 
 

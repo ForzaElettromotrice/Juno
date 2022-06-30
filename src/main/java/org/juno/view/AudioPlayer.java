@@ -14,13 +14,14 @@ import java.io.File;
 public class AudioPlayer
 {
     private static final AudioPlayer INSTANCE = new AudioPlayer();
+    private static final String ERROR_MESSAGE = "Questo suono non esiste!!";
 
-    private final MediaPlayer menuMusic = new MediaPlayer(new Media(new File("src/main/resources/org/juno/sounds/menuMusic.mp3").toURI().toString()));
-    private final MediaPlayer gameMusic = new MediaPlayer(new Media(new File("src/main/resources/org/juno/sounds/gameMusic.mp3").toURI().toString()));
-    private final MediaPlayer buttonClick = new MediaPlayer(new Media(new File("src/main/resources/org/juno/sounds/buttonClick.mp3").toURI().toString()));
-    private final MediaPlayer cursorSelect = new MediaPlayer(new Media(new File("src/main/resources/org/juno/sounds/cursorSelect.mp3").toURI().toString()));
-    private final MediaPlayer alertBeep = new MediaPlayer(new Media(new File("src/main/resources/org/juno/sounds/alertBeep.mp3").toURI().toString()));
-    private final MediaPlayer cardFlip = new MediaPlayer(new Media(new File("src/main/resources/org/juno/sounds/cardFlip.mp3").toURI().toString()));
+    private MediaPlayer menuMusic;
+    private MediaPlayer gameMusic;
+    private MediaPlayer buttonClick;
+    private MediaPlayer cursorSelect;
+    private MediaPlayer alertBeep;
+    private MediaPlayer cardFlip;
 
     public enum Sounds
     {
@@ -46,20 +47,6 @@ public class AudioPlayer
 
     private AudioPlayer()
     {
-        menuMusic.setOnEndOfMedia(
-                () ->
-                {
-                    menuMusic.seek(Duration.ZERO);
-                    menuMusic.play();
-                }
-        );
-        gameMusic.setOnEndOfMedia(
-                () ->
-                {
-                    gameMusic.seek(Duration.ZERO);
-                    gameMusic.play();
-                }
-        );
     }
 
     public static AudioPlayer getINSTANCE()
@@ -67,60 +54,16 @@ public class AudioPlayer
         return INSTANCE;
     }
 
-    public void play(int n) throws NotExistingSoundException
-    {
 
-        switch (n)
-        {
-            case 0 -> menuMusic.play();
-            case 1 -> gameMusic.play();
-            case 2 ->
-            {
-                buttonClick.seek(Duration.ZERO);
-                buttonClick.play();
-            }
-            case 3 ->
-            {
-                cursorSelect.seek(Duration.ZERO);
-                cursorSelect.play();
-            }
-            case 4 ->
-            {
-                alertBeep.seek(Duration.ZERO);
-                alertBeep.play();
-            }
-            case 5 ->
-            {
-                cardFlip.seek(Duration.ZERO);
-                cardFlip.play();
-            }
-            default -> throw new NotExistingSoundException("Questo suono non esiste!");
-        }
+    public double getMusicVolume()
+    {
+        return menuMusic.getVolume();
+    }
+    public double getEffectsVolume()
+    {
+        return alertBeep.getVolume();
     }
 
-    public void play(Sounds s) throws NotExistingSoundException
-    {
-        play(s.getValue());
-    }
-
-    public void stop(int n) throws NotExistingSoundException
-    {
-        switch (n)
-        {
-            case 0 -> menuMusic.stop();
-            case 1 -> gameMusic.stop();
-            case 2 -> buttonClick.stop();
-            case 3 -> cursorSelect.stop();
-            case 4 -> alertBeep.stop();
-            case 5 -> cardFlip.stop();
-            default -> throw new NotExistingSoundException("Questo suono non esiste!");
-        }
-    }
-
-    public void stop(Sounds s) throws NotExistingSoundException
-    {
-        stop(s.getValue());
-    }
 
     public void setMusicVolume(double n)
     {
@@ -134,14 +77,76 @@ public class AudioPlayer
         alertBeep.setVolume(n);
         cardFlip.setVolume(n);
     }
-    public double getMusicVolume()
+
+
+    public void load()
     {
-        return menuMusic.getVolume();
-    }
-    public double getEffectsVolume()
-    {
-        return alertBeep.getVolume();
+        menuMusic = new MediaPlayer(new Media(new File("src/main/resources/org/juno/sounds/menuMusic.mp3").toURI().toString()));
+        gameMusic = new MediaPlayer(new Media(new File("src/main/resources/org/juno/sounds/gameMusic.mp3").toURI().toString()));
+        buttonClick = new MediaPlayer(new Media(new File("src/main/resources/org/juno/sounds/buttonClick.mp3").toURI().toString()));
+        cursorSelect = new MediaPlayer(new Media(new File("src/main/resources/org/juno/sounds/cursorSelect.mp3").toURI().toString()));
+        alertBeep = new MediaPlayer(new Media(new File("src/main/resources/org/juno/sounds/alertBeep.mp3").toURI().toString()));
+        cardFlip = new MediaPlayer(new Media(new File("src/main/resources/org/juno/sounds/cardFlip.mp3").toURI().toString()));
+
+        // Needed to loop the songs
+
+        menuMusic.setOnEndOfMedia(
+                () -> menuMusic.seek(Duration.ZERO)
+        );
+        gameMusic.setOnEndOfMedia(
+                () -> gameMusic.seek(Duration.ZERO)
+        );
+
     }
 
 
+    public void play(Sounds s)
+    {
+
+        switch (s)
+        {
+            case MENUMUSIC ->
+            {
+                menuMusic.seek(Duration.ZERO);
+                menuMusic.play();
+            }
+            case GAMEMUSIC ->
+            {
+                gameMusic.seek(Duration.ZERO);
+                gameMusic.play();
+            }
+            case BUTTONCLICK ->
+            {
+                buttonClick.seek(Duration.ZERO);
+                buttonClick.play();
+            }
+            case CURSORSELECT ->
+            {
+                cursorSelect.seek(Duration.ZERO);
+                cursorSelect.play();
+            }
+            case ALERTBEEP ->
+            {
+                alertBeep.seek(Duration.ZERO);
+                alertBeep.play();
+            }
+            case CARDFLIP ->
+            {
+                cardFlip.seek(Duration.ZERO);
+                cardFlip.play();
+            }
+        }
+    }
+    public void stop(Sounds s)
+    {
+        switch (s)
+        {
+            case MENUMUSIC -> menuMusic.stop();
+            case GAMEMUSIC -> gameMusic.stop();
+            case BUTTONCLICK -> buttonClick.stop();
+            case CURSORSELECT -> cursorSelect.stop();
+            case ALERTBEEP -> alertBeep.stop();
+            case CARDFLIP -> cardFlip.stop();
+        }
+    }
 }

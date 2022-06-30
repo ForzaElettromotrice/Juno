@@ -95,6 +95,19 @@ public class Table extends Observable implements Runnable
 				canStart = false;
 				startMatch();
 				endGame = checkPoints();
+				if (!endGame)
+				{
+					setChanged();
+					try
+					{
+						notifyObservers(BUILD_MP.createMP(BuildMP.Actions.EFFECTS, BuildMP.Effects.ENDMATCH));
+					} catch (MessagePackageTypeNotExistsException err)
+					{
+						System.out.println(err.getMessage());
+						err.printStackTrace();
+					}
+					clearChanged();
+				}
 			}
 		}
 
@@ -142,18 +155,6 @@ public class Table extends Observable implements Runnable
 		}
 
 		turnOrder.updatePoints(winner);
-
-		setChanged();
-		try
-		{
-			notifyObservers(BUILD_MP.createMP(BuildMP.Actions.EFFECTS, BuildMP.Effects.ENDMATCH));
-		} catch (MessagePackageTypeNotExistsException err)
-		{
-			System.out.println(err.getMessage());
-			err.printStackTrace();
-		}
-		clearChanged();
-
 	}
 	protected boolean startTurn(Player currentPlayer)
 	{
