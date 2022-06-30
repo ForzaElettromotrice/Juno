@@ -80,6 +80,8 @@ public class Juno extends Application
 
 
 		//COMBO
+		TABLE_COMBO.addObserver(GEN_VIEW);
+
 		for (Player player : TABLE_COMBO.getPlayers())
 		{
 			player.addObserver(GEN_VIEW);
@@ -87,6 +89,8 @@ public class Juno extends Application
 
 
 		//TRADE
+		TABLE_TRADE.addObserver(GEN_VIEW);
+
 		for (Player player : TABLE_TRADE.getPlayers())
 		{
 			player.addObserver(GEN_VIEW);

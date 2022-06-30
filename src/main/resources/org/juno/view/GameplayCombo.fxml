@@ -28,13 +28,14 @@
               x="640.0" y="405.0">
       <Image url="@../images/back.png"/>
    </ImageView>
-   <HBox fx:id="userHand" layoutX="297.5" layoutY="816.0" maxHeight="285.0" maxWidth="1325.0" prefHeight="264.0"
-         prefWidth="1325.0"/>
-   <HBox fx:id="bot2Hand" layoutX="592.5" prefHeight="264.0" prefWidth="735.0" rotate="180.0"/>
-   <HBox fx:id="bot1Hand" layoutX="-246.0" layoutY="390.0" prefHeight="264.0" prefWidth="735.0" rotate="90.0"/>
-   <HBox fx:id="bot3Hand" layoutX="1406.0" layoutY="383.0" maxHeight="264.0" maxWidth="735.0" prefHeight="264.0"
-         prefWidth="735.0" rotate="270.0" AnchorPane.bottomAnchor="412.0" AnchorPane.rightAnchor="-225.0"
-         AnchorPane.topAnchor="383.0"/>
+   <HBox fx:id="userHand" alignment="CENTER" layoutX="297.5" layoutY="816.0" maxHeight="285.0" maxWidth="1325.0"
+         prefHeight="264.0" prefWidth="1325.0"/>
+   <HBox fx:id="bot2Hand" alignment="CENTER" layoutX="592.5" prefHeight="264.0" prefWidth="735.0" rotate="180.0"/>
+   <HBox fx:id="bot1Hand" alignment="CENTER" layoutX="-246.0" layoutY="390.0" prefHeight="264.0" prefWidth="735.0"
+         rotate="90.0"/>
+   <HBox fx:id="bot3Hand" alignment="CENTER" layoutX="1406.0" layoutY="383.0" maxHeight="264.0" maxWidth="735.0"
+         prefHeight="264.0" prefWidth="735.0" rotate="270.0" AnchorPane.bottomAnchor="412.0"
+         AnchorPane.rightAnchor="-225.0" AnchorPane.topAnchor="383.0"/>
    <Circle fx:id="bot2Circle" fill="WHITE" layoutX="1146.0" layoutY="301.0" radius="100.0" stroke="BLACK"
            strokeType="INSIDE"/>
    <Circle fx:id="bot1Circle" fill="WHITE" layoutX="270.0" layoutY="477.0" radius="100.0" stroke="BLACK"

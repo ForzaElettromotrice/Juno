@@ -67,6 +67,7 @@ public class TableCombo extends Table
 
 				if (chosenCard.getColor() != Card.Color.BLACK)
 				{
+					System.out.println("HA GIOCATO QUESTA CARTA " + chosenCard);
 					checkEffects(chosenCard);
 					DISCARD_PILE.discard(chosenCard);
 

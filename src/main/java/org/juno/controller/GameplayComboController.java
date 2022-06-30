@@ -148,7 +148,6 @@ public class GameplayComboController implements Gameplay
 
 	public void draw(DrawData drawData)
 	{
-		System.out.println("COMBO");
 		cardFlip();
 		switch (drawData.player())
 		{
@@ -300,7 +299,6 @@ public class GameplayComboController implements Gameplay
 							default -> Card.Value.STOP;
 						};
 
-		System.out.println(color + " " + value);
 		TABLE_COMBO.getUser().chooseCard(color, value);
 		if (color == Card.Color.BLACK && TABLE_COMBO.getCurrentPlayer().getId() == BuildMP.PG.PLAYER)
 			colorGridPane.setVisible(true);

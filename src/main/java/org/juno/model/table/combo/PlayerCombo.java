@@ -82,7 +82,9 @@ public class PlayerCombo extends Player
 
 		while (true)
 		{
+			System.out.println("COMINCIO A PESCARE");
 			cardDrawn = super.draw();
+			System.out.println("HO PESCATO " + cardDrawn);
 			if (cardDrawn == null) return null;
 
 			hasDrawn = false;
