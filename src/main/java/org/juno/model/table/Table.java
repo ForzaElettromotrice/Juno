@@ -14,14 +14,13 @@ import java.util.Observable;
  *
  * @author ForzaElettromotrice, R0n3l
  */
-public class Table extends Observable implements Runnable
+public abstract class Table extends Observable implements Runnable
 {
-	private static final Table INSTANCE = new Table();
 	protected static final DrawPile DRAW_PILE = DrawPile.getINSTANCE();
 	protected static final DiscardPile DISCARD_PILE = DiscardPile.getINSTANCE();
 	protected static final BuildMP BUILD_MP = BuildMP.getINSTANCE();
 
-	private final TurnOrder turnOrder = new TurnOrder(TurnOrder.MODALITY.CLASSIC);
+	protected final TurnOrder turnOrder;
 
 	protected boolean stopEarlier;
 	protected boolean canStart = true;
@@ -33,14 +32,11 @@ public class Table extends Observable implements Runnable
 	protected boolean stop;
 
 
-	protected Table()
+	protected Table(TurnOrder to)
 	{
+		turnOrder = to;
 	}
 
-	public static Table getINSTANCE()
-	{
-		return INSTANCE;
-	}
 	public Player[] getPlayers()
 	{
 		return turnOrder.getPlayers();
@@ -81,13 +77,7 @@ public class Table extends Observable implements Runnable
 
 		while (!endGame && !stopEarlier)
 		{
-			try
-			{
-				Thread.sleep(200);
-			} catch (InterruptedException err)
-			{
-				Thread.currentThread().interrupt();
-			}
+			delay(200);
 
 
 			if (canStart)
@@ -156,72 +146,7 @@ public class Table extends Observable implements Runnable
 
 		turnOrder.updatePoints(winner);
 	}
-	protected boolean startTurn(Player currentPlayer)
-	{
-		System.out.println("TURNO DI " + currentPlayer.getId());
-
-		resetTurn();
-		currentPlayer.resetTurn();
-
-		boolean endTurn = false;
-
-		int delay;
-		int delayUno;
-
-		Card chosenCard = null;
-
-		if (currentPlayer.getId() == BuildMP.PG.PLAYER)
-		{
-			delay = 100;
-			delayUno = 2000;
-		} else
-		{
-			delay = 1000;
-			delayUno = 100;
-		}
-
-		while (!endTurn && !stopEarlier) //È possibile ci siano ritardi fra i thread e che il codice entri qui anche se non dovrebbe, stopEarlier evita il problema
-		{
-			try
-			{
-				Thread.sleep(delay);
-			} catch (InterruptedException err)
-			{
-				Thread.currentThread().interrupt();
-			}
-
-			if (currentPlayer.hasChosen())
-			{
-				chosenCard = currentPlayer.getChosenCard();
-				if (chosenCard.getColor() != Card.Color.BLACK)
-				{
-					checkEffects(chosenCard);
-					DISCARD_PILE.discard(chosenCard);
-					endTurn = true;
-				}
-			} else if (currentPlayer.hasPassed()) endTurn = true;
-		}
-
-		if (!currentPlayer.hasPassed())
-		{
-			assert chosenCard != null;
-			setChanged();
-			try
-			{
-				notifyObservers(BUILD_MP.createMP(BuildMP.Actions.DISCARD, currentPlayer.getId(), chosenCard.getColor(), chosenCard.getValue()));
-			} catch (MessagePackageTypeNotExistsException err)
-			{
-				System.out.println(err.getMessage());
-				err.printStackTrace();
-			}
-			clearChanged();
-		}
-
-
-		return checkUno(currentPlayer, delayUno);
-
-
-	}
+	protected abstract boolean startTurn(Player player);
 
 
 	protected boolean checkUno(Player currentPlayer, int delayUno)
@@ -232,13 +157,7 @@ public class Table extends Observable implements Runnable
 			return true;
 		} else if (sizeHand == 1)
 		{
-			try
-			{
-				Thread.sleep(delayUno);
-			} catch (InterruptedException err)
-			{
-				Thread.currentThread().interrupt();
-			}
+			delay(delayUno);
 
 			if (!currentPlayer.saidUno())
 			{
@@ -367,6 +286,18 @@ public class Table extends Observable implements Runnable
 		plus2 = false;
 		plus4 = false;
 		stop = false;
+	}
+
+
+	protected void delay(int millis)
+	{
+		try
+		{
+			Thread.sleep(millis);
+		} catch (InterruptedException err)
+		{
+			Thread.currentThread().interrupt();
+		}
 	}
 
 

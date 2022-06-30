@@ -1,5 +1,4 @@
-package org.juno.model.table.combo;
-
+package org.juno.model.table.classic;
 
 import org.juno.datapackage.BuildMP;
 import org.juno.datapackage.MessagePackageTypeNotExistsException;
@@ -9,30 +8,29 @@ import org.juno.model.table.Table;
 import org.juno.model.table.TurnOrder;
 
 /**
- * Defines TableReflex class,
+ * Defines TableClassic class,
  *
  * @author ForzaElettromotrice, R0n3l
  */
-public class TableCombo extends Table
+public class TableClassic extends Table
 {
-	private static final TableCombo INSTANCE = new TableCombo();
+	private static final TableClassic INSTANCE = new TableClassic();
 
-	private TableCombo()
+
+	private TableClassic()
 	{
-		super(new TurnOrder(TurnOrder.MODALITY.COMBO));
+		super(new TurnOrder(TurnOrder.MODALITY.CLASSIC));
 	}
 
-
-	public static TableCombo getINSTANCE()
+	public static TableClassic getINSTANCE()
 	{
 		return INSTANCE;
 	}
 
-
 	@Override
 	protected boolean startTurn(Player player)
 	{
-		PlayerCombo currentPlayer = (PlayerCombo) player;
+		PlayerClassic currentPlayer = (PlayerClassic) player;
 
 		System.out.println("TURNO DI " + currentPlayer.getId());
 
@@ -44,7 +42,7 @@ public class TableCombo extends Table
 		int delay;
 		int delayUno;
 
-		Card chosenCard;
+		Card chosenCard = null;
 
 		if (currentPlayer.getId() == BuildMP.PG.PLAYER)
 		{
@@ -56,20 +54,17 @@ public class TableCombo extends Table
 			delayUno = 100;
 		}
 
-		while (!endTurn && !stopEarlier)
+		while (!endTurn && !stopEarlier) //È possibile ci siano ritardi fra i thread e che il codice entri qui anche se non dovrebbe, stopEarlier evita il problema
 		{
-
 			delay(delay);
 
 			if (currentPlayer.hasChosen())
 			{
-				chosenCard = player.getChosenCard();
-
+				chosenCard = currentPlayer.getChosenCard();
 				if (chosenCard.getColor() != Card.Color.BLACK)
 				{
 					checkEffects(chosenCard);
 					DISCARD_PILE.discard(chosenCard);
-
 					setChanged();
 					try
 					{
@@ -80,14 +75,12 @@ public class TableCombo extends Table
 						err.printStackTrace();
 					}
 					clearChanged();
-
-					endTurn = !currentPlayer.canPlay();
+					endTurn = true;
 				}
 			} else endTurn = currentPlayer.hasPassed();
 		}
+		
 
 		return checkUno(currentPlayer, delayUno);
 	}
-
-
 }

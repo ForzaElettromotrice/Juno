@@ -5,6 +5,9 @@ import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import org.juno.model.table.Player;
 import org.juno.model.table.Table;
+import org.juno.model.table.classic.TableClassic;
+import org.juno.model.table.combo.TableCombo;
+import org.juno.model.table.trade.TableTrade;
 import org.juno.model.user.DataCorruptedException;
 import org.juno.model.user.User;
 import org.juno.view.AudioPlayer;
@@ -24,7 +27,9 @@ public class Juno extends Application
 {
 	private static final GenView GEN_VIEW = GenView.getINSTANCE();
 	private static final AudioPlayer AUDIO_PLAYER = AudioPlayer.getINSTANCE();
-	private static final Table TABLE = Table.getINSTANCE();
+	private static final TableClassic TABLE_CLASSIC = TableClassic.getINSTANCE();
+	private static final TableCombo TABLE_COMBO = TableCombo.getINSTANCE();
+	private static final TableTrade TABLE_TRADE = TableTrade.getINSTANCE();
 
 	@Override
 	public void start(Stage stage)
@@ -66,20 +71,26 @@ public class Juno extends Application
 
 		//adding the observers
 		//CLASSIC
-		TABLE.addObserver(GEN_VIEW);
+		TABLE_CLASSIC.addObserver(GEN_VIEW);
 
-		for (Player player : TABLE.getPlayers())
+		for (Player player : TABLE_CLASSIC.getPlayers())
 		{
 			player.addObserver(GEN_VIEW);
 		}
 
 
 		//COMBO
-		//TODO
+		for (Player player : TABLE_COMBO.getPlayers())
+		{
+			player.addObserver(GEN_VIEW);
+		}
 
 
 		//TRADE
-		//TODO
+		for (Player player : TABLE_TRADE.getPlayers())
+		{
+			player.addObserver(GEN_VIEW);
+		}
 
 
 		//Loading and starting the music!

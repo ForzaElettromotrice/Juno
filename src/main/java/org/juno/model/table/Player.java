@@ -15,7 +15,7 @@ import java.util.Observable;
  *
  * @author ForzaElettromotrice, R0n3l
  */
-public class Player extends Observable
+public abstract class Player extends Observable
 {
 	protected static final DrawPile DRAW_PILE = DrawPile.getINSTANCE();
 	protected static final DiscardPile DISCARD_PILE = DiscardPile.getINSTANCE();
@@ -35,7 +35,7 @@ public class Player extends Observable
 	protected int points;
 
 
-	public Player(int n)
+	protected Player(int n)
 	{
 		id = switch (n)
 				{

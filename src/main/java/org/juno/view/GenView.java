@@ -11,6 +11,7 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 import org.juno.controller.Gameplay;
 import org.juno.controller.GameplayClassicController;
+import org.juno.controller.GameplayComboController;
 import org.juno.datapackage.DiscardData;
 import org.juno.datapackage.DrawData;
 import org.juno.datapackage.EffectData;
@@ -36,6 +37,8 @@ public class GenView implements Observer
 	private Scene startMenu;
 	private Scene chooseMode;
 	private Scene gameplayClassic;
+	private Scene gameplayCombo;
+	private Scene gameplayTrade;
 	private Scene stats;
 	private Scene settings;
 	private Scene endgame;
@@ -44,25 +47,15 @@ public class GenView implements Observer
 
 	public enum SCENES
 	{
-		LOGIN(-1),
-		STARTMENU(0),
-		CHOOSEMODE(1),
-		STATS(2),
-		SETTINGS(3),
-		GAMEPLAYCLASSIC(4),
-		ENDGAME(5),
-		GAMEPLAYREFLEX(6);
-
-		private final int value;
-
-		SCENES(int i)
-		{
-			value = i;
-		}
-		public int getValue()
-		{
-			return value;
-		}
+		LOGIN,
+		STARTMENU,
+		CHOOSEMODE,
+		STATS,
+		SETTINGS,
+		GAMEPLAYCLASSIC,
+		ENDGAME,
+		GAMEPLAYCOMBO,
+		GAMEPLAYTRADE
 	}
 
 
@@ -92,9 +85,17 @@ public class GenView implements Observer
 	{
 		return chooseMode;
 	}
-	public Scene getGameplay()
+	public Scene getGameplayClassic()
 	{
 		return gameplayClassic;
+	}
+	public Scene getGameplayCombo()
+	{
+		return gameplayCombo;
+	}
+	public Scene getGameplayTrade()
+	{
+		return gameplayTrade;
 	}
 	public Scene getStats()
 	{
@@ -120,7 +121,7 @@ public class GenView implements Observer
 				{
 
 					case CLASSIC -> (GameplayClassicController) gameplayClassic.getUserData();
-					case COMBO -> null; //TODO
+					case COMBO -> (GameplayComboController) gameplayCombo.getUserData();
 					case TRADE -> null; //TODO
 				};
 	}
@@ -143,6 +144,14 @@ public class GenView implements Observer
 		loader = new FXMLLoader(GenView.class.getResource("GameplayClassic.fxml"));
 		gameplayClassic = new Scene(loader.load());
 		gameplayClassic.setUserData(loader.getController());
+
+		loader = new FXMLLoader(GenView.class.getResource("GameplayCombo.fxml"));
+		gameplayCombo = new Scene(loader.load());
+		gameplayCombo.setUserData(loader.getController());
+
+//		loader = new FXMLLoader(GenView.class.getResource("GameplayTrade.fxml"));
+//		gameplayTrade = new Scene(loader.load());
+//		gameplayTrade.setUserData(loader.getController());
 
 		loader = new FXMLLoader(GenView.class.getResource("Stats.fxml"));
 		stats = new Scene(loader.load());
@@ -172,7 +181,8 @@ public class GenView implements Observer
 					case SETTINGS -> settings;
 					case GAMEPLAYCLASSIC -> gameplayClassic;
 					case ENDGAME -> endgame;
-					case GAMEPLAYREFLEX -> null;
+					case GAMEPLAYCOMBO -> gameplayCombo;
+					case GAMEPLAYTRADE -> gameplayTrade;
 				});
 
 		makeFadeOut(scene, anchor);

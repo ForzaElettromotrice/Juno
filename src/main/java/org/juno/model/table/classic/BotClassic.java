@@ -1,19 +1,20 @@
-package org.juno.model.table;
+package org.juno.model.table.classic;
+
 
 import org.juno.model.deck.Card;
 
 import java.util.Random;
 
 /**
- * Defines Bot class,
+ * Defines BotClassic class,
  *
  * @author ForzaElettromotrice, R0n3l
  */
-public class Bot extends Player
+public class BotClassic extends PlayerClassic
 {
 	private static final Random RANDOMIZER = new Random();
 
-	public Bot(int i)
+	public BotClassic(int i)
 	{
 		super(i);
 	}

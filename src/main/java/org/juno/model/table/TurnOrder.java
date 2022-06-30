@@ -1,6 +1,8 @@
 package org.juno.model.table;
 
 import org.juno.datapackage.BuildMP;
+import org.juno.model.table.classic.BotClassic;
+import org.juno.model.table.classic.PlayerClassic;
 import org.juno.model.table.combo.BotCombo;
 import org.juno.model.table.combo.PlayerCombo;
 import org.juno.model.table.trade.BotTrade;
@@ -30,7 +32,7 @@ public class TurnOrder
 	{
 		players[0] = switch (modality)
 				{
-					case CLASSIC -> new Player(0);
+					case CLASSIC -> new PlayerClassic(0);
 					case COMBO -> new PlayerCombo(0);
 					case TRADE -> new PlayerTrade(0);
 				};
@@ -39,7 +41,7 @@ public class TurnOrder
 		{
 			players[i] = switch (modality)
 					{
-						case CLASSIC -> new Bot(i);
+						case CLASSIC -> new BotClassic(i);
 						case COMBO -> new BotCombo(i);
 						case TRADE -> new BotTrade(i);
 					};

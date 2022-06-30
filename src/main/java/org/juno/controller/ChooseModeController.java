@@ -5,6 +5,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import org.juno.model.table.Table;
 import org.juno.model.table.TurnOrder;
+import org.juno.model.table.classic.TableClassic;
 import org.juno.model.table.combo.TableCombo;
 import org.juno.view.AudioPlayer;
 import org.juno.view.GenView;
@@ -18,7 +19,7 @@ public class ChooseModeController
 {
 	private static final GenView GEN_VIEW = GenView.getINSTANCE();
 	private static final AudioPlayer AUDIO_PLAYER = AudioPlayer.getINSTANCE();
-	private static final Table TABLE = Table.getINSTANCE();
+	private static final TableClassic TABLE_CLASSIC = TableClassic.getINSTANCE();
 	private static final TableCombo TABLE_COMBO = TableCombo.getINSTANCE();
 
 
@@ -78,7 +79,7 @@ public class ChooseModeController
 	public void classicClicked()
 	{
 		AUDIO_PLAYER.play(AudioPlayer.Sounds.BUTTONCLICK);
-		Thread thread = new Thread(TABLE);
+		Thread thread = new Thread(TABLE_CLASSIC);
 		GEN_VIEW.changeScene(GenView.SCENES.GAMEPLAYCLASSIC, anchor);
 
 		GEN_VIEW.setCurrentGameController(TurnOrder.MODALITY.CLASSIC);
@@ -88,7 +89,11 @@ public class ChooseModeController
 	public void comboClicked()
 	{
 		AUDIO_PLAYER.play(AudioPlayer.Sounds.BUTTONCLICK);
-		//TODO
+		Thread thread = new Thread(TABLE_COMBO);
+		GEN_VIEW.changeScene(GenView.SCENES.GAMEPLAYCOMBO, anchor);
+
+		GEN_VIEW.setCurrentGameController(TurnOrder.MODALITY.COMBO);
+		thread.start();
 	}
 	@FXML
 	public void tradeClicked()

@@ -22,7 +22,7 @@ import org.juno.datapackage.*;
 import org.juno.model.deck.Card;
 import org.juno.model.deck.WildCard;
 import org.juno.model.table.Player;
-import org.juno.model.table.Table;
+import org.juno.model.table.classic.TableClassic;
 import org.juno.view.AudioPlayer;
 import org.juno.view.GenView;
 
@@ -37,7 +37,7 @@ import java.net.URISyntaxException;
  */
 public class GameplayClassicController implements Gameplay
 {
-	protected static final Table TABLE = Table.getINSTANCE();
+	protected static final TableClassic TABLE_CLASSIC = TableClassic.getINSTANCE();
 	protected static final GenView GEN_VIEW = GenView.getINSTANCE();
 	protected static final AudioPlayer AUDIO_PLAYER = AudioPlayer.getINSTANCE();
 
@@ -84,7 +84,7 @@ public class GameplayClassicController implements Gameplay
 	@FXML
 	public void cardEntered(MouseEvent mouseEvent)
 	{
-		if (TABLE.getCurrentPlayer().getId() != BuildMP.PG.PLAYER) return;
+		if (TABLE_CLASSIC.getCurrentPlayer().getId() != BuildMP.PG.PLAYER) return;
 
 		cardFlip();
 		ImageView card = (ImageView) mouseEvent.getSource();
@@ -93,7 +93,7 @@ public class GameplayClassicController implements Gameplay
 	@FXML
 	public void cardExited(MouseEvent mouseEvent)
 	{
-		if (TABLE.getCurrentPlayer().getId() != BuildMP.PG.PLAYER) return;
+		if (TABLE_CLASSIC.getCurrentPlayer().getId() != BuildMP.PG.PLAYER) return;
 
 		ImageView card = (ImageView) mouseEvent.getSource();
 		card.setTranslateY(0);
@@ -101,7 +101,7 @@ public class GameplayClassicController implements Gameplay
 	@FXML
 	public void cardClicked(MouseEvent mouseEvent)
 	{
-		System.out.println("CLICK");
+		if (TABLE_CLASSIC.getCurrentPlayer().getId() != BuildMP.PG.PLAYER) return;
 		ImageView imageView = (ImageView) mouseEvent.getSource();
 
 		String name = "";
@@ -147,8 +147,8 @@ public class GameplayClassicController implements Gameplay
 						};
 
 		System.out.println(color + " " + value);
-		TABLE.getCurrentPlayer().chooseCard(color, value);
-		if (color == Card.Color.BLACK && TABLE.getCurrentPlayer().getId() == BuildMP.PG.PLAYER)
+		TABLE_CLASSIC.getUser().chooseCard(color, value);
+		if (color == Card.Color.BLACK && TABLE_CLASSIC.getCurrentPlayer().getId() == BuildMP.PG.PLAYER)
 			colorGrid.setVisible(true);
 
 	}
@@ -157,7 +157,7 @@ public class GameplayClassicController implements Gameplay
 	@FXML
 	public void drawClicked()
 	{
-		Player player = TABLE.getCurrentPlayer();
+		Player player = TABLE_CLASSIC.getCurrentPlayer();
 
 		if (player.getId() != BuildMP.PG.PLAYER) return;
 
@@ -170,7 +170,7 @@ public class GameplayClassicController implements Gameplay
 		pass.setDisable(true);
 
 		beep();
-		TABLE.getUser().setHasPassed();
+		TABLE_CLASSIC.getUser().setHasPassed();
 
 	}
 
@@ -179,28 +179,28 @@ public class GameplayClassicController implements Gameplay
 	public void redClicked()
 	{
 		beep();
-		((WildCard) TABLE.getUser().getChosenCard()).setColor(Card.Color.RED);
+		((WildCard) TABLE_CLASSIC.getUser().getChosenCard()).setColor(Card.Color.RED);
 		colorGrid.setVisible(false);
 	}
 	@FXML
 	public void blueClicked()
 	{
 		beep();
-		((WildCard) TABLE.getUser().getChosenCard()).setColor(Card.Color.BLUE);
+		((WildCard) TABLE_CLASSIC.getUser().getChosenCard()).setColor(Card.Color.BLUE);
 		colorGrid.setVisible(false);
 	}
 	@FXML
 	public void yellowClicked()
 	{
 		beep();
-		((WildCard) TABLE.getUser().getChosenCard()).setColor(Card.Color.YELLOW);
+		((WildCard) TABLE_CLASSIC.getUser().getChosenCard()).setColor(Card.Color.YELLOW);
 		colorGrid.setVisible(false);
 	}
 	@FXML
 	public void greenClicked()
 	{
 		beep();
-		((WildCard) TABLE.getUser().getChosenCard()).setColor(Card.Color.GREEN);
+		((WildCard) TABLE_CLASSIC.getUser().getChosenCard()).setColor(Card.Color.GREEN);
 		colorGrid.setVisible(false);
 	}
 
@@ -208,7 +208,7 @@ public class GameplayClassicController implements Gameplay
 	@FXML
 	public void sayUno()
 	{
-		TABLE.getUser().sayUno();
+		TABLE_CLASSIC.getUser().sayUno();
 		juno.setVisible(false);
 	}
 
@@ -346,7 +346,7 @@ public class GameplayClassicController implements Gameplay
 		Label label;
 
 		VBox layout = new VBox();
-		for (Player player : TABLE.getPlayers())
+		for (Player player : TABLE_CLASSIC.getPlayers())
 		{
 			label = new Label(String.format("\t%s:\t\t\t%d/500", player.getId(), player.getPoints()));
 			label.setPrefSize(500, 100);
@@ -378,7 +378,7 @@ public class GameplayClassicController implements Gameplay
 		exit.setOnAction(x ->
 		{
 			buttonClick();
-			TABLE.stopEarlier();
+			TABLE_CLASSIC.stopEarlier();
 			win.close();
 		});
 
@@ -396,7 +396,7 @@ public class GameplayClassicController implements Gameplay
 	{
 		GEN_VIEW.changeScene(GenView.SCENES.ENDGAME, anchorPane);
 
-		((EndgameController) GEN_VIEW.getEndgame().getUserData()).load();
+		((EndgameController) GEN_VIEW.getEndgame().getUserData()).load(TABLE_CLASSIC);
 	}
 	private void reset()
 	{
@@ -404,7 +404,7 @@ public class GameplayClassicController implements Gameplay
 		botHand1.getChildren().clear();
 		botHand2.getChildren().clear();
 		botHand3.getChildren().clear();
-		TABLE.canStart();
+		TABLE_CLASSIC.canStart();
 	}
 
 
