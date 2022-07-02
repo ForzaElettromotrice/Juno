@@ -12,10 +12,8 @@ import javafx.util.Duration;
 import org.juno.controller.Gameplay;
 import org.juno.controller.GameplayClassicController;
 import org.juno.controller.GameplayComboController;
-import org.juno.datapackage.DiscardData;
-import org.juno.datapackage.DrawData;
-import org.juno.datapackage.EffectData;
-import org.juno.datapackage.TurnData;
+import org.juno.controller.GameplayTradeController;
+import org.juno.datapackage.*;
 import org.juno.model.table.TurnOrder;
 
 import java.io.IOException;
@@ -119,10 +117,9 @@ public class GenView implements Observer
 	{
 		currentGameController = switch (modality)
 				{
-
 					case CLASSIC -> (GameplayClassicController) gameplayClassic.getUserData();
 					case COMBO -> (GameplayComboController) gameplayCombo.getUserData();
-					case TRADE -> null; //TODO
+					case TRADE -> (GameplayTradeController) gameplayTrade.getUserData();
 				};
 	}
 
@@ -149,9 +146,9 @@ public class GenView implements Observer
 		gameplayCombo = new Scene(loader.load());
 		gameplayCombo.setUserData(loader.getController());
 
-//		loader = new FXMLLoader(GenView.class.getResource("GameplayTrade.fxml"));
-//		gameplayTrade = new Scene(loader.load());
-//		gameplayTrade.setUserData(loader.getController());
+		loader = new FXMLLoader(GenView.class.getResource("GameplayTrade.fxml"));
+		gameplayTrade = new Scene(loader.load());
+		gameplayTrade.setUserData(loader.getController());
 
 		loader = new FXMLLoader(GenView.class.getResource("Stats.fxml"));
 		stats = new Scene(loader.load());
@@ -211,12 +208,16 @@ public class GenView implements Observer
 	@Override
 	public void update(Observable o, Object arg)
 	{
-		if (arg instanceof DrawData drawData) Platform.runLater(() -> currentGameController.draw(drawData));
-		else if (arg instanceof DiscardData discardData)
+		if (arg instanceof DrawData drawData)
+		{
+			Platform.runLater(() -> currentGameController.draw(drawData));
+		} else if (arg instanceof DiscardData discardData)
 		{
 			Platform.runLater(() -> currentGameController.discard(discardData));
 		} else if (arg instanceof TurnData turnData) Platform.runLater(() -> currentGameController.turn(turnData));
 		else if (arg instanceof EffectData effectData)
 			Platform.runLater(() -> currentGameController.effect(effectData));
+		else if (arg instanceof SwitchData switchData)
+			Platform.runLater(() -> currentGameController.doSwitch(switchData));
 	}
 }

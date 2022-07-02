@@ -1,9 +1,6 @@
 package org.juno.controller;
 
-import org.juno.datapackage.DiscardData;
-import org.juno.datapackage.DrawData;
-import org.juno.datapackage.EffectData;
-import org.juno.datapackage.TurnData;
+import org.juno.datapackage.*;
 
 /**
  * Defines Gameplay interface,
@@ -16,4 +13,5 @@ public interface Gameplay
 	void discard(DiscardData discardData);
 	void turn(TurnData turnData);
 	void effect(EffectData effectData);
+	void doSwitch(SwitchData switchData);
 }

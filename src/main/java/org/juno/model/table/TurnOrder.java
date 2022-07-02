@@ -77,6 +77,17 @@ public class TurnOrder
 		return players[0];
 	}
 
+	public Player getPlayer(BuildMP.PG id)
+	{
+		return switch (id)
+				{
+					case PLAYER -> players[0];
+					case BOT1 -> players[1];
+					case BOT2 -> players[2];
+					case BOT3 -> players[3];
+				};
+	}
+
 
 	public Player nextPlayer()
 	{

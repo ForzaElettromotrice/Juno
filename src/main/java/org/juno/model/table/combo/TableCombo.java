@@ -34,7 +34,7 @@ public class TableCombo extends Table
 	{
 		PlayerCombo currentPlayer = (PlayerCombo) player;
 
-		System.out.println("TURNO DI " + currentPlayer.getId());
+		System.out.println("\nTURNO DI " + currentPlayer.getId());
 
 		resetTurn();
 		currentPlayer.resetTurn();

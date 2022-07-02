@@ -1,6 +1,7 @@
 package org.juno.controller;
 
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
@@ -30,6 +31,7 @@ import org.juno.view.GenView;
 import java.io.File;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.Random;
 
 /**
  * Defines GameplayComboController ,
@@ -43,7 +45,9 @@ public class GameplayComboController implements Gameplay
 	private static final TableCombo TABLE_COMBO = TableCombo.getINSTANCE();
 	private static final AudioPlayer AUDIO_PLAYER = AudioPlayer.getINSTANCE();
 	private static final int CARD_WIDTH_SCALED = 189;
-	protected static final int CARD_HEIGHT_SCALED = 264;
+	private static final int CARD_HEIGHT_SCALED = 264;
+
+	private static final Random RANDOMIZER = new Random();
 
 	@FXML
 	public AnchorPane anchor;
@@ -96,8 +100,6 @@ public class GameplayComboController implements Gameplay
 
 
 		TABLE_COMBO.getUser().draw();
-//		passButton.setDisable(false);
-
 	}
 
 
@@ -149,6 +151,8 @@ public class GameplayComboController implements Gameplay
 	public void draw(DrawData drawData)
 	{
 		cardFlip();
+
+
 		switch (drawData.player())
 		{
 			case PLAYER ->
@@ -237,23 +241,24 @@ public class GameplayComboController implements Gameplay
 	}
 
 
+	private void cardEntered(MouseEvent mouseEvent)
+	{
+		if (TABLE_COMBO.getCurrentPlayer().getId() != BuildMP.PG.PLAYER) return;
+
+		ImageView card = (ImageView) mouseEvent.getSource();
+		card.setTranslateY(-30);
+	}
 	private void cardExited(MouseEvent mouseEvent)
 	{
 		if (TABLE_COMBO.getCurrentPlayer().getId() != BuildMP.PG.PLAYER) return;
 
 		cardFlip();
 		ImageView card = (ImageView) mouseEvent.getSource();
-		card.setTranslateY(-30);
-	}
-	private void cardEntered(MouseEvent mouseEvent)
-	{
-		if (TABLE_COMBO.getCurrentPlayer().getId() != BuildMP.PG.PLAYER) return;
-
-		ImageView card = (ImageView) mouseEvent.getSource();
 		card.setTranslateY(0);
 	}
 	private void cardClicked(MouseEvent mouseEvent)
 	{
+		passButton.setDisable(false);
 		if (TABLE_COMBO.getCurrentPlayer().getId() != BuildMP.PG.PLAYER) return;
 		ImageView imageView = (ImageView) mouseEvent.getSource();
 
@@ -305,6 +310,7 @@ public class GameplayComboController implements Gameplay
 	}
 
 
+	@Override
 	public void turn(TurnData turnData)
 	{
 		passButton.setDisable(true);
@@ -321,6 +327,7 @@ public class GameplayComboController implements Gameplay
 		}
 
 	}
+	@Override
 	public void effect(EffectData effectData)
 	{
 		switch (effectData.effect())
@@ -330,6 +337,19 @@ public class GameplayComboController implements Gameplay
 			case STARTGAME -> reset();
 			case ENDGAME -> goEndgame();
 			case DIDNTSAYUNO -> junoButton.setVisible(false);
+		}
+	}
+	@Override
+	public void doSwitch(SwitchData switchData)
+	{
+		//Has to be void because this modality doesn't support the switch
+		try
+		{
+			throw new UnsupportedModalityException("CLASSIC can't do SWITCH operation");
+		} catch (UnsupportedModalityException err)
+		{
+			System.out.println(err.getMessage());
+			err.printStackTrace();
 		}
 	}
 
@@ -405,6 +425,8 @@ public class GameplayComboController implements Gameplay
 	}
 	private void reset()
 	{
+		passButton.setDisable(true);
+		junoButton.setVisible(false);
 		userHand.getChildren().clear();
 		bot1Hand.getChildren().clear();
 		bot2Hand.getChildren().clear();
@@ -425,4 +447,16 @@ public class GameplayComboController implements Gameplay
 	{
 		AUDIO_PLAYER.play(AudioPlayer.Sounds.BUTTONCLICK);
 	}
+	private void sleep(int millis)
+	{
+		try
+		{
+			Thread.sleep(millis);
+		} catch (InterruptedException err)
+		{
+			Thread.currentThread().interrupt();
+		}
+	}
+
+
 }

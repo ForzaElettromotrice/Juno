@@ -2,6 +2,8 @@ package org.juno.datapackage;
 
 import org.juno.model.deck.Card;
 
+import java.util.Collection;
+
 /**
  * Defines MessagePackage class,
  *
@@ -17,8 +19,7 @@ public class BuildMP
 		TURN,
 		DRAW,
 		DISCARD,
-		SWITCH0,
-		SWITCH7,
+		SWITCH,
 		EFFECTS,
 		JUMP
 	}
@@ -74,6 +75,11 @@ public class BuildMP
 	public Data createMP(Actions action, PG player) throws MessagePackageTypeNotExistsException
 	{
 		if (action == Actions.TURN) return new TurnData(player);
+		else throw new MessagePackageTypeNotExistsException(ERROR_MESSAGE);
+	}
+	public Data createMP(Actions actions, Collection<Card> newHand, PG fromPg, PG toPg) throws MessagePackageTypeNotExistsException
+	{
+		if (actions == Actions.SWITCH) return new SwitchData(newHand, fromPg, toPg);
 		else throw new MessagePackageTypeNotExistsException(ERROR_MESSAGE);
 	}
 }

@@ -1,6 +1,6 @@
-ForzaElettromotrice
-file:/C:/Users/minga/OneDrive/Juno/src/main/resources/org/juno/images/icon1.png
+Federico
+file:/C:/Users/minga/OneDrive/Roba/DatiPerRipristino/Persona5.png
+3
+22
 1
-6
-1
-781
+1924

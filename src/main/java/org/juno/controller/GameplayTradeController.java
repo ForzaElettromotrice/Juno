@@ -1,5 +1,6 @@
 package org.juno.controller;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
@@ -20,9 +21,11 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import org.juno.datapackage.*;
 import org.juno.model.deck.Card;
+import org.juno.model.deck.DiscardPile;
 import org.juno.model.deck.WildCard;
 import org.juno.model.table.Player;
-import org.juno.model.table.classic.TableClassic;
+import org.juno.model.table.trade.PlayerTrade;
+import org.juno.model.table.trade.TableTrade;
 import org.juno.view.AudioPlayer;
 import org.juno.view.GenView;
 
@@ -31,77 +34,165 @@ import java.net.URI;
 import java.net.URISyntaxException;
 
 /**
- * Defines GameplayControllerNew class,
+ * Defines GameplayTradeController ,
  *
  * @author ForzaElettromotrice, R0n3l
  */
-public class GameplayClassicController implements Gameplay
+public class GameplayTradeController implements Gameplay
 {
-	protected static final TableClassic TABLE_CLASSIC = TableClassic.getINSTANCE();
-	protected static final GenView GEN_VIEW = GenView.getINSTANCE();
-	protected static final AudioPlayer AUDIO_PLAYER = AudioPlayer.getINSTANCE();
+	private static final GenView GEN_VIEW = GenView.getINSTANCE();
+	private static final AudioPlayer AUDIO_PLAYER = AudioPlayer.getINSTANCE();
+	private static final TableTrade TABLE_TRADE = TableTrade.getINSTANCE();
 
 	protected static final int CARD_WIDTH_SCALED = 189;
 	protected static final int CARD_HEIGHT_SCALED = 264;
 
 
 	@FXML
-	public AnchorPane anchorPane;
-	@FXML
-	public GridPane colorGrid;
+	public AnchorPane anchor;
 
 
 	@FXML
-	public Button pass;
+	public Circle userCircle;
 	@FXML
-	public Button juno;
+	public Circle bot1Circle;
+	@FXML
+	public Circle bot2Circle;
+	@FXML
+	public Circle bot3Circle;
+
+
+	@FXML
+	public ImageView firstDiscarded;
+	@FXML
+	public ImageView secondDiscarded;
+	@FXML
+	public ImageView thirdDiscarded;
 
 
 	@FXML
 	public HBox userHand;
 	@FXML
-	public HBox botHand1;
+	public HBox bot1Hand;
 	@FXML
-	public HBox botHand2;
+	public HBox bot2Hand;
 	@FXML
-	public HBox botHand3;
+	public HBox bot3Hand;
 
 
 	@FXML
-	public Circle circle1;
-	@FXML
-	public Circle circle2;
-	@FXML
-	public Circle circle3;
-	@FXML
-	public Circle circle4;
+	public GridPane colorGridPane;
 
 
 	@FXML
-	public ImageView cardDiscarded;
+	public Button passButton;
+	@FXML
+	public Button junoButton;
 
 
 	@FXML
+	public void deckClicked()
+	{
+		Player player = TABLE_TRADE.getCurrentPlayer();
+
+		if (player.getId() != BuildMP.PG.PLAYER) return;
+
+		player.draw();
+		passButton.setDisable(false);
+	}
+	@FXML
+	public void passClicked()
+	{
+		passButton.setDisable(true);
+
+		beep();
+		TABLE_TRADE.getUser().setHasPassed();
+	}
+	@FXML
+	public void junoClicked()
+	{
+		TABLE_TRADE.getUser().sayUno();
+		junoButton.setVisible(false);
+	}
+
+
+	@FXML
+	public void redClicked()
+	{
+		beep();
+		((WildCard) TABLE_TRADE.getUser().getChosenCard()).setColor(Card.Color.RED);
+		colorGridPane.setVisible(false);
+	}
+	@FXML
+	public void blueClicked()
+	{
+		beep();
+		((WildCard) TABLE_TRADE.getUser().getChosenCard()).setColor(Card.Color.BLUE);
+		colorGridPane.setVisible(false);
+	}
+	@FXML
+	public void yellowClicked()
+	{
+		beep();
+		((WildCard) TABLE_TRADE.getUser().getChosenCard()).setColor(Card.Color.YELLOW);
+		colorGridPane.setVisible(false);
+	}
+	@FXML
+	public void greenClicked()
+	{
+		beep();
+		((WildCard) TABLE_TRADE.getUser().getChosenCard()).setColor(Card.Color.GREEN);
+		colorGridPane.setVisible(false);
+	}
+
+
+	@FXML
+	public void bot1HandClicked()
+	{
+		PlayerTrade player = (PlayerTrade) TABLE_TRADE.getCurrentPlayer();
+
+		if (player.getId() != BuildMP.PG.PLAYER) return;
+
+		player.setTargetTrade(BuildMP.PG.BOT1);
+	}
+	@FXML
+	public void bot2HandClicked()
+	{
+		PlayerTrade player = (PlayerTrade) TABLE_TRADE.getCurrentPlayer();
+
+		if (player.getId() != BuildMP.PG.PLAYER) return;
+
+		player.setTargetTrade(BuildMP.PG.BOT2);
+	}
+	@FXML
+	public void bot3HandClicked()
+	{
+		PlayerTrade player = (PlayerTrade) TABLE_TRADE.getCurrentPlayer();
+
+		if (player.getId() != BuildMP.PG.PLAYER) return;
+
+		player.setTargetTrade(BuildMP.PG.BOT3);
+	}
+
+
 	public void cardEntered(MouseEvent mouseEvent)
 	{
-		if (TABLE_CLASSIC.getCurrentPlayer().getId() != BuildMP.PG.PLAYER) return;
+		if (TABLE_TRADE.getCurrentPlayer().getId() != BuildMP.PG.PLAYER) return;
 
 		cardFlip();
 		ImageView card = (ImageView) mouseEvent.getSource();
 		card.setTranslateY(-30);
 	}
-	@FXML
 	public void cardExited(MouseEvent mouseEvent)
 	{
-		if (TABLE_CLASSIC.getCurrentPlayer().getId() != BuildMP.PG.PLAYER) return;
+		if (TABLE_TRADE.getCurrentPlayer().getId() != BuildMP.PG.PLAYER) return;
 
 		ImageView card = (ImageView) mouseEvent.getSource();
 		card.setTranslateY(0);
 	}
-	@FXML
 	public void cardClicked(MouseEvent mouseEvent)
 	{
-		if (TABLE_CLASSIC.getCurrentPlayer().getId() != BuildMP.PG.PLAYER) return;
+		if (TABLE_TRADE.getCurrentPlayer().getId() != BuildMP.PG.PLAYER) return;
 		ImageView imageView = (ImageView) mouseEvent.getSource();
 
 		String name = "";
@@ -147,70 +238,12 @@ public class GameplayClassicController implements Gameplay
 						};
 
 		System.out.println(color + " " + value);
-		TABLE_CLASSIC.getUser().chooseCard(color, value);
-		if (color == Card.Color.BLACK && TABLE_CLASSIC.getCurrentPlayer().getId() == BuildMP.PG.PLAYER)
-			colorGrid.setVisible(true);
+		TABLE_TRADE.getUser().chooseCard(color, value);
+		if (color == Card.Color.BLACK && TABLE_TRADE.getCurrentPlayer().getId() == BuildMP.PG.PLAYER)
+			colorGridPane.setVisible(true);
 
 	}
 
-
-	@FXML
-	public void drawClicked()
-	{
-		Player player = TABLE_CLASSIC.getCurrentPlayer();
-
-		if (player.getId() != BuildMP.PG.PLAYER) return;
-
-		player.draw();
-		pass.setDisable(false);
-	}
-	@FXML
-	public void passClicked()
-	{
-		pass.setDisable(true);
-
-		beep();
-		TABLE_CLASSIC.getUser().setHasPassed();
-
-	}
-
-
-	@FXML
-	public void redClicked()
-	{
-		beep();
-		((WildCard) TABLE_CLASSIC.getUser().getChosenCard()).setColor(Card.Color.RED);
-		colorGrid.setVisible(false);
-	}
-	@FXML
-	public void blueClicked()
-	{
-		beep();
-		((WildCard) TABLE_CLASSIC.getUser().getChosenCard()).setColor(Card.Color.BLUE);
-		colorGrid.setVisible(false);
-	}
-	@FXML
-	public void yellowClicked()
-	{
-		beep();
-		((WildCard) TABLE_CLASSIC.getUser().getChosenCard()).setColor(Card.Color.YELLOW);
-		colorGrid.setVisible(false);
-	}
-	@FXML
-	public void greenClicked()
-	{
-		beep();
-		((WildCard) TABLE_CLASSIC.getUser().getChosenCard()).setColor(Card.Color.GREEN);
-		colorGrid.setVisible(false);
-	}
-
-
-	@FXML
-	public void sayUno()
-	{
-		TABLE_CLASSIC.getUser().sayUno();
-		juno.setVisible(false);
-	}
 
 	@Override
 	public void draw(DrawData drawData)
@@ -232,12 +265,11 @@ public class GameplayClassicController implements Gameplay
 				userHand.getChildren().add(imageView);
 				fixWidth(userHand);
 			}
-			case BOT1 -> drawBot(botHand1);
-			case BOT2 -> drawBot(botHand2);
-			case BOT3 -> drawBot(botHand3);
+			case BOT1 -> drawBot(bot1Hand);
+			case BOT2 -> drawBot(bot2Hand);
+			case BOT3 -> drawBot(bot3Hand);
 		}
 	}
-
 	private void drawBot(HBox botHand)
 	{
 		ImageView imageView = new ImageView(new Image(String.format("file:\\%s\\src\\main\\resources\\org\\juno\\images\\back.png", System.getProperty("user.dir"))));
@@ -254,7 +286,9 @@ public class GameplayClassicController implements Gameplay
 		beep();
 		if (discardData.player() == null)
 		{
-			cardDiscarded.setImage(new Image(String.format("file:\\%s\\src\\main\\resources\\org\\juno\\images\\%s%d.png", System.getProperty("user.dir"), discardData.color().toString(), discardData.value().getVal())));
+			thirdDiscarded.setImage(secondDiscarded.getImage());
+			secondDiscarded.setImage(firstDiscarded.getImage());
+			firstDiscarded.setImage(new Image(String.format("file:\\%s\\src\\main\\resources\\org\\juno\\images\\%s%d.png", System.getProperty("user.dir"), discardData.color().toString(), discardData.value().getVal())));
 			return;
 		}
 		switch (discardData.player())
@@ -275,21 +309,23 @@ public class GameplayClassicController implements Gameplay
 			}
 			case BOT1 ->
 			{
-				botHand1.getChildren().remove(0);
-				fixWidth(botHand1);
+				bot1Hand.getChildren().remove(0);
+				fixWidth(bot1Hand);
 			}
 			case BOT2 ->
 			{
-				botHand2.getChildren().remove(0);
-				fixWidth(botHand2);
+				bot2Hand.getChildren().remove(0);
+				fixWidth(bot2Hand);
 			}
 			case BOT3 ->
 			{
-				botHand3.getChildren().remove(0);
-				fixWidth(botHand3);
+				bot3Hand.getChildren().remove(0);
+				fixWidth(bot3Hand);
 			}
 		}
-		cardDiscarded.setImage(new Image(String.format("file:\\%s\\src\\main\\resources\\org\\juno\\images\\%s%d.png", System.getProperty("user.dir"), discardData.color().toString(), discardData.value().getVal())));
+		thirdDiscarded.setImage(secondDiscarded.getImage());
+		secondDiscarded.setImage(firstDiscarded.getImage());
+		firstDiscarded.setImage(new Image(String.format("file:\\%s\\src\\main\\resources\\org\\juno\\images\\%s%d.png", System.getProperty("user.dir"), discardData.color().toString(), discardData.value().getVal())));
 	}
 	private void fixWidth(HBox box)
 	{
@@ -300,21 +336,20 @@ public class GameplayClassicController implements Gameplay
 		box.setSpacing(-spacing);
 	}
 
-
 	@Override
 	public void turn(TurnData turnData)
 	{
-		pass.setDisable(true);
-		circle1.setFill(Color.WHITE);
-		circle2.setFill(Color.WHITE);
-		circle3.setFill(Color.WHITE);
-		circle4.setFill(Color.WHITE);
+		passButton.setDisable(true);
+		userCircle.setFill(Color.WHITE);
+		bot1Circle.setFill(Color.WHITE);
+		bot2Circle.setFill(Color.WHITE);
+		bot3Circle.setFill(Color.WHITE);
 		switch (turnData.player())
 		{
-			case PLAYER -> circle1.setFill(Color.YELLOW);
-			case BOT1 -> circle2.setFill(Color.YELLOW);
-			case BOT2 -> circle3.setFill(Color.YELLOW);
-			case BOT3 -> circle4.setFill(Color.YELLOW);
+			case PLAYER -> userCircle.setFill(Color.YELLOW);
+			case BOT1 -> bot1Circle.setFill(Color.YELLOW);
+			case BOT2 -> bot2Circle.setFill(Color.YELLOW);
+			case BOT3 -> bot3Circle.setFill(Color.YELLOW);
 		}
 
 	}
@@ -323,24 +358,78 @@ public class GameplayClassicController implements Gameplay
 	{
 		switch (effectData.effect())
 		{
-			case ONECARD -> juno.setVisible(true);
+			case ONECARD -> junoButton.setVisible(true);
 			case ENDMATCH -> nextMatch();
 			case STARTGAME -> reset();
 			case ENDGAME -> goEndgame();
-			case DIDNTSAYUNO -> juno.setVisible(false);
+			case DIDNTSAYUNO -> junoButton.setVisible(false);
 		}
 	}
 	@Override
 	public void doSwitch(SwitchData switchData)
 	{
-		//Has to be void because this modality doesn't support the switch
-		try
+		System.out.println("HAND TO SWITCH " + switchData.newHand());
+		System.out.println("FROM " + switchData.fromPg());
+		System.out.println("TO " + switchData.toPg());
+
+		int userSize = userHand.getChildren().size();
+		userHand.getChildren().clear();
+
+		for (Card card : switchData.newHand())
 		{
-			throw new UnsupportedModalityException("CLASSIC can't do SWITCH operation");
-		} catch (UnsupportedModalityException err)
+			draw(new DrawData(BuildMP.PG.PLAYER, card.getColor(), card.getValue()));
+		}
+
+
+		if (switchData.fromPg() == null)
 		{
-			System.out.println(err.getMessage());
-			err.printStackTrace();
+			int bot1Size = bot1Hand.getChildren().size();
+			int bot2Size = bot2Hand.getChildren().size();
+
+			bot1Hand.getChildren().clear();
+			bot2Hand.getChildren().clear();
+			bot3Hand.getChildren().clear();
+
+
+			for (int i = 0; i < userSize; i++)
+			{
+				draw(new DrawData(BuildMP.PG.BOT1, null, null));
+			}
+			for (int i = 0; i < bot1Size; i++)
+			{
+				draw(new DrawData(BuildMP.PG.BOT2, null, null));
+			}
+			for (int i = 0; i < bot2Size; i++)
+			{
+				draw(new DrawData(BuildMP.PG.BOT3, null, null));
+			}
+		} else
+		{
+			if (switchData.fromPg() != BuildMP.PG.PLAYER)
+			{
+				switch (switchData.fromPg())
+				{
+					case BOT1 -> bot1Hand.getChildren().clear();
+					case BOT2 -> bot2Hand.getChildren().clear();
+					case BOT3 -> bot3Hand.getChildren().clear();
+				}
+				for (int i = 0; i < userSize; i++)
+				{
+					draw(new DrawData(switchData.fromPg(), null, null));
+				}
+			} else
+			{
+				switch (switchData.toPg())
+				{
+					case BOT1 -> bot1Hand.getChildren().clear();
+					case BOT2 -> bot2Hand.getChildren().clear();
+					case BOT3 -> bot3Hand.getChildren().clear();
+				}
+				for (int i = 0; i < userSize; i++)
+				{
+					draw(new DrawData(switchData.toPg(), null, null));
+				}
+			}
 		}
 	}
 
@@ -363,7 +452,7 @@ public class GameplayClassicController implements Gameplay
 		Label label;
 
 		VBox layout = new VBox();
-		for (Player player : TABLE_CLASSIC.getPlayers())
+		for (Player player : TABLE_TRADE.getPlayers())
 		{
 			label = new Label(String.format("\t%s:\t\t\t%d/500", player.getId(), player.getPoints()));
 			label.setPrefSize(500, 100);
@@ -395,7 +484,7 @@ public class GameplayClassicController implements Gameplay
 		exit.setOnAction(x ->
 		{
 			buttonClick();
-			TABLE_CLASSIC.stopEarlier();
+			TABLE_TRADE.stopEarlier();
 			win.close();
 		});
 
@@ -411,17 +500,17 @@ public class GameplayClassicController implements Gameplay
 	}
 	private void goEndgame()
 	{
-		GEN_VIEW.changeScene(GenView.SCENES.ENDGAME, anchorPane);
+		GEN_VIEW.changeScene(GenView.SCENES.ENDGAME, anchor);
 
-		((EndgameController) GEN_VIEW.getEndgame().getUserData()).load(TABLE_CLASSIC);
+		((EndgameController) GEN_VIEW.getEndgame().getUserData()).load(TABLE_TRADE);
 	}
 	private void reset()
 	{
 		userHand.getChildren().clear();
-		botHand1.getChildren().clear();
-		botHand2.getChildren().clear();
-		botHand3.getChildren().clear();
-		TABLE_CLASSIC.canStart();
+		bot1Hand.getChildren().clear();
+		bot2Hand.getChildren().clear();
+		bot3Hand.getChildren().clear();
+		TABLE_TRADE.canStart();
 	}
 
 
@@ -437,5 +526,6 @@ public class GameplayClassicController implements Gameplay
 	{
 		AUDIO_PLAYER.play(AudioPlayer.Sounds.BUTTONCLICK);
 	}
+
 
 }

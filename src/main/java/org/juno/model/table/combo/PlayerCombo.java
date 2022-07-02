@@ -75,7 +75,6 @@ public class PlayerCombo extends Player
 	@Override
 	public Card draw()
 	{
-		System.out.println("COMINCIO A PESCARE");
 		Card first = DISCARD_PILE.getFirst();
 
 
@@ -85,7 +84,6 @@ public class PlayerCombo extends Player
 		{
 
 			cardDrawn = super.draw();
-			System.out.println("HO PESCATO " + cardDrawn);
 			if (cardDrawn == null) return null;
 
 			hasDrawn = false;
@@ -95,6 +93,7 @@ public class PlayerCombo extends Player
 				hasDrawn = true;
 				return cardDrawn;
 			}
+			if (id != BuildMP.PG.PLAYER) delay(700);
 		}
 	}
 

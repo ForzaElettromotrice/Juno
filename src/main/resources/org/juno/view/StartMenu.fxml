@@ -121,11 +121,11 @@
             </GridPane.margin>
             <Image url="@../images/yframe.png"/>
         </ImageView>
-        <ImageView fitHeight="365.0" fitWidth="623.0" pickOnBounds="true" GridPane.columnIndex="1"
-                   GridPane.rowIndex="1">
+        <ImageView fitHeight="666.666666" fitWidth="545.333333" pickOnBounds="true" rotate="30.0"
+                   GridPane.columnIndex="1" GridPane.rowIndex="1">
             <Image url="@../images/logo.png"/>
             <GridPane.margin>
-                <Insets left="15.0"/>
+                <Insets left="38.0"/>
             </GridPane.margin>
         </ImageView>
     </GridPane>

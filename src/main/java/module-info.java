@@ -6,9 +6,7 @@ module org.juno
 
 	opens org.juno to javafx.fxml;
 	exports org.juno;
-	exports org.juno.model.table.classic;
-	exports org.juno.model.table.combo;
-	exports org.juno.model.table.trade;
+	exports org.juno.model.table;
 	exports org.juno.controller;
 	exports org.juno.view;
 	exports org.juno.model.deck;

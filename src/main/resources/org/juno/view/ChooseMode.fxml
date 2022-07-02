@@ -13,15 +13,15 @@
             fx:controller="org.juno.controller.ChooseModeController">
    <HBox alignment="CENTER" layoutX="210.0" layoutY="350.0" prefHeight="300.0" prefWidth="1500.0" spacing="200.0">
       <ImageView fitHeight="300.0" fitWidth="300.0" onMouseClicked="#classicClicked" onMouseEntered="#classicEntered"
-                 onMouseExited="#classicExited" pickOnBounds="true" preserveRatio="true">
-         <Image url="@../images/logo.png"/>
+                 onMouseExited="#classicExited" pickOnBounds="true" preserveRatio="true" rotate="30.0">
+         <Image url="@../images/logoClassic.png"/>
       </ImageView>
       <ImageView fitHeight="300.0" fitWidth="300.0" onMouseClicked="#comboClicked" onMouseEntered="#comboEntered"
-                 onMouseExited="#comboExited" pickOnBounds="true" preserveRatio="true">
-         <Image url="@../images/logoReflex.png"/>
+                 onMouseExited="#comboExited" pickOnBounds="true" preserveRatio="true" rotate="30.0">
+         <Image url="@../images/logoCombo.png"/>
       </ImageView>
       <ImageView fitHeight="300.0" fitWidth="300.0" onMouseClicked="#tradeClicked" onMouseEntered="#tradeEntered"
-                 onMouseExited="#tradeExited" pickOnBounds="true" preserveRatio="true">
+                 onMouseExited="#tradeExited" pickOnBounds="true" preserveRatio="true" rotate="30.0">
          <Image url="@../images/logoTrade.png"/>
       </ImageView>
    </HBox>

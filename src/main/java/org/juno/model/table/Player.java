@@ -87,6 +87,7 @@ public abstract class Player extends Observable
 	public void chooseCard(Card.Color color, Card.Value value)
 	{
 		Card first = DISCARD_PILE.getFirst();
+		System.out.println(hand);
 		for (Card card : hand)
 		{
 			if (card.getValue() == value && card.getColor() == color && card.isValid(first))
@@ -229,5 +230,17 @@ public abstract class Player extends Observable
 		hasPassed = false;
 		hasDrawn = false;
 		saidUno = false;
+	}
+
+
+	protected void delay(int millis)
+	{
+		try
+		{
+			Thread.sleep(millis);
+		} catch (InterruptedException err)
+		{
+			Thread.currentThread().interrupt();
+		}
 	}
 }
