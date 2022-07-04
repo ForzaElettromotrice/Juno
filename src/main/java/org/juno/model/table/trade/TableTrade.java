@@ -16,165 +16,165 @@ import java.util.Collection;
  */
 public class TableTrade extends Table
 {
-	private static final TableTrade INSTANCE = new TableTrade();
+    private static final TableTrade INSTANCE = new TableTrade();
 
 
-	private boolean tradeAll;
-	private boolean tradeOne;
+    private boolean tradeAll;
+    private boolean tradeOne;
 
 
-	private TableTrade()
-	{
-		super(new TurnOrder(TurnOrder.MODALITY.TRADE));
-	}
+    private TableTrade()
+    {
+        super(new TurnOrder(TurnOrder.MODALITY.TRADE));
+    }
 
-	public static TableTrade getINSTANCE()
-	{
-		return INSTANCE;
-	}
-
-
-	@Override
-	protected boolean startTurn(Player player)
-	{
-		PlayerTrade currentPlayer = (PlayerTrade) player;
-
-		System.out.println("TURNO DI " + currentPlayer.getId());
-		System.out.println("MANO INIZIALE = " + currentPlayer.getHand());
-
-		resetTurn();
-		currentPlayer.resetTurn();
-
-		boolean endTurn = false;
-
-		int delay;
-		int delayUno;
-
-		Card chosenCard;
-
-		if (currentPlayer.getId() == BuildMP.PG.PLAYER)
-		{
-			delay = 100;
-			delayUno = 2000;
-		} else
-		{
-			delay = 1000;
-			delayUno = 100;
-		}
-
-		while (!endTurn && !stopEarlier) //È possibile ci siano ritardi fra i thread e che il codice entri qui anche se non dovrebbe, stopEarlier evita il problema
-		{
-			delay(delay);
+    public static TableTrade getINSTANCE()
+    {
+        return INSTANCE;
+    }
 
 
-			if (currentPlayer.hasChosen())
-			{
-				chosenCard = currentPlayer.getChosenCard();
-				if ((chosenCard.getColor() != Card.Color.BLACK && chosenCard.getValue() != Card.Value.SEVEN) || (chosenCard.getValue() == Card.Value.SEVEN && currentPlayer.readyToTrade()))
-				{
-					checkEffects(chosenCard);
-					DISCARD_PILE.discard(chosenCard);
-					setChanged();
-					try
-					{
-						notifyObservers(BUILD_MP.createMP(BuildMP.Actions.DISCARD, currentPlayer.getId(), chosenCard.getColor(), chosenCard.getValue()));
-					} catch (MessagePackageTypeNotExistsException err)
-					{
-						System.out.println(err.getMessage());
-						err.printStackTrace();
-					}
-					clearChanged();
-					endTurn = true;
-				}
-			} else endTurn = currentPlayer.hasPassed();
-		}
+    @Override
+    protected boolean startTurn(Player player)
+    {
+        PlayerTrade currentPlayer = (PlayerTrade) player;
 
-		if (tradeAll)
-		{
-			doTrade0();
-			tradeAll = false;
+        System.out.println("TURNO DI " + currentPlayer.getId());
+        System.out.println("MANO INIZIALE = " + currentPlayer.getHand());
 
-			setChanged();
-			try
-			{
-				notifyObservers(BUILD_MP.createMP(BuildMP.Actions.SWITCH, ((PlayerTrade) turnOrder.getUser()).getHand(), null, null));
-			} catch (MessagePackageTypeNotExistsException err)
-			{
-				System.out.println(err.getMessage());
-				err.printStackTrace();
-			}
-			clearChanged();
-		} else if (tradeOne)
-		{
-			doTrade7(currentPlayer, currentPlayer.getTargetTrade());
-			setChanged();
-			try
-			{
-				notifyObservers(BUILD_MP.createMP(BuildMP.Actions.SWITCH, ((PlayerTrade) turnOrder.getUser()).getHand(), currentPlayer.getId(), currentPlayer.getTargetTrade()));
-			} catch (MessagePackageTypeNotExistsException err)
-			{
-				System.out.println(err.getMessage());
-				err.printStackTrace();
-			}
-			clearChanged();
-		}
+        resetTurn();
+        currentPlayer.resetTurn();
 
-		System.out.println("MANO finale = " + currentPlayer.getHand());
-		System.out.println("\n");
+        boolean endTurn = false;
 
-		return checkUno(currentPlayer, delayUno);
-	}
+        int delay;
+        int delayUno;
+
+        Card chosenCard;
+
+        if (currentPlayer.getId() == BuildMP.PG.PLAYER)
+        {
+            delay = 100;
+            delayUno = 2000;
+        } else
+        {
+            delay = 1000;
+            delayUno = 100;
+        }
+
+        while (!endTurn && !stopEarlier) //È possibile ci siano ritardi fra i thread e che il codice entri qui anche se non dovrebbe, stopEarlier evita il problema
+        {
+            delay(delay);
 
 
-	@Override
-	protected void checkEffects(Card cardPlayed)
-	{
-		if (cardPlayed.getValue() == Card.Value.ZERO)
-		{
-			tradeAll = true;
-		} else if (cardPlayed.getValue() == Card.Value.SEVEN)
-		{
-			tradeOne = true;
-		} else
-		{
-			super.checkEffects(cardPlayed);
-		}
-	}
+            if (currentPlayer.hasChosen())
+            {
+                chosenCard = currentPlayer.getChosenCard();
+                if ((chosenCard.getColor() != Card.Color.BLACK && chosenCard.getValue() != Card.Value.SEVEN) || (chosenCard.getValue() == Card.Value.SEVEN && currentPlayer.readyToTrade()))
+                {
+                    checkEffects(chosenCard);
+                    DISCARD_PILE.discard(chosenCard);
+                    setChanged();
+                    try
+                    {
+                        notifyObservers(BUILD_MP.createMP(BuildMP.Actions.DISCARD, currentPlayer.getId(), chosenCard.getColor(), chosenCard.getValue()));
+                    } catch (MessagePackageTypeNotExistsException err)
+                    {
+                        System.out.println(err.getMessage());
+                        err.printStackTrace();
+                    }
+                    clearChanged();
+                    endTurn = true;
+                }
+            } else endTurn = currentPlayer.hasPassed();
+        }
+
+        if (tradeAll)
+        {
+            doTrade0();
+            tradeAll = false;
+
+            setChanged();
+            try
+            {
+                notifyObservers(BUILD_MP.createMP(BuildMP.Actions.SWITCH, ((PlayerTrade) turnOrder.getUser()).getHand(), null, null));
+            } catch (MessagePackageTypeNotExistsException err)
+            {
+                System.out.println(err.getMessage());
+                err.printStackTrace();
+            }
+            clearChanged();
+        } else if (tradeOne)
+        {
+            doTrade7(currentPlayer, currentPlayer.getTargetTrade());
+            setChanged();
+            try
+            {
+                notifyObservers(BUILD_MP.createMP(BuildMP.Actions.SWITCH, ((PlayerTrade) turnOrder.getUser()).getHand(), currentPlayer.getId(), currentPlayer.getTargetTrade()));
+            } catch (MessagePackageTypeNotExistsException err)
+            {
+                System.out.println(err.getMessage());
+                err.printStackTrace();
+            }
+            clearChanged();
+        }
+
+        System.out.println("MANO finale = " + currentPlayer.getHand());
+        System.out.println("\n");
+
+        return checkUno(currentPlayer, delayUno);
+    }
 
 
-	private void doTrade7(PlayerTrade from, BuildMP.PG toPlayer)
-	{
-		Collection<Card> hand1 = from.getHand();
+    @Override
+    protected void checkEffects(Card cardPlayed)
+    {
+        if (cardPlayed.getValue() == Card.Value.ZERO)
+        {
+            tradeAll = true;
+        } else if (cardPlayed.getValue() == Card.Value.SEVEN)
+        {
+            tradeOne = true;
+        } else
+        {
+            super.checkEffects(cardPlayed);
+        }
+    }
 
-		PlayerTrade player2 = (PlayerTrade) turnOrder.getPlayer(toPlayer);
 
-		Collection<Card> hand2 = player2.getHand();
+    private void doTrade7(PlayerTrade from, BuildMP.PG toPlayer)
+    {
+        Collection<Card> hand1 = from.getHand();
 
-		from.setHand(hand2);
-		player2.setHand(hand1);
-	}
+        PlayerTrade player2 = (PlayerTrade) turnOrder.getPlayer(toPlayer);
 
-	private void doTrade0()
-	{
-		Collection<Card> newHand = ((PlayerTrade) turnOrder.getCurrentPlayer()).getHand();
-		Collection<Card> aux;
+        Collection<Card> hand2 = player2.getHand();
 
-		for (int i = 0; i < 4; i++)
-		{
-			PlayerTrade player = (PlayerTrade) turnOrder.nextPlayer();
-			aux = player.getHand();
-			player.setHand(newHand);
-			newHand = aux;
-		}
-	}
+        from.setHand(hand2);
+        player2.setHand(hand1);
+    }
 
-	@Override
-	protected void resetTurn()
-	{
-		super.resetTurn();
-		tradeOne = false;
-		tradeAll = false;
-	}
+    private void doTrade0()
+    {
+        Collection<Card> newHand = ((PlayerTrade) turnOrder.getCurrentPlayer()).getHand();
+        Collection<Card> aux;
+
+        for (int i = 0; i < 4; i++)
+        {
+            PlayerTrade player = (PlayerTrade) turnOrder.nextPlayer();
+            aux = player.getHand();
+            player.setHand(newHand);
+            newHand = aux;
+        }
+    }
+
+    @Override
+    protected void resetTurn()
+    {
+        super.resetTurn();
+        tradeOne = false;
+        tradeAll = false;
+    }
 
 
 }

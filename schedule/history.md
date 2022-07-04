@@ -156,7 +156,7 @@
     * Modified methods startMatch and checkPoints (now updatePoints, adds points to the winning
         player) to be valid for changes.
         
-##07-08/05/2022
+##07-08/06/2022
 
 1. Started working on the GUI: created controllers, view and FXML files for the various menus.
 2. Designed Start menu and implemented exit, stats and settings buttons: the last two change scene,
@@ -165,14 +165,14 @@
     the methods shared between the various views, such as change scene and the loader.
 4. Started designing settings with back button.
 
-##09-11/05/2022
+##09-11/06/2022
 
 1. Chosen images to use in StartMenu layout, for example the background.
 2. Designed the game logo.
 3. Finished designing StartMenu layout: four buttons (exit, stats, settings and play) that have
     a lights border appearing on mouse passing.
 
-##12/05/2022
+##12/06/2022
 
 1. Created the login scene: if it is the first access or if data is corrupted, it will ask to 
     choose a username and a standard avatar. It also saves them in user.txt.
@@ -184,7 +184,7 @@
 5. Made border appear when mouse passes on buttons in all menus.
 6. Finished designing Login layout.
 
-##13-15/05/2022
+##13-15/06/2022
 
 1. Finished designing Settings layout: it lets you change music and sound volume; delete your
     account; reset your level.
@@ -195,7 +195,7 @@
 5. Removed the various views since we only need GenView for now.
 6. Added a new font to be used in the whole project.
 
-##18 to 20/05/2022
+##18 to 20/06/2022
 
 1. Added transitions between scenes when changed.
 2. Added some decorative images on mouse passing in ChooseMode.
@@ -204,7 +204,7 @@
 4. Added sounds to menus.
 5. Converted sound compendium to enum.
 
-##21/05/2022
+##21/06/2022
 
 1. Changed cards design.
 2. Renamed and refactored some files.
@@ -224,7 +224,7 @@
     to GenView with notifyObservers.
 8. Now the game plays on multiple threads. It is starting to work!
 
-##22/05/2022
+##22/06/2022
 
 1. Changed music when the game starts.
 2. Created the methods that change the view on notify: turn, discard, draw, effect (effects are for 
@@ -237,12 +237,27 @@
     thread sleep to give time to the observers to notify the view of card played, etc.
 6. Now the game works fine!!
 
+##23/06/2022
+
+1. Minor changes to names and how some methods work.
+2. Created EndGameController: it has a progress bar that shows the exp progression, current level, avatar,
+    and how much exp was gained. From here you can start a new match or go to main menu.
+3. Fixed the point overview in GameplayController and game flow in Table.
+4. Added sound effects and card selection animation.
+
+##27-28-29/06/2022
+
+1. Rewrote the code to be cleaner and renamed some files.
+2. Refactored some methods.
+
+##30/06/2022
+
+1. Remade graphics and game screens.
+2. Changed Reflex mode to be Combo mode: it only has piling and infinite draw.
+3. Started Combo and Trade modes: they work but still have some bugs. Each mode has its Table, its Player and its Bot.
+
 ##TODO:
 
-1. add sound effects to game
-2. add animations
-3. change back cards and colored wild cards
-4. add different modes
-5. gameplay background
-6. make the buttons in points overview work...!
+1. resolve bugs in trade and combo
+2. check fonts and other things that might differ
 
