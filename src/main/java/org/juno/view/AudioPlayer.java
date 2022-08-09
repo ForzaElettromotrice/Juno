@@ -3,6 +3,7 @@ package org.juno.view;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.util.Duration;
+import org.juno.model.user.User;
 
 import java.io.File;
 
@@ -14,8 +15,8 @@ import java.io.File;
 public class AudioPlayer
 {
     private static final AudioPlayer INSTANCE = new AudioPlayer();
-    private static final String ERROR_MESSAGE = "Questo suono non esiste!!";
 
+    private MediaPlayer loginMusic;
     private MediaPlayer menuMusic;
     private MediaPlayer gameMusic;
     private MediaPlayer buttonClick;
@@ -25,12 +26,13 @@ public class AudioPlayer
 
     public enum Sounds
     {
-        MENUMUSIC(0),
-        GAMEMUSIC(1),
-        BUTTONCLICK(2),
-        CURSORSELECT(3),
-        ALERTBEEP(4),
-        CARDFLIP(5);
+        LOGINMUSIC(0),
+        MENUMUSIC(1),
+        GAMEMUSIC(2),
+        BUTTONCLICK(3),
+        CURSORSELECT(4),
+        ALERTBEEP(5),
+        CARDFLIP(6);
 
         private final int value;
 
@@ -67,11 +69,14 @@ public class AudioPlayer
 
     public void setMusicVolume(double n)
     {
+        User.getInstance().setMusicVolume(n);
+        loginMusic.setVolume(n);
         menuMusic.setVolume(n);
         gameMusic.setVolume(n);
     }
     public void setEffectsVolume(double n)
     {
+        User.getInstance().setEffectsVolume(n);
         buttonClick.setVolume(n);
         cursorSelect.setVolume(n);
         alertBeep.setVolume(n);
@@ -81,6 +86,7 @@ public class AudioPlayer
 
     public void load()
     {
+        loginMusic = new MediaPlayer(new Media(new File("src/main/resources/org/juno/sounds/loginMusic.mp3").toURI().toString()));
         menuMusic = new MediaPlayer(new Media(new File("src/main/resources/org/juno/sounds/menuMusic.mp3").toURI().toString()));
         gameMusic = new MediaPlayer(new Media(new File("src/main/resources/org/juno/sounds/gameMusic.mp3").toURI().toString()));
         buttonClick = new MediaPlayer(new Media(new File("src/main/resources/org/juno/sounds/buttonClick.mp3").toURI().toString()));
@@ -89,6 +95,7 @@ public class AudioPlayer
         cardFlip = new MediaPlayer(new Media(new File("src/main/resources/org/juno/sounds/cardFlip.mp3").toURI().toString()));
 
         // Needed to loop the songs
+        loginMusic.setOnEndOfMedia(() -> loginMusic.seek(Duration.ZERO));
 
         menuMusic.setOnEndOfMedia(
                 () -> menuMusic.seek(Duration.ZERO)
@@ -105,6 +112,11 @@ public class AudioPlayer
 
         switch (s)
         {
+            case LOGINMUSIC ->
+            {
+                loginMusic.seek(Duration.ZERO);
+                loginMusic.play();
+            }
             case MENUMUSIC ->
             {
                 menuMusic.seek(Duration.ZERO);
@@ -141,6 +153,7 @@ public class AudioPlayer
     {
         switch (s)
         {
+            case LOGINMUSIC -> loginMusic.stop();
             case MENUMUSIC -> menuMusic.stop();
             case GAMEMUSIC -> gameMusic.stop();
             case BUTTONCLICK -> buttonClick.stop();

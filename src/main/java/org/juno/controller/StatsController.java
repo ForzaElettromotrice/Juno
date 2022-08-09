@@ -15,6 +15,9 @@ import org.juno.view.AudioPlayer;
 import org.juno.view.GenView;
 
 import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 
 /**
  * Defines StatsNew ,
@@ -26,7 +29,6 @@ public class StatsController
 
 	private static final GenView GEN_VIEW = GenView.getINSTANCE();
 	private static final AudioPlayer AUDIO_PLAYER = AudioPlayer.getINSTANCE();
-	private static final User USER = User.getINSTANCE();
 
 	private static final String USER_DIR = System.getProperty("user.dir");
 
@@ -168,24 +170,33 @@ public class StatsController
 
 	private void saveData()
 	{
-		USER.setNickname(nameTextfield.getText());
-		USER.setAvatar(((ImagePattern) circle.getFill()).getImage().getUrl());
+		try
+		{
+			Files.delete(Path.of(USER_DIR + "/src/main/resources/org/juno/model/user/" + User.getInstance().getNickname() + ".txt"));
+		} catch (IOException err)
+		{
+			System.out.println(err.getMessage());
+			err.printStackTrace();
+		}
+		User.getInstance().setNickname(nameTextfield.getText());
+		User.getInstance().setAvatar(((ImagePattern) circle.getFill()).getImage().getUrl());
+		User.save();
 	}
 
 	public void load()
 	{
 		avatarBox.setVisible(false);
 
-		nameTextfield.setText(USER.getNickname());
-		victoriesCountLabel.setText("" + USER.getVictories());
-		defeatsCountLabel.setText("" + USER.getDefeats());
-		matchesCountLabel.setText("" + USER.getTotalMatches());
+		nameTextfield.setText(User.getInstance().getNickname());
+		victoriesCountLabel.setText("" + User.getInstance().getVictories());
+		defeatsCountLabel.setText("" + User.getInstance().getDefeats());
+		matchesCountLabel.setText("" + User.getInstance().getTotalMatches());
 
-		levelLabel.setText("" + USER.getLevel());
-		levelProgressBar.setProgress(USER.getProgress());
+		levelLabel.setText("" + User.getInstance().getLevel());
+		levelProgressBar.setProgress(User.getInstance().getProgress());
 
 
-		circle.setFill(new ImagePattern(new Image(USER.getAvatar())));
+		circle.setFill(new ImagePattern(new Image(User.getInstance().getAvatar())));
 	}
 
 }

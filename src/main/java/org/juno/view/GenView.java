@@ -15,6 +15,7 @@ import org.juno.controller.GameplayComboController;
 import org.juno.controller.GameplayTradeController;
 import org.juno.datapackage.*;
 import org.juno.model.table.TurnOrder;
+import org.juno.model.user.User;
 
 import java.io.IOException;
 import java.util.Observable;
@@ -32,6 +33,7 @@ public class GenView implements Observer
 	private Stage window;
 
 	private Scene login;
+	private Scene register;
 	private Scene startMenu;
 	private Scene chooseMode;
 	private Scene gameplayClassic;
@@ -39,6 +41,9 @@ public class GenView implements Observer
 	private Scene gameplayTrade;
 	private Scene stats;
 	private Scene settings;
+	private Scene endMatchClassic;
+	private Scene endMatchCombo;
+	private Scene endMatchTrade;
 	private Scene endgame;
 
 	private Gameplay currentGameController;
@@ -46,6 +51,7 @@ public class GenView implements Observer
 	public enum SCENES
 	{
 		LOGIN,
+		REGISTER,
 		STARTMENU,
 		CHOOSEMODE,
 		STATS,
@@ -53,7 +59,10 @@ public class GenView implements Observer
 		GAMEPLAYCLASSIC,
 		ENDGAME,
 		GAMEPLAYCOMBO,
-		GAMEPLAYTRADE
+		GAMEPLAYTRADE,
+		ENDMATCHCLASSIC,
+		ENDMATCHCOMBO,
+		ENDMATCHTRADE
 	}
 
 
@@ -74,6 +83,10 @@ public class GenView implements Observer
 	public Scene getLogin()
 	{
 		return login;
+	}
+	public Scene getRegister()
+	{
+		return register;
 	}
 	public Scene getStartMenu()
 	{
@@ -103,6 +116,18 @@ public class GenView implements Observer
 	{
 		return settings;
 	}
+	public Scene getEndMatchClassic()
+	{
+		return endMatchClassic;
+	}
+	public Scene getEndMatchCombo()
+	{
+		return endMatchCombo;
+	}
+	public Scene getEndMatchTrade()
+	{
+		return endMatchTrade;
+	}
 	public Scene getEndgame()
 	{
 		return endgame;
@@ -129,6 +154,10 @@ public class GenView implements Observer
 		FXMLLoader loader = new FXMLLoader(GenView.class.getResource("Login.fxml"));
 		login = new Scene(loader.load());
 		login.setUserData(loader.getController());
+
+		loader = new FXMLLoader(GenView.class.getResource("Register.fxml"));
+		register = new Scene(loader.load());
+		register.setUserData(loader.getController());
 
 		loader = new FXMLLoader(GenView.class.getResource("StartMenu.fxml"));
 		startMenu = new Scene(loader.load());
@@ -161,10 +190,24 @@ public class GenView implements Observer
 		loader = new FXMLLoader(GenView.class.getResource("Endgame.fxml"));
 		endgame = new Scene(loader.load());
 		endgame.setUserData(loader.getController());
+
+		loader = new FXMLLoader(GenView.class.getResource("EndMatchClassic.fxml"));
+		endMatchClassic = new Scene(loader.load());
+		endMatchClassic.setUserData(loader.getController());
+
+		loader = new FXMLLoader(GenView.class.getResource("EndMatchCombo.fxml"));
+		endMatchCombo = new Scene(loader.load());
+		endMatchCombo.setUserData(loader.getController());
+
+		loader = new FXMLLoader(GenView.class.getResource("EndMatchTrade.fxml"));
+		endMatchTrade = new Scene(loader.load());
+		endMatchTrade.setUserData(loader.getController());
 	}
 	public void closeWindow()
 	{
+		User.save();
 		window.close();
+		System.exit(0);
 	}
 
 	public void changeScene(SCENES s, AnchorPane anchor)
@@ -172,6 +215,7 @@ public class GenView implements Observer
 		Scene scene = (switch (s)
 				{
 					case LOGIN -> login;
+					case REGISTER -> register;
 					case STARTMENU -> startMenu;
 					case CHOOSEMODE -> chooseMode;
 					case STATS -> stats;
@@ -180,6 +224,9 @@ public class GenView implements Observer
 					case ENDGAME -> endgame;
 					case GAMEPLAYCOMBO -> gameplayCombo;
 					case GAMEPLAYTRADE -> gameplayTrade;
+					case ENDMATCHCLASSIC -> endMatchClassic;
+					case ENDMATCHCOMBO -> endMatchCombo;
+					case ENDMATCHTRADE -> endMatchTrade;
 				});
 
 		makeFadeOut(scene, anchor);
@@ -217,7 +264,13 @@ public class GenView implements Observer
 		} else if (arg instanceof TurnData turnData) Platform.runLater(() -> currentGameController.turn(turnData));
 		else if (arg instanceof EffectData effectData)
 			Platform.runLater(() -> currentGameController.effect(effectData));
+		else if (arg instanceof GameflowData gameflowData)
+			Platform.runLater(() -> currentGameController.gameflow(gameflowData));
 		else if (arg instanceof SwitchData switchData)
 			Platform.runLater(() -> currentGameController.doSwitch(switchData));
+		else if (arg instanceof PointsData pointsData)
+		{
+			Platform.runLater(() -> currentGameController.getPoints(pointsData));
+		}
 	}
 }

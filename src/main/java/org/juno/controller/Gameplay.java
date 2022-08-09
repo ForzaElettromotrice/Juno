@@ -14,4 +14,6 @@ public interface Gameplay
 	void turn(TurnData turnData);
 	void effect(EffectData effectData);
 	void doSwitch(SwitchData switchData);
+	void gameflow(GameflowData gameflowData);
+	void getPoints(PointsData pointsData);
 }

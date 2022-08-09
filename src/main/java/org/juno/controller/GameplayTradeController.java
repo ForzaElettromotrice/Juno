@@ -1,37 +1,24 @@
 package org.juno.controller;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.geometry.Pos;
 import javafx.scene.Node;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
-import javafx.scene.text.Font;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
 import org.juno.datapackage.*;
 import org.juno.model.deck.Card;
-import org.juno.model.deck.DiscardPile;
 import org.juno.model.deck.WildCard;
 import org.juno.model.table.Player;
 import org.juno.model.table.trade.PlayerTrade;
 import org.juno.model.table.trade.TableTrade;
 import org.juno.view.AudioPlayer;
 import org.juno.view.GenView;
-
-import java.io.File;
-import java.net.URI;
-import java.net.URISyntaxException;
 
 /**
  * Defines GameplayTradeController ,
@@ -68,6 +55,8 @@ public class GameplayTradeController implements Gameplay
     public ImageView secondDiscarded;
     @FXML
     public ImageView thirdDiscarded;
+
+    public ImageView lastClicked;
 
 
     @FXML
@@ -193,49 +182,10 @@ public class GameplayTradeController implements Gameplay
     public void cardClicked(MouseEvent mouseEvent)
     {
         if (TABLE_TRADE.getCurrentPlayer().getId() != BuildMP.PG.PLAYER) return;
-        ImageView imageView = (ImageView) mouseEvent.getSource();
+        lastClicked = (ImageView) mouseEvent.getSource();
 
-        String name = "";
-
-        try
-        {
-            name = new File(new URI(imageView.getImage().getUrl())).getName();
-        } catch (URISyntaxException err)
-        {
-            System.out.println(err.getMessage());
-            err.printStackTrace();
-        }
-
-        Card.Color color = switch (name.charAt(0))
-                {
-                    case 'r' -> Card.Color.RED;
-                    case 'b' -> Card.Color.BLUE;
-                    case 'g' -> Card.Color.GREEN;
-                    case 'y' -> Card.Color.YELLOW;
-                    default -> Card.Color.BLACK;
-                };
-
-        Card.Value value = color == Card.Color.BLACK ? switch (name.substring(0, 2))
-                {
-                    case "13" -> Card.Value.JOLLY;
-                    default -> Card.Value.PLUSFOUR;
-                } :
-                switch (name.substring(1, 3))
-                        {
-                            case "0." -> Card.Value.ZERO;
-                            case "1." -> Card.Value.ONE;
-                            case "2." -> Card.Value.TWO;
-                            case "3." -> Card.Value.THREE;
-                            case "4." -> Card.Value.FOUR;
-                            case "5." -> Card.Value.FIVE;
-                            case "6." -> Card.Value.SIX;
-                            case "7." -> Card.Value.SEVEN;
-                            case "8." -> Card.Value.EIGHT;
-                            case "9." -> Card.Value.NINE;
-                            case "10" -> Card.Value.PLUSTWO;
-                            case "11" -> Card.Value.REVERSE;
-                            default -> Card.Value.STOP;
-                        };
+        Card.Value value = ((Card) lastClicked.getUserData()).getValue();
+        Card.Color color = ((Card) lastClicked.getUserData()).getColor();
 
         System.out.println(color + " " + value);
         TABLE_TRADE.getUser().chooseCard(color, value);
@@ -253,7 +203,9 @@ public class GameplayTradeController implements Gameplay
         {
             case PLAYER ->
             {
-                ImageView imageView = new ImageView(new Image(String.format("file:\\%s\\src\\main\\resources\\org\\juno\\images\\%s%d.png", System.getProperty("user.dir"), drawData.color().toString(), drawData.value().getVal())));
+                ImageView imageView = new ImageView(new Image(drawData.card().getUrl().getPath()));
+
+                imageView.setUserData(drawData.card());
 
                 imageView.setFitWidth(CARD_WIDTH_SCALED);
                 imageView.setFitHeight(CARD_HEIGHT_SCALED);
@@ -288,23 +240,14 @@ public class GameplayTradeController implements Gameplay
         {
             thirdDiscarded.setImage(secondDiscarded.getImage());
             secondDiscarded.setImage(firstDiscarded.getImage());
-            firstDiscarded.setImage(new Image(String.format("file:\\%s\\src\\main\\resources\\org\\juno\\images\\%s%d.png", System.getProperty("user.dir"), discardData.color().toString(), discardData.value().getVal())));
+            firstDiscarded.setImage(new Image(discardData.card().getUrl().getPath()));
             return;
         }
         switch (discardData.player())
         {
             case PLAYER ->
             {
-                String name = String.format("%s%d.png", (discardData.value().getVal() == 13 || discardData.value().getVal() == 14) ? "" : discardData.color().toString(), discardData.value().getVal());
-
-                for (Node child : userHand.getChildren())
-                {
-                    if (((ImageView) child).getImage().getUrl().endsWith(name))
-                    {
-                        userHand.getChildren().remove(child);
-                        break;
-                    }
-                }
+                userHand.getChildren().remove(lastClicked);
                 fixWidth(userHand);
             }
             case BOT1 ->
@@ -325,7 +268,7 @@ public class GameplayTradeController implements Gameplay
         }
         thirdDiscarded.setImage(secondDiscarded.getImage());
         secondDiscarded.setImage(firstDiscarded.getImage());
-        firstDiscarded.setImage(new Image(String.format("file:\\%s\\src\\main\\resources\\org\\juno\\images\\%s%d.png", System.getProperty("user.dir"), discardData.color().toString(), discardData.value().getVal())));
+        firstDiscarded.setImage(new Image(discardData.card().getFinalUrl().getPath()));
     }
     private void fixWidth(HBox box)
     {
@@ -358,11 +301,22 @@ public class GameplayTradeController implements Gameplay
     {
         switch (effectData.effect())
         {
-            case ONECARD -> junoButton.setVisible(true);
-            case ENDMATCH -> nextMatch();
-            case STARTGAME -> reset();
-            case ENDGAME -> goEndgame();
+            case STOP ->
+            {/*todo*/}
+            case REVERSE ->
+            {/*todo*/}
+            case PLUSTWO ->
+            {/*todo*/}
+            case PLUSFOUR ->
+            {/*todo*/}
+            case JOLLY ->
+            {/*todo*/}
+            case SAIDUNO ->
+            {/*todo*/}
             case DIDNTSAYUNO -> junoButton.setVisible(false);
+            case JUMPIN ->
+            {/*todo*/}
+            case ONECARD -> junoButton.setVisible(true);
         }
     }
     @Override
@@ -377,7 +331,7 @@ public class GameplayTradeController implements Gameplay
 
         for (Card card : switchData.newHand())
         {
-            draw(new DrawData(BuildMP.PG.PLAYER, card.getColor(), card.getValue()));
+            draw(new DrawData(BuildMP.PG.PLAYER, card));
         }
 
 
@@ -393,110 +347,53 @@ public class GameplayTradeController implements Gameplay
 
             for (int i = 0; i < userSize; i++)
             {
-                draw(new DrawData(BuildMP.PG.BOT1, null, null));
+                draw(new DrawData(BuildMP.PG.BOT1, null));
             }
             for (int i = 0; i < bot1Size; i++)
             {
-                draw(new DrawData(BuildMP.PG.BOT2, null, null));
+                draw(new DrawData(BuildMP.PG.BOT2, null));
             }
             for (int i = 0; i < bot2Size; i++)
             {
-                draw(new DrawData(BuildMP.PG.BOT3, null, null));
+                draw(new DrawData(BuildMP.PG.BOT3, null));
             }
         } else
         {
-            if (switchData.fromPg() != BuildMP.PG.PLAYER)
+            BuildMP.PG pg = switchData.fromPg() != BuildMP.PG.PLAYER ? switchData.fromPg() : switchData.toPg();
+
+            switch (pg)
             {
-                switch (switchData.fromPg())
-                {
-                    case BOT1 -> bot1Hand.getChildren().clear();
-                    case BOT2 -> bot2Hand.getChildren().clear();
-                    case BOT3 -> bot3Hand.getChildren().clear();
-                }
-                for (int i = 0; i < userSize; i++)
-                {
-                    draw(new DrawData(switchData.fromPg(), null, null));
-                }
-            } else
+                case BOT1 -> bot1Hand.getChildren().clear();
+                case BOT2 -> bot2Hand.getChildren().clear();
+                case BOT3 -> bot3Hand.getChildren().clear();
+            }
+            for (int i = 0; i < userSize; i++)
             {
-                switch (switchData.toPg())
-                {
-                    case BOT1 -> bot1Hand.getChildren().clear();
-                    case BOT2 -> bot2Hand.getChildren().clear();
-                    case BOT3 -> bot3Hand.getChildren().clear();
-                }
-                for (int i = 0; i < userSize; i++)
-                {
-                    draw(new DrawData(switchData.toPg(), null, null));
-                }
+                draw(new DrawData(pg, null));
             }
         }
+    }
+
+    @Override
+    public void gameflow(GameflowData gameflowData)
+    {
+        switch (gameflowData.gf())
+        {
+            case ENDGAME -> goEndgame();
+            case ENDMATCH -> nextMatch();
+            case STARTGAME -> reset();
+        }
+    }
+    @Override
+    public void getPoints(PointsData pointsData)
+    {
+        ((EndMatchTradeController) GEN_VIEW.getEndMatchTrade().getUserData()).load(pointsData);
     }
 
 
     private void nextMatch()
     {
-        Stage win = new Stage();
-        win.initModality(Modality.APPLICATION_MODAL);
-        win.setTitle("End-match points");
-        win.setMinHeight(500);
-        win.setMinWidth(500);
-        win.setResizable(false);
-
-        win.setOnCloseRequest(x ->
-        {
-            win.close();
-            reset();
-        });
-
-        Label label;
-
-        VBox layout = new VBox();
-        for (Player player : TABLE_TRADE.getPlayers())
-        {
-            label = new Label(String.format("\t%s:\t\t\t%d/500", player.getId(), player.getPoints()));
-            label.setPrefSize(500, 100);
-            label.setStyle("-fx-border-color: BLACK");
-            label.setFont(new Font(30));
-            layout.getChildren().add(label);
-        }
-
-        Button next = new Button("Next match");
-        Button exit = new Button("Exit game");
-
-
-        next.setMinSize(250, 100);
-        next.setFont(new Font(25));
-        next.setStyle("-fx-background-color: transparent; -fx-border-color: RED; -fx-border-width: 3");
-
-        next.setOnAction(x ->
-        {
-            buttonClick();
-            reset();
-            win.close();
-        });
-
-
-        exit.setMinSize(250, 100);
-        exit.setFont(new Font(25));
-        exit.setStyle("-fx-background-color: transparent; -fx-border-color: RED; -fx-border-width: 3");
-
-        exit.setOnAction(x ->
-        {
-            buttonClick();
-            TABLE_TRADE.stopEarlier();
-            win.close();
-        });
-
-
-        HBox buttons = new HBox(exit, next);
-        buttons.setAlignment(Pos.CENTER);
-        layout.getChildren().add(buttons);
-
-        Scene scene = new Scene(layout);
-
-        win.setScene(scene);
-        win.showAndWait();
+        GEN_VIEW.changeScene(GenView.SCENES.ENDMATCHTRADE, anchor);
     }
     private void goEndgame()
     {
@@ -504,7 +401,7 @@ public class GameplayTradeController implements Gameplay
 
         ((EndgameController) GEN_VIEW.getEndgame().getUserData()).load(TABLE_TRADE);
     }
-    private void reset()
+    public void reset()
     {
         userHand.getChildren().clear();
         bot1Hand.getChildren().clear();

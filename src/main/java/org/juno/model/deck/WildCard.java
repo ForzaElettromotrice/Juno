@@ -1,5 +1,7 @@
 package org.juno.model.deck;
 
+import java.io.File;
+
 /**
  * Defines: WildCard class,
  *
@@ -7,6 +9,7 @@ package org.juno.model.deck;
  */
 public class WildCard extends Card
 {
+    private File newUrl;
     /**
      * Constructor
      * @param value The Card value
@@ -18,10 +21,18 @@ public class WildCard extends Card
 
     /**
      * Set the Card color
+     *
      * @param c Color to set
      */
     public void setColor(Color c)
     {
         color = c;
+        newUrl = new File(String.format("file:\\%s\\src\\main\\resources\\org\\juno\\images\\%s%d.png", System.getProperty("user.dir"), color.toString(), value.getVal()));
+    }
+
+    @Override
+    public File getFinalUrl()
+    {
+        return newUrl;
     }
 }

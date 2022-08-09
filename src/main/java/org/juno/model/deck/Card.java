@@ -1,5 +1,6 @@
 package org.juno.model.deck;
 
+import java.io.File;
 import java.util.Objects;
 
 /**
@@ -42,17 +43,19 @@ public class Card
 
     public enum Color
     {
-        RED(0),
-        BLUE(1),
-        GREEN(2),
-        YELLOW(3),
-        BLACK(4);
+        RED(0, "r"),
+        BLUE(1, "b"),
+        GREEN(2, "g"),
+        YELLOW(3, "y"),
+        BLACK(4, "");
 
         private final int val;
+        private final String string;
 
-        Color(int val)
+        Color(int val, String s)
         {
             this.val = val;
+            string = s;
         }
 
         public int getVal()
@@ -63,23 +66,18 @@ public class Card
         @Override
         public String toString()
         {
-            return switch (getVal())
-                    {
-                        case 0 -> "r";
-                        case 1 -> "b";
-                        case 2 -> "g";
-                        case 3 -> "y";
-                        default -> "";
-                    };
+            return string;
         }
     }
 
 
     protected Color color;
     protected final Value value;
+    protected final File url;
 
     /**
      * Constructor
+     *
      * @param color The card color
      * @param value The card value
      */
@@ -87,6 +85,7 @@ public class Card
     {
         this.color = color;
         this.value = value;
+        url = new File(String.format("file:\\%s\\src\\main\\resources\\org\\juno\\images\\%s%d.png", System.getProperty("user.dir"), color.toString(), value.getVal()));
     }
 
     //Getters
@@ -102,6 +101,7 @@ public class Card
 
     /**
      * Returns the Card value
+     *
      * @return the Card value
      */
     public Value getValue()
@@ -109,8 +109,18 @@ public class Card
         return value;
     }
 
+    public File getUrl()
+    {
+        return url;
+    }
+    public File getFinalUrl()
+    {
+        return getUrl();
+    }
+
     /**
      * Returns the couple value, color of the card
+     *
      * @return The couple value, color
      */
     public String toString()

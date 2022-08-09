@@ -8,6 +8,6 @@ import org.juno.model.deck.Card;
  *
  * @author ForzaElettromotrice, R0n3l
  */
-public record DrawData(BuildMP.PG player, Card.Color color, Card.Value value) implements Data
+public record DrawData(BuildMP.PG player, Card card) implements Data
 {
 }

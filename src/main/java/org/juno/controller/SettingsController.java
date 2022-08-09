@@ -1,5 +1,6 @@
 package org.juno.controller;
 
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -32,8 +33,6 @@ public class SettingsController
 	@FXML
 	public Button backButton;
 	@FXML
-	public Button resetButton;
-	@FXML
 	public Button saveButton;
 
 
@@ -55,20 +54,6 @@ public class SettingsController
 			anchor.requestFocus();
 			saveData();
 		}
-	}
-
-
-	@FXML
-	public void resetEntered()
-	{
-//		resetButton.setStyle("-fx-background-color: RED;-fx-background-radius: 100; -fx-border-color: RED; -fx-border-radius: 100;");
-	}
-
-
-	@FXML
-	public void resetExited()
-	{
-//		resetButton.setStyle("-fx-background-color: transparent; -fx-border-color: RED; -fx-border-radius: 100;");
 	}
 
 
@@ -110,17 +95,10 @@ public class SettingsController
 
 	}
 	@FXML
-	public void resetClicked()
+	public void switchClicked()
 	{
 		AUDIO_PLAYER.play(AudioPlayer.Sounds.BUTTONCLICK);
-		Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to reset your account?\nYou will be redirected to the login page", ButtonType.YES, ButtonType.NO);
-		alert.setTitle("Confirm");
-		alert.setHeaderText("Confirm");
-		alert.showAndWait();
-		if (alert.getResult() == ButtonType.NO) return;
-
 		GEN_VIEW.changeScene(GenView.SCENES.LOGIN, anchor);
-
 	}
 	@FXML
 	public void saveClicked()

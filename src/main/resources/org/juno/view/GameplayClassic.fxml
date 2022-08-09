@@ -14,82 +14,55 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="backgroundGameplay" fx:id="anchorPane" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0"
-            prefWidth="1920.0" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/17"
-            xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.juno.controller.GameplayClassicController">
-   <Circle fx:id="circle4" fill="WHITE" layoutX="1642.0" layoutY="613.0" radius="100.0" stroke="BLACK"
-           strokeType="INSIDE"/>
-   <Circle fx:id="circle3" fill="WHITE" layoutX="1146.0" layoutY="301.0" radius="100.0" stroke="BLACK"
-           strokeType="INSIDE"/>
-   <Circle fx:id="circle2" fill="WHITE" layoutX="270.0" layoutY="477.0" radius="100.0" stroke="BLACK"
-           strokeType="INSIDE"/>
-   <Circle fx:id="circle1" fill="WHITE" layoutX="585.0" layoutY="816.0" radius="100.0" stroke="BLACK"
-           strokeType="INSIDE"/>
-   <HBox fx:id="userHand" alignment="TOP_CENTER" cacheShape="false" centerShape="false" layoutX="289.0" layoutY="805.0"
-         maxHeight="285.0" maxWidth="1325.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="285.0"
-         prefWidth="1325.0" scaleShape="false" AnchorPane.bottomAnchor="-10.0" AnchorPane.leftAnchor="289.0"
-         AnchorPane.rightAnchor="306.0"/>
-   <HBox fx:id="botHand1" alignment="TOP_CENTER" cacheShape="false" centerShape="false" layoutX="-228.0" layoutY="397.0"
-         maxHeight="285.0" maxWidth="735.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="285.0"
-         prefWidth="735.0" rotate="90.0" scaleShape="false" AnchorPane.bottomAnchor="398.0"
-         AnchorPane.leftAnchor="-228.0" AnchorPane.topAnchor="397.0"/>
-   <HBox fx:id="botHand3" alignment="TOP_CENTER" cacheShape="false" centerShape="false" layoutX="1406.0" layoutY="383.0"
-         maxHeight="285.0" maxWidth="735.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="285.0"
-         prefWidth="735.0" rotate="270.0" scaleShape="false" AnchorPane.bottomAnchor="412.0"
-         AnchorPane.rightAnchor="-221.0" AnchorPane.topAnchor="383.0"/>
-   <HBox fx:id="botHand2" alignment="TOP_CENTER" cacheShape="false" centerShape="false" layoutX="584.0" layoutY="26.0"
-         maxHeight="285.0" maxWidth="735.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="285.0"
-         prefWidth="735.0" rotate="180.0" scaleShape="false" AnchorPane.leftAnchor="584.0"
-         AnchorPane.rightAnchor="601.0" AnchorPane.topAnchor="26.0"/>
-   <HBox layoutX="764.0" layoutY="408.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
-         minWidth="-Infinity" prefHeight="264.0" prefWidth="735.0">
-      <ImageView fitHeight="264.0" fitWidth="189.0" pickOnBounds="true">
-         <Image url="@../images/backcard.jpg"/>
+<AnchorPane id="backgroundGameplay" fx:id="anchorPane" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.juno.controller.GameplayClassicController">
+   <Circle fx:id="circle4" fill="WHITE" layoutX="1642.0" layoutY="613.0" radius="100.0" stroke="BLACK" strokeType="INSIDE" />
+   <Circle fx:id="circle3" fill="WHITE" layoutX="1146.0" layoutY="301.0" radius="100.0" stroke="BLACK" strokeType="INSIDE" />
+   <Circle fx:id="circle2" fill="WHITE" layoutX="270.0" layoutY="477.0" radius="100.0" stroke="BLACK" strokeType="INSIDE" />
+   <Circle fx:id="circle1" fill="WHITE" layoutX="585.0" layoutY="816.0" radius="100.0" stroke="BLACK" strokeType="INSIDE" />
+   <HBox fx:id="userHand" alignment="TOP_CENTER" cacheShape="false" centerShape="false" layoutX="289.0" layoutY="805.0" maxHeight="285.0" maxWidth="1325.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="285.0" prefWidth="1325.0" scaleShape="false" AnchorPane.bottomAnchor="-10.0" AnchorPane.leftAnchor="289.0" AnchorPane.rightAnchor="306.0" />
+   <HBox fx:id="botHand1" alignment="TOP_CENTER" cacheShape="false" centerShape="false" layoutX="-228.0" layoutY="397.0" maxHeight="285.0" maxWidth="735.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="285.0" prefWidth="735.0" rotate="90.0" scaleShape="false" AnchorPane.bottomAnchor="398.0" AnchorPane.leftAnchor="-228.0" AnchorPane.topAnchor="397.0" />
+   <HBox fx:id="botHand3" alignment="TOP_CENTER" cacheShape="false" centerShape="false" layoutX="1406.0" layoutY="383.0" maxHeight="285.0" maxWidth="735.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="285.0" prefWidth="735.0" rotate="270.0" scaleShape="false" AnchorPane.bottomAnchor="412.0" AnchorPane.rightAnchor="-221.0" AnchorPane.topAnchor="383.0" />
+   <HBox fx:id="botHand2" alignment="TOP_CENTER" cacheShape="false" centerShape="false" layoutX="584.0" layoutY="26.0" maxHeight="285.0" maxWidth="735.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="285.0" prefWidth="735.0" rotate="180.0" scaleShape="false" AnchorPane.leftAnchor="584.0" AnchorPane.rightAnchor="601.0" AnchorPane.topAnchor="26.0" />
+   <ImageView fx:id="thirdDiscarded" fitHeight="264.0" fitWidth="189.0" layoutX="1033.0" layoutY="388.0" pickOnBounds="true" />
+   <ImageView fx:id="secondDiscarded" fitHeight="264.0" fitWidth="189.0" layoutX="1043.0" layoutY="398.0" pickOnBounds="true" />
+   <ImageView fitHeight="264.0" fitWidth="189.0" layoutX="743.0" layoutY="388.0" pickOnBounds="true">
+      <Image url="@../images/back.png" />
+   </ImageView>
+   <ImageView fitHeight="264.0" fitWidth="189.0" layoutX="753.0" layoutY="398.0" pickOnBounds="true">
+      <Image url="@../images/back.png" />
+   </ImageView>
+   <HBox layoutX="764.0" layoutY="408.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="264.0" prefWidth="735.0">
+      <ImageView fitHeight="264.0" fitWidth="189.0" onMouseClicked="#drawClicked" pickOnBounds="true">
+         <Image url="@../images/back.png" />
       </ImageView>
-      <ImageView fx:id="cardDiscarded" fitHeight="264.0" fitWidth="189.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="firstDiscarded" fitHeight="264.0" fitWidth="189.0" pickOnBounds="true" preserveRatio="true">
          <HBox.margin>
-            <Insets left="100.0"/>
+            <Insets left="100.0" />
          </HBox.margin>
       </ImageView>
       <GridPane fx:id="colorGrid" prefHeight="264.0" prefWidth="218.0" visible="false">
          <columnConstraints>
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
          </columnConstraints>
          <rowConstraints>
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
          </rowConstraints>
-         <Rectangle arcHeight="5.0" arcWidth="5.0" fill="RED" height="134.0" onMouseClicked="#redClicked"
-                    stroke="BLACK" strokeType="INSIDE" width="109.0"/>
-         <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#0045ff" height="134.0" layoutX="10.0"
-                    layoutY="7.0" onMouseClicked="#blueClicked" stroke="BLACK" strokeType="INSIDE" width="109.0"
-                    GridPane.columnIndex="1"/>
-         <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#00ff1b" height="134.0" layoutX="10.0"
-                    layoutY="12.0" onMouseClicked="#greenClicked" stroke="BLACK" strokeType="INSIDE" width="109.0"
-                    GridPane.rowIndex="1"/>
-         <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f3ff00" height="134.0" layoutX="10.0"
-                    layoutY="144.0" onMouseClicked="#yellowClicked" stroke="BLACK" strokeType="INSIDE" width="109.0"
-                    GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+         <Rectangle arcHeight="5.0" arcWidth="5.0" fill="RED" height="134.0" onMouseClicked="#redClicked" stroke="BLACK" strokeType="INSIDE" width="109.0" />
+         <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#0045ff" height="134.0" layoutX="10.0" layoutY="7.0" onMouseClicked="#blueClicked" stroke="BLACK" strokeType="INSIDE" width="109.0" GridPane.columnIndex="1" />
+         <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#00ff1b" height="134.0" layoutX="10.0" layoutY="12.0" onMouseClicked="#greenClicked" stroke="BLACK" strokeType="INSIDE" width="109.0" GridPane.rowIndex="1" />
+         <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f3ff00" height="134.0" layoutX="10.0" layoutY="144.0" onMouseClicked="#yellowClicked" stroke="BLACK" strokeType="INSIDE" width="109.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
       </GridPane>
    </HBox>
-   <ImageView fitHeight="264.0" fitWidth="189.0" layoutX="772.0" layoutY="408.0" pickOnBounds="true">
-      <Image url="@../images/backcard.jpg"/>
-   </ImageView>
-   <ImageView fitHeight="264.0" fitWidth="189.0" layoutX="782.0" layoutY="407.0" onMouseClicked="#drawClicked"
-              pickOnBounds="true">
-      <Image url="@../images/backcard.jpg"/>
-   </ImageView>
-   <Label alignment="CENTER" contentDisplay="CENTER" layoutX="545.0" layoutY="741.0" prefHeight="57.0" prefWidth="82.0"
-          text="1">
+   <Label alignment="CENTER" contentDisplay="CENTER" layoutX="545.0" layoutY="741.0" prefHeight="57.0" prefWidth="82.0" text="1">
       <font>
-         <Font name="Anime Ace 2.0 BB" size="45.0"/>
+         <Font name="Anime Ace 2.0 BB" size="45.0" />
       </font>
    </Label>
-   <Label alignment="CENTER" contentDisplay="CENTER" layoutX="266.0" layoutY="439.0" prefHeight="57.0" prefWidth="82.0"
-          text="2">
+   <Label alignment="CENTER" contentDisplay="CENTER" layoutX="266.0" layoutY="439.0" prefHeight="57.0" prefWidth="82.0" text="2">
       <font>
-         <Font name="Anime Ace 2.0 BB" size="45.0"/>
+         <Font name="Anime Ace 2.0 BB" size="45.0" />
       </font>
    </Label>
    <Label alignment="CENTER" contentDisplay="CENTER" layoutX="1105.0" layoutY="317.0" prefHeight="57.0" prefWidth="82.0" text="3">

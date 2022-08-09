@@ -1,6 +1,5 @@
 package org.juno.model.table.classic;
 
-import org.juno.model.deck.Card;
 import org.juno.model.table.Player;
 
 /**

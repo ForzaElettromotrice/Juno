@@ -10,8 +10,22 @@
     -fx-background-size: 100% 100%;
 }
 
-#backgroundLogin
-{
+#backgroundLogin {
+    -fx-background-image: url('../images/backgroundLogin.jpg');
+    -fx-background-size: 100% 100%;
+}
+
+#backgroundRegister {
+    -fx-background-image: url('../images/backgroundLogin.jpg');
+    -fx-background-size: 100% 100%;
+}
+
+#backgroundEndmatch {
+    -fx-background-image: url('../images/backgroundLogin.jpg');
+    -fx-background-size: 100% 100%;
+}
+
+#backgroundEndgame {
     -fx-background-image: url('../images/backgroundLogin.jpg');
     -fx-background-size: 100% 100%;
 }
@@ -32,6 +46,55 @@
 }
 
 
+#switchButton {
+    -fx-background-color: transparent;
+    -fx-border-color: RED;
+    -fx-border-width: 3px;
+    -fx-border-radius: 50%;
+}
+
+#switchButton:hover {
+    -fx-text-fill: WHITE;
+    -fx-background-color: RED;
+    -fx-background-radius: 30%;
+}
+
+
+.backgroundTransparent {
+    -fx-background-color: transparent;
+}
+
+
+.borderLRD {
+    -fx-border-color: BLACK;
+    -fx-border-width: 0px 3px 3px 3px;
+}
+
+.borderTLR {
+    -fx-border-color: BLACK;
+    -fx-border-width: 3px 3px 0px 3px;
+}
+
+.borderTL {
+    -fx-border-color: BLACK;
+    -fx-border-width: 3px 3px 0px 0px;
+}
+
+.borderDown {
+    -fx-border-color: BLACK;
+    -fx-border-width: 0px 0px 3px 0px;
+}
+
+.borderRight {
+    -fx-border-color: BLACK;
+    -fx-border-width: 0px 3px 0px 0px;
+}
+
+.borderBlack {
+    -fx-border-color: BLACK;
+    -fx-border-width: 3px;
+}
+
 .slider .track {
     -fx-pref-height: 25px;
     -fx-background-color: linear-gradient(from 0% 100% to 250px 250px, white, black);
@@ -48,6 +111,7 @@
 
 .button:hover {
     -fx-border-color: BLACK;
+    -fx-border-width: 3px;
     -fx-border-radius: 100;
 }
 

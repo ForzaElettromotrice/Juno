@@ -27,9 +27,9 @@ public abstract class Table extends Observable implements Runnable
 	protected Player winner;
 
 
-	protected boolean plus2;
-	protected boolean plus4;
-	protected boolean stop;
+	protected int plus2;
+	protected int plus4;
+	protected int stop;
 
 
 	protected Table(TurnOrder to)
@@ -90,7 +90,7 @@ public abstract class Table extends Observable implements Runnable
 					setChanged();
 					try
 					{
-						notifyObservers(BUILD_MP.createMP(BuildMP.Actions.EFFECTS, BuildMP.Effects.ENDMATCH));
+						notifyObservers(BUILD_MP.createMP(BuildMP.Actions.GAMEFLOW, BuildMP.Gameflow.ENDMATCH));
 					} catch (MessagePackageTypeNotExistsException err)
 					{
 						System.out.println(err.getMessage());
@@ -104,7 +104,7 @@ public abstract class Table extends Observable implements Runnable
 		setChanged();
 		try
 		{
-			notifyObservers(BUILD_MP.createMP(BuildMP.Actions.EFFECTS, BuildMP.Effects.ENDGAME));
+			notifyObservers(BUILD_MP.createMP(BuildMP.Actions.GAMEFLOW, BuildMP.Gameflow.ENDGAME));
 		} catch (MessagePackageTypeNotExistsException err)
 		{
 			System.out.println(err.getMessage());
@@ -145,6 +145,16 @@ public abstract class Table extends Observable implements Runnable
 		}
 
 		turnOrder.updatePoints(winner);
+		setChanged();
+		try
+		{
+			notifyObservers(BUILD_MP.createMP(BuildMP.Actions.POINTS, turnOrder.getPlayer(BuildMP.PG.PLAYER).getPoints(), turnOrder.getPlayer(BuildMP.PG.BOT1).getPoints(), turnOrder.getPlayer(BuildMP.PG.BOT2).getPoints(), turnOrder.getPlayer(BuildMP.PG.BOT3).getPoints()));
+		} catch (MessagePackageTypeNotExistsException err)
+		{
+			System.out.println(err.getMessage());
+			err.printStackTrace();
+		}
+		clearChanged();
 	}
 	protected abstract boolean startTurn(Player player);
 
@@ -186,14 +196,14 @@ public abstract class Table extends Observable implements Runnable
 			{
 				case PLUSTWO ->
 				{
-					plus2 = true;
-					stop = true;
+					plus2 += 1;
+					stop += 1;
 					notifyObservers(BUILD_MP.createMP(BuildMP.Actions.EFFECTS, BuildMP.Effects.PLUSTWO));
 				}
 				case PLUSFOUR ->
 				{
-					plus4 = true;
-					stop = true;
+					plus4 += 1;
+					stop += 1;
 					notifyObservers(BUILD_MP.createMP(BuildMP.Actions.EFFECTS, BuildMP.Effects.PLUSFOUR));
 				}
 				case REVERSE ->
@@ -203,7 +213,7 @@ public abstract class Table extends Observable implements Runnable
 				}
 				case STOP ->
 				{
-					stop = true;
+					stop += 1;
 					notifyObservers(BUILD_MP.createMP(BuildMP.Actions.EFFECTS, BuildMP.Effects.STOP));
 				}
 				case JOLLY -> notifyObservers(BUILD_MP.createMP(BuildMP.Actions.EFFECTS, BuildMP.Effects.JOLLY));
@@ -225,21 +235,26 @@ public abstract class Table extends Observable implements Runnable
 
 	protected Player applyEffects(Player currentPlayer)
 	{
-		if (plus2) currentPlayer.draw(2);
-		else if (plus4) currentPlayer.draw(4);
-		if (stop)
+		if (plus2 != 0) currentPlayer.draw(2 * plus2);
+		else if (plus4 != 0) currentPlayer.draw(4 * plus4);
+		if (stop != 0)
 		{
-			Player next = turnOrder.nextPlayer();
-			setChanged();
-			try
+			Player next = null;
+			for (int i = 0; i < stop; i++)
 			{
-				notifyObservers(BUILD_MP.createMP(BuildMP.Actions.TURN, next.getId()));
-			} catch (MessagePackageTypeNotExistsException err)
-			{
-				System.out.println(err.getMessage());
-				err.printStackTrace();
+				next = turnOrder.nextPlayer();
+				setChanged();
+				try
+				{
+					notifyObservers(BUILD_MP.createMP(BuildMP.Actions.TURN, next.getId()));
+				} catch (MessagePackageTypeNotExistsException err)
+				{
+					System.out.println(err.getMessage());
+					err.printStackTrace();
+				}
+				clearChanged();
 			}
-			clearChanged();
+
 			return next;
 		}
 		return currentPlayer;
@@ -253,7 +268,7 @@ public abstract class Table extends Observable implements Runnable
 		setChanged();
 		try
 		{
-			notifyObservers(BUILD_MP.createMP(BuildMP.Actions.EFFECTS, BuildMP.Effects.STARTGAME));
+			notifyObservers(BUILD_MP.createMP(BuildMP.Actions.GAMEFLOW, BuildMP.Gameflow.STARTGAME));
 		} catch (MessagePackageTypeNotExistsException err)
 		{
 			System.out.println(err.getMessage());
@@ -263,9 +278,9 @@ public abstract class Table extends Observable implements Runnable
 	}
 	protected void resetMatch()
 	{
-		turnOrder.resetMatch();
 		DRAW_PILE.reset();
 		DISCARD_PILE.reset();
+		turnOrder.resetMatch();
 
 		DISCARD_PILE.discard(DRAW_PILE.draw());
 		if (DISCARD_PILE.getFirst() instanceof WildCard wildCard) wildCard.setColor(Card.Color.RED);
@@ -273,7 +288,7 @@ public abstract class Table extends Observable implements Runnable
 		setChanged();
 		try
 		{
-			notifyObservers(BUILD_MP.createMP(BuildMP.Actions.DISCARD, null, DISCARD_PILE.getFirst().getColor(), DISCARD_PILE.getFirst().getValue()));
+			notifyObservers(BUILD_MP.createMP(BuildMP.Actions.DISCARD, null, DISCARD_PILE.getFirst()));
 		} catch (MessagePackageTypeNotExistsException err)
 		{
 			System.out.println(err.getMessage());
@@ -283,9 +298,9 @@ public abstract class Table extends Observable implements Runnable
 	}
 	protected void resetTurn()
 	{
-		plus2 = false;
-		plus4 = false;
-		stop = false;
+		plus2 = 0;
+		plus4 = 0;
+		stop = 0;
 	}
 
 

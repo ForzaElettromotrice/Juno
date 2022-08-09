@@ -31,13 +31,12 @@ public class EndgameController
 {
 
 	private static final GenView GEN_VIEW = GenView.getINSTANCE();
-	private static final User USER = User.getINSTANCE();
 	private static final AudioPlayer AUDIO_PLAYER = AudioPlayer.getINSTANCE();
 
 	private Table table;
 
 	@FXML
-	public AnchorPane anchorPane;
+	public AnchorPane backgroundEndagame;
 	@FXML
 	public ProgressBar progressBar;
 	@FXML
@@ -54,7 +53,7 @@ public class EndgameController
 	public void mainMenu()
 	{
 		AUDIO_PLAYER.play(AudioPlayer.Sounds.BUTTONCLICK);
-		GEN_VIEW.changeScene(GenView.SCENES.STARTMENU, anchorPane);
+		GEN_VIEW.changeScene(GenView.SCENES.STARTMENU, backgroundEndagame);
 		AUDIO_PLAYER.stop(AudioPlayer.Sounds.GAMEMUSIC);
 		AUDIO_PLAYER.play(AudioPlayer.Sounds.MENUMUSIC);
 	}
@@ -68,7 +67,7 @@ public class EndgameController
 		if (table instanceof TableClassic)
 		{
 			GEN_VIEW.setCurrentGameController(TurnOrder.MODALITY.CLASSIC);
-			GEN_VIEW.changeScene(GenView.SCENES.GAMEPLAYCLASSIC, anchorPane);
+			GEN_VIEW.changeScene(GenView.SCENES.GAMEPLAYCLASSIC, backgroundEndagame);
 		} else if (table instanceof TableCombo)
 		{
 			GEN_VIEW.setCurrentGameController(TurnOrder.MODALITY.COMBO);
@@ -85,12 +84,12 @@ public class EndgameController
 	{
 		table = currentTable;
 
-		int lvl = USER.getLevel();
+		int lvl = User.getInstance().getLevel();
 		actualLevel.setText("" + lvl);
 		nextLevel.setText("" + ++lvl);
 
-		avatar.setFill(new ImagePattern(new Image(String.format(USER.getAvatar()))));
-		progressBar.setProgress(USER.getProgress());
+		avatar.setFill(new ImagePattern(new Image(String.format(User.getInstance().getAvatar()))));
+		progressBar.setProgress(User.getInstance().getProgress());
 
 
 		int points = currentTable.getUser().getPoints();
@@ -99,12 +98,12 @@ public class EndgameController
 
 
 		if (!currentTable.getStopEarlier() && currentTable.getWinner().getId() == BuildMP.PG.PLAYER)
-			USER.addVictories();
+			User.getInstance().addVictories();
 		else
-			USER.addDefeats();
-		
+			User.getInstance().addDefeats();
 
-		USER.addExp(points);
+
+		User.getInstance().addExp(points);
 
 		Platform.runLater(this::animation);
 	}
@@ -114,7 +113,7 @@ public class EndgameController
 
 		Timeline timeline = new Timeline();
 
-		KeyValue keyValue = new KeyValue(progressBar.progressProperty(), USER.getProgress());
+		KeyValue keyValue = new KeyValue(progressBar.progressProperty(), User.getInstance().getProgress());
 		KeyFrame keyFrame = new KeyFrame(new Duration(3000), keyValue);
 		timeline.getKeyFrames().add(keyFrame);
 

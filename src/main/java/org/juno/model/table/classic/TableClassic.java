@@ -68,7 +68,7 @@ public class TableClassic extends Table
 					setChanged();
 					try
 					{
-						notifyObservers(BUILD_MP.createMP(BuildMP.Actions.DISCARD, currentPlayer.getId(), chosenCard.getColor(), chosenCard.getValue()));
+						notifyObservers(BUILD_MP.createMP(BuildMP.Actions.DISCARD, currentPlayer.getId(), chosenCard));
 					} catch (MessagePackageTypeNotExistsException err)
 					{
 						System.out.println(err.getMessage());

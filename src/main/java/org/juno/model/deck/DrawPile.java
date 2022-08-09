@@ -3,6 +3,7 @@ package org.juno.model.deck;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.NoSuchElementException;
 
 /**
  * Defines: Deck class,
@@ -12,6 +13,7 @@ import java.util.Collections;
 public class DrawPile extends GenDeck
 {
     private static final DrawPile INSTANCE = new DrawPile();
+    private static final DiscardPile DISCARD_PILE = DiscardPile.getINSTANCE();
 
     /**
      * Constructor, initiate the deck
@@ -36,7 +38,15 @@ public class DrawPile extends GenDeck
      */
     public Card draw()
     {
-        return deck.removeFirst();
+        System.out.println(deck.size());
+        try
+        {
+            return deck.removeFirst();
+        } catch (NoSuchElementException err)
+        {
+            addAll(DISCARD_PILE.reshuffle());
+            return deck.removeFirst();
+        }
     }
 
     /**
@@ -62,7 +72,8 @@ public class DrawPile extends GenDeck
     @Override
     public void reset()
     {
-        for (Card.Color c: Arrays.stream(Card.Color.values()).filter(x -> x != Card.Color.BLACK).toList())
+        deck.clear();
+        for (Card.Color c : Arrays.stream(Card.Color.values()).filter(x -> x != Card.Color.BLACK).toList())
         {
             for (Card.Value v : Arrays.stream(Card.Value.values()).filter(x -> x != Card.Value.ZERO && x != Card.Value.JOLLY && x != Card.Value.PLUSFOUR).toList())
             {
@@ -70,9 +81,11 @@ public class DrawPile extends GenDeck
                 deck.add(new Card(c, v));
             }
             deck.add(new Card(c, Card.Value.ZERO));
-            deck.add(new WildCard(Card.Value.JOLLY));
-            deck.add(new WildCard(Card.Value.PLUSFOUR));
         }
+        deck.add(new WildCard(Card.Value.JOLLY));
+        deck.add(new WildCard(Card.Value.JOLLY));
+        deck.add(new WildCard(Card.Value.PLUSFOUR));
+        deck.add(new WildCard(Card.Value.PLUSFOUR));
         shuffle();
     }
 }

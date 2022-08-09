@@ -55,7 +55,7 @@ public class StartMenuController
     @FXML
     public void exitClicked()
     {
-        User.getINSTANCE().save();
+        User.save();
         GEN_VIEW.closeWindow();
     }
 

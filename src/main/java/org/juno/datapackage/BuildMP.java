@@ -1,6 +1,7 @@
 package org.juno.datapackage;
 
 import org.juno.model.deck.Card;
+import org.juno.model.table.Player;
 
 import java.util.Collection;
 
@@ -21,7 +22,10 @@ public class BuildMP
 		DISCARD,
 		SWITCH,
 		EFFECTS,
-		JUMP
+		JUMP,
+		GAMEFLOW,
+		COLOR,
+		POINTS
 	}
 
 	public enum PG
@@ -42,14 +46,22 @@ public class BuildMP
 		SAIDUNO,
 		DIDNTSAYUNO,
 		JUMPIN,
-		ONECARD,
+		ONECARD
+	}
+
+	public enum Colors
+	{
+		RED,
+		YELLOW,
+		GREEN,
+		BLUE
+	}
+
+	public enum Gameflow
+	{
 		STARTGAME,
 		ENDMATCH,
-		ENDGAME,
-		YELLOW,
-		BLUE,
-		RED,
-		GREEN
+		ENDGAME
 	}
 
 	private BuildMP()
@@ -61,15 +73,31 @@ public class BuildMP
 		return INSTANCE;
 	}
 
-	public Data createMP(Actions action, PG player, Card.Color color, Card.Value value) throws MessagePackageTypeNotExistsException
+	public Data createMP(Actions action, int playerPoints, int bot1Points, int bot2Points, int bot3Points) throws MessagePackageTypeNotExistsException
 	{
-		if (action == Actions.DRAW) return new DrawData(player, color, value);
-		else if (action == Actions.DISCARD) return new DiscardData(player, color, value);
+		if (action == Actions.POINTS) return new PointsData(playerPoints, bot1Points, bot2Points, bot3Points);
+		else throw new MessagePackageTypeNotExistsException(ERROR_MESSAGE);
+	}
+
+	public Data createMP(Actions action, PG player, Card card) throws MessagePackageTypeNotExistsException
+	{
+		if (action == Actions.DRAW) return new DrawData(player, card);
+		else if (action == Actions.DISCARD) return new DiscardData(player, card);
 		else throw new MessagePackageTypeNotExistsException(ERROR_MESSAGE);
 	}
 	public Data createMP(Actions action, Effects effect) throws MessagePackageTypeNotExistsException
 	{
 		if (action == Actions.EFFECTS) return new EffectData(effect);
+		else throw new MessagePackageTypeNotExistsException(ERROR_MESSAGE);
+	}
+	public Data createMP(Actions action, Gameflow gf) throws MessagePackageTypeNotExistsException
+	{
+		if (action == Actions.GAMEFLOW) return new GameflowData(gf);
+		else throw new MessagePackageTypeNotExistsException(ERROR_MESSAGE);
+	}
+	public Data createMP(Actions action, Colors color) throws MessagePackageTypeNotExistsException
+	{
+		if (action == Actions.COLOR) return new ColorData(color);
 		else throw new MessagePackageTypeNotExistsException(ERROR_MESSAGE);
 	}
 	public Data createMP(Actions action, PG player) throws MessagePackageTypeNotExistsException

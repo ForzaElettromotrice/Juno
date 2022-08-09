@@ -54,12 +54,10 @@ public abstract class Player extends Observable
 	{
 		return id;
 	}
-
 	public int getSizeHand()
 	{
 		return hand.size();
 	}
-
 	public Card getChosenCard()
 	{
 		return chosenCard;
@@ -68,7 +66,6 @@ public abstract class Player extends Observable
 	{
 		return chosenCard != null;
 	}
-
 	public boolean hasPassed()
 	{
 		return hasPassed;
@@ -77,7 +74,6 @@ public abstract class Player extends Observable
 	{
 		return saidUno;
 	}
-
 	public int getPoints()
 	{
 		return points;
@@ -119,12 +115,12 @@ public abstract class Player extends Observable
 			setChanged();
 			try
 			{
-				notifyObservers(BUILD_MP.createMP(BuildMP.Actions.EFFECTS, switch (color)
+				notifyObservers(BUILD_MP.createMP(BuildMP.Actions.COLOR, switch (color)
 						{
-							case RED -> BuildMP.Effects.RED;
-							case BLUE -> BuildMP.Effects.BLUE;
-							case GREEN -> BuildMP.Effects.GREEN;
-							case YELLOW -> BuildMP.Effects.YELLOW;
+							case RED -> BuildMP.Colors.RED;
+							case BLUE -> BuildMP.Colors.BLUE;
+							case GREEN -> BuildMP.Colors.GREEN;
+							case YELLOW -> BuildMP.Colors.YELLOW;
 							default -> throw new MessagePackageTypeNotExistsException("Non puoi scegliere il nero!");
 						}));
 			} catch (MessagePackageTypeNotExistsException err)
@@ -165,7 +161,7 @@ public abstract class Player extends Observable
 		setChanged();
 		try
 		{
-			notifyObservers(BUILD_MP.createMP(BuildMP.Actions.DRAW, id, card.getColor(), card.getValue()));
+			notifyObservers(BUILD_MP.createMP(BuildMP.Actions.DRAW, id, card));
 		} catch (MessagePackageTypeNotExistsException err)
 		{
 			System.out.println(err.getMessage());
@@ -185,7 +181,7 @@ public abstract class Player extends Observable
 			setChanged();
 			try
 			{
-				notifyObservers(BUILD_MP.createMP(BuildMP.Actions.DRAW, id, card.getColor(), card.getValue()));
+				notifyObservers(BUILD_MP.createMP(BuildMP.Actions.DRAW, id, card));
 			} catch (MessagePackageTypeNotExistsException err)
 			{
 				System.out.println(err.getMessage());

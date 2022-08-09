@@ -1,7 +1,9 @@
 package org.juno.model.deck;
 
 import java.util.Collection;
+import java.util.Collections;
 import java.util.LinkedList;
+import java.util.List;
 
 /**
  * Defines: DiscardedPile class,
@@ -45,9 +47,16 @@ public class DiscardPile extends GenDeck
     public Collection<Card> reshuffle()
     {
         Card top = deck.removeFirst();
-        Collection<Card> out = new LinkedList<>(deck);
+        List<Card> out = new LinkedList<>(deck);
         reset();
         discard(top);
+
+        for (Card card : out)
+        {
+            if (card instanceof WildCard wildCard) wildCard.setColor(Card.Color.BLACK);
+        }
+
+        Collections.shuffle(out);
         return out;
     }
 

@@ -4,9 +4,8 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Slider?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane id="backgroundSettings" fx:id="anchor" onKeyPressed="#anchorKeyPressed" prefHeight="1080.0"
@@ -18,49 +17,35 @@
             <Font size="50.0"/>
         </font>
     </Button>
-    <GridPane alignment="CENTER" gridLinesVisible="true" layoutX="460.0" layoutY="240.0" nodeOrientation="LEFT_TO_RIGHT"
-              prefHeight="600.0" prefWidth="1000.0" style="-fx-border-color: BLACK; -fx-border-width: 3px;">
-        <columnConstraints>
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="400.0" minWidth="400.0" prefWidth="400.0"/>
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="600.0" minWidth="600.0" prefWidth="600.0"/>
-        </columnConstraints>
-        <rowConstraints>
-            <RowConstraints maxHeight="200.0" minHeight="200.0" prefHeight="200.0" vgrow="SOMETIMES"/>
-            <RowConstraints maxHeight="200.0" minHeight="200.0" prefHeight="200.0" vgrow="SOMETIMES"/>
-            <RowConstraints fillHeight="false" maxHeight="200.0" minHeight="200.0" prefHeight="200.0"
-                            valignment="CENTER" vgrow="SOMETIMES"/>
-        </rowConstraints>
-        <Label maxHeight="200.0" maxWidth="400.0" prefHeight="200.0" prefWidth="400.0" text="Music Volume">
-            <font>
-                <Font name="Javanese Text" size="60.0"/>
-            </font>
-        </Label>
-        <Label maxHeight="200.0" maxWidth="400.0" prefHeight="200.0" prefWidth="400.0" text="Effects Volume"
-               GridPane.rowIndex="1">
-            <font>
-                <Font name="Javanese Text" size="60.0"/>
-            </font>
-        </Label>
-        <Slider fx:id="musicSlider" focusTraversable="false" maxHeight="200.0" maxWidth="600.0" minHeight="200.0"
-                minWidth="600.0" onMouseReleased="#musicMouseReleased" prefHeight="200.0" prefWidth="600.0"
-                stylesheets="@Style.css" GridPane.columnIndex="1"/>
-        <Slider fx:id="effectsSlider" maxHeight="200.0" maxWidth="600.0" onMouseReleased="#effectsMouseReleased"
-                prefHeight="200.0" prefWidth="600.0" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
-        <Button fx:id="resetButton" alignment="CENTER" mnemonicParsing="false" onAction="#resetClicked"
-                onMouseEntered="#resetEntered" onMouseExited="#resetExited" prefHeight="150.0" prefWidth="500.0"
-                style="-fx-background-color: transparent; -fx-border-color: RED; -fx-border-width: 3; -fx-border-radius: 100;"
-                text="!!!" textFill="RED" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2"
-                GridPane.valignment="CENTER">
-            <font>
-                <Font name="Javanese Text" size="40.0"/>
-            </font>
-        </Button>
-        <Label prefHeight="200.0" prefWidth="400.0" text="Reset Account" textFill="RED" GridPane.rowIndex="2">
-            <font>
-                <Font name="Javanese Text" size="60.0"/>
-            </font>
-        </Label>
-    </GridPane>
+    <VBox layoutX="210.0" layoutY="140.0" prefHeight="800.0" prefWidth="1500.0">
+        <HBox alignment="CENTER" prefHeight="200.0" prefWidth="1500.0">
+            <Label maxHeight="200.0" maxWidth="400.0" prefHeight="200.0" prefWidth="400.0" text="Music Volume">
+                <font>
+                    <Font name="Javanese Text" size="60.0"/>
+                </font>
+            </Label>
+            <Slider fx:id="musicSlider" focusTraversable="false" maxHeight="200.0" maxWidth="600.0" minHeight="200.0"
+                    minWidth="600.0" onMouseReleased="#musicMouseReleased" prefHeight="200.0" prefWidth="600.0"
+                    stylesheets="@Style.css"/>
+        </HBox>
+        <HBox alignment="CENTER" prefHeight="200.0" prefWidth="1500.0">
+            <Label maxHeight="200.0" maxWidth="400.0" prefHeight="200.0" prefWidth="400.0" text="Effects Volume">
+                <font>
+                    <Font name="Javanese Text" size="60.0"/>
+                </font>
+            </Label>
+            <Slider fx:id="effectsSlider" maxHeight="200.0" maxWidth="600.0" onMouseReleased="#effectsMouseReleased"
+                    prefHeight="200.0" prefWidth="600.0"/>
+        </HBox>
+        <HBox alignment="CENTER" prefHeight="200.0" prefWidth="1500.0">
+            <Button id="switchButton" mnemonicParsing="false" onAction="#switchClicked" prefHeight="200.0"
+                    prefWidth="400.0" text="Switch Account" textFill="RED">
+                <font>
+                    <Font name="Javanese Text" size="40.0"/>
+                </font>
+            </Button>
+        </HBox>
+    </VBox>
     <Button fx:id="saveButton" layoutX="860.0" layoutY="900.0" mnemonicParsing="false" onAction="#saveClicked"
             prefHeight="100.0" prefWidth="200.0" style="-fx-background-color: transparent;" text="Save">
         <font>

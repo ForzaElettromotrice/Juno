@@ -3,6 +3,7 @@ package org.juno;
 import javafx.application.Application;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
+import org.juno.controller.LoginController;
 import org.juno.model.table.Player;
 import org.juno.model.table.Table;
 import org.juno.model.table.classic.TableClassic;
@@ -38,7 +39,7 @@ public class Juno extends Application
 		stage.setTitle("JUno");
 		stage.getIcons().add(new Image(Objects.requireNonNull(Juno.class.getResourceAsStream("images/logo.png"))));
 		stage.setResizable(false);
-		stage.setOnCloseRequest(x -> User.getINSTANCE().save());
+		stage.setOnCloseRequest(x -> GEN_VIEW.closeWindow());
 
 
 		//initializing GenView
@@ -54,19 +55,10 @@ public class Juno extends Application
 			return;
 		}
 
-		boolean login;
+		AUDIO_PLAYER.load();
 
-		try
-		{
-			User.getINSTANCE().load();
-			login = false;
-
-		} catch (DataCorruptedException e)
-		{
-			login = true;
-		}
-
-		GEN_VIEW.changeScene(login ? GenView.SCENES.LOGIN : GenView.SCENES.STARTMENU, null);
+		GEN_VIEW.changeScene(GenView.SCENES.LOGIN, null);
+		((LoginController) GEN_VIEW.getLogin().getUserData()).load();
 
 
 		//adding the observers
@@ -97,9 +89,8 @@ public class Juno extends Application
 		}
 
 
-		//Loading and starting the music!
-		AUDIO_PLAYER.load();
-		AUDIO_PLAYER.play(AudioPlayer.Sounds.MENUMUSIC);
+		//Starting the music!
+		AUDIO_PLAYER.play(AudioPlayer.Sounds.LOGINMUSIC);
 
 
 		stage.show();
