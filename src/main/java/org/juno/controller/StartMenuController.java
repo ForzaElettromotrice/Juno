@@ -18,16 +18,21 @@ public class StartMenuController
 {
     private static final GenView GEN_VIEW = GenView.getINSTANCE();
     private static final AudioPlayer AUDIO_PLAYER = AudioPlayer.getINSTANCE();
+
+
     @FXML
-    public ImageView blueFrame;
+    public AnchorPane menuAnchor;
+
+
     @FXML
     public ImageView redFrame;
     @FXML
-    public ImageView greenFrame;
-    @FXML
     public ImageView yellowFrame;
     @FXML
-    public AnchorPane menuAnchor;
+    public ImageView blueFrame;
+    @FXML
+    public ImageView greenFrame;
+
 
     @FXML
     public void playClicked()
@@ -35,15 +40,6 @@ public class StartMenuController
         AUDIO_PLAYER.play(AudioPlayer.Sounds.BUTTONCLICK);
         GEN_VIEW.changeScene(GenView.SCENES.CHOOSEMODE, menuAnchor);
     }
-
-    @FXML
-    public void statsClicked()
-    {
-        AUDIO_PLAYER.play(AudioPlayer.Sounds.BUTTONCLICK);
-        if (GEN_VIEW.getStats().getUserData() instanceof StatsController smc) smc.load();
-        GEN_VIEW.changeScene(GenView.SCENES.STATS, menuAnchor);
-    }
-
     @FXML
     public void settingsClicked()
     {
@@ -51,7 +47,13 @@ public class StartMenuController
         if (GEN_VIEW.getSettings().getUserData() instanceof SettingsController sc) sc.load();
         GEN_VIEW.changeScene(GenView.SCENES.SETTINGS, menuAnchor);
     }
-
+    @FXML
+    public void statsClicked()
+    {
+        AUDIO_PLAYER.play(AudioPlayer.Sounds.BUTTONCLICK);
+        if (GEN_VIEW.getStats().getUserData() instanceof StatsController smc) smc.load();
+        GEN_VIEW.changeScene(GenView.SCENES.STATS, menuAnchor);
+    }
     @FXML
     public void exitClicked()
     {
@@ -59,56 +61,52 @@ public class StartMenuController
         GEN_VIEW.closeWindow();
     }
 
-    @FXML
-    public void statsEntered()
-    {
-        AUDIO_PLAYER.play(AudioPlayer.Sounds.CURSORSELECT);
-        blueFrame.setVisible(true);
-    }
-
-    @FXML
-    public void statsExited()
-    {
-        blueFrame.setVisible(false);
-    }
 
     @FXML
     public void playEntered()
     {
         AUDIO_PLAYER.play(AudioPlayer.Sounds.CURSORSELECT);
-        redFrame.setVisible(true);
+        redFrame.setOpacity(1);
     }
-
-    @FXML
-    public void playExited()
-    {
-        redFrame.setVisible(false);
-    }
-
     @FXML
     public void settingsEntered()
     {
         AUDIO_PLAYER.play(AudioPlayer.Sounds.CURSORSELECT);
-        yellowFrame.setVisible(true);
+        yellowFrame.setOpacity(1);
     }
-
     @FXML
-    public void settingsExited()
+    public void statsEntered()
     {
-        yellowFrame.setVisible(false);
+        AUDIO_PLAYER.play(AudioPlayer.Sounds.CURSORSELECT);
+        blueFrame.setOpacity(1);
     }
-
     @FXML
     public void exitEntered()
     {
         AUDIO_PLAYER.play(AudioPlayer.Sounds.CURSORSELECT);
-        greenFrame.setVisible(true);
+        greenFrame.setOpacity(1);
     }
 
+
+    @FXML
+    public void playExited()
+    {
+        redFrame.setOpacity(0.75);
+    }
+    @FXML
+    public void settingsExited()
+    {
+        yellowFrame.setOpacity(0.75);
+    }
+    @FXML
+    public void statsExited()
+    {
+        blueFrame.setOpacity(0.75);
+    }
     @FXML
     public void exitExited()
     {
-        greenFrame.setVisible(false);
+        greenFrame.setOpacity(0.75);
     }
 
 }

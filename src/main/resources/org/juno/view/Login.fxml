@@ -12,10 +12,10 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="backgroundLogin" prefHeight="1080.0" prefWidth="1920.0" stylesheets="@Style.css"
-            xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="org.juno.controller.LoginController">
-   <VBox alignment="TOP_CENTER" layoutX="210.0" layoutY="140.0" prefHeight="800.0" prefWidth="1500.0">
+<AnchorPane fx:id="backgroundLogin" onKeyPressed="#anchorKeyPressed" prefHeight="1080.0" prefWidth="1920.0"
+            styleClass="backgroundWhite" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/18"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.juno.controller.LoginController">
+   <VBox alignment="TOP_CENTER" layoutX="210.0" layoutY="140.0" prefHeight="810.0" prefWidth="1500.0">
       <Label alignment="TOP_CENTER" prefHeight="100.0" prefWidth="1300.0" text="Choose the account">
          <font>
             <Font size="40.0"/>
@@ -59,32 +59,35 @@
             <Insets top="-20.0"/>
          </VBox.margin>
          <StackPane maxHeight="50.0" maxWidth="50.0" minHeight="50.0" minWidth="50.0" prefHeight="50.0" prefWidth="50.0"
-                    styleClass="borderTL">
+                    styleClass="borderTR">
             <ImageView fitHeight="40.0" fitWidth="40.0" onMouseClicked="#plusClicked" pickOnBounds="true"
                        preserveRatio="true">
                <Image url="@../images/plus.png"/>
             </ImageView>
          </StackPane>
          <StackPane maxHeight="50.0" maxWidth="50.0" minHeight="50.0" minWidth="50.0" prefHeight="50.0" prefWidth="50.0"
-                    styleClass="borderTL">
-            <children>
-               <ToggleButton fx:id="minusToggle" maxHeight="50.0" maxWidth="50.0" minHeight="50.0" minWidth="50.0"
-                             mnemonicParsing="false" onAction="#minusClicked" prefHeight="50.0" prefWidth="50.0"
-                             styleClass="backgroundTransparent">
-                  <graphic>
-                     <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
-                        <Image url="@../images/minus.png"/>
-                     </ImageView>
-                  </graphic>
-               </ToggleButton>
-            </children>
+                    styleClass="borderTR">
+            <ToggleButton fx:id="minusToggle" maxHeight="50.0" maxWidth="50.0" minHeight="50.0" minWidth="50.0"
+                          mnemonicParsing="false" onAction="#minusClicked" prefHeight="50.0" prefWidth="50.0"
+                          styleClass="backgroundTransparent">
+               <graphic>
+                  <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                     <Image url="@../images/minus.png"/>
+                  </ImageView>
+               </graphic>
+            </ToggleButton>
          </StackPane>
       </HBox>
-      <Button fx:id="commitButton" mnemonicParsing="false" onAction="#commit" prefHeight="100.0" prefWidth="200.0"
-              text="Commit">
+      <Button fx:id="commitButton" disable="true" mnemonicParsing="false" onAction="#commit"
+              onMouseEntered="#buttonEntered" prefHeight="100.0" prefWidth="200.0"
+              styleClass="whiteStyle" text="Play!">
          <font>
-            <Font size="25.0"/>
+            <Font name="Arial" size="25.0"/>
          </font>
+         <VBox.margin>
+            <Insets top="10.0"/>
+         </VBox.margin>
       </Button>
    </VBox>
+   <Label alignment="CENTER" layoutX="760.0" prefHeight="50.0" prefWidth="400.0" styleClass="titleStyle" text="LOGIN"/>
 </AnchorPane>

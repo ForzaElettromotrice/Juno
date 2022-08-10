@@ -1,9 +1,11 @@
 package org.juno.controller;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import org.juno.model.user.User;
 import org.juno.view.AudioPlayer;
@@ -23,7 +25,7 @@ public class RegisterController
 
 
 	@FXML
-	public AnchorPane backgroundRegister;
+	public AnchorPane anchor;
 
 
 	@FXML
@@ -32,6 +34,8 @@ public class RegisterController
 
 	@FXML
 	public ToggleGroup avatar;
+
+
 	@FXML
 	public RadioButton avatarRadioButton1;
 	@FXML
@@ -46,6 +50,8 @@ public class RegisterController
 
 	@FXML
 	public Button saveButton;
+	@FXML
+	public Button loginButton;
 
 
 	@FXML
@@ -53,7 +59,7 @@ public class RegisterController
 	{
 		if (keyEvent.getCode() == KeyCode.ENTER)
 		{
-			backgroundRegister.requestFocus();
+			anchor.requestFocus();
 			saveData();
 		}
 	}
@@ -89,7 +95,32 @@ public class RegisterController
 
 		AUDIO_PLAYER.stop(AudioPlayer.Sounds.LOGINMUSIC);
 		AUDIO_PLAYER.play(AudioPlayer.Sounds.MENUMUSIC);
-		GEN_VIEW.changeScene(GenView.SCENES.STARTMENU, backgroundRegister);
+		GEN_VIEW.changeScene(GenView.SCENES.STARTMENU, anchor);
 
+	}
+	public void loginClicked()
+	{
+		AUDIO_PLAYER.play(AudioPlayer.Sounds.BUTTONCLICK);
+		((LoginController) GEN_VIEW.getLogin().getUserData()).load();
+		GEN_VIEW.changeScene(GenView.SCENES.LOGIN, anchor);
+	}
+	public void load()
+	{
+		anchor.requestFocus();
+		usernameTextField.clear();
+		alertLabel.setVisible(false);
+		avatarRadioButton1.setSelected(true);
+	}
+
+	@FXML
+	public void saveEntered()
+	{
+		AUDIO_PLAYER.play(AudioPlayer.Sounds.CURSORSELECT);
+	}
+
+	@FXML
+	public void avatarClicked()
+	{
+		AUDIO_PLAYER.play(AudioPlayer.Sounds.ALERTBEEP);
 	}
 }

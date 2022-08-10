@@ -9,6 +9,7 @@ import javafx.scene.control.Slider;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
+import org.juno.model.user.User;
 import org.juno.view.AudioPlayer;
 import org.juno.view.GenView;
 //TODO: RIFARE LA GRAFICA DA SCENEBUILDER FATTA MEGLIO
@@ -90,7 +91,9 @@ public class SettingsController
 
 		AUDIO_PLAYER.setMusicVolume(musicActual);
 		AUDIO_PLAYER.setEffectsVolume(effectsActual);
-
+		User.getInstance().setMusicVolume(musicActual);
+		User.getInstance().setEffectsVolume(effectsActual);
+		
 		GEN_VIEW.changeScene(GenView.SCENES.STARTMENU, anchor);
 
 	}
@@ -98,6 +101,9 @@ public class SettingsController
 	public void switchClicked()
 	{
 		AUDIO_PLAYER.play(AudioPlayer.Sounds.BUTTONCLICK);
+		AUDIO_PLAYER.stop(AudioPlayer.Sounds.MENUMUSIC);
+		AUDIO_PLAYER.play(AudioPlayer.Sounds.LOGINMUSIC);
+		((LoginController) GEN_VIEW.getLogin().getUserData()).load();
 		GEN_VIEW.changeScene(GenView.SCENES.LOGIN, anchor);
 	}
 	@FXML
@@ -118,6 +124,7 @@ public class SettingsController
 	}
 	public void load()
 	{
+		haveToSave = false;
 		musicActual = AUDIO_PLAYER.getMusicVolume();
 		effectsActual = AUDIO_PLAYER.getEffectsVolume();
 

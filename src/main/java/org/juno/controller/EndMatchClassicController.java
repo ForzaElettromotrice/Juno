@@ -1,6 +1,8 @@
 package org.juno.controller;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
@@ -48,8 +50,12 @@ public class EndMatchClassicController
 	@FXML
 	public void exitClicked()
 	{
-
 		buttonClick();
+		Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to exit? You will lose the match by default!", ButtonType.YES, ButtonType.NO);
+		alert.setTitle("Confirm");
+		alert.setHeaderText("Confirm");
+		alert.showAndWait();
+		if (alert.getResult() == ButtonType.NO) return;
 		GEN_VIEW.changeScene(GenView.SCENES.ENDGAME, anchorPane);
 	}
 

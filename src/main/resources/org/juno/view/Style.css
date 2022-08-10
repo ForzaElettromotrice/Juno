@@ -1,118 +1,224 @@
-#backgroundMenu
+/*CLASS*/
+
+/*BACKGROUND*/
+.backgroundFull
 {
     -fx-background-image: url('../images/backgroundMenu.jpg');
     -fx-background-size: 100% 100%;
 }
-
-#backgroundStats
+.backgroundBlue
 {
     -fx-background-image: url('../images/backgroundStats.jpg');
     -fx-background-size: 100% 100%;
 }
-
-#backgroundLogin {
+.backgroundWhite
+{
     -fx-background-image: url('../images/backgroundLogin.jpg');
     -fx-background-size: 100% 100%;
 }
-
-#backgroundRegister {
+.backgroundRegister
+{
     -fx-background-image: url('../images/backgroundLogin.jpg');
     -fx-background-size: 100% 100%;
 }
-
-#backgroundEndmatch {
+.backgroundEndmatch
+{
     -fx-background-image: url('../images/backgroundLogin.jpg');
     -fx-background-size: 100% 100%;
 }
-
-#backgroundEndgame {
+.backgroundEndgame
+{
     -fx-background-image: url('../images/backgroundLogin.jpg');
     -fx-background-size: 100% 100%;
 }
-
-#backgroundSettings {
+.backgroundSettings
+{
     -fx-background-image: url('../images/backgroundSettings.jpg');
     -fx-background-size: 100% 100%;
 }
-
-#backgroundChooseMode {
+.backgroundChooseMode
+{
     -fx-background-image: url('../images/backgroundChooseMode.jpg');
     -fx-background-size: 100% 100%;
 }
-
-#backgroundGameplay {
+.backgroundGameplay
+{
     -fx-background-image: url('../images/backgroundGameplay.png');
     -fx-background-size: 100% 100%;
 }
+.backgroundTransparent
+{
+    -fx-background-color: transparent;
+}
 
 
-#switchButton {
+/*BORDER*/
+.borderTop
+{
+    -fx-border-color: BLACK;
+    -fx-border-width: 3px 0px 0px 0px;
+}
+.borderRight
+{
+    -fx-border-color: BLACK;
+    -fx-border-width: 0px 3px 0px 0px;
+}
+.borderDown
+{
+    -fx-border-color: BLACK;
+    -fx-border-width: 0px 0px 3px 0px;
+}
+.borderLeft
+{
+    -fx-border-color: BLACK;
+    -fx-border-width: 0px 0px 0px 3px;
+}
+.borderTR
+{
+    -fx-border-color: BLACK;
+    -fx-border-width: 3px 3px 0px 0px;
+}
+.borderTLR
+{
+    -fx-border-color: BLACK;
+    -fx-border-width: 3px 3px 0px 3px;
+}
+.borderLRD
+{
+    -fx-border-color: BLACK;
+    -fx-border-width: 0px 3px 3px 3px;
+}
+.borderBlack
+{
+    -fx-border-color: BLACK;
+    -fx-border-width: 3px;
+}
+
+
+/*STYLE*/
+.titleStyle
+{
+    -fx-font-family: Arial;
+    -fx-font-size: 80;
+    -fx-text-fill: RED;
+}
+
+.whiteStyle
+{
+    -fx-background-color: transparent;
+    -fx-border-color: BLACK;
+    -fx-border-width: 3px;
+    -fx-border-radius: 20px;
+    -fx-font-size: 30;
+    -fx-font-family: Arial;
+}
+.whiteStyle:hover
+{
+    -fx-background-radius: 23px;
+    -fx-background-color: linear-gradient(to bottom, WHITE 0%, #cccccc 25%, #999999 50%, #666666 75%);
+    -fx-border-width: 4px;
+    -fx-text-fill: #800000;
+    -fx-font-weight: bold;
+}
+
+.blueStyle
+{
+    -fx-background-color: transparent;
+    -fx-border-color: BLACK;
+    -fx-border-width: 3px;
+    -fx-border-radius: 20px;
+    -fx-font-size: 30;
+    -fx-font-family: Arial;
+}
+.blueStyle:hover
+{
+    -fx-background-radius: 23px;
+    -fx-background-color: linear-gradient(to left, #ccebff 0%, #66c2ff 25%, #33adff 50%, #0099ff 75%, #007acc 100%);
+    -fx-border-width: 4px;
+    -fx-text-fill: BLACK;
+    -fx-font-weight: bold;
+}
+
+.sliderStyle .track
+{
+    -fx-pref-height: 25px;
+    -fx-background-color: linear-gradient(from 0% 100% to 250px 250px, white, black);
+}
+.sliderStyle .thumb
+{
+    -fx-pref-height: 50px;
+    -fx-pref-width: 15px;
+}
+
+
+
+/*ID*/
+
+#backToLogin
+{
+    -fx-background-color: transparent;
+    -fx-font-size: 18;
+    -fx-text-fill: BLUE;
+    -fx-underline: true;
+}
+#backToLogin:hover
+{
+    -fx-text-fill: PURPLE;
+}
+
+
+
+#playButton
+{
+    -fx-font-size: 43;
+    -fx-font-family: Arial;
+    -fx-text-fill: #c52121;
+}
+#settingsButton
+{
+    -fx-font-size: 35;
+    -fx-font-family: Arial;
+    -fx-text-fill: #ffff39;
+}
+#statsButton
+{
+    -fx-font-size: 43;
+    -fx-font-family: Arial;
+    -fx-text-fill: #0082f2;
+}
+#exitButton
+{
+    -fx-font-size: 43;
+    -fx-font-family: Arial;
+    -fx-text-fill: #00eb15;
+}
+
+
+#modifyNick
+{
+    -fx-background-color: transparent;
+    -fx-border-color: BLACK;
+    -fx-border-radius: 20px;
+    -fx-border-width: 4px;
+}
+#modifyNick:hover
+{
+    -fx-border-width: 5px;
+    -fx-background-radius: 25px;
+    -fx-background-color: linear-gradient(to left, #ccebff 0%, #66c2ff 25%, #33adff 50%, #0099ff 75%, #007acc 100%);
+}
+
+
+#switchButton
+{
     -fx-background-color: transparent;
     -fx-border-color: RED;
     -fx-border-width: 3px;
     -fx-border-radius: 50%;
 }
-
-#switchButton:hover {
+#switchButton:hover
+{
     -fx-text-fill: WHITE;
     -fx-background-color: RED;
     -fx-background-radius: 30%;
 }
-
-
-.backgroundTransparent {
-    -fx-background-color: transparent;
-}
-
-
-.borderLRD {
-    -fx-border-color: BLACK;
-    -fx-border-width: 0px 3px 3px 3px;
-}
-
-.borderTLR {
-    -fx-border-color: BLACK;
-    -fx-border-width: 3px 3px 0px 3px;
-}
-
-.borderTL {
-    -fx-border-color: BLACK;
-    -fx-border-width: 3px 3px 0px 0px;
-}
-
-.borderDown {
-    -fx-border-color: BLACK;
-    -fx-border-width: 0px 0px 3px 0px;
-}
-
-.borderRight {
-    -fx-border-color: BLACK;
-    -fx-border-width: 0px 3px 0px 0px;
-}
-
-.borderBlack {
-    -fx-border-color: BLACK;
-    -fx-border-width: 3px;
-}
-
-.slider .track {
-    -fx-pref-height: 25px;
-    -fx-background-color: linear-gradient(from 0% 100% to 250px 250px, white, black);
-}
-
-.slider .thumb {
-    -fx-pref-height: 50px;
-    -fx-pref-width: 15px;
-}
-
-.button {
-    -fx-background-color: transparent;
-}
-
-.button:hover {
-    -fx-border-color: BLACK;
-    -fx-border-width: 3px;
-    -fx-border-radius: 100;
-}
-
-

@@ -73,7 +73,6 @@ public class User implements Serializable
     {
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(PATH + instance.nickname + ".txt")))
         {
-
             oos.writeObject(instance);
 
         } catch (IOException err)

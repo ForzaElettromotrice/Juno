@@ -197,13 +197,13 @@ public abstract class Table extends Observable implements Runnable
 				case PLUSTWO ->
 				{
 					plus2 += 1;
-					stop += 1;
+					stop = 1;
 					notifyObservers(BUILD_MP.createMP(BuildMP.Actions.EFFECTS, BuildMP.Effects.PLUSTWO));
 				}
 				case PLUSFOUR ->
 				{
 					plus4 += 1;
-					stop += 1;
+					stop = 1;
 					notifyObservers(BUILD_MP.createMP(BuildMP.Actions.EFFECTS, BuildMP.Effects.PLUSFOUR));
 				}
 				case REVERSE ->

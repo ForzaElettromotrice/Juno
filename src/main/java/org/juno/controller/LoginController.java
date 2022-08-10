@@ -9,6 +9,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.text.Font;
@@ -46,13 +48,31 @@ public class LoginController
 	@FXML
 	public ToggleButton minusToggle;
 
+	@FXML
+	public void anchorKeyPressed(KeyEvent keyEvent)
+	{
+		if (keyEvent.getCode() == KeyCode.ESCAPE)
+		{
+			for (Node child : boxAccount.getChildren())
+			{
+				((HBox) child).getChildren().get(5).setVisible(false);
+			}
+			minusToggle.setSelected(false);
+			((ImageView) minusToggle.getChildrenUnmodifiable().get(0)).setImage(new Image("file:\\" + System.getProperty("user.dir") + "\\src\\main\\resources\\org\\juno\\images\\" + "minus.png"));
+		} else if (keyEvent.getCode() == KeyCode.ENTER)
+			commit();
+	}
 
 	@FXML
 	public void minusClicked()
 	{
-
+		commitButton.setDisable(true);
+		click();
+		accountChosen = "";
 		for (Node child : boxAccount.getChildren())
 		{
+			child.setUserData(false);
+			child.setStyle("-fx-border-color: BLACK; -fx-border-width: 0px 0px 3px 0px;");
 			((HBox) child).getChildren().get(5).setVisible(minusToggle.isSelected());
 		}
 		((ImageView) minusToggle.getChildrenUnmodifiable().get(0)).setImage(new Image("file:\\" + System.getProperty("user.dir") + "\\src\\main\\resources\\org\\juno\\images\\" + (minusToggle.isSelected() ? "check.png" : "minus.png")));
@@ -61,7 +81,8 @@ public class LoginController
 	@FXML
 	public void commit()
 	{
-		if (accountChosen == null) return;
+		click();
+		if (accountChosen.equals("")) return;
 
 		User.load(accountChosen + ".txt");
 		AUDIO_PLAYER.setMusicVolume(User.getInstance().getMusicVolume());
@@ -74,7 +95,17 @@ public class LoginController
 	@FXML
 	public void plusClicked()
 	{
+		click();
+		minusToggle.setSelected(false);
+		((ImageView) minusToggle.getChildrenUnmodifiable().get(0)).setImage(new Image("file:\\" + System.getProperty("user.dir") + "\\src\\main\\resources\\org\\juno\\images\\minus.png"));
+		((RegisterController) GEN_VIEW.getRegister().getUserData()).load();
 		GEN_VIEW.changeScene(GenView.SCENES.REGISTER, backgroundLogin);
+	}
+
+	@FXML
+	public void buttonEntered()
+	{
+		AUDIO_PLAYER.play(AudioPlayer.Sounds.CURSORSELECT);
 	}
 
 	public void garbageClicked(MouseEvent event)
@@ -97,17 +128,26 @@ public class LoginController
 
 	public void hBoxClicked(MouseEvent event)
 	{
-		HBox box = ((HBox) event.getSource());
-
-		for (Node child : boxAccount.getChildren())
+		AUDIO_PLAYER.play(AudioPlayer.Sounds.ALERTBEEP);
+		if (!minusToggle.isSelected())
 		{
-			if (child.equals(box)) continue;
-			child.setUserData(false);
-			child.setStyle("-fx-border-color: BLACK; -fx-border-width: 0px 0px 3px 0px;");
-		}
-		box.setUserData(true);
+			HBox box = ((HBox) event.getSource());
 
-		accountChosen = ((Label) box.getChildren().get(1)).getText();
+			if (accountChosen.equals(((Label) box.getChildren().get(1)).getText()))
+				commit();
+
+			for (Node child : boxAccount.getChildren())
+			{
+				if (child.equals(box)) continue;
+				child.setUserData(false);
+				child.setStyle("-fx-border-color: BLACK; -fx-border-width: 0px 0px 3px 0px;");
+			}
+			box.setUserData(true);
+
+			accountChosen = ((Label) box.getChildren().get(1)).getText();
+
+			commitButton.setDisable(false);
+		}
 
 	}
 	public void hBoxEntered(MouseEvent event)
@@ -126,10 +166,14 @@ public class LoginController
 
 	public void load()
 	{
+		backgroundLogin.requestFocus();
+		accountChosen = "";
+		boxAccount.getChildren().clear();
 		File dir = new File(System.getProperty("user.dir") + "\\src\\main\\resources\\org\\juno\\model\\user");
 
 		if (Objects.requireNonNull(dir.list()).length == 0)
 		{
+			((RegisterController) GEN_VIEW.getRegister().getUserData()).load();
 			GEN_VIEW.changeScene(GenView.SCENES.REGISTER, backgroundLogin);
 		}
 
@@ -210,5 +254,10 @@ public class LoginController
 
 			boxAccount.getChildren().add(hBox);
 		}
+	}
+
+	public void click()
+	{
+		AUDIO_PLAYER.play(AudioPlayer.Sounds.BUTTONCLICK);
 	}
 }

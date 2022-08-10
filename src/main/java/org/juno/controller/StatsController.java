@@ -3,6 +3,7 @@ package org.juno.controller;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
@@ -67,6 +68,13 @@ public class StatsController
 	@FXML
 	public ToggleGroup avatar;
 
+	@FXML
+	public RadioButton avatar1;
+	@FXML
+	public RadioButton avatar2;
+	@FXML
+	public RadioButton avatar3;
+
 
 	@FXML
 	public Button backButton;
@@ -75,15 +83,16 @@ public class StatsController
 	@FXML
 	public Button openButton;
 
+	@FXML
+	public ToggleButton changeName;
+
 
 	@FXML
-	public void anchorKeyPressed(KeyEvent keyEvent)
+	public void anchorClicked()
 	{
-		if (keyEvent.getCode() == KeyCode.ENTER)
-		{
-			saveData();
-			anchor.requestFocus();
-		}
+		changeName.setSelected(false);
+		nameTextfield.setEditable(false);
+		anchor.requestFocus();
 	}
 
 
@@ -163,8 +172,40 @@ public class StatsController
 	@FXML
 	public void changeAvatarClicked()
 	{
+		String oldAvatar = ((ImagePattern) circle.getFill()).getImage().getUrl();
+		User.getInstance().setAvatar(oldAvatar);
+		anchor.requestFocus();
 		AUDIO_PLAYER.play(AudioPlayer.Sounds.BUTTONCLICK);
-		avatarBox.setVisible(true);
+		avatarBox.setVisible(!avatarBox.isVisible());
+
+		if (oldAvatar.endsWith(new File(((ImageView) avatar1.getChildrenUnmodifiable().get(0)).getImage().getUrl()).getName()))
+			avatar.selectToggle(avatar1);
+		else if (oldAvatar.endsWith(new File(((ImageView) avatar2.getChildrenUnmodifiable().get(0)).getImage().getUrl()).getName()))
+			avatar.selectToggle(avatar2);
+		else if (oldAvatar.endsWith(new File(((ImageView) avatar3.getChildrenUnmodifiable().get(0)).getImage().getUrl()).getName()))
+			avatar.selectToggle(avatar3);
+		else
+			avatar.selectToggle(null);
+	}
+	@FXML
+	public void anchorKeyPressed(KeyEvent keyEvent)
+	{
+		if (keyEvent.getCode() == KeyCode.ESCAPE)
+			avatarBox.setVisible(false);
+		else if (keyEvent.getCode() == KeyCode.ENTER)
+			anchorClicked();
+	}
+	@FXML
+	public void changeNameClicked()
+	{
+		if (changeName.isSelected())
+		{
+			nameTextfield.setEditable(true);
+			nameTextfield.requestFocus();
+		} else
+		{
+			anchorClicked();
+		}
 	}
 
 
@@ -188,6 +229,8 @@ public class StatsController
 		avatarBox.setVisible(false);
 
 		nameTextfield.setText(User.getInstance().getNickname());
+		nameTextfield.setEditable(false);
+		changeName.setSelected(false);
 		victoriesCountLabel.setText("" + User.getInstance().getVictories());
 		defeatsCountLabel.setText("" + User.getInstance().getDefeats());
 		matchesCountLabel.setText("" + User.getInstance().getTotalMatches());
@@ -198,5 +241,4 @@ public class StatsController
 
 		circle.setFill(new ImagePattern(new Image(User.getInstance().getAvatar())));
 	}
-
 }
