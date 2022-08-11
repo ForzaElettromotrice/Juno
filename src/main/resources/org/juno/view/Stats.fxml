@@ -18,75 +18,73 @@
 
 <AnchorPane fx:id="anchor" onKeyPressed="#anchorKeyPressed" onMouseClicked="#anchorClicked" prefHeight="1080.0" prefWidth="1920.0" styleClass="backgroundBlue" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.juno.controller.StatsController">
    <VBox layoutX="800.0" layoutY="150.0" prefHeight="860.0" prefWidth="1000.0" spacing="20.0">
-      <children>
-         <HBox prefHeight="200.0" prefWidth="800.0">
-            <children>
-               <ImageView fitHeight="200.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
-                  <image>
-                     <Image url="@../images/nickname.png" />
-                  </image>
-               </ImageView>
-               <Label prefHeight="200.0" prefWidth="330.0" text="Nickname:">
-                  <font>
-                     <Font name="Javanese Text" size="70.0" />
-                  </font>
-               </Label>
-               <TextField fx:id="nameTextfield" alignment="CENTER" focusTraversable="false" prefHeight="200.0" prefWidth="470.0" style="-fx-background-color: transparent;">
-                  <font>
-                     <Font name="Javanese Text" size="70.0" />
-                  </font>
-                  <padding>
-                     <Insets right="-1.0" />
-                  </padding>
-               </TextField>
-            </children>
-         </HBox>
-         <HBox prefHeight="200.0" prefWidth="800.0">
-            <ImageView fitHeight="200.0" fitWidth="200.0" pickOnBounds="true">
-               <Image url="@../images/victories.png" />
-            </ImageView>
-            <Label maxHeight="200.0" maxWidth="400.0" prefHeight="200.0" prefWidth="400.0" text="Victories : ">
-               <font>
-                  <Font name="Javanese Text" size="70.0" />
-               </font>
-            </Label>
-            <Label fx:id="victoriesCountLabel" alignment="CENTER_RIGHT" maxHeight="200.0" maxWidth="400.0" prefHeight="200.0" prefWidth="400.0">
-               <font>
-                  <Font name="Javanese Text" size="70.0" />
-               </font>
-            </Label>
-         </HBox>
-         <HBox prefHeight="200.0" prefWidth="800.0">
-            <ImageView fitHeight="200.0" fitWidth="200.0" pickOnBounds="true">
-               <Image url="@../images/defeats.png" />
-            </ImageView>
-            <Label prefHeight="200.0" prefWidth="400.0" text="Defeats :">
-               <font>
-                  <Font name="Javanese Text" size="70.0" />
-               </font>
-            </Label>
-            <Label fx:id="defeatsCountLabel" alignment="CENTER_RIGHT" maxHeight="200.0" maxWidth="400.0" prefHeight="200.0" prefWidth="400.0">
-               <font>
-                  <Font name="Javanese Text" size="70.0" />
-               </font>
-            </Label>
-         </HBox>
-         <HBox prefHeight="200.0" prefWidth="800.0">
-            <ImageView fitHeight="200.0" fitWidth="200.0" pickOnBounds="true">
-               <Image url="@../images/cards.png" />
-            </ImageView>
-            <Label prefHeight="200.0" prefWidth="600.0" text="Matches Played : ">
-               <font>
-                  <Font name="Javanese Text" size="70.0" />
-               </font>
-            </Label>
-            <Label fx:id="matchesCountLabel" alignment="CENTER_RIGHT" maxHeight="200.0" maxWidth="200.0" prefHeight="200.0" prefWidth="200.0">
-               <font>
-                  <Font name="Javanese Text" size="70.0" />
-               </font>
-            </Label>
-         </HBox>
-      </children>
+      <HBox prefHeight="200.0" prefWidth="800.0">
+         <ImageView fitHeight="200.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+            <Image url="@../images/nickname.png"/>
+         </ImageView>
+         <Label prefHeight="200.0" prefWidth="330.0" text="Nickname:">
+            <font>
+               <Font name="Javanese Text" size="70.0"/>
+            </font>
+         </Label>
+         <TextField fx:id="nameTextfield" alignment="CENTER" focusTraversable="false" prefHeight="200.0"
+                    prefWidth="470.0" style="-fx-background-color: transparent;">
+            <font>
+               <Font name="Javanese Text" size="70.0"/>
+            </font>
+            <padding>
+               <Insets right="-1.0"/>
+            </padding>
+         </TextField>
+      </HBox>
+      <HBox prefHeight="200.0" prefWidth="800.0">
+         <ImageView fitHeight="200.0" fitWidth="200.0" pickOnBounds="true">
+            <Image url="@../images/victories.png"/>
+         </ImageView>
+         <Label maxHeight="200.0" maxWidth="400.0" prefHeight="200.0" prefWidth="400.0" text="Victories : ">
+            <font>
+               <Font name="Javanese Text" size="70.0"/>
+            </font>
+         </Label>
+         <Label fx:id="victoriesCountLabel" alignment="CENTER_RIGHT" maxHeight="200.0" maxWidth="400.0"
+                prefHeight="200.0" prefWidth="400.0">
+            <font>
+               <Font name="Javanese Text" size="70.0"/>
+            </font>
+         </Label>
+      </HBox>
+      <HBox prefHeight="200.0" prefWidth="800.0">
+         <ImageView fitHeight="200.0" fitWidth="200.0" pickOnBounds="true">
+            <Image url="@../images/defeats.png"/>
+         </ImageView>
+         <Label prefHeight="200.0" prefWidth="400.0" text="Defeats :">
+            <font>
+               <Font name="Javanese Text" size="70.0"/>
+            </font>
+         </Label>
+         <Label fx:id="defeatsCountLabel" alignment="CENTER_RIGHT" maxHeight="200.0" maxWidth="400.0" prefHeight="200.0"
+                prefWidth="400.0">
+            <font>
+               <Font name="Javanese Text" size="70.0"/>
+            </font>
+         </Label>
+      </HBox>
+      <HBox prefHeight="200.0" prefWidth="800.0">
+         <ImageView fitHeight="200.0" fitWidth="200.0" pickOnBounds="true">
+            <Image url="@../images/cards.png"/>
+         </ImageView>
+         <Label prefHeight="200.0" prefWidth="600.0" text="Matches Played : ">
+            <font>
+               <Font name="Javanese Text" size="70.0"/>
+            </font>
+         </Label>
+         <Label fx:id="matchesCountLabel" alignment="CENTER_RIGHT" maxHeight="200.0" maxWidth="200.0" prefHeight="200.0"
+                prefWidth="200.0">
+            <font>
+               <Font name="Javanese Text" size="70.0"/>
+            </font>
+         </Label>
+      </HBox>
    </VBox>
    <Circle fx:id="circle" fill="TRANSPARENT" layoutX="400.0" layoutY="400.0" onMouseEntered="#changeAvatarEntered" radius="250.0" stroke="BLACK" strokeType="INSIDE" />
    <ProgressBar fx:id="levelProgressBar" layoutX="240.0" layoutY="740.0" onMouseClicked="#anchorClicked" prefHeight="70.0" prefWidth="400.0" progress="0.0" />
@@ -98,9 +96,11 @@
          <Font name="Javanese Text" size="70.0" />
       </font>
    </Label>
-   <Button fx:id="backButton" cacheShape="false" focusTraversable="false" layoutX="20.0" layoutY="20.0" mnemonicParsing="false" onAction="#backClicked" prefHeight="110.0" prefWidth="160.0" styleClass="blueStyle" text="← Back">
+   <Button fx:id="backButton" cacheShape="false" focusTraversable="false" layoutX="20.0" layoutY="20.0"
+           mnemonicParsing="false" onAction="#backClicked" onMouseEntered="#buttonEntered" prefHeight="110.0"
+           prefWidth="160.0" styleClass="blueStyle" text="← Back">
       <font>
-         <Font size="50.0" />
+         <Font size="50.0"/>
       </font>
    </Button>
    <VBox fx:id="avatarBox" layoutX="650.0" layoutY="100.0" prefHeight="700.0" prefWidth="250.0" style="-fx-background-color: WHITE; -fx-border-color: BLACK; -fx-border-width: 5;" visible="false">
@@ -149,10 +149,12 @@
          <Font size="40.0" />
       </font>
    </Button>
-   <ToggleButton id="modifyNick" fx:id="changeName" layoutX="1800.0" layoutY="200.0" minHeight="50.0" minWidth="50.0" mnemonicParsing="false" onAction="#changeNameClicked" prefHeight="100.0" prefWidth="100.0">
+   <ToggleButton id="modifyNick" fx:id="changeName" layoutX="1800.0" layoutY="200.0" minHeight="50.0" minWidth="50.0"
+                 mnemonicParsing="false" onAction="#changeNameClicked" onMouseEntered="#buttonEntered"
+                 prefHeight="100.0" prefWidth="100.0">
       <graphic>
          <ImageView fitHeight="70.0" fitWidth="70.0" pickOnBounds="true">
-            <Image url="@../images/pencil.png" />
+            <Image url="@../images/pencil.png"/>
          </ImageView>
       </graphic>
    </ToggleButton>

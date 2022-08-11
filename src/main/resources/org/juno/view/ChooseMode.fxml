@@ -6,83 +6,51 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="backgroundChooseMode" fx:id="anchor" prefHeight="1080.0" prefWidth="1920.0" stylesheets="@Style.css"
-            xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="org.juno.controller.ChooseModeController">
-   <HBox alignment="CENTER" layoutX="210.0" layoutY="350.0" prefHeight="300.0" prefWidth="1500.0" spacing="200.0">
-      <ImageView fitHeight="300.0" fitWidth="300.0" onMouseClicked="#classicClicked" onMouseEntered="#classicEntered"
-                 onMouseExited="#classicExited" pickOnBounds="true" preserveRatio="true" rotate="30.0">
-         <Image url="@../images/logoClassic.png"/>
-      </ImageView>
-      <ImageView fitHeight="300.0" fitWidth="300.0" onMouseClicked="#comboClicked" onMouseEntered="#comboEntered"
-                 onMouseExited="#comboExited" pickOnBounds="true" preserveRatio="true" rotate="30.0">
-         <Image url="@../images/logoCombo.png"/>
-      </ImageView>
-      <ImageView fitHeight="300.0" fitWidth="300.0" onMouseClicked="#tradeClicked" onMouseEntered="#tradeEntered"
-                 onMouseExited="#tradeExited" pickOnBounds="true" preserveRatio="true" rotate="30.0">
-         <Image url="@../images/logoTrade.png"/>
-      </ImageView>
-   </HBox>
-   <Button layoutX="20.0" layoutY="20.0" mnemonicParsing="false" onAction="#backClicked" prefHeight="150.0"
-           prefWidth="230.0" text="←Back" textFill="WHITE">
+<AnchorPane fx:id="anchor" prefHeight="1080.0" prefWidth="1920.0" styleClass="backgroundRed" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.juno.controller.ChooseModeController">
+   <HBox alignment="CENTER" layoutX="210.0" layoutY="350.0" prefHeight="300.0" prefWidth="1500.0" spacing="200.0" />
+   <Button id="backCM" layoutX="20.0" layoutY="20.0" mnemonicParsing="false" onAction="#backClicked" onMouseEntered="#buttonEntered" prefHeight="110.0" prefWidth="160.0" text="←Back">
       <font>
-         <Font size="50.0"/>
+         <Font size="50.0" />
       </font>
    </Button>
-   <HBox fx:id="classicHBox" alignment="CENTER" layoutY="680.0" prefHeight="400.0" prefWidth="1920.0" spacing="225.0"
-         style="-fx-border-color: YELLOW; -fx-border-width: 3;" visible="false">
-      <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="400.0" prefWidth="640.0"
-             text="The beloved classic! Play against 3 bots&#10;following the (J)uno classic rules!"
-             textAlignment="CENTER" textFill="WHITE">
-         <font>
-            <Font name="Javanese Text" size="30.0"/>
-         </font>
-      </Label>
-      <ImageView fitHeight="300.0" fitWidth="640.0" pickOnBounds="true" preserveRatio="true">
-         <Image url="@../images/cards.png"/>
-      </ImageView>
-      <ImageView fitHeight="300.0" fitWidth="640.0" pickOnBounds="true" preserveRatio="true">
-         <Image url="@../images/classicImage.jpg"/>
-      </ImageView>
-   </HBox>
-   <HBox fx:id="comboHBox" alignment="CENTER" layoutY="680.0" prefHeight="400.0" prefWidth="1920.0" spacing="100.0"
-         style="-fx-border-color: YELLOW; -fx-border-width: 3;" visible="false">
-      <ImageView fitHeight="300.0" fitWidth="640.0" pickOnBounds="true" preserveRatio="true">
-         <Image url="@../images/reflexImage.jpg"/>
-      </ImageView>
-      <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="400.0" prefWidth="700.0"
-             text="Play smart! In this mode you can play cards as &#10;you want only if they match the same number!&#10;And also, if you have to draw, you will be drawing&#10;until you gain a playable card!&#10;"
-             textAlignment="CENTER" textFill="WHITE">
-         <font>
-            <Font name="Javanese Text" size="30.0"/>
-         </font>
-      </Label>
-      <ImageView fitHeight="300.0" fitWidth="640.0" pickOnBounds="true" preserveRatio="true">
-         <Image url="@../images/cards.png"/>
-      </ImageView>
-   </HBox>
-   <HBox fx:id="tradeHBox" alignment="CENTER" layoutY="680.0" prefHeight="400.0" prefWidth="1920.0" spacing="100.0"
-         style="-fx-border-color: YELLOW; -fx-border-width: 3;" visible="false">
-      <ImageView fitHeight="300.0" fitWidth="640.0" pickOnBounds="true" preserveRatio="true">
-         <Image url="@../images/cards.png"/>
-      </ImageView>
-      <ImageView fitHeight="300.0" fitWidth="640.0" pickOnBounds="true" preserveRatio="true">
-         <Image url="@../images/tradeImage.jpg"/>
-      </ImageView>
-      <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="400.0" prefWidth="700.0"
-             text="Be strategic! In this mode 0s trade cards between &#10;all players, while 7s trade cards between 2 players! "
-             textAlignment="CENTER" textFill="WHITE">
-         <font>
-            <Font name="Javanese Text" size="30.0"/>
-         </font>
-      </Label>
-   </HBox>
-   <Label alignment="CENTER" layoutX="460.0" layoutY="20.0" prefHeight="150.0" prefWidth="1000.0"
-          text="Choose game mode :" textFill="WHITE">
+   <Label alignment="CENTER" layoutX="460.0" layoutY="20.0" prefHeight="150.0" prefWidth="1000.0" text="Choose game mode :" textFill="WHITE">
       <font>
-         <Font name="Javanese Text" size="50.0"/>
+         <Font name="Javanese Text" size="50.0" />
       </font>
    </Label>
+   <VBox layoutX="210.0" layoutY="90.0" prefHeight="900.0" prefWidth="1500.0">
+      <HBox alignment="CENTER" prefHeight="300.0" prefWidth="1500.0" spacing="50.0">
+         <ImageView fitHeight="300.0" fitWidth="300.0" onMouseClicked="#classicClicked" onMouseEntered="#classicEntered" onMouseExited="#classicExited" pickOnBounds="true" preserveRatio="true" rotate="55.0">
+            <Image url="@../images/logoClassic.png" />
+         </ImageView>
+         <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="400.0" prefWidth="640.0" styleClass="textCMStyle" text="The beloved classic! Play against 3 bots&#10;following the (J)uno classic rules!" textAlignment="CENTER" textFill="WHITE">
+            <font>
+               <Font name="Javanese Text" size="30.0" />
+            </font>
+         </Label>
+      </HBox>
+      <HBox alignment="CENTER" prefHeight="200.0" prefWidth="1500.0" spacing="50.0">
+         <ImageView fitHeight="300.0" fitWidth="300.0" onMouseClicked="#comboClicked" onMouseEntered="#comboEntered" onMouseExited="#comboExited" pickOnBounds="true" preserveRatio="true" rotate="55.0">
+            <Image url="@../images/logoCombo.png" />
+         </ImageView>
+         <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="400.0" prefWidth="640.0" styleClass="textCMStyle" text="Play smart! In this mode you can play cards as &#10;you want only if they match the same number!&#10;And also, if you have to draw, you will be drawing&#10;until you gain a playable card!&#10;" textAlignment="CENTER" textFill="WHITE">
+            <font>
+               <Font name="Javanese Text" size="30.0" />
+            </font>
+         </Label>
+      </HBox>
+      <HBox alignment="CENTER" prefHeight="200.0" prefWidth="1500.0" spacing="50.0">
+         <ImageView fitHeight="300.0" fitWidth="300.0" onMouseClicked="#tradeClicked" onMouseEntered="#tradeEntered" onMouseExited="#tradeExited" pickOnBounds="true" preserveRatio="true" rotate="55.0">
+            <Image url="@../images/logoTrade.png" />
+         </ImageView>
+         <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="400.0" prefWidth="640.0" styleClass="textCMStyle" text="Be strategic! In this mode 0s trade cards &#10;between all players, while 7s trade cards &#10;between 2 players! " textAlignment="CENTER" textFill="WHITE">
+            <font>
+               <Font name="Javanese Text" size="30.0" />
+            </font>
+         </Label>
+      </HBox>
+   </VBox>
 </AnchorPane>

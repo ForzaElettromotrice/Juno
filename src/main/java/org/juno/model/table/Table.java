@@ -62,6 +62,7 @@ public abstract class Table extends Observable implements Runnable
 	public void stopEarlier()
 	{
 		stopEarlier = true;
+		winner = null;
 	}
 	public void canStart()
 	{
@@ -122,7 +123,6 @@ public abstract class Table extends Observable implements Runnable
 
 		while (!endMatch && !stopEarlier) //È possibile ci siano ritardi fra i thread e che il codice entri qui anche se non dovrebbe, stopEarlier evita il problema
 		{
-
 			currentPlayer = turnOrder.nextPlayer();
 			setChanged();
 			try
@@ -137,6 +137,7 @@ public abstract class Table extends Observable implements Runnable
 
 			currentPlayer = applyEffects(currentPlayer);
 
+
 			if (startTurn(currentPlayer))
 			{
 				endMatch = true;
@@ -144,17 +145,20 @@ public abstract class Table extends Observable implements Runnable
 			}
 		}
 
-		turnOrder.updatePoints(winner);
-		setChanged();
-		try
+		if (!stopEarlier)
 		{
-			notifyObservers(BUILD_MP.createMP(BuildMP.Actions.POINTS, turnOrder.getPlayer(BuildMP.PG.PLAYER).getPoints(), turnOrder.getPlayer(BuildMP.PG.BOT1).getPoints(), turnOrder.getPlayer(BuildMP.PG.BOT2).getPoints(), turnOrder.getPlayer(BuildMP.PG.BOT3).getPoints()));
-		} catch (MessagePackageTypeNotExistsException err)
-		{
-			System.out.println(err.getMessage());
-			err.printStackTrace();
+			turnOrder.updatePoints(winner);
+			setChanged();
+			try
+			{
+				notifyObservers(BUILD_MP.createMP(BuildMP.Actions.POINTS, turnOrder.getPlayer(BuildMP.PG.PLAYER).getPoints(), turnOrder.getPlayer(BuildMP.PG.BOT1).getPoints(), turnOrder.getPlayer(BuildMP.PG.BOT2).getPoints(), turnOrder.getPlayer(BuildMP.PG.BOT3).getPoints()));
+			} catch (MessagePackageTypeNotExistsException err)
+			{
+				System.out.println(err.getMessage());
+				err.printStackTrace();
+			}
+			clearChanged();
 		}
-		clearChanged();
 	}
 	protected abstract boolean startTurn(Player player);
 
@@ -229,7 +233,9 @@ public abstract class Table extends Observable implements Runnable
 	}
 	protected boolean checkPoints()
 	{
-		return winner.getPoints() >= 500;
+		if (!stopEarlier)
+			return winner.getPoints() >= 500;
+		else return true;
 	}
 
 
@@ -281,6 +287,7 @@ public abstract class Table extends Observable implements Runnable
 		DRAW_PILE.reset();
 		DISCARD_PILE.reset();
 		turnOrder.resetMatch();
+		winner = null;
 
 		DISCARD_PILE.discard(DRAW_PILE.draw());
 		if (DISCARD_PILE.getFirst() instanceof WildCard wildCard) wildCard.setColor(Card.Color.RED);

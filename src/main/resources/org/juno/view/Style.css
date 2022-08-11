@@ -6,9 +6,14 @@
     -fx-background-image: url('../images/backgroundMenu.jpg');
     -fx-background-size: 100% 100%;
 }
-.backgroundBlue
+.backgroundRed
 {
-    -fx-background-image: url('../images/backgroundStats.jpg');
+    -fx-background-image: url('../images/backgroundChooseMode.jpg');
+    -fx-background-size: 100% 100%;
+}
+.backgroundYellow
+{
+    -fx-background-image: url('../images/backgroundSettings.jpg');
     -fx-background-size: 100% 100%;
 }
 .backgroundWhite
@@ -16,29 +21,9 @@
     -fx-background-image: url('../images/backgroundLogin.jpg');
     -fx-background-size: 100% 100%;
 }
-.backgroundRegister
+.backgroundBlue
 {
-    -fx-background-image: url('../images/backgroundLogin.jpg');
-    -fx-background-size: 100% 100%;
-}
-.backgroundEndmatch
-{
-    -fx-background-image: url('../images/backgroundLogin.jpg');
-    -fx-background-size: 100% 100%;
-}
-.backgroundEndgame
-{
-    -fx-background-image: url('../images/backgroundLogin.jpg');
-    -fx-background-size: 100% 100%;
-}
-.backgroundSettings
-{
-    -fx-background-image: url('../images/backgroundSettings.jpg');
-    -fx-background-size: 100% 100%;
-}
-.backgroundChooseMode
-{
-    -fx-background-image: url('../images/backgroundChooseMode.jpg');
+    -fx-background-image: url('../images/backgroundStats.jpg');
     -fx-background-size: 100% 100%;
 }
 .backgroundGameplay
@@ -139,15 +124,28 @@
     -fx-font-weight: bold;
 }
 
-.sliderStyle .track
+.slider .track
 {
-    -fx-pref-height: 25px;
-    -fx-background-color: linear-gradient(from 0% 100% to 250px 250px, white, black);
+    -fx-pref-height: 15px;
+    -fx-background-color: linear-gradient(to right, white, black);
+
 }
-.sliderStyle .thumb
+.slider .thumb
 {
-    -fx-pref-height: 50px;
-    -fx-pref-width: 15px;
+    -fx-pref-height: 40px;
+    -fx-pref-width: 40px;
+    -fx-background-radius: 20px;
+    -fx-background-color: RED;
+
+}
+
+.textCMStyle
+{
+    -fx-font-family: Arial;
+    -fx-font-size: 30;
+    -fx-text-fill: WHITE;
+    -fx-font-weight: bold;
+    -fx-effect: dropshadow(two-pass-box, BLACK, 10, 0.0, 4, 1);
 }
 
 
@@ -165,7 +163,6 @@
 {
     -fx-text-fill: PURPLE;
 }
-
 
 
 #playButton
@@ -208,17 +205,73 @@
     -fx-background-color: linear-gradient(to left, #ccebff 0%, #66c2ff 25%, #33adff 50%, #0099ff 75%, #007acc 100%);
 }
 
+#backSettings
+{
+    -fx-background-color: transparent;
+    -fx-border-color: BLACK;
+    -fx-border-radius: 20px;
+    -fx-border-width: 4px;
+    -fx-font-family: Arial;
+    -fx-font-size: 30;
+    -fx-text-fill: BLACK;
+}
+#backSettings:hover
+{
+    -fx-border-width: 5px;
+    -fx-background-radius: 25px;
+    -fx-background-color: linear-gradient(to left, #ffe699 0%, #ffcc33 25%, #cc9900 50%, #664d00 75%, #000000 100%);
+    -fx-font-weight: bold;
+}
+
+#saveSettings
+{
+    -fx-text-fill: BLACK;
+}
+#saveSettings:hover
+{
+    -fx-border-width: 5px;
+    -fx-background-radius: 25px;
+    -fx-background-color: linear-gradient(to bottom, #ffe699 0%, #ffcc33 25%, #cc9900 50%, #664d00 75%, #000000 100%);
+    -fx-font-weight: bold;
+    -fx-text-fill: BLACK;
+}
+
+#backCM
+{
+    -fx-background-color: transparent;
+    -fx-border-color: WHITE;
+    -fx-border-radius: 20px;
+    -fx-border-width: 4px;
+    -fx-font-family: Arial;
+    -fx-font-size: 30;
+    -fx-text-fill: WHITE;
+}
+#backCM:hover
+{
+    -fx-border-width: 5px;
+    -fx-background-radius: 25px;
+    /*-fx-background-color: linear-gradient(to right, WHITE 0%, #cccccc 25%, #999999 50%, #666666 75%);*/
+    -fx-background-color: WHITE;
+    -fx-text-fill: #ab0000;
+    -fx-font-weight: bold;
+}
+
+
 
 #switchButton
 {
     -fx-background-color: transparent;
     -fx-border-color: RED;
     -fx-border-width: 3px;
-    -fx-border-radius: 50%;
+    -fx-border-radius: 50px;
+    -fx-font-family: Arial;
+    -fx-font-size: 30;
+    -fx-text-fill: RED;
 }
 #switchButton:hover
 {
     -fx-text-fill: WHITE;
     -fx-background-color: RED;
-    -fx-background-radius: 30%;
+    -fx-background-radius: 56px;
+    -fx-font-weight: bold;
 }

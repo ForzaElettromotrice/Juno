@@ -27,46 +27,36 @@ public class ChooseModeController
 	@FXML
 	public AnchorPane anchor;
 
-
-	@FXML
-	public HBox classicHBox;
-	@FXML
-	public HBox comboHBox;
-	@FXML
-	public HBox tradeHBox;
-
-
 	@FXML
 	public void classicEntered()
 	{
-		classicHBox.setVisible(true);
+		AUDIO_PLAYER.play(AudioPlayer.Sounds.CURSORSELECT);
 	}
 	@FXML
 	public void comboEntered()
 	{
-		comboHBox.setVisible(true);
+		AUDIO_PLAYER.play(AudioPlayer.Sounds.CURSORSELECT);
 	}
 	@FXML
 	public void tradeEntered()
 	{
-		tradeHBox.setVisible(true);
+		AUDIO_PLAYER.play(AudioPlayer.Sounds.CURSORSELECT);
 	}
 
 
 	@FXML
 	public void classicExited()
 	{
-		classicHBox.setVisible(false);
 	}
 	@FXML
 	public void comboExited()
 	{
-		comboHBox.setVisible(false);
+
 	}
 	@FXML
 	public void tradeExited()
 	{
-		tradeHBox.setVisible(false);
+
 	}
 
 
@@ -117,5 +107,11 @@ public class ChooseModeController
 
 		GEN_VIEW.setCurrentGameController(TurnOrder.MODALITY.TRADE);
 		thread.start();
+	}
+
+	@FXML
+	public void buttonEntered()
+	{
+		AUDIO_PLAYER.play(AudioPlayer.Sounds.CURSORSELECT);
 	}
 }

@@ -24,6 +24,7 @@ public class EndMatchClassicController
 {
 	private static final GenView GEN_VIEW = GenView.getINSTANCE();
 	private static final AudioPlayer AUDIO_PLAYER = AudioPlayer.getINSTANCE();
+	private static final TableClassic TABLE_CLASSIC = TableClassic.getINSTANCE();
 
 	@FXML
 	public AnchorPane anchorPane;
@@ -56,6 +57,7 @@ public class EndMatchClassicController
 		alert.setHeaderText("Confirm");
 		alert.showAndWait();
 		if (alert.getResult() == ButtonType.NO) return;
+		TABLE_CLASSIC.stopEarlier();
 		GEN_VIEW.changeScene(GenView.SCENES.ENDGAME, anchorPane);
 	}
 
@@ -67,6 +69,12 @@ public class EndMatchClassicController
 
 		GEN_VIEW.setCurrentGameController(TurnOrder.MODALITY.CLASSIC);
 		((GameplayClassicController) GEN_VIEW.getGameplayClassic().getUserData()).reset();
+	}
+
+	@FXML
+	public void buttonEntered()
+	{
+		AUDIO_PLAYER.play(AudioPlayer.Sounds.CURSORSELECT);
 	}
 
 	public void load(PointsData pointsData)

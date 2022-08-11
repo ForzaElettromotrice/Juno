@@ -25,6 +25,7 @@ public class EndMatchComboController
 {
 	private static final GenView GEN_VIEW = GenView.getINSTANCE();
 	private static final AudioPlayer AUDIO_PLAYER = AudioPlayer.getINSTANCE();
+	private static final TableCombo TABLE_COMBO = TableCombo.getINSTANCE();
 
 	@FXML
 	public AnchorPane anchorPane;
@@ -51,13 +52,13 @@ public class EndMatchComboController
 	@FXML
 	public void exitClicked()
 	{
-
 		buttonClick();
 		Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to exit? You will lose the match by default!", ButtonType.YES, ButtonType.NO);
 		alert.setTitle("Confirm");
 		alert.setHeaderText("Confirm");
 		alert.showAndWait();
 		if (alert.getResult() == ButtonType.NO) return;
+		TABLE_COMBO.stopEarlier();
 		GEN_VIEW.changeScene(GenView.SCENES.ENDGAME, anchorPane);
 	}
 
@@ -69,6 +70,12 @@ public class EndMatchComboController
 
 		GEN_VIEW.setCurrentGameController(TurnOrder.MODALITY.COMBO);
 		((GameplayComboController) GEN_VIEW.getGameplayCombo().getUserData()).reset();
+	}
+
+	@FXML
+	public void buttonEntered()
+	{
+		AUDIO_PLAYER.play(AudioPlayer.Sounds.CURSORSELECT);
 	}
 
 	public void load(PointsData pointsData)

@@ -6,6 +6,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.ImagePattern;
@@ -99,11 +100,13 @@ public class StatsController
 	@FXML
 	public void openEntered()
 	{
+		AUDIO_PLAYER.play(AudioPlayer.Sounds.CURSORSELECT);
 		openButton.setUnderline(true);
 	}
 	@FXML
 	public void changeAvatarEntered()
 	{
+		AUDIO_PLAYER.play(AudioPlayer.Sounds.CURSORSELECT);
 		circleOpaque.setVisible(true);
 		changeAvatarButton.setVisible(true);
 	}
@@ -132,21 +135,21 @@ public class StatsController
 	@FXML
 	public void avatar1Clicked()
 	{
-		AUDIO_PLAYER.play(AudioPlayer.Sounds.BUTTONCLICK);
+		AUDIO_PLAYER.play(AudioPlayer.Sounds.ALERTBEEP);
 		circle.setFill(new ImagePattern(new Image(String.format("file:\\%s\\src\\main\\resources\\org\\juno\\images\\icon1.png", USER_DIR))));
 		avatarBox.setVisible(false);
 	}
 	@FXML
 	public void avatar2Clicked()
 	{
-		AUDIO_PLAYER.play(AudioPlayer.Sounds.BUTTONCLICK);
+		AUDIO_PLAYER.play(AudioPlayer.Sounds.ALERTBEEP);
 		circle.setFill(new ImagePattern(new Image(String.format("file:\\%s\\src\\main\\resources\\org\\juno\\images\\icon2.png", USER_DIR))));
 		avatarBox.setVisible(false);
 	}
 	@FXML
 	public void avatar3Clicked()
 	{
-		AUDIO_PLAYER.play(AudioPlayer.Sounds.BUTTONCLICK);
+		AUDIO_PLAYER.play(AudioPlayer.Sounds.ALERTBEEP);
 		circle.setFill(new ImagePattern(new Image(String.format("file:\\%s\\src\\main\\resources\\org\\juno\\images\\icon3.png", USER_DIR))));
 		avatarBox.setVisible(false);
 	}
@@ -198,6 +201,7 @@ public class StatsController
 	@FXML
 	public void changeNameClicked()
 	{
+		AUDIO_PLAYER.play(AudioPlayer.Sounds.BUTTONCLICK);
 		if (changeName.isSelected())
 		{
 			nameTextfield.setEditable(true);
@@ -206,6 +210,12 @@ public class StatsController
 		{
 			anchorClicked();
 		}
+	}
+
+	@FXML
+	public void buttonEntered()
+	{
+		AUDIO_PLAYER.play(AudioPlayer.Sounds.CURSORSELECT);
 	}
 
 

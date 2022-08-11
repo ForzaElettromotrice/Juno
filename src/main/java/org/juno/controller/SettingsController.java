@@ -8,6 +8,7 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.Slider;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import org.juno.model.user.User;
 import org.juno.view.AudioPlayer;
@@ -61,18 +62,18 @@ public class SettingsController
 	@FXML
 	public void musicMouseReleased()
 	{
+		AUDIO_PLAYER.play(AudioPlayer.Sounds.ALERTBEEP);
 		haveToSave = true;
 		saveButton.setDisable(false);
 		AUDIO_PLAYER.setMusicVolume(musicSlider.getValue() / 100);
-		//TODO: fare che quando lo muovi cambia colore
 	}
 	@FXML
 	public void effectsMouseReleased()
 	{
+		AUDIO_PLAYER.play(AudioPlayer.Sounds.ALERTBEEP);
 		haveToSave = true;
 		saveButton.setDisable(false);
 		AUDIO_PLAYER.setEffectsVolume(effectsSlider.getValue() / 100);
-		//TODO: fare che quando lo muovi cambia colore
 	}
 
 
@@ -89,10 +90,7 @@ public class SettingsController
 			if (alert.getResult() == ButtonType.NO) return;
 		}
 
-		AUDIO_PLAYER.setMusicVolume(musicActual);
-		AUDIO_PLAYER.setEffectsVolume(effectsActual);
-		User.getInstance().setMusicVolume(musicActual);
-		User.getInstance().setEffectsVolume(effectsActual);
+		saveData();
 		
 		GEN_VIEW.changeScene(GenView.SCENES.STARTMENU, anchor);
 
@@ -111,17 +109,35 @@ public class SettingsController
 	{
 		AUDIO_PLAYER.play(AudioPlayer.Sounds.BUTTONCLICK);
 		saveButton.setDisable(true);
+		getData();
 		saveData();
+	}
+
+	@FXML
+	public void buttonEntered()
+	{
+		AUDIO_PLAYER.play(AudioPlayer.Sounds.CURSORSELECT);
 	}
 
 
 	private void saveData()
 	{
-		musicActual = musicSlider.getValue() / 100;
-		effectsActual = effectsSlider.getValue() / 100;
+		AUDIO_PLAYER.setMusicVolume(musicActual);
+		AUDIO_PLAYER.setEffectsVolume(effectsActual);
+		User.getInstance().setMusicVolume(musicActual);
+		User.getInstance().setEffectsVolume(effectsActual);
+
+		User.save();
 
 		haveToSave = false;
 	}
+
+	public void getData()
+	{
+		musicActual = musicSlider.getValue() / 100;
+		effectsActual = effectsSlider.getValue() / 100;
+	}
+
 	public void load()
 	{
 		haveToSave = false;
@@ -133,5 +149,4 @@ public class SettingsController
 
 		saveButton.setDisable(true);
 	}
-
 }

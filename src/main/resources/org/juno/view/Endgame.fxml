@@ -29,18 +29,18 @@
             <Font name="Javanese Text" size="50.0" />
         </font>
     </Label>
-    <Label fx:id="expMessage" alignment="CENTER" contentDisplay="CENTER" layoutX="308.0" layoutY="92.0" prefHeight="107.0" prefWidth="1304.0" text="YOU GAINED RRR EXP!">
+    <Label fx:id="resultsMessage" alignment="CENTER" contentDisplay="CENTER" layoutX="308.0" layoutY="92.0" prefHeight="107.0" prefWidth="1304.0">
         <font>
             <Font size="66.0" />
         </font>
     </Label>
     <HBox layoutX="710.0" layoutY="906.0" prefHeight="100.0" prefWidth="500.0" spacing="50.0">
-        <Button mnemonicParsing="false" onAction="#mainMenu" prefHeight="100.0" prefWidth="225.0" style="-fx-background-color: transparent; -fx-border-color: BLACK; -fx-border-radius: 40;" text="Main Menu">
+        <Button mnemonicParsing="false" onAction="#mainMenu" onMouseEntered="#buttonEntered" prefHeight="100.0" prefWidth="225.0" style="-fx-background-color: transparent; -fx-border-color: BLACK; -fx-border-radius: 40;" text="Main Menu">
             <font>
                 <Font size="28.0" />
             </font>
         </Button>
-        <Button mnemonicParsing="false" onAction="#newMatch" prefHeight="100.0" prefWidth="225.0" style="-fx-background-color: transparent; -fx-border-color: BLACK; -fx-border-radius: 40;" text="New Match">
+        <Button mnemonicParsing="false" onAction="#newMatch" onMouseEntered="#buttonEntered" prefHeight="100.0" prefWidth="225.0" style="-fx-background-color: transparent; -fx-border-color: BLACK; -fx-border-radius: 40;" text="New Match">
             <font>
                 <Font size="28.0" />
             </font>

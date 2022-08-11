@@ -75,12 +75,11 @@ public class TableClassic extends Table
 						err.printStackTrace();
 					}
 					clearChanged();
+					delay(1000);
 					endTurn = true;
 				}
 			} else endTurn = currentPlayer.hasPassed();
 		}
-		
-
 		return checkUno(currentPlayer, delayUno);
 	}
 }

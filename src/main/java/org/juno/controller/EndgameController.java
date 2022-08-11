@@ -46,7 +46,7 @@ public class EndgameController
 	@FXML
 	public Label nextLevel;
 	@FXML
-	public Label expMessage;
+	public Label resultsMessage;
 
 
 	@FXML
@@ -71,13 +71,19 @@ public class EndgameController
 		} else if (table instanceof TableCombo)
 		{
 			GEN_VIEW.setCurrentGameController(TurnOrder.MODALITY.COMBO);
-			//TODO
+			GEN_VIEW.changeScene(GenView.SCENES.GAMEPLAYCOMBO, backgroundEndagame);
 		} else
 		{
 			GEN_VIEW.setCurrentGameController(TurnOrder.MODALITY.TRADE);
-			//TODO
+			GEN_VIEW.changeScene(GenView.SCENES.GAMEPLAYTRADE, backgroundEndagame);
 		}
 		new Thread(table).start();
+	}
+
+	@FXML
+	public void buttonEntered()
+	{
+		AUDIO_PLAYER.play(AudioPlayer.Sounds.CURSORSELECT);
 	}
 
 	public void load(Table currentTable)
@@ -94,7 +100,9 @@ public class EndgameController
 
 		int points = currentTable.getUser().getPoints();
 
-		expMessage.setText(String.format("You gained %d exp!", points));
+		if (currentTable.getWinner() != null)
+			resultsMessage.setText(String.format("You %s! You gained %d exp!", currentTable.getWinner().getId().equals(BuildMP.PG.PLAYER) ? "won" : "lost", points));
+		else resultsMessage.setText(String.format("You lost! You gained %d exp!", points));
 
 
 		if (!currentTable.getStopEarlier() && currentTable.getWinner().getId() == BuildMP.PG.PLAYER)

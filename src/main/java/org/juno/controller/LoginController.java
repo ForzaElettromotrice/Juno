@@ -253,6 +253,7 @@ public class LoginController
 			hBox.setOnMouseClicked(this::hBoxClicked);
 
 			boxAccount.getChildren().add(hBox);
+			AUDIO_PLAYER.setMusicVolume(10);
 		}
 	}
 

@@ -1,9 +1,12 @@
 package org.juno.controller;
 
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -11,11 +14,13 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import org.juno.datapackage.*;
 import org.juno.model.deck.Card;
 import org.juno.model.deck.WildCard;
 import org.juno.model.table.combo.TableCombo;
+import org.juno.model.user.User;
 import org.juno.view.AudioPlayer;
 import org.juno.view.GenView;
 
@@ -38,6 +43,14 @@ public class GameplayComboController implements Gameplay
 	public AnchorPane anchor;
 
 
+	@FXML
+	public ImageView userTurn;
+	@FXML
+	public ImageView bot1Turn;
+	@FXML
+	public ImageView bot2Turn;
+	@FXML
+	public ImageView bot3Turn;
 
 
 	@FXML
@@ -76,9 +89,9 @@ public class GameplayComboController implements Gameplay
 
 	@FXML
 	public GridPane colorGridPane;
-	
 
-	public ImageView lastClicked;
+
+	private ImageView lastClicked;
 
 	@FXML
 	public void deckClicked()
@@ -98,6 +111,7 @@ public class GameplayComboController implements Gameplay
 	@FXML
 	public void junoClicked()
 	{
+		AUDIO_PLAYER.play(AudioPlayer.Sounds.BUTTONCLICK);
 		junoButton.setVisible(false);
 		TABLE_COMBO.getUser().sayUno();
 	}
@@ -130,6 +144,24 @@ public class GameplayComboController implements Gameplay
 		beep();
 		((WildCard) TABLE_COMBO.getUser().getChosenCard()).setColor(Card.Color.GREEN);
 		colorGridPane.setVisible(false);
+	}
+
+	@FXML
+	public void exitClicked()
+	{
+		AUDIO_PLAYER.play(AudioPlayer.Sounds.BUTTONCLICK);
+		Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to exit? You will lose the match by default!", ButtonType.YES, ButtonType.NO);
+		alert.setTitle("Confirm");
+		alert.setHeaderText("Confirm");
+		alert.showAndWait();
+		if (alert.getResult() == ButtonType.NO) return;
+		TABLE_COMBO.stopEarlier();
+	}
+
+	@FXML
+	public void buttonEntered()
+	{
+		AUDIO_PLAYER.play(AudioPlayer.Sounds.CURSORSELECT);
 	}
 
 
@@ -222,6 +254,7 @@ public class GameplayComboController implements Gameplay
 	{
 		if (TABLE_COMBO.getCurrentPlayer().getId() != BuildMP.PG.PLAYER) return;
 
+		cardFlip();
 		ImageView card = (ImageView) mouseEvent.getSource();
 		card.setTranslateY(-30);
 	}
@@ -229,7 +262,6 @@ public class GameplayComboController implements Gameplay
 	{
 		if (TABLE_COMBO.getCurrentPlayer().getId() != BuildMP.PG.PLAYER) return;
 
-		cardFlip();
 		ImageView card = (ImageView) mouseEvent.getSource();
 		card.setTranslateY(0);
 	}
@@ -252,16 +284,21 @@ public class GameplayComboController implements Gameplay
 	public void turn(TurnData turnData)
 	{
 		passButton.setDisable(true);
-		userCircle.setFill(Color.WHITE);
-		bot1Circle.setFill(Color.WHITE);
-		bot2Circle.setFill(Color.WHITE);
-		bot3Circle.setFill(Color.WHITE);
+		userTurn.setVisible(false);
+		bot1Turn.setVisible(false);
+		bot2Turn.setVisible(false);
+		bot3Turn.setVisible(false);
 		switch (turnData.player())
 		{
-			case PLAYER -> userCircle.setFill(Color.YELLOW);
-			case BOT1 -> bot1Circle.setFill(Color.YELLOW);
-			case BOT2 -> bot2Circle.setFill(Color.YELLOW);
-			case BOT3 -> bot3Circle.setFill(Color.YELLOW);
+			case PLAYER -> userTurn.setVisible(true);
+			case BOT1 -> bot1Turn.setVisible(true);
+			case BOT2 -> bot2Turn.setVisible(true);
+			case BOT3 -> bot3Turn.setVisible(true);
+		}
+
+		for (Node card : userHand.getChildren())
+		{
+			card.setTranslateY(0);
 		}
 
 	}
@@ -338,6 +375,10 @@ public class GameplayComboController implements Gameplay
 		bot1Hand.getChildren().clear();
 		bot2Hand.getChildren().clear();
 		bot3Hand.getChildren().clear();
+		userCircle.setFill(new ImagePattern(new Image(User.getInstance().getAvatar())));
+		bot1Circle.setFill(new ImagePattern(new Image(String.format("file:\\%s\\src\\main\\resources\\org\\juno\\images\\iconBot1.png", System.getProperty("user.dir")))));
+		bot2Circle.setFill(new ImagePattern(new Image(String.format("file:\\%s\\src\\main\\resources\\org\\juno\\images\\iconBot2.png", System.getProperty("user.dir")))));
+		bot3Circle.setFill(new ImagePattern(new Image(String.format("file:\\%s\\src\\main\\resources\\org\\juno\\images\\iconBot3.png", System.getProperty("user.dir")))));
 		TABLE_COMBO.canStart();
 	}
 

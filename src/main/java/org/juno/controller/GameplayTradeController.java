@@ -1,8 +1,11 @@
 package org.juno.controller;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -10,6 +13,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import org.juno.datapackage.*;
 import org.juno.model.deck.Card;
@@ -17,6 +21,7 @@ import org.juno.model.deck.WildCard;
 import org.juno.model.table.Player;
 import org.juno.model.table.trade.PlayerTrade;
 import org.juno.model.table.trade.TableTrade;
+import org.juno.model.user.User;
 import org.juno.view.AudioPlayer;
 import org.juno.view.GenView;
 
@@ -47,6 +52,15 @@ public class GameplayTradeController implements Gameplay
     public Circle bot2Circle;
     @FXML
     public Circle bot3Circle;
+
+    @FXML
+    public ImageView userTurn;
+    @FXML
+    public ImageView bot1Turn;
+    @FXML
+    public ImageView bot2Turn;
+    @FXML
+    public ImageView bot3Turn;
 
 
     @FXML
@@ -100,6 +114,7 @@ public class GameplayTradeController implements Gameplay
     @FXML
     public void junoClicked()
     {
+        buttonClick();
         TABLE_TRADE.getUser().sayUno();
         junoButton.setVisible(false);
     }
@@ -138,6 +153,7 @@ public class GameplayTradeController implements Gameplay
     @FXML
     public void bot1HandClicked()
     {
+        beep();
         PlayerTrade player = (PlayerTrade) TABLE_TRADE.getCurrentPlayer();
 
         if (player.getId() != BuildMP.PG.PLAYER) return;
@@ -147,6 +163,7 @@ public class GameplayTradeController implements Gameplay
     @FXML
     public void bot2HandClicked()
     {
+        beep();
         PlayerTrade player = (PlayerTrade) TABLE_TRADE.getCurrentPlayer();
 
         if (player.getId() != BuildMP.PG.PLAYER) return;
@@ -156,11 +173,30 @@ public class GameplayTradeController implements Gameplay
     @FXML
     public void bot3HandClicked()
     {
+        beep();
         PlayerTrade player = (PlayerTrade) TABLE_TRADE.getCurrentPlayer();
 
         if (player.getId() != BuildMP.PG.PLAYER) return;
 
         player.setTargetTrade(BuildMP.PG.BOT3);
+    }
+
+    @FXML
+    public void exitClicked()
+    {
+        buttonClick();
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to exit? You will lose the match by default!", ButtonType.YES, ButtonType.NO);
+        alert.setTitle("Confirm");
+        alert.setHeaderText("Confirm");
+        alert.showAndWait();
+        if (alert.getResult() == ButtonType.NO) return;
+        TABLE_TRADE.stopEarlier();
+    }
+
+    @FXML
+    public void buttonEntered()
+    {
+        AUDIO_PLAYER.play(AudioPlayer.Sounds.CURSORSELECT);
     }
 
 
@@ -283,16 +319,22 @@ public class GameplayTradeController implements Gameplay
     public void turn(TurnData turnData)
     {
         passButton.setDisable(true);
-        userCircle.setFill(Color.WHITE);
-        bot1Circle.setFill(Color.WHITE);
-        bot2Circle.setFill(Color.WHITE);
-        bot3Circle.setFill(Color.WHITE);
+        userTurn.setVisible(false);
+        bot1Turn.setVisible(false);
+        bot2Turn.setVisible(false);
+        bot3Turn.setVisible(false);
+
         switch (turnData.player())
         {
-            case PLAYER -> userCircle.setFill(Color.YELLOW);
-            case BOT1 -> bot1Circle.setFill(Color.YELLOW);
-            case BOT2 -> bot2Circle.setFill(Color.YELLOW);
-            case BOT3 -> bot3Circle.setFill(Color.YELLOW);
+            case PLAYER -> userTurn.setVisible(true);
+            case BOT1 -> bot1Turn.setVisible(true);
+            case BOT2 -> bot2Turn.setVisible(true);
+            case BOT3 -> bot3Turn.setVisible(true);
+        }
+
+        for (Node card : userHand.getChildren())
+        {
+            card.setTranslateY(0);
         }
 
     }
@@ -407,6 +449,10 @@ public class GameplayTradeController implements Gameplay
         bot1Hand.getChildren().clear();
         bot2Hand.getChildren().clear();
         bot3Hand.getChildren().clear();
+        userCircle.setFill(new ImagePattern(new Image(User.getInstance().getAvatar())));
+        bot1Circle.setFill(new ImagePattern(new Image(String.format("file:\\%s\\src\\main\\resources\\org\\juno\\images\\iconBot1.png", System.getProperty("user.dir")))));
+        bot2Circle.setFill(new ImagePattern(new Image(String.format("file:\\%s\\src\\main\\resources\\org\\juno\\images\\iconBot2.png", System.getProperty("user.dir")))));
+        bot3Circle.setFill(new ImagePattern(new Image(String.format("file:\\%s\\src\\main\\resources\\org\\juno\\images\\iconBot3.png", System.getProperty("user.dir")))));
         TABLE_TRADE.canStart();
     }
 
@@ -423,6 +469,4 @@ public class GameplayTradeController implements Gameplay
     {
         AUDIO_PLAYER.play(AudioPlayer.Sounds.BUTTONCLICK);
     }
-
-
 }

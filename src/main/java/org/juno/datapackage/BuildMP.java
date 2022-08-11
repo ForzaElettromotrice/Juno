@@ -25,7 +25,8 @@ public class BuildMP
 		JUMP,
 		GAMEFLOW,
 		COLOR,
-		POINTS
+		POINTS,
+		EXIT
 	}
 
 	public enum PG

@@ -14,85 +14,99 @@
 <AnchorPane fx:id="menuAnchor" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" styleClass="backgroundFull" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.juno.controller.StartMenuController">
     <GridPane alignment="CENTER" layoutX="-1.0" prefHeight="540.0" prefWidth="960.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <columnConstraints>
-            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="100.0" minWidth="100.0" prefWidth="100.0" />
-            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="100.0" minWidth="100.0"
+                               prefWidth="100.0"/>
+            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
         </columnConstraints>
         <rowConstraints>
-            <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="10.0" minHeight="10.0" prefHeight="10.0" valignment="CENTER" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES"/>
+            <RowConstraints maxHeight="10.0" minHeight="10.0" prefHeight="10.0" valignment="CENTER" vgrow="SOMETIMES"/>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES"/>
         </rowConstraints>
-      <StackPane maxHeight="360.0" maxWidth="260.0" minHeight="360.0" minWidth="260.0" onMouseClicked="#playClicked" onMouseEntered="#playEntered" onMouseExited="#playExited" prefHeight="360.0" prefWidth="260.0" rotate="-22.5">
-         <children>
-                <ImageView fitHeight="300.0" fitWidth="200.0" pickOnBounds="true" style="-fx-background-color: transparent;">
-                    <Image url="@../images/rempty.png" />
-                </ImageView>
-              <Button alignment="CENTER" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="300.0" prefWidth="200.0" styleClass="backgroundTransparent" text="Play" textFill="#bf0000">
-                  <opaqueInsets>
-                      <Insets />
-                  </opaqueInsets>
-                  <font>
-                      <Font name="Arial" size="47.0" />
-                  </font>
-              </Button>
-              <ImageView fx:id="redFrame" fitHeight="360.0" fitWidth="260.0" opacity="0.75" pickOnBounds="true">
-                  <Image url="@../images/rframe.png" />
-              </ImageView>
-         </children>
-         <GridPane.margin>
-            <Insets />
-         </GridPane.margin>
-      </StackPane>
-      <StackPane maxHeight="360.0" maxWidth="260.0" minHeight="360.0" minWidth="260.0" onMouseClicked="#settingsClicked" onMouseEntered="#settingsEntered" onMouseExited="#settingsExited" prefHeight="360.0" prefWidth="260.0" rotate="22.5" GridPane.columnIndex="2">
-         <children>
-                <ImageView fitHeight="300.0" fitWidth="200.0" pickOnBounds="true">
-                    <Image url="@../images/yempty.png" />
-                </ImageView>
-              <Button id="settingsButton" alignment="CENTER" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="361.0" prefWidth="284.0" styleClass="backgroundTransparent" text="Settings" textFill="#f2ff60">
-                  <font>
-                      <Font name="Arial" size="35.0" />
-                  </font>
-              </Button>
-              <ImageView fx:id="yellowFrame" fitHeight="360.0" fitWidth="260.0" opacity="0.75" pickOnBounds="true">
-                  <Image url="@../images/yframe.png" />
-              </ImageView>
-         </children>
-      </StackPane>
-      <StackPane maxHeight="360.0" maxWidth="260.0" minHeight="360.0" minWidth="260.0" onMouseClicked="#statsClicked" onMouseEntered="#statsEntered" onMouseExited="#statsExited" prefHeight="300.0" prefWidth="200.0" rotate="22.5" GridPane.rowIndex="2">
-         <children>
-                <ImageView fitHeight="300.0" fitWidth="200.0" pickOnBounds="true">
-                    <Image url="@../images/bempty.png" />
-                </ImageView>
-              <Button id="statsButton" alignment="CENTER" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="300.0" prefWidth="200.0" styleClass="backgroundTransparent" text="Stats" textFill="#5043ff">
-                  <font>
-                      <Font name="Arial" size="47.0" />
-                  </font>
-              </Button>
-              <ImageView fx:id="blueFrame" fitHeight="360.0" fitWidth="260.0" opacity="0.75" pickOnBounds="true">
-                  <Image url="@../images/bframe.png" />
-              </ImageView>
-         </children>
-      </StackPane>
-      <StackPane maxHeight="360.0" maxWidth="260.0" minHeight="360.0" minWidth="260.0" onMouseClicked="#exitClicked" onMouseEntered="#exitEntered" onMouseExited="#exitExited" prefHeight="360.0" prefWidth="260.0" rotate="-22.5" GridPane.columnIndex="2" GridPane.rowIndex="2">
-         <children>
-                <ImageView fitHeight="300.0" fitWidth="200.0" pickOnBounds="true">
-                    <Image url="@../images/gempty.png" />
-                </ImageView>
-              <Button id="exitButton" alignment="CENTER" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="300.0" prefWidth="200.0" styleClass="backgroundTransparent" text="Exit" textFill="#4aff56">
-                  <font>
-                      <Font name="Impact" size="47.0" />
-                  </font>
-              </Button>
-              <ImageView fx:id="greenFrame" fitHeight="360.0" fitWidth="260.0" opacity="0.75" pickOnBounds="true">
-                  <Image url="@../images/gframe.png" />
-              </ImageView>
-         </children>
-      </StackPane>
-        <ImageView fitHeight="510.0" fitWidth="400.0" pickOnBounds="true" rotate="30.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
-            <Image url="@../images/logo.png" />
+        <StackPane maxHeight="360.0" maxWidth="260.0" minHeight="360.0" minWidth="260.0" onMouseClicked="#playClicked"
+                   onMouseEntered="#playEntered" onMouseExited="#playExited" prefHeight="360.0" prefWidth="260.0"
+                   rotate="-22.5">
             <GridPane.margin>
-                <Insets left="38.0" />
+                <Insets/>
+            </GridPane.margin>
+            <ImageView fitHeight="300.0" fitWidth="200.0" pickOnBounds="true"
+                       style="-fx-background-color: transparent;">
+                <Image url="@../images/rempty.png"/>
+            </ImageView>
+            <Button alignment="CENTER" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity"
+                    minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="300.0"
+                    prefWidth="200.0" styleClass="backgroundTransparent" text="Play" textFill="#bf0000">
+                <opaqueInsets>
+                    <Insets/>
+                </opaqueInsets>
+                <font>
+                    <Font name="Arial" size="47.0"/>
+                </font>
+            </Button>
+            <ImageView fx:id="redFrame" fitHeight="360.0" fitWidth="260.0" opacity="0.75" pickOnBounds="true">
+                <Image url="@../images/rframe.png"/>
+            </ImageView>
+        </StackPane>
+        <StackPane maxHeight="360.0" maxWidth="260.0" minHeight="360.0" minWidth="260.0"
+                   onMouseClicked="#settingsClicked" onMouseEntered="#settingsEntered" onMouseExited="#settingsExited"
+                   prefHeight="360.0" prefWidth="260.0" rotate="22.5" GridPane.columnIndex="2">
+            <ImageView fitHeight="300.0" fitWidth="200.0" pickOnBounds="true">
+                <Image url="@../images/yempty.png"/>
+            </ImageView>
+            <Button id="settingsButton" alignment="CENTER" contentDisplay="CENTER" maxHeight="-Infinity"
+                    maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false"
+                    prefHeight="361.0" prefWidth="284.0" styleClass="backgroundTransparent" text="Settings"
+                    textFill="#f2ff60">
+                <font>
+                    <Font name="Arial" size="35.0"/>
+                </font>
+            </Button>
+            <ImageView fx:id="yellowFrame" fitHeight="360.0" fitWidth="260.0" opacity="0.75" pickOnBounds="true">
+                <Image url="@../images/yframe.png"/>
+            </ImageView>
+        </StackPane>
+        <StackPane maxHeight="360.0" maxWidth="260.0" minHeight="360.0" minWidth="260.0" onMouseClicked="#statsClicked"
+                   onMouseEntered="#statsEntered" onMouseExited="#statsExited" prefHeight="300.0" prefWidth="200.0"
+                   rotate="22.5" GridPane.rowIndex="2">
+            <ImageView fitHeight="300.0" fitWidth="200.0" pickOnBounds="true">
+                <Image url="@../images/bempty.png"/>
+            </ImageView>
+            <Button id="statsButton" alignment="CENTER" contentDisplay="CENTER" maxHeight="-Infinity"
+                    maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false"
+                    prefHeight="300.0" prefWidth="200.0" styleClass="backgroundTransparent" text="Stats"
+                    textFill="#5043ff">
+                <font>
+                    <Font name="Arial" size="47.0"/>
+                </font>
+            </Button>
+            <ImageView fx:id="blueFrame" fitHeight="360.0" fitWidth="260.0" opacity="0.75" pickOnBounds="true">
+                <Image url="@../images/bframe.png"/>
+            </ImageView>
+        </StackPane>
+        <StackPane maxHeight="360.0" maxWidth="260.0" minHeight="360.0" minWidth="260.0" onMouseClicked="#exitClicked"
+                   onMouseEntered="#exitEntered" onMouseExited="#exitExited" prefHeight="360.0" prefWidth="260.0"
+                   rotate="-22.5" GridPane.columnIndex="2" GridPane.rowIndex="2">
+            <ImageView fitHeight="300.0" fitWidth="200.0" pickOnBounds="true">
+                <Image url="@../images/gempty.png"/>
+            </ImageView>
+            <Button id="exitButton" alignment="CENTER" contentDisplay="CENTER" maxHeight="-Infinity"
+                    maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false"
+                    prefHeight="300.0" prefWidth="200.0" styleClass="backgroundTransparent" text="Exit"
+                    textFill="#4aff56">
+                <font>
+                    <Font name="Impact" size="47.0"/>
+                </font>
+            </Button>
+            <ImageView fx:id="greenFrame" fitHeight="360.0" fitWidth="260.0" opacity="0.75" pickOnBounds="true">
+                <Image url="@../images/gframe.png"/>
+            </ImageView>
+        </StackPane>
+        <ImageView fitHeight="510.0" fitWidth="400.0" pickOnBounds="true" rotate="30.0" GridPane.columnIndex="1"
+                   GridPane.rowIndex="1">
+            <Image url="@../images/logo.png"/>
+            <GridPane.margin>
+                <Insets left="38.0"/>
             </GridPane.margin>
         </ImageView>
     </GridPane>

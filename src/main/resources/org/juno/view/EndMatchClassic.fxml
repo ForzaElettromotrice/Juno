@@ -56,12 +56,12 @@
         </HBox>
     </VBox>
      <HBox alignment="BOTTOM_RIGHT" layoutX="1280.0" layoutY="964.0" prefHeight="100.0" prefWidth="624.0" spacing="100.0">
-         <Button fx:id="exitButton" mnemonicParsing="false" onAction="#exitClicked" prefHeight="100.0" prefWidth="250.0" stylesheets="@Style.css" text="EXIT GAME">
+         <Button fx:id="exitButton" mnemonicParsing="false" onAction="#exitClicked" onMouseEntered="#buttonEntered" prefHeight="100.0" prefWidth="250.0" stylesheets="@Style.css" text="EXIT GAME">
              <font>
                  <Font name="Javanese Text" size="27.0" />
              </font>
          </Button>
-         <Button fx:id="nextMatchButton" mnemonicParsing="false" onAction="#nextMatchClicked" prefHeight="100.0" prefWidth="250.0" stylesheets="@Style.css" text="NEXT MATCH">
+         <Button fx:id="nextMatchButton" mnemonicParsing="false" onAction="#nextMatchClicked" onMouseEntered="#buttonEntered" prefHeight="100.0" prefWidth="250.0" stylesheets="@Style.css" text="NEXT MATCH">
              <font>
                  <Font name="Javanese Text" size="27.0" />
              </font>
