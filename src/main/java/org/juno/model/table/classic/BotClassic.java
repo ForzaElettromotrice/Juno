@@ -35,6 +35,7 @@ public class BotClassic extends PlayerClassic
 		if (chosenCard == null)
 		{
 			Card drawn = draw();
+			delay(1000);
 			if (drawn.isValid(first))
 			{
 				chosenCard = drawn;

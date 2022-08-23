@@ -36,7 +36,7 @@
          <ImageView fitHeight="300.0" fitWidth="300.0" onMouseClicked="#comboClicked" onMouseEntered="#comboEntered" onMouseExited="#comboExited" pickOnBounds="true" preserveRatio="true" rotate="55.0">
             <Image url="@../images/logoCombo.png" />
          </ImageView>
-         <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="400.0" prefWidth="640.0" styleClass="textCMStyle" text="Play smart! In this mode you can play cards as &#10;you want only if they match the same number!&#10;And also, if you have to draw, you will be drawing&#10;until you gain a playable card!&#10;" textAlignment="CENTER" textFill="WHITE">
+         <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="400.0" prefWidth="640.0" styleClass="textCMStyle" text="Play smart! In this mode you can play &#10;cards as you want only if they match &#10;the same number! And also, if you &#10;have to draw, you will be drawing &#10;until you gain a playable card!&#10;" textAlignment="CENTER" textFill="WHITE">
             <font>
                <Font name="Javanese Text" size="30.0" />
             </font>

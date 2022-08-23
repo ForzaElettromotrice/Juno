@@ -271,6 +271,7 @@ public class GameplayTradeController implements Gameplay
     @Override
     public void discard(DiscardData discardData)
     {
+        colorGridPane.setVisible(false);
         beep();
         if (discardData.player() == null)
         {

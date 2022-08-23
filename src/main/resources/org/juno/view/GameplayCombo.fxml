@@ -13,6 +13,11 @@
 <?import javafx.scene.text.Font?>
 
 <AnchorPane id="backgroundGameplay" fx:id="anchor" maxHeight="1080.0" maxWidth="1920.0" prefHeight="1080.0" prefWidth="1920.0" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.juno.controller.GameplayComboController">
+   <ImageView fx:id="cardDrawn" fitHeight="264.0" fitWidth="189.0" layoutX="660.0" layoutY="425.0" onMouseClicked="#deckClicked" pickOnBounds="true" preserveRatio="true" visible="false">
+      <image>
+         <Image url="@../images/back.png" />
+      </image>
+   </ImageView>
    <ImageView fx:id="bot1Turn" fitHeight="417.0" fitWidth="428.0" layoutX="60.0" layoutY="266.0" pickOnBounds="true" preserveRatio="true" visible="false">
       <image>
          <Image url="@../images/rays.png" />

@@ -72,7 +72,8 @@ public class TableTrade extends Table
                 chosenCard = currentPlayer.getChosenCard();
                 if ((chosenCard.getColor() != Card.Color.BLACK && chosenCard.getValue() != Card.Value.SEVEN) || (chosenCard.getValue() == Card.Value.SEVEN && currentPlayer.readyToTrade()))
                 {
-                    checkEffects(chosenCard);
+                    if (currentPlayer.getSizeHand() != 0)
+                        checkEffects(chosenCard);
                     DISCARD_PILE.discard(chosenCard);
                     setChanged();
                     try

@@ -188,6 +188,7 @@ public abstract class Player extends Observable
 				err.printStackTrace();
 			}
 			clearChanged();
+			delay(1000);
 		}
 	}
 

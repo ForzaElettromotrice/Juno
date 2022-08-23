@@ -79,6 +79,8 @@ public class GameplayComboController implements Gameplay
 	public ImageView secondDiscarded;
 	@FXML
 	public ImageView thirdDiscarded;
+	@FXML
+	public ImageView cardDrawn;
 
 
 	@FXML
@@ -205,6 +207,7 @@ public class GameplayComboController implements Gameplay
 	}
 	public void discard(DiscardData discardData)
 	{
+		colorGridPane.setVisible(false);
 		beep();
 		if (discardData.player() == null)
 		{

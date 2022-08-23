@@ -23,6 +23,8 @@ public class PlayerTrade extends Player
 	}
 	public boolean readyToTrade()
 	{
+		if (getSizeHand() == 0)
+			return true;
 		return targetTrade != null;
 	}
 

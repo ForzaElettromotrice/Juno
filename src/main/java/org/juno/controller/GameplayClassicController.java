@@ -3,7 +3,6 @@ package org.juno.controller;
 import javafx.animation.PathTransition;
 import javafx.animation.RotateTransition;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -27,15 +26,12 @@ import org.juno.model.user.User;
 import org.juno.view.AudioPlayer;
 import org.juno.view.GenView;
 
-import java.net.URL;
-import java.util.ResourceBundle;
-
 /**
  * Defines GameplayControllerNew class,
  *
  * @author ForzaElettromotrice, R0n3l
  */
-public class GameplayClassicController implements Gameplay, Initializable
+public class GameplayClassicController implements Gameplay
 {
 	protected static final TableClassic TABLE_CLASSIC = TableClassic.getINSTANCE();
 	protected static final GenView GEN_VIEW = GenView.getINSTANCE();
@@ -44,23 +40,37 @@ public class GameplayClassicController implements Gameplay, Initializable
 	protected static final int CARD_WIDTH_SCALED = 189;
 	protected static final int CARD_HEIGHT_SCALED = 264;
 
-	private static final PathTransition PLAYER_PATH = new PathTransition(Duration.seconds(1), new Line(1147.5, 948, 1147.5, 540));
-	private static final PathTransition BOT1_PATH = new PathTransition(Duration.seconds(1), new Line(0, 408, 1147.5, 540));
-	private static final PathTransition BOT2_PATH = new PathTransition(Duration.seconds(1), new Line(1053, 0, 1147.5, 540));
-	private static final PathTransition BOT3_PATH = new PathTransition(Duration.seconds(1), new Line(1693.5, 408, 1147.5, 540));
+	protected static final double PARENT_PLAYER_X = 298.5;
+	protected static final double PARENT_BOT1_X = -288;
+	protected static final double PARENT_BOT2_X = 584;
+	protected static final double PARENT_BOT3_X = 1406;
 
-	private static final PathTransition PLAYER_DRAW_PATH = new PathTransition(Duration.seconds(1), new Line(858.5, 540, 1147.5, 948));
-	private static final PathTransition BOT1_DRAW_PATH = new PathTransition(Duration.seconds(1), new Line(858.5, 540, 0, 408));
-	private static final PathTransition BOT2_DRAW_PATH = new PathTransition(Duration.seconds(1), new Line(858.5, 540, 1053, 0));
-	private static final PathTransition BOT3_DRAW_PATH = new PathTransition(Duration.seconds(1), new Line(858.5, 540, 1693.5, 408));
+	protected static final double PARENT_PLAYER_Y = 816;
+	protected static final double PARENT_BOT1_Y = 397;
+	protected static final double PARENT_BOT2_Y = 26;
+	protected static final double PARENT_BOT3_Y = 383;
 
-	private static final RotateTransition PLAYER_ROTATE = new RotateTransition(Duration.seconds(1));
-	private static final RotateTransition BOT1_ROTATE = new RotateTransition(Duration.seconds(1));
-	private static final RotateTransition BOT2_ROTATE = new RotateTransition(Duration.seconds(1));
-	private static final RotateTransition BOT3_ROTATE = new RotateTransition(Duration.seconds(1));
+	protected double playerX;
+	protected double bot1XDiscard;
+	protected double bot2XDiscard;
+	protected double bot3XDiscard;
+	protected double bot1XDraw;
+	protected double bot2XDraw;
+	protected double bot3XDraw;
 
-	private static final RotateTransition DRAW_ROTATE = new RotateTransition(Duration.seconds(1));
+	protected double playerY;
+	protected double bot1YDiscard;
+	protected double bot2YDiscard;
+	protected double bot3YDiscard;
+	protected double bot1YDraw;
+	protected double bot2YDraw;
+	protected double bot3YDraw;
 
+	private final PathTransition pathDisc = new PathTransition(Duration.seconds(1), new Line(0, 0, 1147.5, 540));
+	private final PathTransition pathDraw = new PathTransition(Duration.millis(500), new Line(858.5, 540, 0, 0));
+	private final RotateTransition rotate = new RotateTransition(Duration.seconds(1));
+
+	private final RotateTransition drawRotate = new RotateTransition(Duration.millis(500));
 
 	@FXML
 	public AnchorPane anchorPane;
@@ -121,11 +131,8 @@ public class GameplayClassicController implements Gameplay, Initializable
 	public ImageView bot3Animation;
 	@FXML
 	public ImageView cardDrawn;
-	@FXML
-	public ImageView testTestoso;
 
 	private ImageView lastClicked;
-
 
 	@FXML
 	public void cardEntered(MouseEvent mouseEvent)
@@ -168,6 +175,7 @@ public class GameplayClassicController implements Gameplay, Initializable
 		if (player.getId() != BuildMP.PG.PLAYER) return;
 
 		player.draw();
+
 		pass.setDisable(false);
 	}
 	@FXML
@@ -240,6 +248,7 @@ public class GameplayClassicController implements Gameplay, Initializable
 	@Override
 	public void draw(DrawData drawData)
 	{
+		setTransition(drawData.player(), drawData.card());
 		cardFlip();
 		switch (drawData.player())
 		{
@@ -247,148 +256,168 @@ public class GameplayClassicController implements Gameplay, Initializable
 			{
 				cardDrawn.setImage(new Image(drawData.card().getUrl().getPath()));
 				cardDrawn.setVisible(true);
-				PLAYER_DRAW_PATH.play();
-				ImageView imageView = new ImageView(new Image(drawData.card().getUrl().getPath()));
 
-				imageView.setUserData(drawData.card());
-
-				imageView.setFitWidth(CARD_WIDTH_SCALED);
-				imageView.setFitHeight(CARD_HEIGHT_SCALED);
-
-				imageView.setOnMouseClicked(this::cardClicked);
-				imageView.setOnMouseEntered(this::cardEntered);
-				imageView.setOnMouseExited(this::cardExited);
-
-				userHand.getChildren().add(imageView);
-				fixWidth(userHand);
+				if (userHand.getChildren().isEmpty())
+				{
+					playerX = PARENT_PLAYER_X * 2;
+					playerY = PARENT_PLAYER_Y;
+				} else
+				{
+					playerX = userHand.getLayoutX() + PARENT_PLAYER_X + CARD_WIDTH_SCALED / 2;
+					playerY = userHand.getChildren().get(0).getLayoutY() + PARENT_PLAYER_Y + CARD_HEIGHT_SCALED / 2;
+				}
+				((Line) pathDraw.getPath()).setEndX(playerX);
+				((Line) pathDraw.getPath()).setEndY(playerY);
+				pathDraw.play();
+				drawRotate.play();
 			}
 			case BOT1 ->
 			{
-				drawBot(botHand1);
 				cardDrawn.setImage(new Image(String.format("file:\\%s\\src\\main\\resources\\org\\juno\\images\\back.png", System.getProperty("user.dir"))));
 				cardDrawn.setVisible(true);
-				BOT1_DRAW_PATH.play();
-				DRAW_ROTATE.play();
+
+				if (botHand1.getChildren().isEmpty())
+				{
+					bot1XDraw = PARENT_BOT1_X * 2;
+					bot1YDraw = PARENT_BOT1_Y;
+				} else
+				{
+					bot1XDraw = userHand.getLayoutX() + PARENT_BOT1_X + CARD_WIDTH_SCALED / 2;
+					bot1YDraw = userHand.getChildren().get(0).getLayoutY() + PARENT_BOT1_Y + CARD_HEIGHT_SCALED / 2;
+				}
+				((Line) pathDraw.getPath()).setEndX(bot1XDraw);
+				((Line) pathDraw.getPath()).setEndY(bot1YDraw);
+				pathDraw.play();
+				drawRotate.play();
 			}
 			case BOT2 ->
 			{
-				drawBot(botHand2);
 				cardDrawn.setImage(new Image(String.format("file:\\%s\\src\\main\\resources\\org\\juno\\images\\back.png", System.getProperty("user.dir"))));
 				cardDrawn.setVisible(true);
-				BOT2_DRAW_PATH.play();
+				if (botHand2.getChildren().isEmpty())
+				{
+					bot2XDraw = PARENT_BOT2_X * 2;
+					bot2YDraw = PARENT_BOT2_Y;
+				} else
+				{
+					bot2XDraw = userHand.getLayoutX() + PARENT_BOT2_X + CARD_WIDTH_SCALED / 2;
+					bot2YDraw = userHand.getChildren().get(0).getLayoutY() + PARENT_BOT2_Y + CARD_HEIGHT_SCALED / 2;
+				}
+				((Line) pathDraw.getPath()).setEndX(bot2XDraw);
+				((Line) pathDraw.getPath()).setEndY(bot2YDraw);
+				pathDraw.play();
+				drawRotate.play();
 			}
 			case BOT3 ->
 			{
-				drawBot(botHand3);
 				cardDrawn.setImage(new Image(String.format("file:\\%s\\src\\main\\resources\\org\\juno\\images\\back.png", System.getProperty("user.dir"))));
 				cardDrawn.setVisible(true);
-				BOT3_DRAW_PATH.play();
-				DRAW_ROTATE.play();
+				if (botHand3.getChildren().isEmpty())
+				{
+					bot3XDraw = PARENT_BOT3_X;
+					bot3YDraw = PARENT_BOT3_Y;
+				} else
+				{
+					bot3XDraw = userHand.getLayoutX() + PARENT_BOT3_X + CARD_WIDTH_SCALED / 2;
+					bot3YDraw = userHand.getChildren().get(0).getLayoutY() + PARENT_BOT3_Y + CARD_HEIGHT_SCALED / 2;
+				}
+				((Line) pathDraw.getPath()).setEndX(bot3XDraw);
+				((Line) pathDraw.getPath()).setEndY(bot3YDraw);
+				pathDraw.play();
+				drawRotate.play();
 			}
 		}
 	}
 
-	private void drawBot(HBox botHand)
-	{
-		ImageView imageView = new ImageView(new Image(String.format("file:\\%s\\src\\main\\resources\\org\\juno\\images\\back.png", System.getProperty("user.dir"))));
-
-		imageView.setFitWidth(CARD_WIDTH_SCALED);
-		imageView.setFitHeight(CARD_HEIGHT_SCALED);
-
-		botHand.getChildren().add(imageView);
-		fixWidth(botHand);
-	}
 	@Override
 	public void discard(DiscardData discardData)
 	{
+		colorGrid.setVisible(false);
 		if (discardData.player() == null)
 		{
 			firstDiscarded.setImage(new Image(discardData.card().getUrl().getPath()));
 			return;
 		}
 		preAnimation(discardData.player(), discardData.card());
-		PathTransition path = switch (discardData.player())
-				{
-					case PLAYER -> PLAYER_PATH;
-					case BOT1 -> BOT1_PATH;
-					case BOT2 -> BOT2_PATH;
-					case BOT3 -> BOT3_PATH;
-				};
 
-		path.setOnFinished(x -> postAnimation(discardData.card()));
+		pathDisc.setOnFinished(x -> postAnimation(discardData.card()));
 
 
-		animation(discardData.player());
-
+		animation();
 
 	}
 	protected void preAnimation(BuildMP.PG player, Card card)
 	{
-
+		setTransition(player, null);
 		switch (player)
 		{
 			case PLAYER ->
 			{
-//				System.out.printf("Layout X = %f%n%n", lastClicked.getLayoutX());
-//				playerAnimation.setX(lastClicked.getLayoutX() + 298.5);
 				userHand.getChildren().remove(lastClicked);
 				fixWidth(userHand);
-
 				playerAnimation.setVisible(true);
 				playerAnimation.setImage(new Image(card.getUrl().getPath()));
+				((Line) pathDisc.getPath()).setStartX(lastClicked.getLayoutX() + PARENT_PLAYER_X + CARD_WIDTH_SCALED / 2);
+				((Line) pathDisc.getPath()).setStartY(lastClicked.getLayoutY() + PARENT_PLAYER_Y + CARD_HEIGHT_SCALED / 2);
 			}
 			case BOT1 ->
 			{
+				if (bot1XDiscard == 0 && bot1YDiscard == 0)
+				{
+					bot1XDiscard = botHand1.getChildren().get(0).getLayoutX() + PARENT_BOT1_X + CARD_WIDTH_SCALED / 2;
+					bot1YDiscard = botHand1.getChildren().get(0).getLayoutY() + PARENT_BOT1_Y + CARD_HEIGHT_SCALED / 2;
+				}
 				botHand1.getChildren().remove(0);
 				fixWidth(botHand1);
 				bot1Animation.setVisible(true);
 				bot1Animation.setImage(new Image(card.getUrl().getPath()));
+				((Line) pathDisc.getPath()).setStartX(bot1XDiscard);
+				((Line) pathDisc.getPath()).setStartY(bot1YDiscard);
 			}
 			case BOT2 ->
 			{
+				if (bot2XDiscard == 0 && bot2YDiscard == 0)
+				{
+					bot2XDiscard = botHand2.getChildren().get(0).getLayoutX() + PARENT_BOT2_X + CARD_WIDTH_SCALED / 2;
+					bot2YDiscard = botHand2.getChildren().get(0).getLayoutY() + PARENT_BOT2_Y + CARD_HEIGHT_SCALED / 2;
+				}
 				botHand2.getChildren().remove(0);
 				fixWidth(botHand2);
 				bot2Animation.setVisible(true);
 				bot2Animation.setImage(new Image(card.getUrl().getPath()));
+				((Line) pathDisc.getPath()).setStartX(bot2XDiscard);
+				((Line) pathDisc.getPath()).setStartY(bot2YDiscard);
 			}
 			case BOT3 ->
 			{
+				if (bot3XDiscard == 0 && bot3YDiscard == 0)
+				{
+					bot3XDiscard = botHand3.getChildren().get(0).getLayoutX() + PARENT_BOT3_X + CARD_WIDTH_SCALED / 2;
+					bot3YDiscard = botHand3.getChildren().get(0).getLayoutY() + PARENT_BOT3_Y + CARD_HEIGHT_SCALED / 2;
+				}
 				botHand3.getChildren().remove(0);
 				fixWidth(botHand3);
 				bot3Animation.setVisible(true);
 				bot3Animation.setImage(new Image(card.getUrl().getPath()));
+				((Line) pathDisc.getPath()).setStartX(bot3XDiscard);
+				((Line) pathDisc.getPath()).setStartY(bot3YDiscard);
 			}
 		}
 	}
-	public void animation(BuildMP.PG pg)
+	public void animation()
 	{
-		switch (pg)
-		{
-			case PLAYER ->
-			{
-				PLAYER_PATH.play();
-				PLAYER_ROTATE.play();
-			}
-			case BOT1 ->
-			{
-				BOT1_PATH.play();
-				BOT1_ROTATE.play();
-			}
-			case BOT2 ->
-			{
-				BOT2_PATH.play();
-				BOT2_ROTATE.play();
-			}
-			case BOT3 ->
-			{
-				BOT3_PATH.play();
-				BOT3_ROTATE.play();
-			}
-		}
+		pathDisc.play();
+		rotate.play();
 	}
 	public void postAnimation(Card card)
 	{
 		beep();
+
+		playerAnimation.setVisible(false);
+		bot1Animation.setVisible(false);
+		bot3Animation.setVisible(false);
+		bot2Animation.setVisible(false);
+
 
 		thirdDiscarded.setImage(secondDiscarded.getImage());
 		secondDiscarded.setImage(firstDiscarded.getImage());
@@ -504,7 +533,14 @@ public class GameplayClassicController implements Gameplay, Initializable
 		bot1Circle.setFill(new ImagePattern(new Image(String.format("file:\\%s\\src\\main\\resources\\org\\juno\\images\\iconBot1.png", System.getProperty("user.dir")))));
 		bot2Circle.setFill(new ImagePattern(new Image(String.format("file:\\%s\\src\\main\\resources\\org\\juno\\images\\iconBot2.png", System.getProperty("user.dir")))));
 		bot3Circle.setFill(new ImagePattern(new Image(String.format("file:\\%s\\src\\main\\resources\\org\\juno\\images\\iconBot3.png", System.getProperty("user.dir")))));
+		userTurn.setVisible(false);
+		bot1Turn.setVisible(false);
+		bot2Turn.setVisible(false);
+		bot3Turn.setVisible(false);
 
+		firstDiscarded.setImage(null);
+		secondDiscarded.setImage(null);
+		thirdDiscarded.setImage(null);
 		TABLE_CLASSIC.canStart();
 	}
 
@@ -517,79 +553,143 @@ public class GameplayClassicController implements Gameplay, Initializable
 	{
 		AUDIO_PLAYER.play(AudioPlayer.Sounds.CARDFLIP);
 	}
-	@Override
-	public void initialize(URL url, ResourceBundle resourceBundle)
+
+	public void setTransition(BuildMP.PG player, Card card)
 	{
-		PLAYER_PATH.setNode(playerAnimation);
-		PLAYER_ROTATE.setNode(playerAnimation);
-		PLAYER_ROTATE.setByAngle(0);
-
-
-		PLAYER_ROTATE.setOnFinished(x ->
+		switch (player)
 		{
-			playerAnimation.setVisible(false);
-			playerAnimation.setRotate(0);
-		});
+			case PLAYER ->
+			{
+				pathDisc.setNode(playerAnimation);
+				rotate.setNode(playerAnimation);
+				rotate.setByAngle(0);
+				rotate.setOnFinished(x ->
+				{
+					playerAnimation.setVisible(false);
+					playerAnimation.setRotate(0);
+				});
 
-		BOT1_PATH.setNode(bot1Animation);
-		BOT1_ROTATE.setNode(bot1Animation);
-		BOT1_ROTATE.setByAngle(-90);
+				pathDraw.setNode(cardDrawn);
+				pathDraw.setOnFinished(x -> cardDrawn.setVisible(false));
 
+				drawRotate.setNode(cardDrawn);
+				cardDrawn.setRotate(180);
+				drawRotate.setByAngle(180);
+				drawRotate.setOnFinished(x ->
+				{
+					ImageView imageView = new ImageView(new Image(card.getUrl().getPath()));
 
-		BOT1_ROTATE.setOnFinished(x ->
-		{
-			bot1Animation.setVisible(false);
-			bot1Animation.setRotate(90);
-		});
+					imageView.setUserData(card);
 
-		BOT2_PATH.setNode(bot2Animation);
-		BOT2_ROTATE.setNode(bot2Animation);
-		BOT2_ROTATE.setByAngle(-180);
+					imageView.setFitWidth(CARD_WIDTH_SCALED);
+					imageView.setFitHeight(CARD_HEIGHT_SCALED);
 
+					imageView.setOnMouseClicked(this::cardClicked);
+					imageView.setOnMouseEntered(this::cardEntered);
+					imageView.setOnMouseExited(this::cardExited);
 
-		BOT2_ROTATE.setOnFinished(x ->
-		{
-			bot2Animation.setVisible(false);
-			bot2Animation.setRotate(180);
-		});
+					userHand.getChildren().add(imageView);
+					fixWidth(userHand);
+					cardDrawn.setVisible(false);
+					cardDrawn.setRotate(0);
+				});
+			}
+			case BOT1 ->
+			{
+				pathDisc.setNode(bot1Animation);
+				rotate.setNode(bot1Animation);
+				rotate.setByAngle(-90);
 
-		BOT3_PATH.setNode(bot3Animation);
-		BOT3_ROTATE.setNode(bot3Animation);
-		BOT3_ROTATE.setByAngle(90);
+				rotate.setOnFinished(x ->
+				{
+					bot1Animation.setVisible(false);
+					bot1Animation.setRotate(90);
+				});
+				pathDraw.setNode(cardDrawn);
+				pathDraw.setOnFinished(x -> cardDrawn.setVisible(false));
 
+				drawRotate.setNode(cardDrawn);
+				drawRotate.setByAngle(90);
 
-		BOT3_ROTATE.setOnFinished(x ->
-		{
-			bot3Animation.setVisible(false);
-			bot3Animation.setRotate(-90);
-		});
+				drawRotate.setOnFinished(x ->
+				{
+					ImageView imageView = new ImageView(new Image(String.format("file:\\%s\\src\\main\\resources\\org\\juno\\images\\back.png", System.getProperty("user.dir"))));
 
-		PLAYER_DRAW_PATH.setNode(cardDrawn);
-		PLAYER_DRAW_PATH.setOnFinished(x -> cardDrawn.setVisible(false));
+					imageView.setUserData(card);
 
-		BOT1_DRAW_PATH.setNode(cardDrawn);
-		DRAW_ROTATE.setNode(cardDrawn);
-		DRAW_ROTATE.setByAngle(90);
+					imageView.setFitWidth(CARD_WIDTH_SCALED);
+					imageView.setFitHeight(CARD_HEIGHT_SCALED);
 
-		DRAW_ROTATE.setOnFinished(x ->
-		{
-			cardDrawn.setVisible(false);
-			cardDrawn.setRotate(0);
-		});
+					botHand1.getChildren().add(imageView);
+					fixWidth(botHand1);
+					cardDrawn.setVisible(false);
+					cardDrawn.setRotate(0);
+				});
+			}
+			case BOT2 ->
+			{
+				pathDisc.setNode(bot2Animation);
+				rotate.setNode(bot2Animation);
+				rotate.setByAngle(-180);
 
-		BOT2_DRAW_PATH.setNode(cardDrawn);
-		BOT2_DRAW_PATH.setOnFinished(x -> cardDrawn.setVisible(false));
+				rotate.setOnFinished(x ->
+				{
+					bot2Animation.setVisible(false);
+					bot2Animation.setRotate(180);
+				});
+				pathDraw.setNode(cardDrawn);
+				pathDraw.setOnFinished(x -> cardDrawn.setVisible(false));
 
-		BOT3_DRAW_PATH.setNode(cardDrawn);
-		BOT3_DRAW_PATH.setOnFinished(x -> cardDrawn.setVisible(false));
+				drawRotate.setNode(cardDrawn);
+				drawRotate.setByAngle(180);
+				drawRotate.setOnFinished(x ->
+				{
+					ImageView imageView = new ImageView(new Image(String.format("file:\\%s\\src\\main\\resources\\org\\juno\\images\\back.png", System.getProperty("user.dir"))));
 
-		/**
-		 * Partenza = partenza + meta carta + layour del parent
-		 * Destinazione finale = destinazione + meta carta + layout del parent
-		 *
-		 *
-		 * Ogni volta che voglio fare un' animazione, devo settare nuovamente la partenza (o l'arrivo a seconda dell'animazione)
-		 */
+					imageView.setUserData(card);
 
+					imageView.setFitWidth(CARD_WIDTH_SCALED);
+					imageView.setFitHeight(CARD_HEIGHT_SCALED);
+
+					botHand2.getChildren().add(imageView);
+					fixWidth(botHand2);
+					cardDrawn.setVisible(false);
+					cardDrawn.setRotate(0);
+				});
+			}
+			case BOT3 ->
+			{
+				pathDisc.setNode(bot3Animation);
+				rotate.setNode(bot3Animation);
+				rotate.setByAngle(-90);
+
+				rotate.setOnFinished(x ->
+				{
+					bot3Animation.setVisible(false);
+					bot3Animation.setRotate(90);
+				});
+
+				pathDraw.setNode(cardDrawn);
+				pathDraw.setOnFinished(x -> cardDrawn.setVisible(false));
+
+				drawRotate.setNode(cardDrawn);
+				drawRotate.setByAngle(270);
+
+				drawRotate.setOnFinished(x ->
+				{
+					ImageView imageView = new ImageView(new Image(String.format("file:\\%s\\src\\main\\resources\\org\\juno\\images\\back.png", System.getProperty("user.dir"))));
+
+					imageView.setUserData(card);
+
+					imageView.setFitWidth(CARD_WIDTH_SCALED);
+					imageView.setFitHeight(CARD_HEIGHT_SCALED);
+
+					botHand3.getChildren().add(imageView);
+					fixWidth(botHand3);
+					cardDrawn.setVisible(false);
+					cardDrawn.setRotate(0);
+				});
+			}
+		}
 	}
 }

@@ -15,9 +15,6 @@
 <?import javafx.scene.text.Font?>
 
 <AnchorPane id="backgroundGameplay" fx:id="anchorPane" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.juno.controller.GameplayClassicController">
-   <ImageView fx:id="cardDrawn" fitHeight="264.0" fitWidth="189.0" onMouseClicked="#drawClicked" pickOnBounds="true" visible="false" x="764.0" y="408.0">
-      <Image url="@../images/back.png" />
-   </ImageView>
    <ImageView fx:id="userTurn" fitHeight="420.0" fitWidth="419.0" layoutX="374.0" layoutY="604.0" pickOnBounds="true" preserveRatio="true" visible="false">
       <Image url="@../images/rays.png" />
    </ImageView>
@@ -35,13 +32,6 @@
    </ImageView>
    <Circle fx:id="bot3Circle" fill="WHITE" layoutX="1642.0" layoutY="613.0" radius="100.0" rotate="270.0" stroke="BLACK" strokeType="INSIDE" />
    <HBox fx:id="userHand" alignment="CENTER" cacheShape="false" centerShape="false" fillHeight="false" layoutX="298.5" layoutY="816.0" maxHeight="264.0" maxWidth="1323.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="264.0" prefWidth="1323.0" scaleShape="false">
-      <children>
-         <ImageView fx:id="firstDiscarded1" fitHeight="264.0" fitWidth="189.0" pickOnBounds="true" preserveRatio="true">
-            <image>
-               <Image url="@../images/b1.png" />
-            </image>
-         </ImageView>
-      </children>
       <rotationAxis>
          <Point3D />
       </rotationAxis></HBox>
@@ -64,7 +54,6 @@
          <HBox.margin>
             <Insets left="100.0" />
          </HBox.margin>
-         <Image url="@../images/b1.png" />
       </ImageView>
       <GridPane fx:id="colorGrid" prefHeight="264.0" prefWidth="218.0" visible="false">
          <columnConstraints>
@@ -86,18 +75,30 @@
          <Font name="Javanese Text" size="36.0" />
       </font>
    </Button>
-   <Button fx:id="juno" layoutX="1444.0" layoutY="904.0" mnemonicParsing="false" onAction="#sayUno" onMouseEntered="#buttonEntered" prefHeight="112.0" prefWidth="176.0" style="-fx-background-color: WHITE; -fx-background-radius: 40; -fx-border-color: RED; -fx-border-radius: 40; -fx-border-width: 3;" text="(J)UNO!" textFill="RED" visible="false">
+   <Button fx:id="juno" layoutX="1444.0" layoutY="904.0" mnemonicParsing="false" onAction="#sayUno"
+           onMouseEntered="#buttonEntered" prefHeight="112.0" prefWidth="176.0"
+           style="-fx-background-color: WHITE; -fx-background-radius: 40; -fx-border-color: RED; -fx-border-radius: 40; -fx-border-width: 3;"
+           text="(J)UNO!" textFill="RED" visible="false">
       <font>
-         <Font name="Javanese Text" size="31.0" />
+         <Font name="Javanese Text" size="31.0"/>
       </font>
    </Button>
-   <Button fx:id="exit" layoutX="18.0" layoutY="47.0" mnemonicParsing="false" onAction="#exitClicked" onMouseEntered="#buttonEntered" prefHeight="112.0" prefWidth="189.0" text="Exit">
+   <Button fx:id="exit" layoutX="18.0" layoutY="47.0" mnemonicParsing="false" onAction="#exitClicked"
+           onMouseEntered="#buttonEntered" prefHeight="112.0" prefWidth="189.0" text="Exit">
       <font>
-         <Font size="37.0" />
+         <Font size="37.0"/>
       </font>
    </Button>
-   <ImageView fx:id="bot1Animation" fitHeight="264.0" fitWidth="189.0" pickOnBounds="true" preserveRatio="true" rotate="90.0" visible="false" x="37.5" y="408.0" />
-   <ImageView fx:id="bot2Animation" fitHeight="264.0" fitWidth="189.0" pickOnBounds="true" preserveRatio="true" rotate="180.0" visible="false" x="1053.0" />
-   <ImageView fx:id="bot3Animation" fitHeight="264.0" fitWidth="189.0" pickOnBounds="true" preserveRatio="true" rotate="270.0" visible="false" x="1693.5" y="408.0" />
-   <ImageView fx:id="playerAnimation" fitHeight="264.0" fitWidth="189.0" pickOnBounds="true" preserveRatio="true" visible="false" x="1053.0" y="816.0" />
+   <ImageView fx:id="cardDrawn" fitHeight="264.0" fitWidth="189.0" onMouseClicked="#drawClicked" pickOnBounds="true"
+              visible="false" x="764.0" y="408.0">
+      <Image url="@../images/back.png"/>
+   </ImageView>
+   <ImageView fx:id="bot1Animation" fitHeight="264.0" fitWidth="189.0" pickOnBounds="true" preserveRatio="true"
+              rotate="90.0" visible="false" x="37.5" y="408.0"/>
+   <ImageView fx:id="bot2Animation" fitHeight="264.0" fitWidth="189.0" pickOnBounds="true" preserveRatio="true"
+              rotate="180.0" visible="false" x="1053.0"/>
+   <ImageView fx:id="bot3Animation" fitHeight="264.0" fitWidth="189.0" pickOnBounds="true" preserveRatio="true"
+              rotate="90.0" visible="false" x="1693.5" y="408.0"/>
+   <ImageView fx:id="playerAnimation" fitHeight="264.0" fitWidth="189.0" pickOnBounds="true" preserveRatio="true"
+              visible="false" x="1053.0" y="816.0"/>
 </AnchorPane>
