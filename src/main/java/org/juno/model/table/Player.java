@@ -83,13 +83,14 @@ public abstract class Player extends Observable
 	public void chooseCard(Card.Color color, Card.Value value)
 	{
 		Card first = DISCARD_PILE.getFirst();
-		System.out.println(hand);
 		for (Card card : hand)
 		{
 			if (card.getValue() == value && card.getColor() == color && card.isValid(first))
 			{
 				chosenCard = card;
+				System.out.println(hand);
 				hand.remove(card);
+				System.out.println(hand);
 				if (hand.size() == 1)
 				{
 					setChanged();
@@ -156,6 +157,7 @@ public abstract class Player extends Observable
 		Card card = DRAW_PILE.draw();
 
 		hand.add(card);
+
 		hasDrawn = true;
 
 		setChanged();
@@ -168,6 +170,9 @@ public abstract class Player extends Observable
 			err.printStackTrace();
 		}
 		clearChanged();
+
+		delay(750);
+
 		return card;
 	}
 
@@ -177,7 +182,9 @@ public abstract class Player extends Observable
 		for (int i = 0; i < n; i++)
 		{
 			Card card = DRAW_PILE.draw();
+			System.out.printf("%s PESCA %s%n", id, card);
 			hand.add(card);
+			System.out.printf("ECCO LA SUA MANO ORA %s%n%n", hand);
 			setChanged();
 			try
 			{

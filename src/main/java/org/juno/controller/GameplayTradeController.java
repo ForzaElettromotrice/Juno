@@ -1,5 +1,7 @@
 package org.juno.controller;
 
+import javafx.animation.PathTransition;
+import javafx.animation.RotateTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -15,6 +17,8 @@ import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
+import javafx.scene.shape.Line;
+import javafx.util.Duration;
 import org.juno.datapackage.*;
 import org.juno.model.deck.Card;
 import org.juno.model.deck.WildCard;
@@ -38,6 +42,38 @@ public class GameplayTradeController implements Gameplay
 
     protected static final int CARD_WIDTH_SCALED = 189;
     protected static final int CARD_HEIGHT_SCALED = 264;
+
+    protected static final double PARENT_PLAYER_X = 298.5;
+    protected static final double PARENT_BOT1_X = -288;
+    protected static final double PARENT_BOT2_X = 584;
+    protected static final double PARENT_BOT3_X = 1406;
+
+    protected static final double PARENT_PLAYER_Y = 816;
+    protected static final double PARENT_BOT1_Y = 397;
+    protected static final double PARENT_BOT2_Y = 26;
+    protected static final double PARENT_BOT3_Y = 383;
+
+    protected double playerX;
+    protected double bot1XDiscard;
+    protected double bot2XDiscard;
+    protected double bot3XDiscard;
+    protected double bot1XDraw;
+    protected double bot2XDraw;
+    protected double bot3XDraw;
+
+    protected double playerY;
+    protected double bot1YDiscard;
+    protected double bot2YDiscard;
+    protected double bot3YDiscard;
+    protected double bot1YDraw;
+    protected double bot2YDraw;
+    protected double bot3YDraw;
+
+    private final PathTransition pathDisc = new PathTransition(Duration.seconds(1), new Line(0, 0, 1147.5, 540));
+    private final PathTransition pathDraw = new PathTransition(Duration.millis(500), new Line(858.5, 540, 0, 0));
+    private final RotateTransition rotate = new RotateTransition(Duration.seconds(1));
+
+    private final RotateTransition drawRotate = new RotateTransition(Duration.millis(500));
 
 
     @FXML
@@ -76,47 +112,58 @@ public class GameplayTradeController implements Gameplay
     @FXML
     public HBox userHand;
     @FXML
-    public HBox bot1Hand;
+    public HBox botHand1;
     @FXML
-    public HBox bot2Hand;
+    public HBox botHand2;
     @FXML
-    public HBox bot3Hand;
+    public HBox botHand3;
 
 
     @FXML
-    public GridPane colorGridPane;
+    public GridPane colorGrid;
+
+    @FXML
+    public ImageView cardDrawn;
+    @FXML
+    public ImageView bot1Animation;
+    @FXML
+    public ImageView bot2Animation;
+    @FXML
+    public ImageView bot3Animation;
+    @FXML
+    public ImageView playerAnimation;
 
 
     @FXML
-    public Button passButton;
+    public Button pass;
     @FXML
-    public Button junoButton;
+    public Button juno;
 
 
     @FXML
-    public void deckClicked()
+    public void drawClicked()
     {
         Player player = TABLE_TRADE.getCurrentPlayer();
 
         if (player.getId() != BuildMP.PG.PLAYER) return;
 
         player.draw();
-        passButton.setDisable(false);
+        pass.setDisable(false);
     }
     @FXML
     public void passClicked()
     {
-        passButton.setDisable(true);
+        pass.setDisable(true);
 
         beep();
         TABLE_TRADE.getUser().setHasPassed();
     }
     @FXML
-    public void junoClicked()
+    public void sayUno()
     {
         buttonClick();
         TABLE_TRADE.getUser().sayUno();
-        junoButton.setVisible(false);
+        juno.setVisible(false);
     }
 
 
@@ -125,33 +172,33 @@ public class GameplayTradeController implements Gameplay
     {
         beep();
         ((WildCard) TABLE_TRADE.getUser().getChosenCard()).setColor(Card.Color.RED);
-        colorGridPane.setVisible(false);
+        colorGrid.setVisible(false);
     }
     @FXML
     public void blueClicked()
     {
         beep();
         ((WildCard) TABLE_TRADE.getUser().getChosenCard()).setColor(Card.Color.BLUE);
-        colorGridPane.setVisible(false);
+        colorGrid.setVisible(false);
     }
     @FXML
     public void yellowClicked()
     {
         beep();
         ((WildCard) TABLE_TRADE.getUser().getChosenCard()).setColor(Card.Color.YELLOW);
-        colorGridPane.setVisible(false);
+        colorGrid.setVisible(false);
     }
     @FXML
     public void greenClicked()
     {
         beep();
         ((WildCard) TABLE_TRADE.getUser().getChosenCard()).setColor(Card.Color.GREEN);
-        colorGridPane.setVisible(false);
+        colorGrid.setVisible(false);
     }
 
 
     @FXML
-    public void bot1HandClicked()
+    public void botHand1Clicked()
     {
         beep();
         PlayerTrade player = (PlayerTrade) TABLE_TRADE.getCurrentPlayer();
@@ -226,7 +273,7 @@ public class GameplayTradeController implements Gameplay
         System.out.println(color + " " + value);
         TABLE_TRADE.getUser().chooseCard(color, value);
         if (color == Card.Color.BLACK && TABLE_TRADE.getCurrentPlayer().getId() == BuildMP.PG.PLAYER)
-            colorGridPane.setVisible(true);
+            colorGrid.setVisible(true);
 
     }
 
@@ -234,78 +281,180 @@ public class GameplayTradeController implements Gameplay
     @Override
     public void draw(DrawData drawData)
     {
+        setTransition(drawData.player(), drawData.card());
         cardFlip();
+
         switch (drawData.player())
         {
             case PLAYER ->
             {
-                ImageView imageView = new ImageView(new Image(drawData.card().getUrl().getPath()));
+                cardDrawn.setImage(new Image(drawData.card().getUrl().getPath()));
+                cardDrawn.setVisible(true);
 
-                imageView.setUserData(drawData.card());
-
-                imageView.setFitWidth(CARD_WIDTH_SCALED);
-                imageView.setFitHeight(CARD_HEIGHT_SCALED);
-
-                imageView.setOnMouseClicked(this::cardClicked);
-                imageView.setOnMouseEntered(this::cardEntered);
-                imageView.setOnMouseExited(this::cardExited);
-
-                userHand.getChildren().add(imageView);
-                fixWidth(userHand);
+                if (userHand.getChildren().isEmpty())
+                {
+                    playerX = PARENT_PLAYER_X * 2;
+                    playerY = PARENT_PLAYER_Y;
+                } else
+                {
+                    playerX = userHand.getLayoutX() + PARENT_PLAYER_X + CARD_WIDTH_SCALED / 2;
+                    playerY = userHand.getChildren().get(0).getLayoutY() + PARENT_PLAYER_Y + CARD_HEIGHT_SCALED / 2;
+                }
+                ((Line) pathDraw.getPath()).setEndX(playerX);
+                ((Line) pathDraw.getPath()).setEndY(playerY);
+                pathDraw.play();
+                drawRotate.play();
             }
-            case BOT1 -> drawBot(bot1Hand);
-            case BOT2 -> drawBot(bot2Hand);
-            case BOT3 -> drawBot(bot3Hand);
+            case BOT1 ->
+            {
+                cardDrawn.setImage(new Image(String.format("file:\\%s\\src\\main\\resources\\org\\juno\\images\\back.png", System.getProperty("user.dir"))));
+                cardDrawn.setVisible(true);
+
+                if (botHand1.getChildren().isEmpty())
+                {
+                    bot1XDraw = PARENT_BOT1_X * 2;
+                    bot1YDraw = PARENT_BOT1_Y;
+                } else
+                {
+                    bot1XDraw = userHand.getLayoutX() + PARENT_BOT1_X + CARD_WIDTH_SCALED / 2;
+                    bot1YDraw = userHand.getChildren().get(0).getLayoutY() + PARENT_BOT1_Y + CARD_HEIGHT_SCALED / 2;
+                }
+                ((Line) pathDraw.getPath()).setEndX(bot1XDraw);
+                ((Line) pathDraw.getPath()).setEndY(bot1YDraw);
+                pathDraw.play();
+                drawRotate.play();
+            }
+            case BOT2 ->
+            {
+                cardDrawn.setImage(new Image(String.format("file:\\%s\\src\\main\\resources\\org\\juno\\images\\back.png", System.getProperty("user.dir"))));
+                cardDrawn.setVisible(true);
+                if (botHand2.getChildren().isEmpty())
+                {
+                    bot2XDraw = PARENT_BOT2_X * 2;
+                    bot2YDraw = PARENT_BOT2_Y;
+                } else
+                {
+                    bot2XDraw = userHand.getLayoutX() + PARENT_BOT2_X + CARD_WIDTH_SCALED / 2;
+                    bot2YDraw = userHand.getChildren().get(0).getLayoutY() + PARENT_BOT2_Y + CARD_HEIGHT_SCALED / 2;
+                }
+                ((Line) pathDraw.getPath()).setEndX(bot2XDraw);
+                ((Line) pathDraw.getPath()).setEndY(bot2YDraw);
+                pathDraw.play();
+                drawRotate.play();
+            }
+            case BOT3 ->
+            {
+                cardDrawn.setImage(new Image(String.format("file:\\%s\\src\\main\\resources\\org\\juno\\images\\back.png", System.getProperty("user.dir"))));
+                cardDrawn.setVisible(true);
+                if (botHand3.getChildren().isEmpty())
+                {
+                    bot3XDraw = PARENT_BOT3_X;
+                    bot3YDraw = PARENT_BOT3_Y;
+                } else
+                {
+                    bot3XDraw = userHand.getLayoutX() + PARENT_BOT3_X + CARD_WIDTH_SCALED / 2;
+                    bot3YDraw = userHand.getChildren().get(0).getLayoutY() + PARENT_BOT3_Y + CARD_HEIGHT_SCALED / 2;
+                }
+                ((Line) pathDraw.getPath()).setEndX(bot3XDraw);
+                ((Line) pathDraw.getPath()).setEndY(bot3YDraw);
+                pathDraw.play();
+                drawRotate.play();
+            }
         }
-    }
-    private void drawBot(HBox botHand)
-    {
-        ImageView imageView = new ImageView(new Image(String.format("file:\\%s\\src\\main\\resources\\org\\juno\\images\\back.png", System.getProperty("user.dir"))));
-
-        imageView.setFitWidth(CARD_WIDTH_SCALED);
-        imageView.setFitHeight(CARD_HEIGHT_SCALED);
-
-        botHand.getChildren().add(imageView);
-        fixWidth(botHand);
     }
     @Override
     public void discard(DiscardData discardData)
     {
-        colorGridPane.setVisible(false);
-        beep();
+        colorGrid.setVisible(false);
         if (discardData.player() == null)
         {
-            thirdDiscarded.setImage(secondDiscarded.getImage());
-            secondDiscarded.setImage(firstDiscarded.getImage());
             firstDiscarded.setImage(new Image(discardData.card().getUrl().getPath()));
             return;
         }
-        switch (discardData.player())
+        preAnimation(discardData.player(), discardData.card());
+
+        pathDisc.setOnFinished(x -> postAnimation(discardData.card()));
+
+
+        animation();
+    }
+
+    protected void preAnimation(BuildMP.PG player, Card card)
+    {
+        setTransition(player, null);
+        switch (player)
         {
             case PLAYER ->
             {
                 userHand.getChildren().remove(lastClicked);
                 fixWidth(userHand);
+                playerAnimation.setVisible(true);
+                playerAnimation.setImage(new Image(card.getUrl().getPath()));
+                ((Line) pathDisc.getPath()).setStartX(lastClicked.getLayoutX() + PARENT_PLAYER_X + CARD_WIDTH_SCALED / 2);
+                ((Line) pathDisc.getPath()).setStartY(lastClicked.getLayoutY() + PARENT_PLAYER_Y + CARD_HEIGHT_SCALED / 2);
             }
             case BOT1 ->
             {
-                bot1Hand.getChildren().remove(0);
-                fixWidth(bot1Hand);
+                if (bot1XDiscard == 0 && bot1YDiscard == 0)
+                {
+                    bot1XDiscard = botHand1.getChildren().get(0).getLayoutX() + PARENT_BOT1_X + CARD_WIDTH_SCALED / 2;
+                    bot1YDiscard = botHand1.getChildren().get(0).getLayoutY() + PARENT_BOT1_Y + CARD_HEIGHT_SCALED / 2;
+                }
+                botHand1.getChildren().remove(0);
+                fixWidth(botHand1);
+                bot1Animation.setVisible(true);
+                bot1Animation.setImage(new Image(card.getUrl().getPath()));
+                ((Line) pathDisc.getPath()).setStartX(bot1XDiscard);
+                ((Line) pathDisc.getPath()).setStartY(bot1YDiscard);
             }
             case BOT2 ->
             {
-                bot2Hand.getChildren().remove(0);
-                fixWidth(bot2Hand);
+                if (bot2XDiscard == 0 && bot2YDiscard == 0)
+                {
+                    bot2XDiscard = botHand2.getChildren().get(0).getLayoutX() + PARENT_BOT2_X + CARD_WIDTH_SCALED / 2;
+                    bot2YDiscard = botHand2.getChildren().get(0).getLayoutY() + PARENT_BOT2_Y + CARD_HEIGHT_SCALED / 2;
+                }
+                botHand2.getChildren().remove(0);
+                fixWidth(botHand2);
+                bot2Animation.setVisible(true);
+                bot2Animation.setImage(new Image(card.getUrl().getPath()));
+                ((Line) pathDisc.getPath()).setStartX(bot2XDiscard);
+                ((Line) pathDisc.getPath()).setStartY(bot2YDiscard);
             }
             case BOT3 ->
             {
-                bot3Hand.getChildren().remove(0);
-                fixWidth(bot3Hand);
+                if (bot3XDiscard == 0 && bot3YDiscard == 0)
+                {
+                    bot3XDiscard = botHand3.getChildren().get(0).getLayoutX() + PARENT_BOT3_X + CARD_WIDTH_SCALED / 2;
+                    bot3YDiscard = botHand3.getChildren().get(0).getLayoutY() + PARENT_BOT3_Y + CARD_HEIGHT_SCALED / 2;
+                }
+                botHand3.getChildren().remove(0);
+                fixWidth(botHand3);
+                bot3Animation.setVisible(true);
+                bot3Animation.setImage(new Image(card.getUrl().getPath()));
+                ((Line) pathDisc.getPath()).setStartX(bot3XDiscard);
+                ((Line) pathDisc.getPath()).setStartY(bot3YDiscard);
             }
         }
+    }
+    public void animation()
+    {
+        pathDisc.play();
+        rotate.play();
+    }
+    public void postAnimation(Card card)
+    {
+        beep();
+
+        playerAnimation.setVisible(false);
+        bot1Animation.setVisible(false);
+        bot3Animation.setVisible(false);
+        bot2Animation.setVisible(false);
+
+
         thirdDiscarded.setImage(secondDiscarded.getImage());
         secondDiscarded.setImage(firstDiscarded.getImage());
-        firstDiscarded.setImage(new Image(discardData.card().getFinalUrl().getPath()));
+        firstDiscarded.setImage(new Image(card.getFinalUrl().getPath()));
     }
     private void fixWidth(HBox box)
     {
@@ -319,7 +468,7 @@ public class GameplayTradeController implements Gameplay
     @Override
     public void turn(TurnData turnData)
     {
-        passButton.setDisable(true);
+        pass.setDisable(true);
         userTurn.setVisible(false);
         bot1Turn.setVisible(false);
         bot2Turn.setVisible(false);
@@ -356,10 +505,10 @@ public class GameplayTradeController implements Gameplay
             {/*todo*/}
             case SAIDUNO ->
             {/*todo*/}
-            case DIDNTSAYUNO -> junoButton.setVisible(false);
+            case DIDNTSAYUNO -> juno.setVisible(false);
             case JUMPIN ->
             {/*todo*/}
-            case ONECARD -> junoButton.setVisible(true);
+            case ONECARD -> juno.setVisible(true);
         }
     }
     @Override
@@ -380,12 +529,12 @@ public class GameplayTradeController implements Gameplay
 
         if (switchData.fromPg() == null)
         {
-            int bot1Size = bot1Hand.getChildren().size();
-            int bot2Size = bot2Hand.getChildren().size();
+            int bot1Size = botHand1.getChildren().size();
+            int bot2Size = botHand2.getChildren().size();
 
-            bot1Hand.getChildren().clear();
-            bot2Hand.getChildren().clear();
-            bot3Hand.getChildren().clear();
+            botHand1.getChildren().clear();
+            botHand2.getChildren().clear();
+            botHand3.getChildren().clear();
 
 
             for (int i = 0; i < userSize; i++)
@@ -406,9 +555,9 @@ public class GameplayTradeController implements Gameplay
 
             switch (pg)
             {
-                case BOT1 -> bot1Hand.getChildren().clear();
-                case BOT2 -> bot2Hand.getChildren().clear();
-                case BOT3 -> bot3Hand.getChildren().clear();
+                case BOT1 -> botHand1.getChildren().clear();
+                case BOT2 -> botHand2.getChildren().clear();
+                case BOT3 -> botHand3.getChildren().clear();
             }
             for (int i = 0; i < userSize; i++)
             {
@@ -447,9 +596,9 @@ public class GameplayTradeController implements Gameplay
     public void reset()
     {
         userHand.getChildren().clear();
-        bot1Hand.getChildren().clear();
-        bot2Hand.getChildren().clear();
-        bot3Hand.getChildren().clear();
+        botHand1.getChildren().clear();
+        botHand2.getChildren().clear();
+        botHand3.getChildren().clear();
         userCircle.setFill(new ImagePattern(new Image(User.getInstance().getAvatar())));
         bot1Circle.setFill(new ImagePattern(new Image(String.format("file:\\%s\\src\\main\\resources\\org\\juno\\images\\iconBot1.png", System.getProperty("user.dir")))));
         bot2Circle.setFill(new ImagePattern(new Image(String.format("file:\\%s\\src\\main\\resources\\org\\juno\\images\\iconBot2.png", System.getProperty("user.dir")))));
@@ -469,5 +618,143 @@ public class GameplayTradeController implements Gameplay
     protected void buttonClick()
     {
         AUDIO_PLAYER.play(AudioPlayer.Sounds.BUTTONCLICK);
+    }
+    public void setTransition(BuildMP.PG player, Card card)
+    {
+        switch (player)
+        {
+            case PLAYER ->
+            {
+                pathDisc.setNode(playerAnimation);
+                rotate.setNode(playerAnimation);
+                rotate.setByAngle(0);
+                rotate.setOnFinished(x ->
+                {
+                    playerAnimation.setVisible(false);
+                    playerAnimation.setRotate(0);
+                });
+
+                pathDraw.setNode(cardDrawn);
+                pathDraw.setOnFinished(x -> cardDrawn.setVisible(false));
+
+                drawRotate.setNode(cardDrawn);
+                cardDrawn.setRotate(180);
+                drawRotate.setByAngle(180);
+                drawRotate.setOnFinished(x ->
+                {
+                    ImageView imageView = new ImageView(new Image(card.getUrl().getPath()));
+
+                    imageView.setUserData(card);
+
+                    imageView.setFitWidth(CARD_WIDTH_SCALED);
+                    imageView.setFitHeight(CARD_HEIGHT_SCALED);
+
+                    imageView.setOnMouseClicked(this::cardClicked);
+                    imageView.setOnMouseEntered(this::cardEntered);
+                    imageView.setOnMouseExited(this::cardExited);
+
+                    userHand.getChildren().add(imageView);
+                    fixWidth(userHand);
+                    cardDrawn.setVisible(false);
+                    cardDrawn.setRotate(0);
+                });
+            }
+            case BOT1 ->
+            {
+                pathDisc.setNode(bot1Animation);
+                rotate.setNode(bot1Animation);
+                rotate.setByAngle(-90);
+
+                rotate.setOnFinished(x ->
+                {
+                    bot1Animation.setVisible(false);
+                    bot1Animation.setRotate(90);
+                });
+                pathDraw.setNode(cardDrawn);
+                pathDraw.setOnFinished(x -> cardDrawn.setVisible(false));
+
+                drawRotate.setNode(cardDrawn);
+                drawRotate.setByAngle(90);
+
+                drawRotate.setOnFinished(x ->
+                {
+                    ImageView imageView = new ImageView(new Image(String.format("file:\\%s\\src\\main\\resources\\org\\juno\\images\\back.png", System.getProperty("user.dir"))));
+
+                    imageView.setUserData(card);
+
+                    imageView.setFitWidth(CARD_WIDTH_SCALED);
+                    imageView.setFitHeight(CARD_HEIGHT_SCALED);
+
+                    botHand1.getChildren().add(imageView);
+                    fixWidth(botHand1);
+                    cardDrawn.setVisible(false);
+                    cardDrawn.setRotate(0);
+                });
+            }
+            case BOT2 ->
+            {
+                pathDisc.setNode(bot2Animation);
+                rotate.setNode(bot2Animation);
+                rotate.setByAngle(-180);
+
+                rotate.setOnFinished(x ->
+                {
+                    bot2Animation.setVisible(false);
+                    bot2Animation.setRotate(180);
+                });
+                pathDraw.setNode(cardDrawn);
+                pathDraw.setOnFinished(x -> cardDrawn.setVisible(false));
+
+                drawRotate.setNode(cardDrawn);
+                drawRotate.setByAngle(180);
+                drawRotate.setOnFinished(x ->
+                {
+                    ImageView imageView = new ImageView(new Image(String.format("file:\\%s\\src\\main\\resources\\org\\juno\\images\\back.png", System.getProperty("user.dir"))));
+
+                    imageView.setUserData(card);
+
+                    imageView.setFitWidth(CARD_WIDTH_SCALED);
+                    imageView.setFitHeight(CARD_HEIGHT_SCALED);
+
+                    botHand2.getChildren().add(imageView);
+                    fixWidth(botHand2);
+                    cardDrawn.setVisible(false);
+                    cardDrawn.setRotate(0);
+                });
+            }
+            case BOT3 ->
+            {
+                pathDisc.setNode(bot3Animation);
+                rotate.setNode(bot3Animation);
+                rotate.setByAngle(-90);
+
+                rotate.setOnFinished(x ->
+                {
+                    bot3Animation.setVisible(false);
+                    bot3Animation.setRotate(90);
+                });
+
+                pathDraw.setNode(cardDrawn);
+                pathDraw.setOnFinished(x -> cardDrawn.setVisible(false));
+
+                drawRotate.setNode(cardDrawn);
+                drawRotate.setByAngle(270);
+
+                drawRotate.setOnFinished(x ->
+                {
+                    ImageView imageView = new ImageView(new Image(String.format("file:\\%s\\src\\main\\resources\\org\\juno\\images\\back.png", System.getProperty("user.dir"))));
+
+                    imageView.setUserData(card);
+
+                    imageView.setFitWidth(CARD_WIDTH_SCALED);
+                    imageView.setFitHeight(CARD_HEIGHT_SCALED);
+
+                    botHand3.getChildren().add(imageView);
+                    fixWidth(botHand3);
+                    cardDrawn.setVisible(false);
+                    cardDrawn.setRotate(0);
+                });
+            }
+        }
     }
 }

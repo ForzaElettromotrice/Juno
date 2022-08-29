@@ -58,7 +58,6 @@ public class TableCombo extends Table
 
 		while (!endTurn && !stopEarlier)
 		{
-
 			delay(delay);
 
 			if (currentPlayer.hasChosen())
@@ -81,14 +80,14 @@ public class TableCombo extends Table
 						err.printStackTrace();
 					}
 					clearChanged();
-
+					delay(1000);
 					endTurn = !currentPlayer.canPlay();
+					System.out.println("END TURN = " + endTurn);
 				}
 			} else endTurn = currentPlayer.hasPassed();
 		}
 
 		return checkUno(currentPlayer, delayUno);
 	}
-
 
 }

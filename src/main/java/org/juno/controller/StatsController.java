@@ -20,6 +20,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.Objects;
 
 /**
  * Defines StatsNew ,
@@ -166,7 +167,23 @@ public class StatsController
 
 		if (path != null)
 		{
-			circle.setFill(new ImagePattern(new Image(String.format("file:\\%s", path.getPath()))));
+
+			String[] name = path.getName().split("\\.");
+			String extension = name[name.length - 1];
+
+			File dest = new File(USER_DIR + "\\src\\main\\resources\\org\\juno\\images\\" + Objects.hash(User.getInstance().getNickname()) + "_imported." + extension);
+
+			try
+			{
+				Files.deleteIfExists(Path.of(dest.getPath()));
+				Files.copy(Path.of(path.getPath()), Path.of(dest.getPath()));
+			} catch (IOException err)
+			{
+				System.out.println(err.getMessage());
+				err.printStackTrace();
+			}
+
+			circle.setFill(new ImagePattern(new Image(String.format("file:\\%s", dest.getPath()))));
 			saveData();
 		}
 
@@ -223,7 +240,7 @@ public class StatsController
 	{
 		try
 		{
-			Files.delete(Path.of(USER_DIR + "/src/main/resources/org/juno/model/user/" + User.getInstance().getNickname() + ".txt"));
+			Files.delete(Path.of(USER_DIR + "\\src\\main\\resources\\org\\juno\\model\\user\\" + User.getInstance().getNickname() + ".txt"));
 		} catch (IOException err)
 		{
 			System.out.println(err.getMessage());

@@ -38,7 +38,6 @@ public class DrawPile extends GenDeck
      */
     public Card draw()
     {
-        System.out.println(deck.size());
         try
         {
             return deck.removeFirst();

@@ -147,7 +147,21 @@
     -fx-font-weight: bold;
     -fx-effect: dropshadow(two-pass-box, BLACK, 10, 0.0, 4, 1);
 }
-
+.buttonGameplay
+{
+    -fx-font-family: Arial;
+    -fx-font-size: 20;
+    -fx-border-color: BLACK;
+    -fx-border-radius: 15px;
+    -fx-background-radius: 20px;
+    -fx-border-width: 3px;
+    -fx-background-color: WHITE;
+}
+.buttonGameplay:hover
+{
+    -fx-background-color: #d4d4d4;
+    -fx-border-width: 4px;
+}
 
 
 /*ID*/

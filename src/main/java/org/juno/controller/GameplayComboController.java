@@ -1,7 +1,7 @@
 package org.juno.controller;
 
-
-import javafx.event.ActionEvent;
+import javafx.animation.PathTransition;
+import javafx.animation.RotateTransition;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
@@ -13,9 +13,11 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.paint.Color;
+import javafx.scene.layout.StackPane;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
+import javafx.scene.shape.Line;
+import javafx.util.Duration;
 import org.juno.datapackage.*;
 import org.juno.model.deck.Card;
 import org.juno.model.deck.WildCard;
@@ -24,99 +26,78 @@ import org.juno.model.user.User;
 import org.juno.view.AudioPlayer;
 import org.juno.view.GenView;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 /**
- * Defines GameplayComboController ,
+ * Defines GameplayComboController class,
  *
  * @author ForzaElettromotrice, R0n3l
  */
 public class GameplayComboController implements Gameplay
 {
-
 	private static final GenView GEN_VIEW = GenView.getINSTANCE();
 	private static final TableCombo TABLE_COMBO = TableCombo.getINSTANCE();
 	private static final AudioPlayer AUDIO_PLAYER = AudioPlayer.getINSTANCE();
-	private static final int CARD_WIDTH_SCALED = 189;
-	private static final int CARD_HEIGHT_SCALED = 264;
+
+	private static final String USER_DIR = System.getProperty("user.dir");
 
 
 	@FXML
-	public AnchorPane anchor;
+	public AnchorPane anchorPane;
 
 
+	@FXML
+	public ImageView bot3Turn;
+	@FXML
+	public ImageView bot2Turn;
 	@FXML
 	public ImageView userTurn;
 	@FXML
 	public ImageView bot1Turn;
+
+
 	@FXML
-	public ImageView bot2Turn;
+	public Circle userCircle;
 	@FXML
-	public ImageView bot3Turn;
+	public Circle bot1Circle;
+	@FXML
+	public Circle bot2Circle;
+	@FXML
+	public Circle bot3Circle;
+
+
+	@FXML
+	public ImageView thirdDiscarded;
+	@FXML
+	public ImageView secondDiscarded;
+	@FXML
+	public ImageView firstDiscarded;
+	@FXML
+	public ImageView colorGrid;
+
+
+	@FXML
+	public GridPane colorPane;
+
+
+	@FXML
+	public Button pass;
+	@FXML
+	public Button juno;
 
 
 	@FXML
 	public HBox userHand;
 	@FXML
-	public HBox bot2Hand;
+	public HBox botHand1;
 	@FXML
-	public HBox bot1Hand;
+	public HBox botHand3;
 	@FXML
-	public HBox bot3Hand;
-
-
-	@FXML
-	public Circle bot2Circle;
-	@FXML
-	public Circle bot1Circle;
-	@FXML
-	public Circle bot3Circle;
-	@FXML
-	public Circle userCircle;
-
-
-	@FXML
-	public ImageView firstDiscarded;
-	@FXML
-	public ImageView secondDiscarded;
-	@FXML
-	public ImageView thirdDiscarded;
-	@FXML
-	public ImageView cardDrawn;
-
-
-	@FXML
-	public Button passButton;
-	@FXML
-	public Button junoButton;
-
-
-	@FXML
-	public GridPane colorGridPane;
+	public HBox botHand2;
 
 
 	private ImageView lastClicked;
-
-	@FXML
-	public void deckClicked()
-	{
-		if (TABLE_COMBO.getCurrentPlayer().getId() != BuildMP.PG.PLAYER) return;
-
-
-		TABLE_COMBO.getUser().draw();
-	}
-	@FXML
-	public void passClicked()
-	{
-		beep();
-		passButton.setDisable(true);
-		TABLE_COMBO.getUser().setHasPassed();
-	}
-	@FXML
-	public void junoClicked()
-	{
-		AUDIO_PLAYER.play(AudioPlayer.Sounds.BUTTONCLICK);
-		junoButton.setVisible(false);
-		TABLE_COMBO.getUser().sayUno();
-	}
 
 
 	@FXML
@@ -124,30 +105,33 @@ public class GameplayComboController implements Gameplay
 	{
 		beep();
 		((WildCard) TABLE_COMBO.getUser().getChosenCard()).setColor(Card.Color.RED);
-		colorGridPane.setVisible(false);
+		colorGrid.setVisible(false);
+		colorPane.setVisible(false);
 	}
 	@FXML
 	public void blueClicked()
 	{
 		beep();
 		((WildCard) TABLE_COMBO.getUser().getChosenCard()).setColor(Card.Color.BLUE);
-		colorGridPane.setVisible(false);
+		colorGrid.setVisible(false);
+		colorPane.setVisible(false);
 	}
 	@FXML
 	public void yellowClicked()
 	{
 		beep();
 		((WildCard) TABLE_COMBO.getUser().getChosenCard()).setColor(Card.Color.YELLOW);
-		colorGridPane.setVisible(false);
+		colorGrid.setVisible(false);
+		colorPane.setVisible(false);
 	}
 	@FXML
 	public void greenClicked()
 	{
 		beep();
 		((WildCard) TABLE_COMBO.getUser().getChosenCard()).setColor(Card.Color.GREEN);
-		colorGridPane.setVisible(false);
+		colorGrid.setVisible(false);
+		colorPane.setVisible(false);
 	}
-
 	@FXML
 	public void exitClicked()
 	{
@@ -159,97 +143,29 @@ public class GameplayComboController implements Gameplay
 		if (alert.getResult() == ButtonType.NO) return;
 		TABLE_COMBO.stopEarlier();
 	}
-
 	@FXML
-	public void buttonEntered()
+	public void drawClicked()
 	{
-		AUDIO_PLAYER.play(AudioPlayer.Sounds.CURSORSELECT);
+		if (TABLE_COMBO.getCurrentPlayer().getId() != BuildMP.PG.PLAYER) return;
+
+		Thread thread = new Thread(() -> TABLE_COMBO.getUser().draw());
+
+		thread.start();
+
 	}
-
-
-	public void draw(DrawData drawData)
+	@FXML
+	public void passClicked()
 	{
-		cardFlip();
-
-
-		switch (drawData.player())
-		{
-			case PLAYER ->
-			{
-				ImageView imageView = new ImageView(new Image(drawData.card().getUrl().getPath()));
-
-				imageView.setUserData(drawData.card());
-
-				imageView.setFitWidth(CARD_WIDTH_SCALED);
-				imageView.setFitHeight(CARD_HEIGHT_SCALED);
-
-				imageView.setOnMouseClicked(this::cardClicked);
-				imageView.setOnMouseEntered(this::cardEntered);
-				imageView.setOnMouseExited(this::cardExited);
-
-				userHand.getChildren().add(imageView);
-				fixWidth(userHand);
-			}
-			case BOT1 -> drawBot(bot1Hand);
-			case BOT2 -> drawBot(bot2Hand);
-			case BOT3 -> drawBot(bot3Hand);
-		}
-	}
-	private void drawBot(HBox botHand)
-	{
-		ImageView imageView = new ImageView(new Image(String.format("file:\\%s\\src\\main\\resources\\org\\juno\\images\\back.png", System.getProperty("user.dir"))));
-
-		imageView.setFitWidth(CARD_WIDTH_SCALED);
-		imageView.setFitHeight(CARD_HEIGHT_SCALED);
-
-		botHand.getChildren().add(imageView);
-		fixWidth(botHand);
-	}
-	public void discard(DiscardData discardData)
-	{
-		colorGridPane.setVisible(false);
 		beep();
-		if (discardData.player() == null)
-		{
-			thirdDiscarded.setImage(secondDiscarded.getImage());
-			secondDiscarded.setImage(firstDiscarded.getImage());
-			firstDiscarded.setImage(new Image(discardData.card().getUrl().getPath()));
-			return;
-		}
-		switch (discardData.player())
-		{
-			case PLAYER ->
-			{
-				userHand.getChildren().remove(lastClicked);
-				fixWidth(userHand);
-			}
-			case BOT1 ->
-			{
-				bot1Hand.getChildren().remove(0);
-				fixWidth(bot1Hand);
-			}
-			case BOT2 ->
-			{
-				bot2Hand.getChildren().remove(0);
-				fixWidth(bot2Hand);
-			}
-			case BOT3 ->
-			{
-				bot3Hand.getChildren().remove(0);
-				fixWidth(bot3Hand);
-			}
-		}
-		thirdDiscarded.setImage(secondDiscarded.getImage());
-		secondDiscarded.setImage(firstDiscarded.getImage());
-		firstDiscarded.setImage(new Image(discardData.card().getFinalUrl().getPath()));
+		pass.setDisable(true);
+		TABLE_COMBO.getUser().setHasPassed();
 	}
-	private void fixWidth(HBox box)
+	@FXML
+	public void sayUno()
 	{
-		double spacing = ((box.getChildren().size() * CARD_WIDTH_SCALED) - (box.getMaxWidth())) / box.getChildren().size();
-
-		if (spacing < 0) spacing = 0;
-
-		box.setSpacing(-spacing);
+		AUDIO_PLAYER.play(AudioPlayer.Sounds.BUTTONCLICK);
+		juno.setVisible(false);
+		TABLE_COMBO.getUser().sayUno();
 	}
 
 
@@ -270,7 +186,7 @@ public class GameplayComboController implements Gameplay
 	}
 	private void cardClicked(MouseEvent mouseEvent)
 	{
-		passButton.setDisable(false);
+		pass.setDisable(false);
 		if (TABLE_COMBO.getCurrentPlayer().getId() != BuildMP.PG.PLAYER) return;
 		lastClicked = (ImageView) mouseEvent.getSource();
 
@@ -279,14 +195,263 @@ public class GameplayComboController implements Gameplay
 
 		TABLE_COMBO.getUser().chooseCard(color, value);
 		if (color == Card.Color.BLACK && TABLE_COMBO.getCurrentPlayer().getId() == BuildMP.PG.PLAYER)
-			colorGridPane.setVisible(true);
+		{
+			colorGrid.setVisible(true);
+			colorPane.setVisible(true);
+		}
+	}
+
+
+	private void fixWidth(HBox box)
+	{
+		double spacing = ((box.getChildren().size() * Costants.CARD_WIDTH_SCALED.getVal()) - (box.getMaxWidth())) / box.getChildren().size();
+
+
+		if (spacing <= 0) spacing = 30;
+
+		box.setSpacing(-spacing);
+	}
+
+	@Override
+	public void draw(DrawData drawData)
+	{
+
+		ImageView newCard = createTransitionCard(drawData.card(), drawData.player() == BuildMP.PG.PLAYER);
+
+		PathTransition pathTransition = createDrawPathTransition(drawData.player(), newCard);
+		RotateTransition rotateTransition = createDrawRotateTransition(drawData.player(), newCard);
+
+		pathTransition.play();
+		rotateTransition.play();
+	}
+
+	private ImageView createTransitionCard(Card card, boolean isPlayer)
+	{
+		ImageView newCard = new ImageView(new Image(isPlayer ? card.getUrl().getPath() : "file:\\" + USER_DIR + "\\src\\main\\resources\\org\\juno\\images\\back.png"));
+		newCard.setFitWidth(Costants.CARD_WIDTH_SCALED.getVal());
+		newCard.setFitHeight(Costants.CARD_HEIGHT_SCALED.getVal());
+		newCard.setUserData(card);
+
+		anchorPane.getChildren().add(newCard);
+
+		return newCard;
+	}
+	private ImageView createCard(Image image, Card card, boolean isPlayer)
+	{
+		ImageView newCard = new ImageView(image);
+		newCard.setFitWidth(Costants.CARD_WIDTH_SCALED.getVal());
+		newCard.setFitHeight(Costants.CARD_HEIGHT_SCALED.getVal());
+		newCard.setUserData(card);
+
+
+		if (isPlayer)
+		{
+			newCard.setOnMouseEntered(this::cardEntered);
+			newCard.setOnMouseExited(this::cardExited);
+			newCard.setOnMouseClicked(this::cardClicked);
+		}
+
+
+		return newCard;
+	}
+	private PathTransition createDrawPathTransition(BuildMP.PG pg, ImageView node)
+	{
+		double endX = Costants.CARD_WIDTH_SCALED.getVal() / 2;
+		double endY = Costants.CARD_HEIGHT_SCALED.getVal() / 2;
+		HBox hand = userHand;
+
+		switch (pg)
+		{
+
+			case PLAYER ->
+			{
+				endX += Costants.PARENT_PLAYER_CENTER_X.getVal();
+				endY += Costants.PARENT_PLAYER_CENTER_Y.getVal();
+			}
+			case BOT1 ->
+			{
+				endX += Costants.PARENT_BOT1_CENTER_X.getVal();
+				endY += Costants.PARENT_BOT1_CENTER_Y.getVal();
+				hand = botHand1;
+			}
+			case BOT2 ->
+			{
+				endX += Costants.PARENT_BOT2_CENTER_X.getVal();
+				endY += Costants.PARENT_BOT2_CENTER_Y.getVal();
+				hand = botHand2;
+			}
+			case BOT3 ->
+			{
+				endX += Costants.PARENT_BOT3_CENTER_X.getVal();
+				endY += Costants.PARENT_BOT3_CENTER_Y.getVal();
+				hand = botHand3;
+			}
+		}
+
+		PathTransition pathTransition = new PathTransition(Duration.millis(750), new Line(845.5, 540, endX, endY), node);
+
+		HBox finalHand = hand;
+
+		pathTransition.setOnFinished(x ->
+		{
+			ImageView imageView = createCard(node.getImage(), (Card) node.getUserData(), pg == BuildMP.PG.PLAYER);
+			finalHand.getChildren().add(imageView);
+			fixWidth(finalHand);
+			node.setVisible(false);
+		});
+
+		return pathTransition;
+	}
+	private RotateTransition createDrawRotateTransition(BuildMP.PG pg, ImageView node)
+	{
+		RotateTransition rotateTransition = new RotateTransition(Duration.millis(750), node);
+
+		switch (pg)
+		{
+
+			case PLAYER ->
+			{
+				rotateTransition.setByAngle(180);
+				node.setRotate(180);
+			}
+			case BOT1 -> rotateTransition.setByAngle(90);
+			case BOT2 -> rotateTransition.setByAngle(180);
+			case BOT3 -> rotateTransition.setByAngle(270);
+		}
+
+
+		return rotateTransition;
+	}
+
+
+	@Override
+	public void discard(DiscardData discardData)
+	{
+		if (discardData.player() == null)
+		{
+			firstDiscarded.setImage(new Image(discardData.card().getFinalUrl().getPath()));
+			return;
+		}
+		ImageView transitionCard = createTransitionCard(discardData.card());
+
+		PathTransition pathTransition = createDiscardPathTransition(discardData.player(), transitionCard);
+		RotateTransition rotateTransition = createDiscardRotateTransition(discardData.player(), transitionCard);
+		removeCard(discardData.player());
+
+		pathTransition.play();
+		rotateTransition.play();
+	}
+	private ImageView createTransitionCard(Card card)
+	{
+		ImageView newCard = new ImageView(new Image(card.getFinalUrl().getPath()));
+		newCard.setFitWidth(Costants.CARD_WIDTH_SCALED.getVal());
+		newCard.setFitHeight(Costants.CARD_HEIGHT_SCALED.getVal());
+		newCard.setUserData(card);
+
+		anchorPane.getChildren().add(newCard);
+
+		return newCard;
+	}
+	private PathTransition createDiscardPathTransition(BuildMP.PG pg, ImageView node)
+	{
+		double startX = Costants.CARD_WIDTH_SCALED.getVal() / 2;
+		double startY = Costants.CARD_HEIGHT_SCALED.getVal() / 2;
+
+		ImageView cardInHand;
+
+		switch (pg)
+		{
+
+			case PLAYER ->
+			{
+				cardInHand = (ImageView) userHand.getChildren().stream().filter(x -> x.getUserData().equals(node.getUserData())).toList().get(0);
+
+				startX += cardInHand.getLayoutX() + Costants.PARENT_PLAYER_X.getVal();
+				startY += cardInHand.getLayoutY() + Costants.PARENT_PLAYER_Y.getVal();
+			}
+			case BOT1 ->
+			{
+				cardInHand = (ImageView) botHand1.getChildren().get(0);
+				startX += cardInHand.getLayoutX() + Costants.PARENT_BOT1_X.getVal();
+				startY += cardInHand.getLayoutY() + Costants.PARENT_BOT1_Y.getVal();
+			}
+			case BOT2 ->
+			{
+				cardInHand = (ImageView) botHand2.getChildren().get(0);
+				startX += cardInHand.getLayoutX() + Costants.PARENT_BOT2_X.getVal();
+				startY += cardInHand.getLayoutY() + Costants.PARENT_BOT2_Y.getVal();
+			}
+			case BOT3 ->
+			{
+				cardInHand = (ImageView) botHand3.getChildren().get(0);
+				startX += cardInHand.getLayoutX() + Costants.PARENT_BOT3_X.getVal();
+				startY += cardInHand.getLayoutY() + Costants.PARENT_BOT3_Y.getVal();
+			}
+		}
+
+
+		PathTransition pathTransition = new PathTransition(Duration.seconds(1), new Line(startX, startY, 1074.5, 540), node);
+
+		pathTransition.setOnFinished(x ->
+		{
+			thirdDiscarded.setImage(secondDiscarded.getImage());
+			secondDiscarded.setImage(firstDiscarded.getImage());
+			firstDiscarded.setImage(node.getImage());
+
+			node.setVisible(false);
+		});
+
+		return pathTransition;
+	}
+	private RotateTransition createDiscardRotateTransition(BuildMP.PG pg, ImageView node)
+	{
+		RotateTransition rotateTransition = new RotateTransition(Duration.seconds(1), node);
+
+		switch (pg)
+		{
+
+			case PLAYER -> rotateTransition.setByAngle(360);
+			case BOT1 ->
+			{
+				rotateTransition.setByAngle(270);
+				node.setRotate(90);
+			}
+			case BOT2 ->
+			{
+				rotateTransition.setByAngle(180);
+				node.setRotate(180);
+			}
+			case BOT3 ->
+			{
+				rotateTransition.setByAngle(90);
+				node.setRotate(270);
+			}
+		}
+
+
+		return rotateTransition;
+	}
+	private void removeCard(BuildMP.PG pg)
+	{
+		HBox hand = switch (pg)
+				{
+					case PLAYER -> userHand;
+					case BOT1 -> botHand1;
+					case BOT2 -> botHand2;
+					case BOT3 -> botHand3;
+				};
+
+		if (pg == BuildMP.PG.PLAYER)
+			hand.getChildren().remove(lastClicked);
+		else
+			hand.getChildren().remove(0);
 	}
 
 
 	@Override
 	public void turn(TurnData turnData)
 	{
-		passButton.setDisable(true);
+		pass.setDisable(true);
 		userTurn.setVisible(false);
 		bot1Turn.setVisible(false);
 		bot2Turn.setVisible(false);
@@ -322,10 +487,10 @@ public class GameplayComboController implements Gameplay
 			{/*todo*/}
 			case SAIDUNO ->
 			{/*todo*/}
-			case DIDNTSAYUNO -> junoButton.setVisible(false);
+			case DIDNTSAYUNO -> juno.setVisible(false);
 			case JUMPIN ->
 			{/*todo*/}
-			case ONECARD -> junoButton.setVisible(true);
+			case ONECARD -> juno.setVisible(true);
 		}
 	}
 	@Override
@@ -334,13 +499,19 @@ public class GameplayComboController implements Gameplay
 		//Has to be void because this modality doesn't support the switch
 		try
 		{
-			throw new UnsupportedModalityException("CLASSIC can't do SWITCH operation");
+			throw new UnsupportedModalityException("COMBO can't do SWITCH operation");
 		} catch (UnsupportedModalityException err)
 		{
 			System.out.println(err.getMessage());
 			err.printStackTrace();
 		}
 	}
+	@Override
+	public void getPoints(PointsData pointsData)
+	{
+		((EndMatchComboController) GEN_VIEW.getEndMatchCombo().getUserData()).load(pointsData);
+	}
+
 
 	@Override
 	public void gameflow(GameflowData gameflowData)
@@ -352,36 +523,35 @@ public class GameplayComboController implements Gameplay
 			case STARTGAME -> reset();
 		}
 	}
-
-	@Override
-	public void getPoints(PointsData pointsData)
-	{
-		((EndMatchComboController) GEN_VIEW.getEndMatchCombo().getUserData()).load(pointsData);
-	}
-
 	private void nextMatch()
 	{
-		GEN_VIEW.changeScene(GenView.SCENES.ENDMATCHCOMBO, anchor);
+		GEN_VIEW.changeScene(GenView.SCENES.ENDMATCHCOMBO, anchorPane);
 	}
-
 	private void goEndgame()
 	{
-		GEN_VIEW.changeScene(GenView.SCENES.ENDGAME, anchor);
+		GEN_VIEW.changeScene(GenView.SCENES.ENDGAME, anchorPane);
 
 		((EndgameController) GEN_VIEW.getEndgame().getUserData()).load(TABLE_COMBO);
 	}
 	public void reset()
 	{
-		passButton.setDisable(true);
-		junoButton.setVisible(false);
+		anchorPane.requestFocus();
 		userHand.getChildren().clear();
-		bot1Hand.getChildren().clear();
-		bot2Hand.getChildren().clear();
-		bot3Hand.getChildren().clear();
+		botHand1.getChildren().clear();
+		botHand2.getChildren().clear();
+		botHand3.getChildren().clear();
 		userCircle.setFill(new ImagePattern(new Image(User.getInstance().getAvatar())));
 		bot1Circle.setFill(new ImagePattern(new Image(String.format("file:\\%s\\src\\main\\resources\\org\\juno\\images\\iconBot1.png", System.getProperty("user.dir")))));
 		bot2Circle.setFill(new ImagePattern(new Image(String.format("file:\\%s\\src\\main\\resources\\org\\juno\\images\\iconBot2.png", System.getProperty("user.dir")))));
 		bot3Circle.setFill(new ImagePattern(new Image(String.format("file:\\%s\\src\\main\\resources\\org\\juno\\images\\iconBot3.png", System.getProperty("user.dir")))));
+		userTurn.setVisible(false);
+		bot1Turn.setVisible(false);
+		bot2Turn.setVisible(false);
+		bot3Turn.setVisible(false);
+
+		firstDiscarded.setImage(null);
+		secondDiscarded.setImage(null);
+		thirdDiscarded.setImage(null);
 		TABLE_COMBO.canStart();
 	}
 
@@ -394,4 +564,6 @@ public class GameplayComboController implements Gameplay
 	{
 		AUDIO_PLAYER.play(AudioPlayer.Sounds.CARDFLIP);
 	}
+
+
 }

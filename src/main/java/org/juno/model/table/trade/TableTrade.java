@@ -66,7 +66,6 @@ public class TableTrade extends Table
         {
             delay(delay);
 
-
             if (currentPlayer.hasChosen())
             {
                 chosenCard = currentPlayer.getChosenCard();
@@ -85,6 +84,7 @@ public class TableTrade extends Table
                         err.printStackTrace();
                     }
                     clearChanged();
+                    delay(1000);
                     endTurn = true;
                 }
             } else endTurn = currentPlayer.hasPassed();

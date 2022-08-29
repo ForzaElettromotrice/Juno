@@ -256,21 +256,24 @@ public class GenView implements Observer
 	public void update(Observable o, Object arg)
 	{
 		if (arg instanceof DrawData drawData)
-		{
 			Platform.runLater(() -> currentGameController.draw(drawData));
-		} else if (arg instanceof DiscardData discardData)
-		{
+
+		else if (arg instanceof DiscardData discardData)
 			Platform.runLater(() -> currentGameController.discard(discardData));
-		} else if (arg instanceof TurnData turnData) Platform.runLater(() -> currentGameController.turn(turnData));
+
+		else if (arg instanceof TurnData turnData)
+			Platform.runLater(() -> currentGameController.turn(turnData));
+
 		else if (arg instanceof EffectData effectData)
 			Platform.runLater(() -> currentGameController.effect(effectData));
+
 		else if (arg instanceof GameflowData gameflowData)
 			Platform.runLater(() -> currentGameController.gameflow(gameflowData));
+
 		else if (arg instanceof SwitchData switchData)
 			Platform.runLater(() -> currentGameController.doSwitch(switchData));
+
 		else if (arg instanceof PointsData pointsData)
-		{
 			Platform.runLater(() -> currentGameController.getPoints(pointsData));
-		}
 	}
 }

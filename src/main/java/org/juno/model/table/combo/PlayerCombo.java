@@ -32,6 +32,8 @@ public class PlayerCombo extends Player
 			Card first = DISCARD_PILE.getFirst();
 			for (Card card : hand)
 			{
+				System.out.println(value + " " + color);
+				System.out.println(first);
 				if (card.getValue() == value && card.getColor() == color && card.getColor() != Card.Color.BLACK && card.getValue() == first.getValue())
 				{
 					chosenCard = card;
@@ -53,23 +55,25 @@ public class PlayerCombo extends Player
 				}
 			}
 		}
+		Card first = chosenCard;
+
+		for (Card card : hand)
+		{
+			System.out.println(card);
+			System.out.println(first);
+			if (card.getColor() != Card.Color.BLACK && card.getValue() == first.getValue())
+			{
+				System.out.println("COMBO TRUE");
+				combo = true;
+				break;
+			}
+		}
 	}
 
 	public boolean canPlay()
 	{
-
-		Card first = DISCARD_PILE.getFirst();
-
-		for (Card card : hand)
-		{
-			if (card.getColor() != Card.Color.BLACK && card.getValue() == first.getValue())
-			{
-				combo = true;
-				chosenCard = null;
-				return true;
-			}
-		}
-		return false;
+		chosenCard = null;
+		return combo;
 	}
 
 	@Override
@@ -77,12 +81,10 @@ public class PlayerCombo extends Player
 	{
 		Card first = DISCARD_PILE.getFirst();
 
-
 		Card cardDrawn;
 
 		while (true)
 		{
-
 			cardDrawn = super.draw();
 			if (cardDrawn == null) return null;
 
