@@ -88,9 +88,7 @@ public abstract class Player extends Observable
 			if (card.getValue() == value && card.getColor() == color && card.isValid(first))
 			{
 				chosenCard = card;
-				System.out.println(hand);
 				hand.remove(card);
-				System.out.println(hand);
 				if (hand.size() == 1)
 				{
 					setChanged();

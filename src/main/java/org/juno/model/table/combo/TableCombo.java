@@ -82,7 +82,6 @@ public class TableCombo extends Table
 					clearChanged();
 					delay(1000);
 					endTurn = !currentPlayer.canPlay();
-					System.out.println("END TURN = " + endTurn);
 				}
 			} else endTurn = currentPlayer.hasPassed();
 		}

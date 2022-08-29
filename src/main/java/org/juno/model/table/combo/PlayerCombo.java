@@ -24,6 +24,7 @@ public class PlayerCombo extends Player
 	@Override
 	public void chooseCard(Card.Color color, Card.Value value)
 	{
+		if (chosenCard != null) return;
 		if (!combo)
 		{
 			super.chooseCard(color, value);
@@ -32,8 +33,6 @@ public class PlayerCombo extends Player
 			Card first = DISCARD_PILE.getFirst();
 			for (Card card : hand)
 			{
-				System.out.println(value + " " + color);
-				System.out.println(first);
 				if (card.getValue() == value && card.getColor() == color && card.getColor() != Card.Color.BLACK && card.getValue() == first.getValue())
 				{
 					chosenCard = card;
@@ -59,15 +58,13 @@ public class PlayerCombo extends Player
 
 		for (Card card : hand)
 		{
-			System.out.println(card);
-			System.out.println(first);
 			if (card.getColor() != Card.Color.BLACK && card.getValue() == first.getValue())
 			{
-				System.out.println("COMBO TRUE");
 				combo = true;
-				break;
+				return;
 			}
 		}
+		combo = false;
 	}
 
 	public boolean canPlay()
