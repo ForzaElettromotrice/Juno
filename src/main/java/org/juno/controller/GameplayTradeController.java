@@ -3,6 +3,7 @@ package org.juno.controller;
 
 import javafx.animation.PathTransition;
 import javafx.animation.RotateTransition;
+import javafx.animation.ScaleTransition;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
@@ -97,6 +98,9 @@ public class GameplayTradeController implements Gameplay
     @FXML
     public Button juno;
 
+    @FXML
+    public ImageView popUp;
+
 
     @FXML
     public void drawClicked()
@@ -128,30 +132,46 @@ public class GameplayTradeController implements Gameplay
     @FXML
     public void redClicked()
     {
+        popUp.setVisible(true);
+        popUp.setImage(new Image("file:\\Users\\Eleonora\\Desktop\\Programming\\JUno\\src\\main\\resources\\org\\juno\\images\\b6.png"));
+        zoomAnimation();
         beep();
         ((WildCard) TABLE_TRADE.getUser().getChosenCard()).setColor(Card.Color.RED);
         colorGrid.setVisible(false);
+        colorPane.setVisible(false);
     }
     @FXML
     public void blueClicked()
     {
+        popUp.setVisible(true);
+        popUp.setImage(new Image("file:\\Users\\Eleonora\\Desktop\\Programming\\JUno\\src\\main\\resources\\org\\juno\\images\\b6.png"));
+        zoomAnimation();
         beep();
         ((WildCard) TABLE_TRADE.getUser().getChosenCard()).setColor(Card.Color.BLUE);
         colorGrid.setVisible(false);
+        colorPane.setVisible(false);
     }
     @FXML
     public void yellowClicked()
     {
+        popUp.setVisible(true);
+        popUp.setImage(new Image("file:\\Users\\Eleonora\\Desktop\\Programming\\JUno\\src\\main\\resources\\org\\juno\\images\\b6.png"));
+        zoomAnimation();
         beep();
         ((WildCard) TABLE_TRADE.getUser().getChosenCard()).setColor(Card.Color.YELLOW);
         colorGrid.setVisible(false);
+        colorPane.setVisible(false);
     }
     @FXML
     public void greenClicked()
     {
+        popUp.setVisible(true);
+        popUp.setImage(new Image("file:\\Users\\Eleonora\\Desktop\\Programming\\JUno\\src\\main\\resources\\org\\juno\\images\\b6.png"));
+        zoomAnimation();
         beep();
         ((WildCard) TABLE_TRADE.getUser().getChosenCard()).setColor(Card.Color.GREEN);
         colorGrid.setVisible(false);
+        colorPane.setVisible(false);
     }
 
 
@@ -249,7 +269,7 @@ public class GameplayTradeController implements Gameplay
     @Override
     public void draw(DrawData drawData)
     {
-
+        cardFlip();
         ImageView newCard = createTransitionCard(drawData.card(), drawData.player() == BuildMP.PG.PLAYER);
 
         PathTransition pathTransition = createDrawPathTransition(drawData.player(), newCard);
@@ -361,6 +381,7 @@ public class GameplayTradeController implements Gameplay
 
     public void discard(DiscardData discardData)
     {
+        beep();
         if (discardData.player() == null)
         {
             firstDiscarded.setImage(new Image(discardData.card().getFinalUrl().getPath()));
@@ -481,7 +502,6 @@ public class GameplayTradeController implements Gameplay
             hand.getChildren().remove(0);
     }
 
-
     @Override
     public void turn(TurnData turnData)
     {
@@ -511,22 +531,49 @@ public class GameplayTradeController implements Gameplay
         switch (effectData.effect())
         {
             case STOP ->
-            {/*todo*/}
-            case REVERSE ->
-            {/*todo*/}
+            {
+                popUp.setVisible(true);
+                popUp.setImage(new Image("file:\\Users\\Eleonora\\Desktop\\Programming\\JUno\\src\\main\\resources\\org\\juno\\images\\b6.png"));
+                zoomAnimation();}
             case PLUSTWO ->
-            {/*todo*/}
+            {
+                popUp.setVisible(true);
+                popUp.setImage(new Image("file:\\Users\\Eleonora\\Desktop\\Programming\\JUno\\src\\main\\resources\\org\\juno\\images\\b6.png"));
+                zoomAnimation();}
             case PLUSFOUR ->
-            {/*todo*/}
-            case JOLLY ->
-            {/*todo*/}
+            {
+                popUp.setVisible(true);
+                popUp.setImage(new Image("file:\\Users\\Eleonora\\Desktop\\Programming\\JUno\\src\\main\\resources\\org\\juno\\images\\b6.png"));
+                zoomAnimation();
+            }
             case SAIDUNO ->
-            {/*todo*/}
-            case DIDNTSAYUNO -> juno.setVisible(false);
-            case JUMPIN ->
-            {/*todo*/}
+            {
+                popUp.setVisible(true);
+                popUp.setImage(new Image("file:\\Users\\Eleonora\\Desktop\\Programming\\JUno\\src\\main\\resources\\org\\juno\\images\\b6.png"));
+                zoomAnimation();
+            }
+            case DIDNTSAYUNO ->
+            {
+                juno.setVisible(false);
+                popUp.setVisible(true);
+                popUp.setImage(new Image("file:\\Users\\Eleonora\\Desktop\\Programming\\JUno\\src\\main\\resources\\org\\juno\\images\\b6.png"));
+                zoomAnimation();
+            }
             case ONECARD -> juno.setVisible(true);
         }
+    }
+
+    private void zoomAnimation()
+    {
+        ScaleTransition st = new ScaleTransition(Duration.millis(500), popUp);
+        ScaleTransition st1 = new ScaleTransition(Duration.millis(500), popUp);
+        st.setToX(5);
+        st.setToY(5);
+        st1.setToX(0.5);
+        st1.setToY(0.5);
+        st.setOnFinished(x -> st1.play());
+        st1.setOnFinished(x -> popUp.setVisible(false));
+        st.play();
     }
     @Override
     public void doSwitch(SwitchData switchData)
@@ -620,6 +667,14 @@ public class GameplayTradeController implements Gameplay
         bot1Circle.setFill(new ImagePattern(new Image(String.format("file:\\%s\\src\\main\\resources\\org\\juno\\images\\iconBot1.png", System.getProperty("user.dir")))));
         bot2Circle.setFill(new ImagePattern(new Image(String.format("file:\\%s\\src\\main\\resources\\org\\juno\\images\\iconBot2.png", System.getProperty("user.dir")))));
         bot3Circle.setFill(new ImagePattern(new Image(String.format("file:\\%s\\src\\main\\resources\\org\\juno\\images\\iconBot3.png", System.getProperty("user.dir")))));
+        userTurn.setVisible(false);
+        bot1Turn.setVisible(false);
+        bot2Turn.setVisible(false);
+        bot3Turn.setVisible(false);
+
+        firstDiscarded.setImage(null);
+        secondDiscarded.setImage(null);
+        thirdDiscarded.setImage(null);
         TABLE_TRADE.canStart();
     }
 

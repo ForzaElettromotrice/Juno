@@ -63,4 +63,5 @@
    <HBox fx:id="botHand3" alignment="CENTER" layoutX="1315.5" layoutY="408.0" maxHeight="264.0" maxWidth="945.0" prefHeight="264.0" prefWidth="945.0" rotate="270.0" />
    <HBox fx:id="botHand2" alignment="CENTER" layoutX="487.5" maxHeight="264.0" maxWidth="945.0" prefHeight="264.0" prefWidth="945.0" rotate="180.0" />
    <Button mnemonicParsing="false" onAction="#exitClicked" prefHeight="100.0" prefWidth="100.0" styleClass="buttonGameplay" text="Exit" />
+   <ImageView fx:id="popUp" fitHeight="95.0" fitWidth="116.0" layoutX="1004.0" layoutY="502.0" pickOnBounds="true" preserveRatio="true" visible="false"/>
 </AnchorPane>

@@ -46,7 +46,6 @@ public class BuildMP
 		JOLLY,
 		SAIDUNO,
 		DIDNTSAYUNO,
-		JUMPIN,
 		ONECARD
 	}
 

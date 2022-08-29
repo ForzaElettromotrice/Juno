@@ -10,92 +10,63 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.shape.Circle?>
 
-<AnchorPane fx:id="anchorPane" maxHeight="1080.0" maxWidth="1920.0" minHeight="1080.0" minWidth="1920.0"
-            prefHeight="1080.0" prefWidth="1920.0" styleClass="backgroundGameplay" stylesheets="@Style.css"
-            xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="org.juno.controller.GameplayClassicController">
-   <ImageView fx:id="bot3Turn" fitHeight="417.0" fitWidth="417.0" layoutX="1446.0" layoutY="153.0" pickOnBounds="true"
-              preserveRatio="true" visible="false">
-      <Image url="@../images/rays.png"/>
+<AnchorPane fx:id="anchorPane" maxHeight="1080.0" maxWidth="1920.0" minHeight="1080.0" minWidth="1920.0" prefHeight="1080.0" prefWidth="1920.0" styleClass="backgroundGameplay" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.juno.controller.GameplayClassicController">
+   <ImageView fx:id="bot3Turn" fitHeight="417.0" fitWidth="417.0" layoutX="1446.0" layoutY="153.0" pickOnBounds="true" preserveRatio="true" visible="false">
+      <Image url="@../images/rays.png" />
    </ImageView>
-   <ImageView fx:id="bot2Turn" fitHeight="416.0" fitWidth="417.0" layoutX="378.0" layoutY="54.0" pickOnBounds="true"
-              preserveRatio="true" visible="false">
-      <Image url="@../images/rays.png"/>
+   <ImageView fx:id="bot2Turn" fitHeight="416.0" fitWidth="417.0" layoutX="378.0" layoutY="54.0" pickOnBounds="true" preserveRatio="true" visible="false">
+      <Image url="@../images/rays.png" />
    </ImageView>
-   <ImageView fx:id="userTurn" fitHeight="417.0" fitWidth="417.0" layoutX="1217.0" layoutY="605.0" pickOnBounds="true"
-              preserveRatio="true" visible="false">
-      <Image url="@../images/rays.png"/>
+   <ImageView fx:id="userTurn" fitHeight="417.0" fitWidth="417.0" layoutX="1217.0" layoutY="605.0" pickOnBounds="true" preserveRatio="true" visible="false">
+      <Image url="@../images/rays.png" />
    </ImageView>
-   <ImageView fx:id="bot1Turn" fitHeight="417.0" fitWidth="417.0" layoutX="54.0" layoutY="505.0" pickOnBounds="true"
-              preserveRatio="true" visible="false">
-      <Image url="@../images/rays.png"/>
+   <ImageView fx:id="bot1Turn" fitHeight="417.0" fitWidth="417.0" layoutX="54.0" layoutY="505.0" pickOnBounds="true" preserveRatio="true" visible="false">
+      <Image url="@../images/rays.png" />
    </ImageView>
-   <Circle fx:id="userCircle" fill="DODGERBLUE" layoutX="1427.0" layoutY="816.0" radius="100.0" stroke="BLACK"
-           strokeType="INSIDE"/>
-   <Circle fx:id="bot1Circle" fill="DODGERBLUE" layoutX="264.0" layoutY="716.0" radius="100.0" rotate="90.0"
-           stroke="BLACK" strokeType="INSIDE"/>
-   <Circle fx:id="bot2Circle" fill="DODGERBLUE" layoutX="587.5" layoutY="264.0" radius="100.0" rotate="180.0"
-           stroke="BLACK" strokeType="INSIDE"/>
-   <Circle fx:id="bot3Circle" fill="DODGERBLUE" layoutX="1655.5" layoutY="364.0" radius="100.0" rotate="270.0"
-           stroke="BLACK" strokeType="INSIDE"/>
-   <ImageView fx:id="cardDrawn" fitHeight="264.0" fitWidth="189.0" pickOnBounds="true" preserveRatio="true"/>
+   <Circle fx:id="userCircle" fill="DODGERBLUE" layoutX="1427.0" layoutY="816.0" radius="100.0" stroke="BLACK" strokeType="INSIDE" />
+   <Circle fx:id="bot1Circle" fill="DODGERBLUE" layoutX="264.0" layoutY="716.0" radius="100.0" rotate="90.0" stroke="BLACK" strokeType="INSIDE" />
+   <Circle fx:id="bot2Circle" fill="DODGERBLUE" layoutX="587.5" layoutY="264.0" radius="100.0" rotate="180.0" stroke="BLACK" strokeType="INSIDE" />
+   <Circle fx:id="bot3Circle" fill="DODGERBLUE" layoutX="1655.5" layoutY="364.0" radius="100.0" rotate="270.0" stroke="BLACK" strokeType="INSIDE" />
+   <ImageView fx:id="cardDrawn" fitHeight="264.0" fitWidth="189.0" pickOnBounds="true" preserveRatio="true" />
    <ImageView fitHeight="264.0" fitWidth="189.0" layoutX="731.0" layoutY="388.0" pickOnBounds="true" smooth="false">
-      <Image url="@../images/back.png"/>
+      <Image url="@../images/back.png" />
    </ImageView>
    <ImageView fitHeight="264.0" fitWidth="189.0" layoutX="741.0" layoutY="398.0" pickOnBounds="true" smooth="false">
-      <Image url="@../images/back.png"/>
+      <Image url="@../images/back.png" />
    </ImageView>
-   <ImageView fitHeight="264.0" fitWidth="189.0" layoutX="751.0" layoutY="408.0" onMouseClicked="#drawClicked"
-              pickOnBounds="true" smooth="false">
-      <Image url="@../images/back.png"/>
+   <ImageView fitHeight="264.0" fitWidth="189.0" layoutX="751.0" layoutY="408.0" onMouseClicked="#drawClicked" pickOnBounds="true" smooth="false">
+      <Image url="@../images/back.png" />
    </ImageView>
-   <ImageView fx:id="thirdDiscarded" fitHeight="264.0" fitWidth="189.0" layoutX="960.0" layoutY="388.0"
-              pickOnBounds="true" preserveRatio="true"/>
-   <ImageView fx:id="secondDiscarded" fitHeight="264.0" fitWidth="189.0" layoutX="970.0" layoutY="398.0"
-              pickOnBounds="true" preserveRatio="true"/>
-   <ImageView fx:id="firstDiscarded" fitHeight="264.0" fitWidth="189.0" layoutX="980.0" layoutY="408.0"
-              pickOnBounds="true" preserveRatio="true"/>
-   <ImageView fx:id="colorGrid" fitHeight="264.0" fitWidth="189.0" layoutX="1209.0" layoutY="408.0" pickOnBounds="true"
-              smooth="false" visible="false">
-      <Image url="@../images/13.png"/>
+   <ImageView fx:id="thirdDiscarded" fitHeight="264.0" fitWidth="189.0" layoutX="960.0" layoutY="388.0" pickOnBounds="true" preserveRatio="true" />
+   <ImageView fx:id="secondDiscarded" fitHeight="264.0" fitWidth="189.0" layoutX="970.0" layoutY="398.0" pickOnBounds="true" preserveRatio="true" />
+   <ImageView fx:id="firstDiscarded" fitHeight="264.0" fitWidth="189.0" layoutX="980.0" layoutY="408.0" pickOnBounds="true" preserveRatio="true" />
+   <ImageView fx:id="colorGrid" fitHeight="264.0" fitWidth="189.0" layoutX="1209.0" layoutY="408.0" pickOnBounds="true" smooth="false" visible="false">
+      <Image url="@../images/13.png" />
    </ImageView>
    <GridPane fx:id="colorPane" layoutX="1209.0" layoutY="408.0">
       <columnConstraints>
-         <ColumnConstraints hgrow="SOMETIMES" maxWidth="94.5" minWidth="94.5" percentWidth="0.0" prefWidth="94.5"/>
-         <ColumnConstraints hgrow="SOMETIMES" maxWidth="94.5" minWidth="94.5" percentWidth="0.0" prefWidth="94.5"/>
+         <ColumnConstraints hgrow="SOMETIMES" maxWidth="94.5" minWidth="94.5" percentWidth="0.0" prefWidth="94.5" />
+         <ColumnConstraints hgrow="SOMETIMES" maxWidth="94.5" minWidth="94.5" percentWidth="0.0" prefWidth="94.5" />
       </columnConstraints>
       <rowConstraints>
-         <RowConstraints maxHeight="132.0" minHeight="132.0" percentHeight="0.0" prefHeight="132.0" vgrow="SOMETIMES"/>
-         <RowConstraints maxHeight="132.0" minHeight="132.0" percentHeight="0.0" prefHeight="132.0" vgrow="SOMETIMES"/>
+         <RowConstraints maxHeight="132.0" minHeight="132.0" percentHeight="0.0" prefHeight="132.0" vgrow="SOMETIMES" />
+         <RowConstraints maxHeight="132.0" minHeight="132.0" percentHeight="0.0" prefHeight="132.0" vgrow="SOMETIMES" />
       </rowConstraints>
-      <Button mnemonicParsing="false" onAction="#redClicked" prefHeight="132.0" prefWidth="94.5"
-              styleClass="backgroundTransparent"/>
-      <Button mnemonicParsing="false" onAction="#blueClicked" prefHeight="132.0" prefWidth="94.5"
-              styleClass="backgroundTransparent" GridPane.columnIndex="1"/>
-      <Button mnemonicParsing="false" onAction="#yellowClicked" prefHeight="132.0" prefWidth="94.5"
-              styleClass="backgroundTransparent" GridPane.rowIndex="1"/>
-      <Button mnemonicParsing="false" onAction="#greenClicked" prefHeight="132.0" prefWidth="94.5"
-              styleClass="backgroundTransparent" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+      <Button mnemonicParsing="false" onAction="#redClicked" prefHeight="132.0" prefWidth="94.5" styleClass="backgroundTransparent" />
+      <Button mnemonicParsing="false" onAction="#blueClicked" prefHeight="132.0" prefWidth="94.5" styleClass="backgroundTransparent" GridPane.columnIndex="1" />
+      <Button mnemonicParsing="false" onAction="#yellowClicked" prefHeight="132.0" prefWidth="94.5" styleClass="backgroundTransparent" GridPane.rowIndex="1" />
+      <Button mnemonicParsing="false" onAction="#greenClicked" prefHeight="132.0" prefWidth="94.5" styleClass="backgroundTransparent" GridPane.columnIndex="1" GridPane.rowIndex="1" />
    </GridPane>
-   <Button fx:id="pass" disable="true" layoutX="587.0" layoutY="572.0" mnemonicParsing="false" onAction="#passClicked"
-           prefHeight="100.0" prefWidth="100.0" styleClass="buttonGameplay" text="Pass"/>
-   <Button fx:id="juno" layoutX="587.0" layoutY="388.0" mnemonicParsing="false" onAction="#sayUno" prefHeight="100.0"
-           prefWidth="100.0" styleClass="buttonGameplay" text="(J)uno!" visible="false"/>
-   <ImageView fx:id="bot1Animation" fitHeight="264.0" fitWidth="189.0" pickOnBounds="true" preserveRatio="true"
-              rotate="90.0"/>
-   <ImageView fx:id="bot2Animation" fitHeight="264.0" fitWidth="189.0" pickOnBounds="true" preserveRatio="true"
-              rotate="180.0"/>
-   <ImageView fx:id="bot3Animation" fitHeight="264.0" fitWidth="189.0" pickOnBounds="true" preserveRatio="true"
-              rotate="270.0"/>
-   <ImageView fx:id="playerAnimation" fitHeight="264.0" fitWidth="189.0" pickOnBounds="true" preserveRatio="true"/>
-   <HBox fx:id="userHand" alignment="CENTER" cacheShape="false" centerShape="false" layoutX="393.0" layoutY="816.0"
-         maxHeight="1134.0" maxWidth="1134.0" prefHeight="264.0" prefWidth="1134.0" scaleShape="false"/>
-   <HBox fx:id="botHand1" alignment="CENTER" layoutX="-340.5" layoutY="408.0" maxHeight="264.0" maxWidth="945.0"
-         prefHeight="264.0" prefWidth="945.0" rotate="90.0"/>
-   <HBox fx:id="botHand3" alignment="CENTER" layoutX="1315.5" layoutY="408.0" maxHeight="264.0" maxWidth="945.0"
-         prefHeight="264.0" prefWidth="945.0" rotate="270.0"/>
-   <HBox fx:id="botHand2" alignment="CENTER" layoutX="487.5" maxHeight="264.0" maxWidth="945.0" prefHeight="264.0"
-         prefWidth="945.0" rotate="180.0"/>
-   <Button mnemonicParsing="false" onAction="#exitClicked" prefHeight="100.0" prefWidth="100.0"
-           styleClass="buttonGameplay" text="Exit"/>
+   <Button fx:id="pass" disable="true" layoutX="587.0" layoutY="572.0" mnemonicParsing="false" onAction="#passClicked" prefHeight="100.0" prefWidth="100.0" styleClass="buttonGameplay" text="Pass" />
+   <Button fx:id="juno" layoutX="587.0" layoutY="388.0" mnemonicParsing="false" onAction="#sayUno" prefHeight="100.0" prefWidth="100.0" styleClass="buttonGameplay" text="(J)uno!" visible="false" />
+   <ImageView fx:id="bot1Animation" fitHeight="264.0" fitWidth="189.0" pickOnBounds="true" preserveRatio="true" rotate="90.0" />
+   <ImageView fx:id="bot2Animation" fitHeight="264.0" fitWidth="189.0" pickOnBounds="true" preserveRatio="true" rotate="180.0" />
+   <ImageView fx:id="bot3Animation" fitHeight="264.0" fitWidth="189.0" pickOnBounds="true" preserveRatio="true" rotate="270.0" />
+   <ImageView fx:id="playerAnimation" fitHeight="264.0" fitWidth="189.0" pickOnBounds="true" preserveRatio="true" />
+   <HBox fx:id="userHand" alignment="CENTER" cacheShape="false" centerShape="false" layoutX="393.0" layoutY="816.0" maxHeight="1134.0" maxWidth="1134.0" prefHeight="264.0" prefWidth="1134.0" scaleShape="false" />
+   <HBox fx:id="botHand1" alignment="CENTER" layoutX="-340.5" layoutY="408.0" maxHeight="264.0" maxWidth="945.0" prefHeight="264.0" prefWidth="945.0" rotate="90.0" />
+   <HBox fx:id="botHand3" alignment="CENTER" layoutX="1315.5" layoutY="408.0" maxHeight="264.0" maxWidth="945.0" prefHeight="264.0" prefWidth="945.0" rotate="270.0" />
+   <HBox fx:id="botHand2" alignment="CENTER" layoutX="487.5" maxHeight="264.0" maxWidth="945.0" prefHeight="264.0" prefWidth="945.0" rotate="180.0" />
+   <Button mnemonicParsing="false" onAction="#exitClicked" prefHeight="100.0" prefWidth="100.0" styleClass="buttonGameplay" text="Exit" />
+   <ImageView fx:id="popUp" fitHeight="95.0" fitWidth="116.0" layoutX="1004.0" layoutY="502.0" pickOnBounds="true" preserveRatio="true" visible="false"/>
 </AnchorPane>

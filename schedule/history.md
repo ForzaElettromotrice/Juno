@@ -256,8 +256,61 @@
 2. Changed Reflex mode to be Combo mode: it only has piling and infinite draw.
 3. Started Combo and Trade modes: they work but still have some bugs. Each mode has its Table, its Player and its Bot.
 
-##TODO:
+##03/07/2022
 
-1. resolve bugs in trade and combo
-2. check fonts and other things that might differ
+1. From ChooseMode screen you can choose the mode you want to play.
+2. Created the SwitchData, that conveys the message on who has to trade with who in Trade.
+3. Completed Trade mode and added a new method called doSwitch to Gameplay: it is void on other modalities.
+4. Added some delays.
+5. Minor changes.
+
+##09/08/2022
+
+1. Created the EndMatch screens: they are identical even if the mode changes, and they show partial points.
+    From here you can decide if you want to continue playing or exit.
+2. Refactored the different messages and divided them based on what they do.
+3. Added userData in cards: now when a card is shown on screen, it will contain informations on the card itself.
+4. Added the URL field in Card that represent the link to the png, thus simplifying many methods.
+5. Now the player can create and delete different accounts thanks to Register and Login screens. The player can also
+    do so from Settings.
+6. Implemented Serializable in User to guarantee the creation of different accounts.
+7. Chosen new music.
+
+##10/08/2022
+
+1. Now you can exit the game from the Table.
+2. Added Alerts for when you want to exit games.
+3. Added keyboard shortcuts for menus.
+4. Added sound effects to buttons.
+5. Fixed bugs.
+6. Started fixing FXMLs and creating the stylesheet.
+
+##11/08/2022
+
+1. Now when the game is finished you see if you won or lost.
+2. Started adding draw and discard animations.
+3. Now audio Settings are saved in User data.
+4. Continued fixing FXMLs and stylesheet.
+
+##23/08/2022
+
+1. Finished animations.
+2. Fixed bugs in Trade: now the three modes work perfectly.
+3. Minor changes.
+
+##28/08/2022
+
+1. Fixed animations: now they are more fluid and follow the right paths.
+2. Created new enum Constants that contains data for animations.
+3. Minor changes.
+
+##29/08/2022
+
+1. Created popup animations activated when a certain effect happens.
+2. Fixed some bugs.
+3. Added new Table background.
+
+##TODO:
+1. create popup images+refactor popup code.
+
 

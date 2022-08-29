@@ -2,6 +2,7 @@ package org.juno.controller;
 
 import javafx.animation.PathTransition;
 import javafx.animation.RotateTransition;
+import javafx.animation.ScaleTransition;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
@@ -97,12 +98,17 @@ public class GameplayComboController implements Gameplay
 	public HBox botHand2;
 
 
+	@FXML
+	public ImageView popUp;
 	private ImageView lastClicked;
 
 
 	@FXML
 	public void redClicked()
 	{
+		popUp.setVisible(true);
+		popUp.setImage(new Image("file:\\Users\\Eleonora\\Desktop\\Programming\\JUno\\src\\main\\resources\\org\\juno\\images\\b6.png"));
+		zoomAnimation();
 		beep();
 		((WildCard) TABLE_COMBO.getUser().getChosenCard()).setColor(Card.Color.RED);
 		colorGrid.setVisible(false);
@@ -111,6 +117,9 @@ public class GameplayComboController implements Gameplay
 	@FXML
 	public void blueClicked()
 	{
+		popUp.setVisible(true);
+		popUp.setImage(new Image("file:\\Users\\Eleonora\\Desktop\\Programming\\JUno\\src\\main\\resources\\org\\juno\\images\\b6.png"));
+		zoomAnimation();
 		beep();
 		((WildCard) TABLE_COMBO.getUser().getChosenCard()).setColor(Card.Color.BLUE);
 		colorGrid.setVisible(false);
@@ -119,6 +128,9 @@ public class GameplayComboController implements Gameplay
 	@FXML
 	public void yellowClicked()
 	{
+		popUp.setVisible(true);
+		popUp.setImage(new Image("file:\\Users\\Eleonora\\Desktop\\Programming\\JUno\\src\\main\\resources\\org\\juno\\images\\b6.png"));
+		zoomAnimation();
 		beep();
 		((WildCard) TABLE_COMBO.getUser().getChosenCard()).setColor(Card.Color.YELLOW);
 		colorGrid.setVisible(false);
@@ -127,6 +139,9 @@ public class GameplayComboController implements Gameplay
 	@FXML
 	public void greenClicked()
 	{
+		popUp.setVisible(true);
+		popUp.setImage(new Image("file:\\Users\\Eleonora\\Desktop\\Programming\\JUno\\src\\main\\resources\\org\\juno\\images\\b6.png"));
+		zoomAnimation();
 		beep();
 		((WildCard) TABLE_COMBO.getUser().getChosenCard()).setColor(Card.Color.GREEN);
 		colorGrid.setVisible(false);
@@ -215,7 +230,7 @@ public class GameplayComboController implements Gameplay
 	@Override
 	public void draw(DrawData drawData)
 	{
-
+		cardFlip();
 		ImageView newCard = createTransitionCard(drawData.card(), drawData.player() == BuildMP.PG.PLAYER);
 
 		PathTransition pathTransition = createDrawPathTransition(drawData.player(), newCard);
@@ -327,6 +342,7 @@ public class GameplayComboController implements Gameplay
 	@Override
 	public void discard(DiscardData discardData)
 	{
+		beep();
 		if (discardData.player() == null)
 		{
 			firstDiscarded.setImage(new Image(discardData.card().getFinalUrl().getPath()));
@@ -473,25 +489,53 @@ public class GameplayComboController implements Gameplay
 	@Override
 	public void effect(EffectData effectData)
 	{
-		switch (effectData.effect())
-		{
-			case STOP ->
-			{/*todo*/}
-			case REVERSE ->
-			{/*todo*/}
-			case PLUSTWO ->
-			{/*todo*/}
-			case PLUSFOUR ->
-			{/*todo*/}
-			case JOLLY ->
-			{/*todo*/}
-			case SAIDUNO ->
-			{/*todo*/}
-			case DIDNTSAYUNO -> juno.setVisible(false);
-			case JUMPIN ->
-			{/*todo*/}
-			case ONECARD -> juno.setVisible(true);
+			switch (effectData.effect())
+			{
+				case STOP ->
+				{
+					popUp.setVisible(true);
+					popUp.setImage(new Image("file:\\Users\\Eleonora\\Desktop\\Programming\\JUno\\src\\main\\resources\\org\\juno\\images\\b6.png"));
+					zoomAnimation();}
+				case PLUSTWO ->
+				{
+					popUp.setVisible(true);
+					popUp.setImage(new Image("file:\\Users\\Eleonora\\Desktop\\Programming\\JUno\\src\\main\\resources\\org\\juno\\images\\b6.png"));
+					zoomAnimation();}
+				case PLUSFOUR ->
+				{
+					popUp.setVisible(true);
+					popUp.setImage(new Image("file:\\Users\\Eleonora\\Desktop\\Programming\\JUno\\src\\main\\resources\\org\\juno\\images\\b6.png"));
+					zoomAnimation();
+				}
+				case SAIDUNO ->
+				{
+					popUp.setVisible(true);
+					popUp.setImage(new Image("file:\\Users\\Eleonora\\Desktop\\Programming\\JUno\\src\\main\\resources\\org\\juno\\images\\b6.png"));
+					zoomAnimation();
+				}
+				case DIDNTSAYUNO ->
+				{
+					juno.setVisible(false);
+					popUp.setVisible(true);
+					popUp.setImage(new Image("file:\\Users\\Eleonora\\Desktop\\Programming\\JUno\\src\\main\\resources\\org\\juno\\images\\b6.png"));
+					zoomAnimation();
+				}
+				case ONECARD -> juno.setVisible(true);
+
 		}
+	}
+
+	private void zoomAnimation()
+	{
+		ScaleTransition st = new ScaleTransition(Duration.millis(500), popUp);
+		ScaleTransition st1 = new ScaleTransition(Duration.millis(500), popUp);
+		st.setToX(5);
+		st.setToY(5);
+		st1.setToX(0.5);
+		st1.setToY(0.5);
+		st.setOnFinished(x -> st1.play());
+		st1.setOnFinished(x -> popUp.setVisible(false));
+		st.play();
 	}
 	@Override
 	public void doSwitch(SwitchData switchData)
@@ -564,6 +608,4 @@ public class GameplayComboController implements Gameplay
 	{
 		AUDIO_PLAYER.play(AudioPlayer.Sounds.CARDFLIP);
 	}
-
-
 }
