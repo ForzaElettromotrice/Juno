@@ -9,10 +9,10 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="backgroundEndmatch" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.juno.controller.EndMatchClassicController">
-    <VBox prefHeight="978.0" prefWidth="1920.0" spacing="25.0">
+<AnchorPane fx:id="backgroundEndmatch" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" styleClass="backgroundWhite" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.juno.controller.EndMatchClassicController">
+    <VBox layoutY="8.0" prefHeight="978.0" prefWidth="1920.0" spacing="25.0">
         <HBox alignment="TOP_CENTER" prefHeight="81.0" prefWidth="1080.0">
-            <Label text="Points overview" textAlignment="CENTER" textFill="RED">
+            <Label styleClass="titleStyle" stylesheets="@Style.css" text="Points overview" textAlignment="CENTER" textFill="RED">
                 <font>
                     <Font name="Javanese Text" size="54.0" />
                 </font>
@@ -24,7 +24,7 @@
                     <Insets />
                 </HBox.margin>
             </Circle>
-            <Label fx:id="labelPlayer" alignment="CENTER" prefHeight="160.0" prefWidth="650.0" textAlignment="CENTER">
+            <Label fx:id="labelPlayer" alignment="CENTER" prefHeight="160.0" prefWidth="650.0" styleClass="textEMStyle" stylesheets="@Style.css" textAlignment="CENTER">
                 <font>
                     <Font name="Javanese Text" size="54.0" />
                 </font>
@@ -32,7 +32,7 @@
         </HBox>
         <HBox alignment="CENTER" prefHeight="150.0" prefWidth="1920.0">
             <Circle fx:id="avatarBot1" fill="DODGERBLUE" radius="100.0" stroke="BLACK" strokeType="INSIDE" />
-            <Label fx:id="labelBot1" alignment="CENTER" prefHeight="160.0" prefWidth="650.0" textAlignment="CENTER">
+            <Label fx:id="labelBot1" alignment="CENTER" prefHeight="160.0" prefWidth="650.0" styleClass="textEMStyle" stylesheets="@Style.css" textAlignment="CENTER">
                 <font>
                     <Font name="Javanese Text" size="54.0" />
                 </font>
@@ -40,7 +40,7 @@
         </HBox>
         <HBox alignment="CENTER" prefHeight="150.0" prefWidth="1920.0">
             <Circle fx:id="avatarBot2" fill="DODGERBLUE" radius="100.0" stroke="BLACK" strokeType="INSIDE" />
-            <Label fx:id="labelBot2" alignment="CENTER" prefHeight="160.0" prefWidth="650.0" textAlignment="CENTER">
+            <Label fx:id="labelBot2" alignment="CENTER" prefHeight="160.0" prefWidth="650.0" styleClass="textEMStyle" stylesheets="@Style.css" textAlignment="CENTER">
                 <font>
                     <Font name="Javanese Text" size="54.0" />
                 </font>
@@ -48,7 +48,7 @@
         </HBox>
         <HBox alignment="CENTER" layoutX="10.0" layoutY="559.0" prefHeight="150.0" prefWidth="1920.0">
             <Circle fx:id="avatarBot3" fill="DODGERBLUE" radius="100.0" stroke="BLACK" strokeType="INSIDE" />
-            <Label fx:id="labelBot3" alignment="CENTER" prefHeight="160.0" prefWidth="650.0" textAlignment="CENTER">
+            <Label fx:id="labelBot3" alignment="CENTER" prefHeight="160.0" prefWidth="650.0" styleClass="textEMStyle" stylesheets="@Style.css" textAlignment="CENTER">
                 <font>
                     <Font name="Javanese Text" size="54.0" />
                 </font>
@@ -56,12 +56,12 @@
         </HBox>
     </VBox>
      <HBox alignment="BOTTOM_RIGHT" layoutX="1280.0" layoutY="964.0" prefHeight="100.0" prefWidth="624.0" spacing="100.0">
-         <Button fx:id="exitButton" mnemonicParsing="false" onAction="#exitClicked" onMouseEntered="#buttonEntered" prefHeight="100.0" prefWidth="250.0" stylesheets="@Style.css" text="EXIT GAME">
+         <Button fx:id="exitButton" mnemonicParsing="false" onAction="#exitClicked" onMouseEntered="#buttonEntered" prefHeight="100.0" prefWidth="250.0" styleClass="greenStyle" stylesheets="@Style.css" text="EXIT">
              <font>
                  <Font name="Javanese Text" size="27.0" />
              </font>
          </Button>
-         <Button fx:id="nextMatchButton" mnemonicParsing="false" onAction="#nextMatchClicked" onMouseEntered="#buttonEntered" prefHeight="100.0" prefWidth="250.0" stylesheets="@Style.css" text="NEXT MATCH">
+         <Button fx:id="nextMatchButton" mnemonicParsing="false" onAction="#nextMatchClicked" onMouseEntered="#buttonEntered" prefHeight="100.0" prefWidth="250.0" styleClass="greenStyle" stylesheets="@Style.css" text="NEXT">
              <font>
                  <Font name="Javanese Text" size="27.0" />
              </font>

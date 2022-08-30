@@ -79,13 +79,13 @@ public class EndMatchClassicController
 
 	public void load(PointsData pointsData)
 	{
-		avatarPlayer.setFill(new ImagePattern(new Image(User.getInstance().getAvatar())));
+//		avatarPlayer.setFill(new ImagePattern(new Image(User.getInstance().getAvatar())));
 		labelPlayer.setText(String.format("%s: %d points", User.getInstance().getNickname(), pointsData.playerPoints()));
-		avatarBot1.setFill(new ImagePattern(new Image(String.format("file:\\%s\\src\\main\\resources\\org\\juno\\images\\iconBot1.png", System.getProperty("user.dir")))));
+//		avatarBot1.setFill(new ImagePattern(new Image(String.format("file:\\%s\\src\\main\\resources\\org\\juno\\images\\iconBot1.png", System.getProperty("user.dir")))));
 		labelBot1.setText(String.format("Bot 1: %d points", pointsData.bot1Points()));
-		avatarBot2.setFill(new ImagePattern(new Image(String.format("file:\\%s\\src\\main\\resources\\org\\juno\\images\\iconBot2.png", System.getProperty("user.dir")))));
+//		avatarBot2.setFill(new ImagePattern(new Image(String.format("file:\\%s\\src\\main\\resources\\org\\juno\\images\\iconBot2.png", System.getProperty("user.dir")))));
 		labelBot2.setText(String.format("Bot 2: %d points", pointsData.bot2Points()));
-		avatarBot3.setFill(new ImagePattern(new Image(String.format("file:\\%s\\src\\main\\resources\\org\\juno\\images\\iconBot3.png", System.getProperty("user.dir")))));
+//		avatarBot3.setFill(new ImagePattern(new Image(String.format("file:\\%s\\src\\main\\resources\\org\\juno\\images\\iconBot3.png", System.getProperty("user.dir")))));
 		labelBot3.setText(String.format("Bot 3: %d points", pointsData.bot3Points()));
 	}
 

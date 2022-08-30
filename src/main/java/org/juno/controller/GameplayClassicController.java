@@ -96,21 +96,10 @@ public class GameplayClassicController implements Gameplay, Initializable
 	public ImageView secondDiscarded;
 	@FXML
 	public ImageView thirdDiscarded;
-	@FXML
-	public ImageView playerAnimation;
-	@FXML
-	public ImageView bot1Animation;
-	@FXML
-	public ImageView bot2Animation;
-	@FXML
-	public ImageView bot3Animation;
-	@FXML
 	public ImageView cardDrawn;
 
 	@FXML
 	public GridPane colorPane;
-    @FXML
-    public ImageView popUp;
 	private ImageView lastClicked;
 
 	@FXML
