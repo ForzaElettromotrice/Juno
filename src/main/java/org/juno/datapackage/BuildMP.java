@@ -46,7 +46,11 @@ public class BuildMP
 		JOLLY,
 		SAIDUNO,
 		DIDNTSAYUNO,
-		ONECARD
+		ONECARD,
+		RED,
+		BLUE,
+		YELLOW,
+		GREEN
 	}
 
 	public enum Colors

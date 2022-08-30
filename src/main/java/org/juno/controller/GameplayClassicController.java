@@ -172,9 +172,7 @@ public class GameplayClassicController implements Gameplay, Initializable
 	@FXML
 	public void redClicked()
 	{
-		popUp.setVisible(true);
-		popUp.setImage(new Image("file:\\Users\\Eleonora\\Desktop\\Programming\\JUno\\src\\main\\resources\\org\\juno\\images\\b6.png"));
-		zoomAnimation();
+		zoomAnimation(BuildMP.Effects.RED);
 		beep();
 		((WildCard) TABLE_CLASSIC.getUser().getChosenCard()).setColor(Card.Color.RED);
 		colorGrid.setVisible(false);
@@ -183,9 +181,7 @@ public class GameplayClassicController implements Gameplay, Initializable
 	@FXML
 	public void blueClicked()
 	{
-		popUp.setVisible(true);
-		popUp.setImage(new Image("file:\\Users\\Eleonora\\Desktop\\Programming\\JUno\\src\\main\\resources\\org\\juno\\images\\b6.png"));
-		zoomAnimation();
+		zoomAnimation(BuildMP.Effects.BLUE);
 		beep();
 		((WildCard) TABLE_CLASSIC.getUser().getChosenCard()).setColor(Card.Color.BLUE);
 		colorGrid.setVisible(false);
@@ -194,9 +190,7 @@ public class GameplayClassicController implements Gameplay, Initializable
 	@FXML
 	public void yellowClicked()
 	{
-		popUp.setVisible(true);
-		popUp.setImage(new Image("file:\\Users\\Eleonora\\Desktop\\Programming\\JUno\\src\\main\\resources\\org\\juno\\images\\b6.png"));
-		zoomAnimation();
+		zoomAnimation(BuildMP.Effects.YELLOW);
 		beep();
 		((WildCard) TABLE_CLASSIC.getUser().getChosenCard()).setColor(Card.Color.YELLOW);
 		colorGrid.setVisible(false);
@@ -205,9 +199,7 @@ public class GameplayClassicController implements Gameplay, Initializable
 	@FXML
 	public void greenClicked()
 	{
-		popUp.setVisible(true);
-		popUp.setImage(new Image("file:\\Users\\Eleonora\\Desktop\\Programming\\JUno\\src\\main\\resources\\org\\juno\\images\\b6.png"));
-		zoomAnimation();
+		zoomAnimation(BuildMP.Effects.GREEN);
 		beep();
 		((WildCard) TABLE_CLASSIC.getUser().getChosenCard()).setColor(Card.Color.GREEN);
 		colorGrid.setVisible(false);
@@ -513,49 +505,60 @@ public class GameplayClassicController implements Gameplay, Initializable
 	{
 		switch (effectData.effect())
 		{
-			case STOP ->
-			{
-				popUp.setVisible(true);
-				popUp.setImage(new Image("file:\\Users\\Eleonora\\Desktop\\Programming\\JUno\\src\\main\\resources\\org\\juno\\images\\b6.png"));
-				zoomAnimation();}
-			case PLUSTWO ->
-			{
-				popUp.setVisible(true);
-				popUp.setImage(new Image("file:\\Users\\Eleonora\\Desktop\\Programming\\JUno\\src\\main\\resources\\org\\juno\\images\\b6.png"));
-				zoomAnimation();}
-			case PLUSFOUR ->
-			{
-				popUp.setVisible(true);
-				popUp.setImage(new Image("file:\\Users\\Eleonora\\Desktop\\Programming\\JUno\\src\\main\\resources\\org\\juno\\images\\b6.png"));
-				zoomAnimation();
-            }
-			case SAIDUNO ->
-			{
-				popUp.setVisible(true);
-				popUp.setImage(new Image("file:\\Users\\Eleonora\\Desktop\\Programming\\JUno\\src\\main\\resources\\org\\juno\\images\\b6.png"));
-				zoomAnimation();
-			}
+			case STOP -> zoomAnimation(BuildMP.Effects.STOP);
+			case REVERSE -> zoomAnimation(BuildMP.Effects.REVERSE);
+			case JOLLY -> zoomAnimation(BuildMP.Effects.JOLLY);
+			case PLUSTWO -> zoomAnimation(BuildMP.Effects.PLUSTWO);
+			case PLUSFOUR -> zoomAnimation(BuildMP.Effects.PLUSFOUR);
+			case SAIDUNO -> zoomAnimation(BuildMP.Effects.SAIDUNO);
 			case DIDNTSAYUNO ->
 			{
 				juno.setVisible(false);
-				popUp.setVisible(true);
-				popUp.setImage(new Image("file:\\Users\\Eleonora\\Desktop\\Programming\\JUno\\src\\main\\resources\\org\\juno\\images\\b6.png"));
-				zoomAnimation();
+				zoomAnimation(BuildMP.Effects.DIDNTSAYUNO);
 			}
 			case ONECARD -> juno.setVisible(true);
+			default ->
+					throw new RuntimeException("Questo messaggio non dovrebbe essere arrivato " + effectData.effect());
 		}
 	}
 
-	private void zoomAnimation()
+	private ImageView createZoomImage(BuildMP.Effects effect)
 	{
-		ScaleTransition st = new ScaleTransition(Duration.millis(500), popUp);
-		ScaleTransition st1 = new ScaleTransition(Duration.millis(500), popUp);
+		ImageView imageView = new ImageView(new Image("file:\\" + USER_DIR + "\\src\\main\\resources\\org\\juno\\images\\" + switch (effect)
+				{
+					case STOP -> "stopPopUp.png";
+					case REVERSE -> "reversePopUp.png";
+					case PLUSTWO -> "plusTwoPopUp.png";
+					case PLUSFOUR -> "plusFourPopUp.png";
+					case JOLLY -> "jollyPopUp.png";
+					case SAIDUNO -> "saidUnoPopUp.png";
+					case DIDNTSAYUNO -> "didntSayUnoPopUp.png";
+					case ONECARD -> "oneCardPopUp.png";
+					case RED -> "redPopUp.png";
+					case BLUE -> "bluePopUp.png";
+					case YELLOW -> "yellowPopUp.png";
+					case GREEN -> "greenPopUp.png";
+				}));
+		anchorPane.getChildren().add(imageView);
+		imageView.setFitWidth(320);
+		imageView.setFitHeight(180);
+		imageView.setX(800);
+		imageView.setY(450);
+
+		return imageView;
+
+	}
+	private void zoomAnimation(BuildMP.Effects effect)
+	{
+		ImageView imageView = createZoomImage(effect);
+		ScaleTransition st = new ScaleTransition(Duration.millis(500), imageView);
+		ScaleTransition st1 = new ScaleTransition(Duration.millis(500), imageView);
 		st.setToX(5);
 		st.setToY(5);
 		st1.setToX(0.5);
 		st1.setToY(0.5);
 		st.setOnFinished(x -> st1.play());
-		st1.setOnFinished(x -> popUp.setVisible(false));
+		st1.setOnFinished(x -> imageView.setVisible(false));
 		st.play();
 	}
 

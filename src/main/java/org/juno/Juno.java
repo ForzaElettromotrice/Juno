@@ -37,7 +37,7 @@ public class Juno extends Application
 	{
 		//default stuff
 		stage.setTitle("JUno");
-		stage.getIcons().add(new Image(Objects.requireNonNull(Juno.class.getResourceAsStream("images/logo.png"))));
+		stage.getIcons().add(new Image(Objects.requireNonNull(Juno.class.getResourceAsStream("images/icona.png"))));
 		stage.setResizable(false);
 		stage.setOnCloseRequest(x -> GEN_VIEW.closeWindow());
 

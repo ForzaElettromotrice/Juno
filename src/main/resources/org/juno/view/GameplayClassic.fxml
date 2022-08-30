@@ -41,7 +41,7 @@
    <ImageView fx:id="secondDiscarded" fitHeight="264.0" fitWidth="189.0" layoutX="970.0" layoutY="398.0" pickOnBounds="true" preserveRatio="true" />
    <ImageView fx:id="firstDiscarded" fitHeight="264.0" fitWidth="189.0" layoutX="980.0" layoutY="408.0" pickOnBounds="true" preserveRatio="true" />
    <ImageView fx:id="colorGrid" fitHeight="264.0" fitWidth="189.0" layoutX="1209.0" layoutY="408.0" pickOnBounds="true" smooth="false" visible="false">
-      <Image url="@../images/13.png" />
+      <Image url="@../images/color%20selector.png" />
    </ImageView>
    <GridPane fx:id="colorPane" layoutX="1209.0" layoutY="408.0">
       <columnConstraints>
@@ -59,14 +59,9 @@
    </GridPane>
    <Button fx:id="pass" disable="true" layoutX="587.0" layoutY="572.0" mnemonicParsing="false" onAction="#passClicked" prefHeight="100.0" prefWidth="100.0" styleClass="buttonGameplay" text="Pass" />
    <Button fx:id="juno" layoutX="587.0" layoutY="388.0" mnemonicParsing="false" onAction="#sayUno" prefHeight="100.0" prefWidth="100.0" styleClass="buttonGameplay" text="(J)uno!" visible="false" />
-   <ImageView fx:id="bot1Animation" fitHeight="264.0" fitWidth="189.0" pickOnBounds="true" preserveRatio="true" rotate="90.0" />
-   <ImageView fx:id="bot2Animation" fitHeight="264.0" fitWidth="189.0" pickOnBounds="true" preserveRatio="true" rotate="180.0" />
-   <ImageView fx:id="bot3Animation" fitHeight="264.0" fitWidth="189.0" pickOnBounds="true" preserveRatio="true" rotate="270.0" />
-   <ImageView fx:id="playerAnimation" fitHeight="264.0" fitWidth="189.0" pickOnBounds="true" preserveRatio="true" />
    <HBox fx:id="userHand" alignment="CENTER" cacheShape="false" centerShape="false" layoutX="393.0" layoutY="816.0" maxHeight="1134.0" maxWidth="1134.0" prefHeight="264.0" prefWidth="1134.0" scaleShape="false" />
    <HBox fx:id="botHand1" alignment="CENTER" layoutX="-340.5" layoutY="408.0" maxHeight="264.0" maxWidth="945.0" prefHeight="264.0" prefWidth="945.0" rotate="90.0" />
    <HBox fx:id="botHand3" alignment="CENTER" layoutX="1315.5" layoutY="408.0" maxHeight="264.0" maxWidth="945.0" prefHeight="264.0" prefWidth="945.0" rotate="270.0" />
    <HBox fx:id="botHand2" alignment="CENTER" layoutX="487.5" maxHeight="264.0" maxWidth="945.0" prefHeight="264.0" prefWidth="945.0" rotate="180.0" />
    <Button mnemonicParsing="false" onAction="#exitClicked" prefHeight="100.0" prefWidth="100.0" styleClass="buttonGameplay" text="Exit" />
-   <ImageView fx:id="popUp" fitHeight="95.0" fitWidth="116.0" layoutX="1004.0" layoutY="502.0" pickOnBounds="true" preserveRatio="true" visible="false"/>
 </AnchorPane>
