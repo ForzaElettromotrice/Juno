@@ -47,6 +47,8 @@ public class EndgameController
 	public Label nextLevel;
 	@FXML
 	public Label resultsMessage;
+	@FXML
+	public Label levelUp;
 
 
 	@FXML
@@ -88,16 +90,6 @@ public class EndgameController
 
 	public void load(Table currentTable)
 	{
-		table = currentTable;
-
-		int lvl = User.getInstance().getLevel();
-		actualLevel.setText("" + lvl);
-		nextLevel.setText("" + ++lvl);
-
-		avatar.setFill(new ImagePattern(new Image(String.format(User.getInstance().getAvatar()))));
-		progressBar.setProgress(User.getInstance().getProgress());
-
-
 		int points = currentTable.getUser().getPoints();
 
 		if (currentTable.getWinner() != null)
@@ -110,15 +102,26 @@ public class EndgameController
 		else
 			User.getInstance().addDefeats();
 
-
 		User.getInstance().addExp(points);
+
+		levelUp.setVisible(false);
+		table = currentTable;
+
+		int lvl = User.getInstance().getLevel();
+		actualLevel.setText("" + lvl);
+		nextLevel.setText("" + ++lvl);
+
+		avatar.setFill(new ImagePattern(new Image(String.format(User.getInstance().getAvatar()))));
+		if (User.getInstance().getProgress() != 0)
+			progressBar.setProgress(User.getInstance().getProgress());
+		else
+			levelUp.setVisible(true);
 
 		Platform.runLater(this::animation);
 	}
 
 	public void animation()
 	{
-
 		Timeline timeline = new Timeline();
 
 		KeyValue keyValue = new KeyValue(progressBar.progressProperty(), User.getInstance().getProgress());

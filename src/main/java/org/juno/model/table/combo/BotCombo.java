@@ -22,7 +22,6 @@ public class BotCombo extends PlayerCombo
 	@Override
 	public boolean hasChosen()
 	{
-
 		Card first = DISCARD_PILE.getFirst();
 		for (Card card : hand)
 		{
@@ -40,8 +39,15 @@ public class BotCombo extends PlayerCombo
 			chosenCard = drawn;
 			hand.remove(drawn);
 		}
-
 		chooseColor(Card.Color.RED);
+		for (Card card:hand)
+		{
+			if (card.getValue() == chosenCard.getValue()) {
+				combo = true;
+				return true;
+			}
+		}
+		combo = false;
 		return true;
 	}
 

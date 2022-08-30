@@ -204,7 +204,6 @@
     -fx-text-fill: PURPLE;
 }
 
-
 #playButton
 {
     -fx-font-size: 43;
@@ -224,6 +223,12 @@
     -fx-text-fill: #0082f2;
 }
 #exitButton
+{
+    -fx-font-size: 43;
+    -fx-font-family: Arial;
+    -fx-text-fill: #00eb15;
+}
+#nextMatchButton
 {
     -fx-font-size: 43;
     -fx-font-family: Arial;

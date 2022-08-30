@@ -10,7 +10,7 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="backgroundEndgame" prefHeight="1080.0" prefWidth="1920.0" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.juno.controller.EndgameController">
+<AnchorPane fx:id="backgroundEndgame" prefHeight="1080.0" prefWidth="1920.0" styleClass="backgroundWhite" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.juno.controller.EndgameController">
     <Circle fx:id="avatar" fill="TRANSPARENT" layoutX="960.0" layoutY="491.0" radius="176.0" stroke="BLACK" strokeType="INSIDE" />
     <ProgressBar fx:id="progressBar" cacheShape="false" centerShape="false" layoutX="400.0" layoutY="750.0" prefHeight="125.0" prefWidth="1100.0" progress="0.0" scaleShape="false" />
     <ImageView fitHeight="200.0" fitWidth="200.0" layoutX="290.0" layoutY="710.0" pickOnBounds="true" preserveRatio="true">
@@ -19,31 +19,32 @@
     <ImageView fitHeight="200.0" fitWidth="200.0" layoutX="1410.0" layoutY="710.0" pickOnBounds="true" preserveRatio="true">
         <Image url="@../images/levelStar.png" />
     </ImageView>
-    <Label fx:id="actualLevel" alignment="CENTER" cacheShape="false" centerShape="false" contentDisplay="CENTER" layoutX="290.0" layoutY="710.0" prefHeight="200.0" prefWidth="200.0" scaleShape="false" text="1">
+    <Label fx:id="actualLevel" alignment="CENTER" cacheShape="false" centerShape="false" contentDisplay="CENTER" layoutX="290.0" layoutY="702.0" prefHeight="200.0" prefWidth="200.0" scaleShape="false">
         <font>
             <Font name="Javanese Text" size="50.0" />
         </font>
     </Label>
-    <Label fx:id="nextLevel" alignment="CENTER" cacheShape="false" centerShape="false" contentDisplay="CENTER" layoutX="1410.0" layoutY="710.0" prefHeight="200.0" prefWidth="200.0" scaleShape="false" text="2">
+    <Label fx:id="nextLevel" alignment="CENTER" cacheShape="false" centerShape="false" contentDisplay="CENTER" layoutX="1410.0" layoutY="705.0" prefHeight="200.0" prefWidth="200.0" scaleShape="false">
         <font>
             <Font name="Javanese Text" size="50.0" />
         </font>
     </Label>
-    <Label fx:id="resultsMessage" alignment="CENTER" contentDisplay="CENTER" layoutX="308.0" layoutY="92.0" prefHeight="107.0" prefWidth="1304.0">
+    <Label fx:id="resultsMessage" alignment="CENTER" contentDisplay="CENTER" layoutX="308.0" layoutY="92.0" prefHeight="107.0" prefWidth="1304.0" styleClass="titleStyle" stylesheets="@Style.css">
         <font>
             <Font size="66.0" />
         </font>
     </Label>
     <HBox layoutX="710.0" layoutY="906.0" prefHeight="100.0" prefWidth="500.0" spacing="50.0">
-        <Button mnemonicParsing="false" onAction="#mainMenu" onMouseEntered="#buttonEntered" prefHeight="100.0" prefWidth="225.0" style="-fx-background-color: transparent; -fx-border-color: BLACK; -fx-border-radius: 40;" text="Main Menu">
+        <Button mnemonicParsing="false" onAction="#mainMenu" onMouseEntered="#buttonEntered" prefHeight="100.0" prefWidth="225.0" styleClass="whiteStyle" stylesheets="@Style.css" text="Main Menu">
             <font>
                 <Font size="28.0" />
             </font>
         </Button>
-        <Button mnemonicParsing="false" onAction="#newMatch" onMouseEntered="#buttonEntered" prefHeight="100.0" prefWidth="225.0" style="-fx-background-color: transparent; -fx-border-color: BLACK; -fx-border-radius: 40;" text="New Match">
+        <Button mnemonicParsing="false" onAction="#newMatch" onMouseEntered="#buttonEntered" prefHeight="100.0" prefWidth="225.0" styleClass="whiteStyle" stylesheets="@Style.css" text="New Match">
             <font>
                 <Font size="28.0" />
             </font>
         </Button>
     </HBox>
+   <Label fx:id="levelUp" layoutX="807.0" layoutY="791.0" styleClass="textEMStyle" stylesheets="@Style.css" text="You levelled up!" visible="false" />
 </AnchorPane>
