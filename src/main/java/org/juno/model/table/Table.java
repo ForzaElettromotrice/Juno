@@ -171,21 +171,25 @@ public abstract class Table extends Observable implements Runnable
 			return true;
 		} else if (sizeHand == 1)
 		{
-			delay(delayUno);
 
-			if (!currentPlayer.saidUno())
+
+			if (!currentPlayer.saidUno())    // serve per passare subito in caso lo abbia detto in anticipo, altrimenti aspetta 2 secondi e poi ricontrolla
 			{
-				setChanged();
-				try
+				delay(delayUno);
+				if (!currentPlayer.saidUno())
 				{
-					notifyObservers(BUILD_MP.createMP(BuildMP.Actions.EFFECTS, BuildMP.Effects.DIDNTSAYUNO));
-				} catch (MessagePackageTypeNotExistsException err)
-				{
-					System.out.println(err.getMessage());
-					err.printStackTrace();
+					setChanged();
+					try
+					{
+						notifyObservers(BUILD_MP.createMP(BuildMP.Actions.EFFECTS, BuildMP.Effects.DIDNTSAYUNO));
+					} catch (MessagePackageTypeNotExistsException err)
+					{
+						System.out.println(err.getMessage());
+						err.printStackTrace();
+					}
+					clearChanged();
+					currentPlayer.draw(2);
 				}
-				clearChanged();
-				currentPlayer.draw(2);
 			}
 			return false;
 		}

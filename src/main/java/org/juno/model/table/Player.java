@@ -169,7 +169,7 @@ public abstract class Player extends Observable
 		}
 		clearChanged();
 
-		delay(750);
+		delay(500);
 
 		return card;
 	}
@@ -180,9 +180,7 @@ public abstract class Player extends Observable
 		for (int i = 0; i < n; i++)
 		{
 			Card card = DRAW_PILE.draw();
-			System.out.printf("%s PESCA %s%n", id, card);
 			hand.add(card);
-			System.out.printf("ECCO LA SUA MANO ORA %s%n%n", hand);
 			setChanged();
 			try
 			{
@@ -193,7 +191,7 @@ public abstract class Player extends Observable
 				err.printStackTrace();
 			}
 			clearChanged();
-			delay(1000);
+			delay(250);
 		}
 	}
 

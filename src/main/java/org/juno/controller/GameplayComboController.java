@@ -481,20 +481,23 @@ public class GameplayComboController implements Gameplay
 	@Override
 	public void effect(EffectData effectData)
 	{
-			switch (effectData.effect())
+		switch (effectData.effect())
+		{
+			case STOP -> zoomAnimation(BuildMP.Effects.STOP);
+			case REVERSE -> zoomAnimation(BuildMP.Effects.REVERSE);
+			case JOLLY -> zoomAnimation(BuildMP.Effects.JOLLY);
+			case PLUSTWO -> zoomAnimation(BuildMP.Effects.PLUSTWO);
+			case PLUSFOUR -> zoomAnimation(BuildMP.Effects.PLUSFOUR);
+			case SAIDUNO -> zoomAnimation(BuildMP.Effects.SAIDUNO);
+			case DIDNTSAYUNO ->
 			{
-				case STOP -> zoomAnimation(BuildMP.Effects.STOP);
-				case PLUSTWO -> zoomAnimation(BuildMP.Effects.PLUSTWO);
-				case PLUSFOUR -> zoomAnimation(BuildMP.Effects.PLUSFOUR);
-				case SAIDUNO -> zoomAnimation(BuildMP.Effects.SAIDUNO);
-				case DIDNTSAYUNO ->
-				{
-					juno.setVisible(false);
-					zoomAnimation(BuildMP.Effects.DIDNTSAYUNO);
-				}
-				case ONECARD -> juno.setVisible(true);
-				default -> throw new RuntimeException("Questo messaggio non dovrebbe essere arrivato");
+				juno.setVisible(false);
+				zoomAnimation(BuildMP.Effects.DIDNTSAYUNO);
 			}
+			case ONECARD -> juno.setVisible(true);
+			default ->
+					throw new RuntimeException("Questo messaggio non dovrebbe essere arrivato " + effectData.effect());
+		}
 	}
 
 	private ImageView createZoomImage(BuildMP.Effects effect)

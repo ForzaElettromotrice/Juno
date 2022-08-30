@@ -92,7 +92,6 @@ public class PlayerCombo extends Player
 				hasDrawn = true;
 				return cardDrawn;
 			}
-			if (id != BuildMP.PG.PLAYER) delay(700);
 		}
 	}
 

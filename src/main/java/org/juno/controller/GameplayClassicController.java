@@ -145,7 +145,8 @@ public class GameplayClassicController implements Gameplay, Initializable
 
 		if (player.getId() != BuildMP.PG.PLAYER) return;
 
-		player.draw();
+		Thread thread = new Thread(player::draw);
+		thread.start();
 
 		pass.setDisable(false);
 	}
