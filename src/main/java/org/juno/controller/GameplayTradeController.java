@@ -1,6 +1,7 @@
 package org.juno.controller;
 
 
+import javafx.animation.Interpolator;
 import javafx.animation.PathTransition;
 import javafx.animation.RotateTransition;
 import javafx.animation.ScaleTransition;
@@ -18,6 +19,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
+import javafx.scene.transform.Rotate;
 import javafx.util.Duration;
 import org.juno.datapackage.*;
 import org.juno.model.deck.Card;
@@ -262,18 +264,19 @@ public class GameplayTradeController implements Gameplay
     public void draw(DrawData drawData)
     {
         cardFlip();
-        ImageView newCard = createTransitionCard(drawData.card(), drawData.player() == BuildMP.PG.PLAYER);
+        ImageView newCard = createDrawTransitionCard(drawData.card());
 
         PathTransition pathTransition = createDrawPathTransition(drawData.player(), newCard);
-        RotateTransition rotateTransition = createDrawRotateTransition(drawData.player(), newCard);
+        RotateTransition rotateTransition = drawData.player() == BuildMP.PG.PLAYER ? createPlayerDrawRotateTransition(newCard) : createBotDrawRotateTransition(drawData.player(), newCard);
+
 
         pathTransition.play();
         rotateTransition.play();
     }
 
-    private ImageView createTransitionCard(Card card, boolean isPlayer)
+    private ImageView createDrawTransitionCard(Card card)
     {
-        ImageView newCard = new ImageView(new Image(isPlayer ? card.getUrl().getPath() : "file:\\" + USER_DIR + "\\src\\main\\resources\\org\\juno\\images\\back.png"));
+        ImageView newCard = new ImageView(new Image("file:\\" + USER_DIR + "\\src\\main\\resources\\org\\juno\\images\\back.png"));
         newCard.setFitWidth(Costants.CARD_WIDTH_SCALED.getVal());
         newCard.setFitHeight(Costants.CARD_HEIGHT_SCALED.getVal());
         newCard.setUserData(card);
@@ -347,8 +350,10 @@ public class GameplayTradeController implements Gameplay
         });
 
         return pathTransition;
+
+
     }
-    private RotateTransition createDrawRotateTransition(BuildMP.PG pg, ImageView node)
+    private RotateTransition createBotDrawRotateTransition(BuildMP.PG pg, ImageView node)
     {
         RotateTransition rotateTransition = new RotateTransition(Duration.millis(750), node);
 
@@ -364,13 +369,35 @@ public class GameplayTradeController implements Gameplay
             case BOT2 -> rotateTransition.setByAngle(180);
             case BOT3 -> rotateTransition.setByAngle(270);
         }
+        return rotateTransition;
+    }
+    private RotateTransition createPlayerDrawRotateTransition(ImageView node)
+    {
+        node.setRotate(180);
 
+        RotateTransition rotateTransition = new RotateTransition(Duration.millis(375), node);
+        RotateTransition rotateTransition2 = new RotateTransition(Duration.millis(375), node);
+
+        rotateTransition.setInterpolator(Interpolator.LINEAR);
+        rotateTransition2.setInterpolator(Interpolator.LINEAR);
+
+        rotateTransition.setAxis(Rotate.X_AXIS);
+        rotateTransition2.setAxis(Rotate.X_AXIS);
+
+        rotateTransition.setByAngle(90);
+        rotateTransition2.setByAngle(90);
+
+        rotateTransition.setOnFinished(x ->
+        {
+            node.setImage(new Image(((Card) node.getUserData()).getUrl().getPath()));
+            rotateTransition2.play();
+        });
 
         return rotateTransition;
     }
+
+
     @Override
-
-
     public void discard(DiscardData discardData)
     {
         beep();
@@ -379,7 +406,7 @@ public class GameplayTradeController implements Gameplay
             firstDiscarded.setImage(new Image(discardData.card().getFinalUrl().getPath()));
             return;
         }
-        ImageView transitionCard = createTransitionCard(discardData.card());
+        ImageView transitionCard = createDiscardTransitionCard(discardData.card());
 
         PathTransition pathTransition = createDiscardPathTransition(discardData.player(), transitionCard);
         RotateTransition rotateTransition = createDiscardRotateTransition(discardData.player(), transitionCard);
@@ -388,7 +415,7 @@ public class GameplayTradeController implements Gameplay
         pathTransition.play();
         rotateTransition.play();
     }
-    private ImageView createTransitionCard(Card card)
+    private ImageView createDiscardTransitionCard(Card card)
     {
         ImageView newCard = new ImageView(new Image(card.getFinalUrl().getPath()));
         newCard.setFitWidth(Costants.CARD_WIDTH_SCALED.getVal());
