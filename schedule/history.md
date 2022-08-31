@@ -330,5 +330,6 @@
 3. Finish history
 4. Write essay
 5. Write javadoc
+6. Class diagrams
 
 
