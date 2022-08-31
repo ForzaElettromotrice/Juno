@@ -54,7 +54,7 @@ public class User implements Serializable
             if (exp >= (4 + lvl) * 500)
             {
                 lvl++;
-                exp = 0;
+                exp -= (4 + lvl) * 500;
             }
         }
     }
