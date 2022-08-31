@@ -92,31 +92,34 @@ public class EndgameController
 	{
 		int points = currentTable.getUser().getPoints();
 
-		if (currentTable.getWinner() != null)
-			resultsMessage.setText(String.format("You %s! You gained %d exp!", currentTable.getWinner().getId().equals(BuildMP.PG.PLAYER) ? "won" : "lost", points));
-		else resultsMessage.setText(String.format("You lost! You gained %d exp!", points));
-
-
 		if (!currentTable.getStopEarlier() && currentTable.getWinner().getId() == BuildMP.PG.PLAYER)
+		{
 			User.getInstance().addVictories();
-		else
+			resultsMessage.setText(String.format("You won! You gained %d exp!", points));
+		}
+		else {
 			User.getInstance().addDefeats();
-
-		User.getInstance().addExp(points);
+			resultsMessage.setText(String.format("You lost! You gained %d exp!", points));
+		}
 
 		levelUp.setVisible(false);
 		table = currentTable;
 
+		avatar.setFill(new ImagePattern(new Image(String.format(User.getInstance().getAvatar()))));
+		progressBar.setProgress(User.getInstance().getProgress());
+
+		int prevLvl = User.getInstance().getLevel();
+
+		User.getInstance().addExp(points);
+
 		int lvl = User.getInstance().getLevel();
 		actualLevel.setText("" + lvl);
-		nextLevel.setText("" + ++lvl);
+		nextLevel.setText("" + (lvl+1));
 
-		avatar.setFill(new ImagePattern(new Image(String.format(User.getInstance().getAvatar()))));
-		if (User.getInstance().getProgress() != 0)
-			progressBar.setProgress(User.getInstance().getProgress());
-		else
+		if (prevLvl != lvl) {
+			progressBar.setProgress(0);
 			levelUp.setVisible(true);
-
+		}
 		Platform.runLater(this::animation);
 	}
 
