@@ -306,11 +306,29 @@
 
 ##29/08/2022
 
-1. Created popup animations activated when a certain effect happens.
+1. Created popup animations activated when a certain effect happens (said Uno, did not say Uno etc.).
 2. Fixed some bugs.
 3. Added new Table background.
 
+##30/08/2022
+
+1. Refactored pop up animations.
+2. Removed useless code.
+3. Chosen new images for color grid and logo.
+4. Finished CSS: fixed EndMatch and EndGame FXMLs.
+5. Minor changes.
+
+##31/08/2022
+
+1. Fixed level up method: now exceeding exp is not erased, but added to the total Player exp.
+2. Fixed progress bar animation in Endgame: now the current level is shown correctly, the animation
+    works fine and a label appears when you level up.
+
 ##TODO:
-1. create popup images+refactor popup code.
+1. Testing for bugs
+2. Pop up images
+3. Finish history
+4. Write essay
+5. Write javadoc
 
 
