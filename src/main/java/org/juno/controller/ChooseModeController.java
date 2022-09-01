@@ -2,7 +2,6 @@ package org.juno.controller;
 
 import javafx.fxml.FXML;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.HBox;
 import org.juno.model.table.TurnOrder;
 import org.juno.model.table.classic.TableClassic;
 import org.juno.model.table.combo.TableCombo;
@@ -27,45 +26,20 @@ public class ChooseModeController
 	@FXML
 	public AnchorPane anchor;
 
-	@FXML
-	public void classicEntered()
-	{
-		AUDIO_PLAYER.play(AudioPlayer.Sounds.CURSORSELECT);
-	}
-	@FXML
-	public void comboEntered()
-	{
-		AUDIO_PLAYER.play(AudioPlayer.Sounds.CURSORSELECT);
-	}
-	@FXML
-	public void tradeEntered()
-	{
-		AUDIO_PLAYER.play(AudioPlayer.Sounds.CURSORSELECT);
-	}
 
-
-	@FXML
-	public void classicExited()
-	{
-	}
-	@FXML
-	public void comboExited()
-	{
-
-	}
-	@FXML
-	public void tradeExited()
-	{
-
-	}
-
-
+	/**
+	 * called when the user clicks on the "back" button
+	 */
 	@FXML
 	public void backClicked()
 	{
 		AUDIO_PLAYER.play(AudioPlayer.Sounds.BUTTONCLICK);
 		GEN_VIEW.changeScene(GenView.SCENES.STARTMENU, anchor);
 	}
+
+	/**
+	 * called when the user clicks on the "classic" button
+	 */
 	@FXML
 	public void classicClicked()
 	{
@@ -80,6 +54,10 @@ public class ChooseModeController
 		GEN_VIEW.setCurrentGameController(TurnOrder.MODALITY.CLASSIC);
 		thread.start();
 	}
+
+	/**
+	 * called when the user clicks on the "combo" button
+	 */
 	@FXML
 	public void comboClicked()
 	{
@@ -94,6 +72,10 @@ public class ChooseModeController
 		GEN_VIEW.setCurrentGameController(TurnOrder.MODALITY.COMBO);
 		thread.start();
 	}
+
+	/**
+	 * called when the user clicks on the "trade" button
+	 */
 	@FXML
 	public void tradeClicked()
 	{
@@ -109,6 +91,9 @@ public class ChooseModeController
 		thread.start();
 	}
 
+	/**
+	 * play button entered sound
+	 */
 	@FXML
 	public void buttonEntered()
 	{

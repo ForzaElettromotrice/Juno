@@ -91,7 +91,6 @@ public class Card
     //Getters
 
     /**
-     * Returns the Card color
      * @return the Card color
      */
     public Color getColor()
@@ -100,8 +99,6 @@ public class Card
     }
 
     /**
-     * Returns the Card value
-     *
      * @return the Card value
      */
     public Value getValue()
@@ -109,19 +106,23 @@ public class Card
         return value;
     }
 
+    /**
+     * @return the Card url
+     */
     public File getUrl()
     {
         return url;
     }
+    /**
+     * @return the final url of the card
+     */
     public File getFinalUrl()
     {
         return getUrl();
     }
 
     /**
-     * Returns the couple value, color of the card
-     *
-     * @return The couple value, color
+     * @return The couple value, color as a string
      */
     public String toString()
     {
@@ -139,6 +140,12 @@ public class Card
         return color.equals(Color.BLACK) || color.equals(c.getColor()) || value.equals(c.getValue());
     }
 
+    /**
+     * Check if the given Obect is equal to the current card
+     *
+     * @param toCompare The object to compare
+     * @return True if equal else False
+     */
     @Override
     public boolean equals(Object toCompare)
     {
@@ -148,6 +155,9 @@ public class Card
         } else return false;
     }
 
+    /**
+     * @return The hashcode of the card
+     */
     @Override
     public int hashCode()
     {

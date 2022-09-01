@@ -24,7 +24,6 @@ public class DrawPile extends GenDeck
     }
 
     /**
-     * Returns the Instance of the class
      * @return the Instance of the class
      */
     public static DrawPile getINSTANCE()
@@ -58,7 +57,8 @@ public class DrawPile extends GenDeck
 
     /**
      * Add all the given Card to the deck
-     * @param c Collections of Cards
+     *
+     * @param c Collections of Cards to add
      */
     public void addAll(Collection<Card> c)
     {

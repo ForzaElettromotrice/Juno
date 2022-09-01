@@ -48,6 +48,11 @@ public class SettingsController
 	private double effectsActual;
 
 
+	/**
+	 * called when the user press a key on the keyboard
+	 *
+	 * @param keyEvent the key pressed
+	 */
 	@FXML
 	public void anchorKeyPressed(KeyEvent keyEvent)
 	{
@@ -58,7 +63,9 @@ public class SettingsController
 		}
 	}
 
-
+	/**
+	 * called when the user release the mouse button on the music slider
+	 */
 	@FXML
 	public void musicMouseReleased()
 	{
@@ -67,6 +74,10 @@ public class SettingsController
 		saveButton.setDisable(false);
 		AUDIO_PLAYER.setMusicVolume(musicSlider.getValue() / 100);
 	}
+
+	/**
+	 * called when the user release the mouse button on the effects slider
+	 */
 	@FXML
 	public void effectsMouseReleased()
 	{
@@ -76,7 +87,9 @@ public class SettingsController
 		AUDIO_PLAYER.setEffectsVolume(effectsSlider.getValue() / 100);
 	}
 
-
+	/**
+	 * called when the user clicks on the "Back" button
+	 */
 	@FXML
 	public void backClicked()
 	{
@@ -91,10 +104,13 @@ public class SettingsController
 		}
 
 		saveData();
-		
+
 		GEN_VIEW.changeScene(GenView.SCENES.STARTMENU, anchor);
 
 	}
+	/**
+	 * called when the user clicks on the "switch account" button
+	 */
 	@FXML
 	public void switchClicked()
 	{
@@ -104,6 +120,9 @@ public class SettingsController
 		((LoginController) GEN_VIEW.getLogin().getUserData()).load();
 		GEN_VIEW.changeScene(GenView.SCENES.LOGIN, anchor);
 	}
+	/**
+	 * called when the user clicks on the "save" button
+	 */
 	@FXML
 	public void saveClicked()
 	{
@@ -113,13 +132,18 @@ public class SettingsController
 		saveData();
 	}
 
+	/**
+	 * play button entered sound
+	 */
 	@FXML
 	public void buttonEntered()
 	{
 		AUDIO_PLAYER.play(AudioPlayer.Sounds.CURSORSELECT);
 	}
 
-
+	/**
+	 * saves the data in the user class
+	 */
 	private void saveData()
 	{
 		AUDIO_PLAYER.setMusicVolume(musicActual);
@@ -132,12 +156,18 @@ public class SettingsController
 		haveToSave = false;
 	}
 
+	/**
+	 * gets the data from the sliders
+	 */
 	public void getData()
 	{
 		musicActual = musicSlider.getValue() / 100;
 		effectsActual = effectsSlider.getValue() / 100;
 	}
 
+	/**
+	 * called when the scene is shown
+	 */
 	public void load()
 	{
 		haveToSave = false;

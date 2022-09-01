@@ -23,8 +23,7 @@ public class DiscardPile extends GenDeck
     }
 
     /**
-     * Returns the Instance of the class
-     * @return class Instance
+     * @return the instance of the DiscardPile
      */
     public static DiscardPile getINSTANCE()
     {

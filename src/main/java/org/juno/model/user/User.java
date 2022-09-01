@@ -69,6 +69,9 @@ public class User implements Serializable
     }
 
 
+    /**
+     * Save the data in {nickname}.txt
+     */
     public static void save()
     {
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(PATH + instance.nickname + ".txt")))
@@ -81,6 +84,13 @@ public class User implements Serializable
             err.printStackTrace();
         }
     }
+
+    /**
+     * Load the data from {nickname}.txt
+     *
+     * @param name nickname
+     * @return the User instance loaded
+     */
     public static User load(String name)
     {
         try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(PATH + name)))
@@ -98,26 +108,32 @@ public class User implements Serializable
     }
 
     //Getters
+    /**
+     * @return the User instance
+     */
     public static User getInstance()
     {
         if (instance == null) instance = new User();
         return instance;
     }
 
-
+    /**
+     * @return the Volume of the music for this User
+     */
     public double getMusicVolume()
     {
         return musicVolume;
     }
 
+    /**
+     * @return the Volume of the effects for this User
+     */
     public double getEffectsVolume()
     {
         return effectsVolume;
     }
     /**
-     * Returns the current nickname
-     *
-     * @return nickname
+     * @return the current nickname
      */
     public String getNickname()
     {
@@ -125,8 +141,7 @@ public class User implements Serializable
     }
 
     /**
-     * Returns the curret avatar path
-     * @return avatar path
+     * @return the curret avatar path
      */
     public String getAvatar()
     {
@@ -134,8 +149,7 @@ public class User implements Serializable
     }
 
     /**
-     * Returns the current total wins
-     * @return total wins
+     * @return the current total wins
      */
     public int getVictories()
     {
@@ -143,8 +157,7 @@ public class User implements Serializable
     }
 
     /**
-     * Returns the current total losses
-     * @return total losses
+     * @return the current total losses
      */
     public int getDefeats()
     {
@@ -152,8 +165,7 @@ public class User implements Serializable
     }
 
     /**
-     * Returns the total matches played
-     * @return total matches
+     * @return the total matches played
      */
     public int getTotalMatches()
     {
@@ -161,8 +173,7 @@ public class User implements Serializable
     }
 
     /**
-     * Returns the total exp gained
-     * @return the total exp
+     * @return the total exp gained
      */
     public int getTotalExp()
     {
@@ -170,8 +181,7 @@ public class User implements Serializable
     }
 
     /**
-     * Return partial exp
-     * @return partial exp
+     * @return the partial exp
      */
     public int getExp()
     {
@@ -179,15 +189,16 @@ public class User implements Serializable
     }
 
     /**
-     * Returns the current level
-     *
-     * @return current level
+     * @return the current level
      */
     public int getLevel()
     {
         return level.lvl;
     }
 
+    /**
+     * @return the progress to the next level
+     */
     public double getProgress()
     {
         return ((double) level.exp) / ((4 + level.lvl) * 500);
@@ -195,10 +206,20 @@ public class User implements Serializable
 
     //Setters
 
+    /**
+     * Set the Music Volume for this User
+     *
+     * @param musicVolume the new Music Volume
+     */
     public void setMusicVolume(double musicVolume)
     {
         this.musicVolume = musicVolume;
     }
+    /**
+     * Set the Effects Volume for this User
+     *
+     * @param effectsVolume the new Effects Volume
+     */
     public void setEffectsVolume(double effectsVolume)
     {
         this.effectsVolume = effectsVolume;
@@ -248,6 +269,9 @@ public class User implements Serializable
         level.addExp(e);
     }
 
+    /**
+     * reset the User data
+     */
     public void reset()
     {
         nickname = "";
@@ -258,16 +282,5 @@ public class User implements Serializable
         level.exp = 0;
         musicVolume = 1;
         effectsVolume = 1;
-    }
-
-    public static void main(String[] args)
-    {
-        User user = User.getInstance();
-
-        user.setNickname("Eleonora");
-        user.setAvatar("file:\\C:\\Users\\minga\\OneDrive\\Juno\\src\\main\\resources\\org\\juno\\images\\icon2.png");
-
-        User.save();
-
     }
 }

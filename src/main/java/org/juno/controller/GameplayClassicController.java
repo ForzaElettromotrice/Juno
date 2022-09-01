@@ -39,15 +39,13 @@ import java.util.ResourceBundle;
  *
  * @author ForzaElettromotrice, R0n3l
  */
-public class GameplayClassicController implements Gameplay, Initializable
+public class GameplayClassicController implements Gameplay
 {
 	protected static final TableClassic TABLE_CLASSIC = TableClassic.getINSTANCE();
 	protected static final GenView GEN_VIEW = GenView.getINSTANCE();
 	protected static final AudioPlayer AUDIO_PLAYER = AudioPlayer.getINSTANCE();
 
 	private static final String USER_DIR = System.getProperty("user.dir");
-	private final PathTransition pathDraw = new PathTransition(Duration.millis(750), new Line(845.5, 540, 0, 0));
-	private final RotateTransition drawRotate = new RotateTransition(Duration.millis(750));
 
 	@FXML
 	public AnchorPane anchorPane;
@@ -105,7 +103,11 @@ public class GameplayClassicController implements Gameplay, Initializable
 	public GridPane colorPane;
 	private ImageView lastClicked;
 
-	@FXML
+	/**
+	 * called when the mouse enters a card
+	 *
+	 * @param mouseEvent the mouse event
+	 */
 	public void cardEntered(MouseEvent mouseEvent)
 	{
 		if (TABLE_CLASSIC.getCurrentPlayer().getId() != BuildMP.PG.PLAYER) return;
@@ -114,7 +116,12 @@ public class GameplayClassicController implements Gameplay, Initializable
 		ImageView card = (ImageView) mouseEvent.getSource();
 		card.setTranslateY(-30);
 	}
-	@FXML
+
+	/**
+	 * called when the mouse exits a card
+	 *
+	 * @param mouseEvent the mouse event
+	 */
 	public void cardExited(MouseEvent mouseEvent)
 	{
 		if (TABLE_CLASSIC.getCurrentPlayer().getId() != BuildMP.PG.PLAYER) return;
@@ -122,7 +129,12 @@ public class GameplayClassicController implements Gameplay, Initializable
 		ImageView card = (ImageView) mouseEvent.getSource();
 		card.setTranslateY(0);
 	}
-	@FXML
+
+	/**
+	 * called when the mouse clicks a card
+	 *
+	 * @param mouseEvent the mouse event
+	 */
 	public void cardClicked(MouseEvent mouseEvent)
 	{
 		if (TABLE_CLASSIC.getCurrentPlayer().getId() != BuildMP.PG.PLAYER) return;
@@ -141,6 +153,9 @@ public class GameplayClassicController implements Gameplay, Initializable
 		}
 	}
 
+	/**
+	 * called when the mouse clicks the draw pile
+	 */
 	@FXML
 	public void drawClicked()
 	{
@@ -153,6 +168,9 @@ public class GameplayClassicController implements Gameplay, Initializable
 
 		pass.setDisable(false);
 	}
+	/**
+	 * called when the mouse clicks the pass button
+	 */
 	@FXML
 	public void passClicked()
 	{
@@ -162,6 +180,9 @@ public class GameplayClassicController implements Gameplay, Initializable
 		TABLE_CLASSIC.getUser().setHasPassed();
 	}
 
+	/**
+	 * called when the mouse clicks the red button
+	 */
 	@FXML
 	public void redClicked()
 	{
@@ -171,6 +192,10 @@ public class GameplayClassicController implements Gameplay, Initializable
 		colorGrid.setVisible(false);
 		colorPane.setVisible(false);
 	}
+
+	/**
+	 * called when the mouse clicks the blue button
+	 */
 	@FXML
 	public void blueClicked()
 	{
@@ -180,6 +205,10 @@ public class GameplayClassicController implements Gameplay, Initializable
 		colorGrid.setVisible(false);
 		colorPane.setVisible(false);
 	}
+
+	/**
+	 * called when the mouse clicks the yellow button
+	 */
 	@FXML
 	public void yellowClicked()
 	{
@@ -189,6 +218,10 @@ public class GameplayClassicController implements Gameplay, Initializable
 		colorGrid.setVisible(false);
 		colorPane.setVisible(false);
 	}
+
+	/**
+	 * called when the mouse clicks the green button
+	 */
 	@FXML
 	public void greenClicked()
 	{
@@ -199,6 +232,9 @@ public class GameplayClassicController implements Gameplay, Initializable
 		colorPane.setVisible(false);
 	}
 
+	/**
+	 * called when the mouse clicks the juno button
+	 */
 	@FXML
 	public void sayUno()
 	{
@@ -207,12 +243,18 @@ public class GameplayClassicController implements Gameplay, Initializable
 		juno.setVisible(false);
 	}
 
+	/**
+	 * play button entered sound
+	 */
 	@FXML
 	public void buttonEntered()
 	{
 		AUDIO_PLAYER.play(AudioPlayer.Sounds.CURSORSELECT);
 	}
 
+	/**
+	 * called when the user clicks the exit button
+	 */
 	@FXML
 	public void exitClicked()
 	{
@@ -224,6 +266,12 @@ public class GameplayClassicController implements Gameplay, Initializable
 		if (alert.getResult() == ButtonType.NO) return;
 		TABLE_CLASSIC.stopEarlier();
 	}
+
+	/**
+	 * fix the overlapping of the cards
+	 *
+	 * @param box the box who contain the cards
+	 */
 	private void fixWidth(HBox box)
 	{
 		double spacing = ((box.getChildren().size() * Costants.CARD_WIDTH_SCALED.getVal()) - (box.getMaxWidth())) / box.getChildren().size();
@@ -234,6 +282,11 @@ public class GameplayClassicController implements Gameplay, Initializable
 		box.setSpacing(-spacing);
 	}
 
+	/**
+	 * create the animation of the card draw
+	 *
+	 * @param drawData the data of the card draw
+	 */
 	@Override
 	public void draw(DrawData drawData)
 	{
@@ -248,6 +301,12 @@ public class GameplayClassicController implements Gameplay, Initializable
 		rotateTransition.play();
 	}
 
+	/**
+	 * create the imageview of the card draw for the animation
+	 *
+	 * @param card the card draw
+	 * @return the imageview of the card draw
+	 */
 	private ImageView createDrawTransitionCard(Card card)
 	{
 		ImageView newCard = new ImageView(new Image("file:\\" + USER_DIR + "\\src\\main\\resources\\org\\juno\\images\\back.png"));
@@ -259,6 +318,14 @@ public class GameplayClassicController implements Gameplay, Initializable
 
 		return newCard;
 	}
+	/**
+	 * create the imageview of the card draw for the hand of the player
+	 *
+	 * @param image    the image of the card draw
+	 * @param card     the card draw
+	 * @param isPlayer true if the card is for the player
+	 * @return the imageview of the card draw
+	 */
 	private ImageView createCard(Image image, Card card, boolean isPlayer)
 	{
 		ImageView newCard = new ImageView(image);
@@ -277,6 +344,14 @@ public class GameplayClassicController implements Gameplay, Initializable
 
 		return newCard;
 	}
+
+	/**
+	 * create the path transition of the card draw
+	 *
+	 * @param pg   the player who draw the card
+	 * @param node the imageview of the card draw
+	 * @return the path transition of the card draw
+	 */
 	private PathTransition createDrawPathTransition(BuildMP.PG pg, ImageView node)
 	{
 		double endX = Costants.CARD_WIDTH_SCALED.getVal() / 2;
@@ -327,6 +402,14 @@ public class GameplayClassicController implements Gameplay, Initializable
 
 
 	}
+
+	/**
+	 * create the rotation transition of the card draw for the bot
+	 *
+	 * @param pg   the player who draw the card
+	 * @param node the imageview of the card draw
+	 * @return the rotation transition of the card draw
+	 */
 	private RotateTransition createBotDrawRotateTransition(BuildMP.PG pg, ImageView node)
 	{
 		RotateTransition rotateTransition = new RotateTransition(Duration.millis(750), node);
@@ -345,6 +428,13 @@ public class GameplayClassicController implements Gameplay, Initializable
 		}
 		return rotateTransition;
 	}
+
+	/**
+	 * create the rotation transition of the card draw for the player
+	 *
+	 * @param node the imageview of the card draw
+	 * @return the rotation transition of the card draw
+	 */
 	private RotateTransition createPlayerDrawRotateTransition(ImageView node)
 	{
 		node.setRotate(180);
@@ -370,7 +460,11 @@ public class GameplayClassicController implements Gameplay, Initializable
 		return rotateTransition;
 	}
 
-
+	/**
+	 * make the animation of the card played by the player
+	 *
+	 * @param discardData the data of the card played
+	 */
 	@Override
 	public void discard(DiscardData discardData)
 	{
@@ -389,6 +483,13 @@ public class GameplayClassicController implements Gameplay, Initializable
 		pathTransition.play();
 		rotateTransition.play();
 	}
+
+	/**
+	 * create the imageview of the card played for the animation
+	 *
+	 * @param card the card played
+	 * @return the imageview of the card played
+	 */
 	private ImageView createDiscardTransitionCard(Card card)
 	{
 		ImageView newCard = new ImageView(new Image(card.getFinalUrl().getPath()));
@@ -400,6 +501,13 @@ public class GameplayClassicController implements Gameplay, Initializable
 
 		return newCard;
 	}
+	/**
+	 * create the path transition of the card played
+	 *
+	 * @param pg   the player who played the card
+	 * @param node the imageview of the card played
+	 * @return the path transition of the card played
+	 */
 	private PathTransition createDiscardPathTransition(BuildMP.PG pg, ImageView node)
 	{
 		double startX = Costants.CARD_WIDTH_SCALED.getVal() / 2;
@@ -451,6 +559,14 @@ public class GameplayClassicController implements Gameplay, Initializable
 
 		return pathTransition;
 	}
+
+	/**
+	 * create the rotation transition of the card played
+	 *
+	 * @param pg   the player who played the card
+	 * @param node the imageview of the card played
+	 * @return the rotation transition of the card played
+	 */
 	private RotateTransition createDiscardRotateTransition(BuildMP.PG pg, ImageView node)
 	{
 		RotateTransition rotateTransition = new RotateTransition(Duration.seconds(1), node);
@@ -479,6 +595,11 @@ public class GameplayClassicController implements Gameplay, Initializable
 
 		return rotateTransition;
 	}
+	/**
+	 * remove the card played from the hand of the player
+	 *
+	 * @param pg the player who played the card
+	 */
 	private void removeCard(BuildMP.PG pg)
 	{
 		HBox hand = switch (pg)
@@ -495,6 +616,10 @@ public class GameplayClassicController implements Gameplay, Initializable
 			hand.getChildren().remove(0);
 	}
 
+	/**
+	 * make the animation of the "start turn" of the player
+	 * @param turnData the data of the turn
+	 */
 	@Override
 	public void turn(TurnData turnData)
 	{
@@ -518,6 +643,12 @@ public class GameplayClassicController implements Gameplay, Initializable
 		}
 
 	}
+
+	/**
+	 * make the animation of the given effect
+	 *
+	 * @param effectData the data of the effect
+	 */
 	@Override
 	public void effect(EffectData effectData)
 	{
@@ -540,6 +671,12 @@ public class GameplayClassicController implements Gameplay, Initializable
 		}
 	}
 
+	/**
+	 * create the imageview of the effect for the animation
+	 *
+	 * @param effect the effect
+	 * @return the imageview of the effect
+	 */
 	private ImageView createZoomImage(BuildMP.Effects effect)
 	{
 		ImageView imageView = new ImageView(new Image("file:\\" + USER_DIR + "\\src\\main\\resources\\org\\juno\\images\\" + switch (effect)
@@ -566,6 +703,12 @@ public class GameplayClassicController implements Gameplay, Initializable
 		return imageView;
 
 	}
+
+	/**
+	 * make the animation of the given effect
+	 *
+	 * @param effect the effect
+	 */
 	private void zoomAnimation(BuildMP.Effects effect)
 	{
 		ImageView imageView = createZoomImage(effect);
@@ -580,6 +723,11 @@ public class GameplayClassicController implements Gameplay, Initializable
 		st.play();
 	}
 
+	/**
+	 * this method should never be called in this mode
+	 *
+	 * @param switchData the data of the switch
+	 */
 	@Override
 	public void doSwitch(SwitchData switchData)
 	{
@@ -594,6 +742,11 @@ public class GameplayClassicController implements Gameplay, Initializable
 		}
 	}
 
+	/**
+	 * manage the start, endmatch and endgame actions
+	 *
+	 * @param gameflowData the data of the gameflow
+	 */
 	@Override
 	public void gameflow(GameflowData gameflowData)
 	{
@@ -605,23 +758,36 @@ public class GameplayClassicController implements Gameplay, Initializable
 		}
 	}
 
+	/**
+	 * load the points of the players
+	 *
+	 * @param pointsData the data of the points
+	 */
 	@Override
 	public void getPoints(PointsData pointsData)
 	{
 		((EndMatchClassicController) GEN_VIEW.getEndMatchClassic().getUserData()).load(pointsData);
 	}
 
-
+	/**
+	 * load the endmatch scene
+	 */
 	private void nextMatch()
 	{
 		GEN_VIEW.changeScene(GenView.SCENES.ENDMATCHCLASSIC, anchorPane);
 	}
+	/**
+	 * load the endgame scene
+	 */
 	private void goEndgame()
 	{
 		GEN_VIEW.changeScene(GenView.SCENES.ENDGAME, anchorPane);
 
 		((EndgameController) GEN_VIEW.getEndgame().getUserData()).load(TABLE_CLASSIC);
 	}
+	/**
+	 * reset the scene
+	 */
 	public void reset()
 	{
 		anchorPane.requestFocus();
@@ -644,20 +810,19 @@ public class GameplayClassicController implements Gameplay, Initializable
 		TABLE_CLASSIC.canStart();
 	}
 
-
+	/**
+	 * play the "beep" sound
+	 */
 	protected void beep()
 	{
 		AUDIO_PLAYER.play(AudioPlayer.Sounds.ALERTBEEP);
 	}
+	/**
+	 * play the "card flip" sound
+	 */
 	protected void cardFlip()
 	{
 		AUDIO_PLAYER.play(AudioPlayer.Sounds.CARDFLIP);
 	}
 
-	@Override
-	public void initialize(URL url, ResourceBundle resourceBundle)
-	{
-		pathDraw.setNode(cardDrawn);
-		drawRotate.setNode(cardDrawn);
-	}
 }

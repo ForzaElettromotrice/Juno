@@ -23,8 +23,9 @@
    </Label>
    <VBox layoutX="210.0" layoutY="90.0" prefHeight="900.0" prefWidth="1500.0">
       <HBox alignment="CENTER" prefHeight="300.0" prefWidth="1500.0" spacing="50.0">
-         <ImageView fitHeight="300.0" fitWidth="300.0" onMouseClicked="#classicClicked" onMouseEntered="#classicEntered" onMouseExited="#classicExited" pickOnBounds="true" preserveRatio="true" rotate="55.0">
-            <Image url="@../images/logoClassic.png" />
+         <ImageView fitHeight="300.0" fitWidth="300.0" onMouseClicked="#classicClicked" pickOnBounds="true"
+                    preserveRatio="true" rotate="55.0">
+            <Image url="@../images/logoClassic.png"/>
          </ImageView>
          <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="400.0" prefWidth="640.0" styleClass="textCMStyle" text="The beloved classic! Play against 3 bots&#10;following the (J)uno classic rules!" textAlignment="CENTER" textFill="WHITE">
             <font>
@@ -33,8 +34,9 @@
          </Label>
       </HBox>
       <HBox alignment="CENTER" prefHeight="200.0" prefWidth="1500.0" spacing="50.0">
-         <ImageView fitHeight="300.0" fitWidth="300.0" onMouseClicked="#comboClicked" onMouseEntered="#comboEntered" onMouseExited="#comboExited" pickOnBounds="true" preserveRatio="true" rotate="55.0">
-            <Image url="@../images/logoCombo.png" />
+         <ImageView fitHeight="300.0" fitWidth="300.0" onMouseClicked="#comboClicked" pickOnBounds="true"
+                    preserveRatio="true" rotate="55.0">
+            <Image url="@../images/logoCombo.png"/>
          </ImageView>
          <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="400.0" prefWidth="640.0" styleClass="textCMStyle" text="Play smart! In this mode you can play&#10;as many cards as you want only if&#10;they have the same number! If you&#10;have to draw, you will be drawing&#10;until you gain a playable card!&#10;" textAlignment="CENTER" textFill="WHITE">
             <font>
@@ -43,8 +45,9 @@
          </Label>
       </HBox>
       <HBox alignment="CENTER" prefHeight="200.0" prefWidth="1500.0" spacing="50.0">
-         <ImageView fitHeight="300.0" fitWidth="300.0" onMouseClicked="#tradeClicked" onMouseEntered="#tradeEntered" onMouseExited="#tradeExited" pickOnBounds="true" preserveRatio="true" rotate="55.0">
-            <Image url="@../images/logoTrade.png" />
+         <ImageView fitHeight="300.0" fitWidth="300.0" onMouseClicked="#tradeClicked" pickOnBounds="true"
+                    preserveRatio="true" rotate="55.0">
+            <Image url="@../images/logoTrade.png"/>
          </ImageView>
          <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="400.0" prefWidth="640.0" styleClass="textCMStyle" text="Be strategic! In this mode 0s trade cards &#10;between all players, while 7s trade cards &#10;between 2 players! " textAlignment="CENTER" textFill="WHITE">
             <font>

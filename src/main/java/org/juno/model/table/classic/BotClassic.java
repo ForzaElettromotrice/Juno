@@ -14,11 +14,22 @@ public class BotClassic extends PlayerClassic
 {
 	private static final Random RANDOMIZER = new Random();
 
+	/**
+	 * Constructor, initiate the bot
+	 *
+	 * @param i The bot id
+	 */
 	public BotClassic(int i)
 	{
 		super(i);
 	}
 
+	/**
+	 * Choose a Card to play, if the card is a WildCard, choose a color
+	 * if it can't play, draw a card and play it if it can
+	 *
+	 * @return true if the bot played a card, false otherwise
+	 */
 	@Override
 	public boolean hasChosen()
 	{
@@ -50,6 +61,11 @@ public class BotClassic extends PlayerClassic
 		return true;
 	}
 
+	/**
+	 * Say UNO if the bot has only one card with a percentage of 20%
+	 *
+	 * @return true if the bot said UNO, false otherwise
+	 */
 	@Override
 	public boolean saidUno()
 	{

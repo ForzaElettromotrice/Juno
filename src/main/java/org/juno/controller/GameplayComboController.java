@@ -100,11 +100,11 @@ public class GameplayComboController implements Gameplay
 	public HBox botHand2;
 
 
-	@FXML
-	public ImageView popUp;
 	private ImageView lastClicked;
 
-
+	/**
+	 * called when the user clicks on "red" button
+	 */
 	@FXML
 	public void redClicked()
 	{
@@ -114,6 +114,9 @@ public class GameplayComboController implements Gameplay
 		colorGrid.setVisible(false);
 		colorPane.setVisible(false);
 	}
+	/**
+	 * called when the user clicks on "blue" button
+	 */
 	@FXML
 	public void blueClicked()
 	{
@@ -123,6 +126,9 @@ public class GameplayComboController implements Gameplay
 		colorGrid.setVisible(false);
 		colorPane.setVisible(false);
 	}
+	/**
+	 * called when the user clicks on "yellow" button
+	 */
 	@FXML
 	public void yellowClicked()
 	{
@@ -132,6 +138,9 @@ public class GameplayComboController implements Gameplay
 		colorGrid.setVisible(false);
 		colorPane.setVisible(false);
 	}
+	/**
+	 * called when the user clicks on "green" button
+	 */
 	@FXML
 	public void greenClicked()
 	{
@@ -141,6 +150,10 @@ public class GameplayComboController implements Gameplay
 		colorGrid.setVisible(false);
 		colorPane.setVisible(false);
 	}
+
+	/**
+	 * called when the user clicks on "exit" button
+	 */
 	@FXML
 	public void exitClicked()
 	{
@@ -152,6 +165,9 @@ public class GameplayComboController implements Gameplay
 		if (alert.getResult() == ButtonType.NO) return;
 		TABLE_COMBO.stopEarlier();
 	}
+	/**
+	 * called when the user clicks on the draw pile
+	 */
 	@FXML
 	public void drawClicked()
 	{
@@ -162,6 +178,9 @@ public class GameplayComboController implements Gameplay
 		thread.start();
 
 	}
+	/**
+	 * called when the user clicks on "pass" button
+	 */
 	@FXML
 	public void passClicked()
 	{
@@ -169,6 +188,9 @@ public class GameplayComboController implements Gameplay
 		pass.setDisable(true);
 		TABLE_COMBO.getUser().setHasPassed();
 	}
+	/**
+	 * called when the user clicks on "juno" button
+	 */
 	@FXML
 	public void sayUno()
 	{
@@ -177,7 +199,9 @@ public class GameplayComboController implements Gameplay
 		TABLE_COMBO.getUser().sayUno();
 	}
 
-
+	/**
+	 * called when the mouse enters on a card
+	 */
 	private void cardEntered(MouseEvent mouseEvent)
 	{
 		if (TABLE_COMBO.getCurrentPlayer().getId() != BuildMP.PG.PLAYER) return;
@@ -186,6 +210,9 @@ public class GameplayComboController implements Gameplay
 		ImageView card = (ImageView) mouseEvent.getSource();
 		card.setTranslateY(-30);
 	}
+	/**
+	 * called when the mouse exits from a card
+	 */
 	private void cardExited(MouseEvent mouseEvent)
 	{
 		if (TABLE_COMBO.getCurrentPlayer().getId() != BuildMP.PG.PLAYER) return;
@@ -193,6 +220,9 @@ public class GameplayComboController implements Gameplay
 		ImageView card = (ImageView) mouseEvent.getSource();
 		card.setTranslateY(0);
 	}
+	/**
+	 * called when the user clicks on a card
+	 */
 	private void cardClicked(MouseEvent mouseEvent)
 	{
 		pass.setDisable(false);
@@ -211,6 +241,11 @@ public class GameplayComboController implements Gameplay
 	}
 
 
+	/**
+	 * fix the overlapping of the cards
+	 *
+	 * @param box the box containing the cards
+	 */
 	private void fixWidth(HBox box)
 	{
 		double spacing = ((box.getChildren().size() * Costants.CARD_WIDTH_SCALED.getVal()) - (box.getMaxWidth())) / box.getChildren().size();
@@ -221,6 +256,11 @@ public class GameplayComboController implements Gameplay
 		box.setSpacing(-spacing);
 	}
 
+	/**
+	 * make the animation of the card drawn
+	 *
+	 * @param drawData the data of the card drawn
+	 */
 	@Override
 	public void draw(DrawData drawData)
 	{
@@ -234,7 +274,12 @@ public class GameplayComboController implements Gameplay
 		pathTransition.play();
 		rotateTransition.play();
 	}
-
+	/**
+	 * create the imageview of the card for the animation
+	 *
+	 * @param card the card to draw
+	 * @return the imageview of the card
+	 */
 	private ImageView createDrawTransitionCard(Card card)
 	{
 		ImageView newCard = new ImageView(new Image("file:\\" + USER_DIR + "\\src\\main\\resources\\org\\juno\\images\\back.png"));
@@ -246,6 +291,14 @@ public class GameplayComboController implements Gameplay
 
 		return newCard;
 	}
+	/**
+	 * create the imageview of the card for the hand of the player
+	 *
+	 * @param image    the image of the card
+	 * @param card     the card to draw
+	 * @param isPlayer true if the card is for the player
+	 * @return the imageview of the card
+	 */
 	private ImageView createCard(Image image, Card card, boolean isPlayer)
 	{
 		ImageView newCard = new ImageView(image);
@@ -264,6 +317,13 @@ public class GameplayComboController implements Gameplay
 
 		return newCard;
 	}
+	/**
+	 * create the path transition of the card drawn
+	 *
+	 * @param pg   the player who drew the card
+	 * @param node the card drawn
+	 * @return the path transition
+	 */
 	private PathTransition createDrawPathTransition(BuildMP.PG pg, ImageView node)
 	{
 		double endX = Costants.CARD_WIDTH_SCALED.getVal() / 2;
@@ -314,6 +374,13 @@ public class GameplayComboController implements Gameplay
 
 
 	}
+	/**
+	 * create the rotatation transition of the card drawn by the bot
+	 *
+	 * @param pg   the player who drew the card
+	 * @param node the card drawn
+	 * @return the rotation transition
+	 */
 	private RotateTransition createBotDrawRotateTransition(BuildMP.PG pg, ImageView node)
 	{
 		RotateTransition rotateTransition = new RotateTransition(Duration.millis(750), node);
@@ -332,6 +399,12 @@ public class GameplayComboController implements Gameplay
 		}
 		return rotateTransition;
 	}
+	/**
+	 * create the rotatation transition of the card drawn by the player
+	 *
+	 * @param node the card drawn
+	 * @return the rotation transition
+	 */
 	private RotateTransition createPlayerDrawRotateTransition(ImageView node)
 	{
 		node.setRotate(180);
@@ -357,7 +430,11 @@ public class GameplayComboController implements Gameplay
 		return rotateTransition;
 	}
 
-
+	/**
+	 * create the animation of the card played by the player
+	 *
+	 * @param discardData the data of the card played
+	 */
 	@Override
 	public void discard(DiscardData discardData)
 	{
@@ -376,6 +453,12 @@ public class GameplayComboController implements Gameplay
 		pathTransition.play();
 		rotateTransition.play();
 	}
+	/**
+	 * create the imageview of card for the discard animation
+	 *
+	 * @param card the card played
+	 * @return the card played
+	 */
 	private ImageView createDiscardTransitionCard(Card card)
 	{
 		ImageView newCard = new ImageView(new Image(card.getFinalUrl().getPath()));
@@ -387,6 +470,13 @@ public class GameplayComboController implements Gameplay
 
 		return newCard;
 	}
+	/**
+	 * create the path transition of the card played
+	 *
+	 * @param pg   the player who played the card
+	 * @param node the card played
+	 * @return the path transition
+	 */
 	private PathTransition createDiscardPathTransition(BuildMP.PG pg, ImageView node)
 	{
 		double startX = Costants.CARD_WIDTH_SCALED.getVal() / 2;
@@ -438,6 +528,12 @@ public class GameplayComboController implements Gameplay
 
 		return pathTransition;
 	}
+	/**
+	 * create the rotation transition of the card played
+	 * @param pg the player who played the card
+	 * @param node the card played
+	 * @return the rotation transition
+	 */
 	private RotateTransition createDiscardRotateTransition(BuildMP.PG pg, ImageView node)
 	{
 		RotateTransition rotateTransition = new RotateTransition(Duration.seconds(1), node);
@@ -466,6 +562,11 @@ public class GameplayComboController implements Gameplay
 
 		return rotateTransition;
 	}
+	/**
+	 * remove the card played from the hand of the player
+	 *
+	 * @param pg the player who played the card
+	 */
 	private void removeCard(BuildMP.PG pg)
 	{
 		HBox hand = switch (pg)
@@ -482,7 +583,10 @@ public class GameplayComboController implements Gameplay
 			hand.getChildren().remove(0);
 	}
 
-
+	/**
+	 * make the animation of the "start turn" of the player
+	 * @param turnData the data of the turn
+	 */
 	@Override
 	public void turn(TurnData turnData)
 	{
@@ -505,6 +609,11 @@ public class GameplayComboController implements Gameplay
 		}
 
 	}
+	/**
+	 * make the animation of the given effect
+	 *
+	 * @param effectData the data of the effect
+	 */
 	@Override
 	public void effect(EffectData effectData)
 	{
@@ -527,6 +636,12 @@ public class GameplayComboController implements Gameplay
 		}
 	}
 
+	/**
+	 * create the image view of the given effect
+	 *
+	 * @param effect the effect
+	 * @return the image view of the effect
+	 */
 	private ImageView createZoomImage(BuildMP.Effects effect)
 	{
 		ImageView imageView = new ImageView(new Image("file:\\" + USER_DIR + "\\src\\main\\resources\\org\\juno\\images\\" + switch (effect)
@@ -553,6 +668,12 @@ public class GameplayComboController implements Gameplay
 		return imageView;
 
 	}
+
+	/**
+	 * make the animation of the given effect
+	 *
+	 * @param effect the effect
+	 */
 	private void zoomAnimation(BuildMP.Effects effect)
 	{
 		System.out.println("Inizio animazione");
@@ -567,6 +688,11 @@ public class GameplayComboController implements Gameplay
 		st1.setOnFinished(x -> imageView.setVisible(false));
 		st.play();
 	}
+	/**
+	 * this methods should never be called in this mode
+	 *
+	 * @param switchData the data of the switch
+	 */
 	@Override
 	public void doSwitch(SwitchData switchData)
 	{
@@ -580,13 +706,22 @@ public class GameplayComboController implements Gameplay
 			err.printStackTrace();
 		}
 	}
+	/**
+	 * load the points of the players
+	 *
+	 * @param pointsData the data of the points
+	 */
 	@Override
 	public void getPoints(PointsData pointsData)
 	{
 		((EndMatchComboController) GEN_VIEW.getEndMatchCombo().getUserData()).load(pointsData);
 	}
 
-
+	/**
+	 * manage the start, endmatch and endgame actions
+	 *
+	 * @param gameflowData the data of the gameflow
+	 */
 	@Override
 	public void gameflow(GameflowData gameflowData)
 	{
@@ -597,16 +732,25 @@ public class GameplayComboController implements Gameplay
 			case STARTGAME -> reset();
 		}
 	}
+	/**
+	 * go to the endmatch scene
+	 */
 	private void nextMatch()
 	{
 		GEN_VIEW.changeScene(GenView.SCENES.ENDMATCHCOMBO, anchorPane);
 	}
+	/**
+	 * go to the endgame scene
+	 */
 	private void goEndgame()
 	{
 		GEN_VIEW.changeScene(GenView.SCENES.ENDGAME, anchorPane);
 
 		((EndgameController) GEN_VIEW.getEndgame().getUserData()).load(TABLE_COMBO);
 	}
+	/**
+	 * reset the scene
+	 */
 	public void reset()
 	{
 		anchorPane.requestFocus();
@@ -629,11 +773,17 @@ public class GameplayComboController implements Gameplay
 		TABLE_COMBO.canStart();
 	}
 
-
+	/**
+	 * play the sound "beep"
+	 */
 	protected void beep()
 	{
 		AUDIO_PLAYER.play(AudioPlayer.Sounds.ALERTBEEP);
 	}
+
+	/**
+	 * play the sound "card flip"
+	 */
 	protected void cardFlip()
 	{
 		AUDIO_PLAYER.play(AudioPlayer.Sounds.CARDFLIP);

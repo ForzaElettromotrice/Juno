@@ -14,11 +14,22 @@ public class BotCombo extends PlayerCombo
 {
 	private static final Random RANDOMIZER = new Random();
 
+	/**
+	 * Constructor, initiate the bot
+	 *
+	 * @param i The bot id
+	 */
 	public BotCombo(int i)
 	{
 		super(i);
 	}
 
+	/**
+	 * Choose a Card to play, if the card is a WildCard, choose a color
+	 * if it can't play, draws card until it can play it if it can
+	 *
+	 * @return true
+	 */
 	@Override
 	public boolean hasChosen()
 	{
@@ -40,9 +51,10 @@ public class BotCombo extends PlayerCombo
 			hand.remove(drawn);
 		}
 		chooseColor(Card.Color.RED);
-		for (Card card:hand)
+		for (Card card : hand)
 		{
-			if (card.getValue() == chosenCard.getValue()) {
+			if (card.getValue() == chosenCard.getValue())
+			{
 				combo = true;
 				return true;
 			}
@@ -51,6 +63,11 @@ public class BotCombo extends PlayerCombo
 		return true;
 	}
 
+	/**
+	 * Say UNO if the bot has only one card with a percentage of 20%
+	 *
+	 * @return true if the bot said UNO, false otherwise
+	 */
 	@Override
 	public boolean saidUno()
 	{

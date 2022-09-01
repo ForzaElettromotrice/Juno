@@ -28,6 +28,11 @@ public class TurnOrder
 		TRADE
 	}
 
+	/**
+	 * Constructor, initiate the turn order
+	 *
+	 * @param modality The given modality
+	 */
 	public TurnOrder(MODALITY modality)
 	{
 		players[0] = switch (modality)
@@ -50,33 +55,34 @@ public class TurnOrder
 
 	}
 
-	public void setPlayer(BuildMP.PG player)
-	{
-		currentPlayer = switch (player)
-				{
-					case PLAYER -> 0;
-					case BOT1 -> 1;
-					case BOT2 -> 2;
-					case BOT3 -> 3;
-				};
-	}
-
-
+	/**
+	 * @return the array of the players
+	 */
 	public Player[] getPlayers()
 	{
 		return players;
 	}
 
+	/**
+	 * @return the current player
+	 */
 	public Player getCurrentPlayer()
 	{
 		return players[currentPlayer];
 	}
 
+	/**
+	 * @return the User Player instance
+	 */
 	public Player getUser()
 	{
 		return players[0];
 	}
 
+	/**
+	 * @param id The id of a player
+	 * @return the player with the given id
+	 */
 	public Player getPlayer(BuildMP.PG id)
 	{
 		return switch (id)
@@ -88,7 +94,9 @@ public class TurnOrder
 				};
 	}
 
-
+	/**
+	 * @return the next player who has to play
+	 */
 	public Player nextPlayer()
 	{
 		currentPlayer = switch (currentPlayer)
@@ -100,12 +108,19 @@ public class TurnOrder
 		return players[currentPlayer];
 	}
 
+	/**
+	 * reverse the turn order
+	 */
 	public void reverse()
 	{
 		isInverted = !isInverted;
 	}
 
-
+	/**
+	 * update the points of the winner player
+	 *
+	 * @param winner The winner player
+	 */
 	public void updatePoints(Player winner)
 	{
 		for (Player player : players)
@@ -114,7 +129,9 @@ public class TurnOrder
 		}
 	}
 
-
+	/**
+	 * reset the turn order for the next game
+	 */
 	public void resetGame()
 	{
 		for (Player player : players)
@@ -122,7 +139,9 @@ public class TurnOrder
 			player.resetGame();
 		}
 	}
-
+	/**
+	 * reset the turn order for the next match
+	 */
 	public void resetMatch()
 	{
 		for (Player player : players)

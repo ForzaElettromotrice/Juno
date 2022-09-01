@@ -30,6 +30,9 @@ public class WildCard extends Card
         newUrl = new File(String.format("file:\\%s\\src\\main\\resources\\org\\juno\\images\\%s%d.png", System.getProperty("user.dir"), color.toString(), value.getVal()));
     }
 
+    /**
+     * @return the final URL of the card
+     */
     @Override
     public File getFinalUrl()
     {

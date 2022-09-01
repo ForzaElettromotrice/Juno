@@ -88,7 +88,9 @@ public class StatsController
 	@FXML
 	public ToggleButton changeName;
 
-
+	/**
+	 * it requests the focus when the anchor is clicked
+	 */
 	@FXML
 	public void anchorClicked()
 	{
@@ -97,13 +99,18 @@ public class StatsController
 		anchor.requestFocus();
 	}
 
-
+	/**
+	 * called when the mouse enters the Open button
+	 */
 	@FXML
 	public void openEntered()
 	{
 		AUDIO_PLAYER.play(AudioPlayer.Sounds.CURSORSELECT);
 		openButton.setUnderline(true);
 	}
+	/**
+	 * called when the mouse enters the Avatar Circle
+	 */
 	@FXML
 	public void changeAvatarEntered()
 	{
@@ -112,12 +119,17 @@ public class StatsController
 		changeAvatarButton.setVisible(true);
 	}
 
-
+	/**
+	 * called when the mouse exits the Open button
+	 */
 	@FXML
 	public void openExited()
 	{
 		openButton.setUnderline(false);
 	}
+	/**
+	 * called when the mouse exits the Avatar Circle
+	 */
 	@FXML
 	public void changeAvatarExited()
 	{
@@ -125,7 +137,9 @@ public class StatsController
 		changeAvatarButton.setVisible(false);
 	}
 
-
+	/**
+	 * called when the mouse clicks the Back button
+	 */
 	@FXML
 	public void backClicked()
 	{
@@ -133,6 +147,9 @@ public class StatsController
 		saveData();
 		GEN_VIEW.changeScene(GenView.SCENES.STARTMENU, anchor);
 	}
+	/**
+	 * called when the mouse clicks the avatar 1 button
+	 */
 	@FXML
 	public void avatar1Clicked()
 	{
@@ -140,6 +157,9 @@ public class StatsController
 		circle.setFill(new ImagePattern(new Image(String.format("file:\\%s\\src\\main\\resources\\org\\juno\\images\\icon1.png", USER_DIR))));
 		avatarBox.setVisible(false);
 	}
+	/**
+	 * called when the mouse clicks the avatar 2 button
+	 */
 	@FXML
 	public void avatar2Clicked()
 	{
@@ -147,6 +167,9 @@ public class StatsController
 		circle.setFill(new ImagePattern(new Image(String.format("file:\\%s\\src\\main\\resources\\org\\juno\\images\\icon2.png", USER_DIR))));
 		avatarBox.setVisible(false);
 	}
+	/**
+	 * called when the mouse clicks the avatar 3 button
+	 */
 	@FXML
 	public void avatar3Clicked()
 	{
@@ -154,6 +177,9 @@ public class StatsController
 		circle.setFill(new ImagePattern(new Image(String.format("file:\\%s\\src\\main\\resources\\org\\juno\\images\\icon3.png", USER_DIR))));
 		avatarBox.setVisible(false);
 	}
+	/**
+	 * called when the mouse clicks the open button
+	 */
 	@FXML
 	public void openClicked()
 	{
@@ -189,6 +215,9 @@ public class StatsController
 
 		avatarBox.setVisible(false);
 	}
+	/**
+	 * called when the mouse clicks the change avatar button
+	 */
 	@FXML
 	public void changeAvatarClicked()
 	{
@@ -207,6 +236,9 @@ public class StatsController
 		else
 			avatar.selectToggle(null);
 	}
+	/**
+	 * called when the user press a key on the keyboard
+	 */
 	@FXML
 	public void anchorKeyPressed(KeyEvent keyEvent)
 	{
@@ -215,6 +247,9 @@ public class StatsController
 		else if (keyEvent.getCode() == KeyCode.ENTER)
 			anchorClicked();
 	}
+	/**
+	 * called when the mouse clicks the change name button
+	 */
 	@FXML
 	public void changeNameClicked()
 	{
@@ -229,13 +264,18 @@ public class StatsController
 		}
 	}
 
+	/**
+	 * play button entered sound
+	 */
 	@FXML
 	public void buttonEntered()
 	{
 		AUDIO_PLAYER.play(AudioPlayer.Sounds.CURSORSELECT);
 	}
 
-
+	/**
+	 * saves the data of the user
+	 */
 	private void saveData()
 	{
 		try
@@ -251,6 +291,10 @@ public class StatsController
 		User.save();
 	}
 
+	/**
+	 * called when the scene is shown
+	 * it initializes the scene with the data of the user
+	 */
 	public void load()
 	{
 		avatarBox.setVisible(false);

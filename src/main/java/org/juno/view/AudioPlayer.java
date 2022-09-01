@@ -47,26 +47,41 @@ public class AudioPlayer
         }
     }
 
+    /**
+     * Constructor for AudioPlayer class (private) (singleton)
+     */
     private AudioPlayer()
     {
     }
 
+    /**
+     * @return the instance of AudioPlayer
+     */
     public static AudioPlayer getINSTANCE()
     {
         return INSTANCE;
     }
 
-
+    /**
+     * @return the music volume
+     */
     public double getMusicVolume()
     {
         return menuMusic.getVolume();
     }
+    /**
+     * @return the effects volume
+     */
     public double getEffectsVolume()
     {
         return alertBeep.getVolume();
     }
 
-
+    /**
+     * sets the music volume to the given value
+     *
+     * @param n the new volume value
+     */
     public void setMusicVolume(double n)
     {
         User.getInstance().setMusicVolume(n);
@@ -74,6 +89,11 @@ public class AudioPlayer
         menuMusic.setVolume(n);
         gameMusic.setVolume(n);
     }
+    /**
+     * sets the effects volume to the given value
+     *
+     * @param n the new volume value
+     */
     public void setEffectsVolume(double n)
     {
         User.getInstance().setEffectsVolume(n);
@@ -83,7 +103,9 @@ public class AudioPlayer
         cardFlip.setVolume(n);
     }
 
-
+    /**
+     * loads all the sounds into the AudioPlayer from the filepaths
+     */
     public void load()
     {
         loginMusic = new MediaPlayer(new Media(new File("src/main/resources/org/juno/sounds/loginMusic.mp3").toURI().toString()));
@@ -106,7 +128,11 @@ public class AudioPlayer
 
     }
 
-
+    /**
+     * plays the sound chosen by the enum
+     *
+     * @param s the sound to play
+     */
     public void play(Sounds s)
     {
 
@@ -149,6 +175,11 @@ public class AudioPlayer
             }
         }
     }
+    /**
+     * stops the sound chosen by the enum
+     *
+     * @param s the sound to stop
+     */
     public void stop(Sounds s)
     {
         switch (s)

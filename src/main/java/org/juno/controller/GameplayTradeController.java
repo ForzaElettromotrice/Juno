@@ -100,10 +100,10 @@ public class GameplayTradeController implements Gameplay
     @FXML
     public Button juno;
 
-    @FXML
-    public ImageView popUp;
 
-
+    /**
+     * called when is the user click on the draw pile
+     */
     @FXML
     public void drawClicked()
     {
@@ -114,6 +114,9 @@ public class GameplayTradeController implements Gameplay
         player.draw();
         pass.setDisable(false);
     }
+    /**
+     * called when is the user click on the "pass" button
+     */
     @FXML
     public void passClicked()
     {
@@ -122,6 +125,9 @@ public class GameplayTradeController implements Gameplay
         beep();
         TABLE_TRADE.getUser().setHasPassed();
     }
+    /**
+     * called when is the user click on the "say juno" button
+     */
     @FXML
     public void sayUno()
     {
@@ -130,7 +136,9 @@ public class GameplayTradeController implements Gameplay
         juno.setVisible(false);
     }
 
-
+    /**
+     * called when is the user click on the "red" button
+     */
     @FXML
     public void redClicked()
     {
@@ -140,6 +148,9 @@ public class GameplayTradeController implements Gameplay
         colorGrid.setVisible(false);
         colorPane.setVisible(false);
     }
+    /**
+     * called when is the user click on the "blue" button
+     */
     @FXML
     public void blueClicked()
     {
@@ -149,6 +160,9 @@ public class GameplayTradeController implements Gameplay
         colorGrid.setVisible(false);
         colorPane.setVisible(false);
     }
+    /**
+     * called when is the user click on the "yellow" button
+     */
     @FXML
     public void yellowClicked()
     {
@@ -158,6 +172,9 @@ public class GameplayTradeController implements Gameplay
         colorGrid.setVisible(false);
         colorPane.setVisible(false);
     }
+    /**
+     * called when is the user click on the "green" button
+     */
     @FXML
     public void greenClicked()
     {
@@ -168,7 +185,9 @@ public class GameplayTradeController implements Gameplay
         colorPane.setVisible(false);
     }
 
-
+    /**
+     * called when the user click on the "bot1 hand" button
+     */
     @FXML
     public void bot1HandClicked()
     {
@@ -179,6 +198,9 @@ public class GameplayTradeController implements Gameplay
 
         player.setTargetTrade(BuildMP.PG.BOT1);
     }
+    /**
+     * called when the user click on the "bot2 hand" button
+     */
     @FXML
     public void bot2HandClicked()
     {
@@ -189,6 +211,9 @@ public class GameplayTradeController implements Gameplay
 
         player.setTargetTrade(BuildMP.PG.BOT2);
     }
+    /**
+     * called when the user click on the "bot3 hand" button
+     */
     @FXML
     public void bot3HandClicked()
     {
@@ -200,6 +225,9 @@ public class GameplayTradeController implements Gameplay
         player.setTargetTrade(BuildMP.PG.BOT3);
     }
 
+    /**
+     * called when the user click "exit" button
+     */
     @FXML
     public void exitClicked()
     {
@@ -212,13 +240,20 @@ public class GameplayTradeController implements Gameplay
         TABLE_TRADE.stopEarlier();
     }
 
+    /**
+     * plays the button entered sounds
+     */
     @FXML
     public void buttonEntered()
     {
         AUDIO_PLAYER.play(AudioPlayer.Sounds.CURSORSELECT);
     }
 
-
+    /**
+     * called when the mouse enter on a card
+     *
+     * @param mouseEvent the mouse event
+     */
     public void cardEntered(MouseEvent mouseEvent)
     {
         if (TABLE_TRADE.getCurrentPlayer().getId() != BuildMP.PG.PLAYER) return;
@@ -227,6 +262,11 @@ public class GameplayTradeController implements Gameplay
         ImageView card = (ImageView) mouseEvent.getSource();
         card.setTranslateY(-30);
     }
+    /**
+     * called when the mouse exit from a card
+     *
+     * @param mouseEvent the mouse event
+     */
     public void cardExited(MouseEvent mouseEvent)
     {
         if (TABLE_TRADE.getCurrentPlayer().getId() != BuildMP.PG.PLAYER) return;
@@ -234,6 +274,11 @@ public class GameplayTradeController implements Gameplay
         ImageView card = (ImageView) mouseEvent.getSource();
         card.setTranslateY(0);
     }
+    /**
+     * called when the mouse click on a card
+     *
+     * @param mouseEvent the mouse event
+     */
     public void cardClicked(MouseEvent mouseEvent)
     {
         if (TABLE_TRADE.getCurrentPlayer().getId() != BuildMP.PG.PLAYER) return;
@@ -249,6 +294,11 @@ public class GameplayTradeController implements Gameplay
 
     }
 
+    /**
+     * fix the overlapping of the cards
+     *
+     * @param box the box where the cards are
+     */
     private void fixWidth(HBox box)
     {
         double spacing = ((box.getChildren().size() * Costants.CARD_WIDTH_SCALED.getVal()) - (box.getMaxWidth())) / box.getChildren().size();
@@ -259,7 +309,12 @@ public class GameplayTradeController implements Gameplay
         box.setSpacing(-spacing);
     }
 
-
+    /**
+     * make the animation of the card drawn
+     * then it add the card to the hand of the player given
+     *
+     * @param drawData the data of the card drawn (color, value) and the player who draw it
+     */
     @Override
     public void draw(DrawData drawData)
     {
@@ -274,6 +329,12 @@ public class GameplayTradeController implements Gameplay
         rotateTransition.play();
     }
 
+    /**
+     * create the imageview of the card drawn for the animation
+     *
+     * @param card the card drawn (color, value)
+     * @return the imageview of the card drawn
+     */
     private ImageView createDrawTransitionCard(Card card)
     {
         ImageView newCard = new ImageView(new Image("file:\\" + USER_DIR + "\\src\\main\\resources\\org\\juno\\images\\back.png"));
@@ -285,6 +346,14 @@ public class GameplayTradeController implements Gameplay
 
         return newCard;
     }
+    /**
+     * create the imageview of the card drawn for the hand of the player
+     *
+     * @param image    the image of the card drawn
+     * @param card     the card drawn (color, value)
+     * @param isPlayer true if the player is the user, false otherwise
+     * @return the imageview of the card drawn
+     */
     private ImageView createCard(Image image, Card card, boolean isPlayer)
     {
         ImageView newCard = new ImageView(image);
@@ -303,6 +372,13 @@ public class GameplayTradeController implements Gameplay
 
         return newCard;
     }
+    /**
+     * create the path transition of the card drawn
+     *
+     * @param pg   the player who draw the card
+     * @param node the imageview of the card drawn
+     * @return the path transition of the card drawn
+     */
     private PathTransition createDrawPathTransition(BuildMP.PG pg, ImageView node)
     {
         double endX = Costants.CARD_WIDTH_SCALED.getVal() / 2;
@@ -353,6 +429,12 @@ public class GameplayTradeController implements Gameplay
 
 
     }
+    /**
+     * create the rotatation transition of the card drawn by the bot
+     *
+     * @param node the imageview of the card drawn
+     * @return the rotatation transition of the card drawn
+     */
     private RotateTransition createBotDrawRotateTransition(BuildMP.PG pg, ImageView node)
     {
         RotateTransition rotateTransition = new RotateTransition(Duration.millis(750), node);
@@ -371,6 +453,12 @@ public class GameplayTradeController implements Gameplay
         }
         return rotateTransition;
     }
+    /**
+     * create the rotatation transition of the card drawn by the user
+     *
+     * @param node the imageview of the card drawn
+     * @return the rotatation transition of the card drawn
+     */
     private RotateTransition createPlayerDrawRotateTransition(ImageView node)
     {
         node.setRotate(180);
@@ -396,7 +484,11 @@ public class GameplayTradeController implements Gameplay
         return rotateTransition;
     }
 
-
+    /**
+     * make the animation of the card played by the player or the bot and add the card to the table
+     *
+     * @param discardData the data of the card played
+     */
     @Override
     public void discard(DiscardData discardData)
     {
@@ -415,6 +507,12 @@ public class GameplayTradeController implements Gameplay
         pathTransition.play();
         rotateTransition.play();
     }
+    /**
+     * create the imageview of the card played for the animation
+     *
+     * @param card the card played
+     * @return the imageview of the card played
+     */
     private ImageView createDiscardTransitionCard(Card card)
     {
         ImageView newCard = new ImageView(new Image(card.getFinalUrl().getPath()));
@@ -426,6 +524,13 @@ public class GameplayTradeController implements Gameplay
 
         return newCard;
     }
+    /**
+     * create the path transition of the card played
+     *
+     * @param pg   the player who played the card
+     * @param node the imageview of the card played
+     * @return the path transition of the card played
+     */
     private PathTransition createDiscardPathTransition(BuildMP.PG pg, ImageView node)
     {
         double startX = Costants.CARD_WIDTH_SCALED.getVal() / 2;
@@ -477,6 +582,13 @@ public class GameplayTradeController implements Gameplay
 
         return pathTransition;
     }
+    /**
+     * create the rotatation transition of the card played
+     *
+     * @param pg   the player who played the card
+     * @param node the imageview of the card played
+     * @return the rotatation transition of the card played
+     */
     private RotateTransition createDiscardRotateTransition(BuildMP.PG pg, ImageView node)
     {
         RotateTransition rotateTransition = new RotateTransition(Duration.seconds(1), node);
@@ -505,6 +617,11 @@ public class GameplayTradeController implements Gameplay
 
         return rotateTransition;
     }
+    /**
+     * remove the card played from the hand of the player
+     *
+     * @param pg the player who played the card
+     */
     private void removeCard(BuildMP.PG pg)
     {
         HBox hand = switch (pg)
@@ -521,6 +638,11 @@ public class GameplayTradeController implements Gameplay
             hand.getChildren().remove(0);
     }
 
+    /**
+     * make the animation of the "start turn" of a player
+     *
+     * @param turnData the data of the player who start the turn
+     */
     @Override
     public void turn(TurnData turnData)
     {
@@ -544,6 +666,11 @@ public class GameplayTradeController implements Gameplay
         }
 
     }
+    /**
+     * make the animation of the effect given
+     *
+     * @param effectData the data of the effect given
+     */
     @Override
     public void effect(EffectData effectData)
     {
@@ -566,6 +693,12 @@ public class GameplayTradeController implements Gameplay
         }
     }
 
+    /**
+     * create the imageview of the effect given
+     *
+     * @param effect the effect given
+     * @return the imageview of the effect given
+     */
     private ImageView createZoomImage(BuildMP.Effects effect)
     {
         ImageView imageView = new ImageView(new Image("file:\\" + USER_DIR + "\\src\\main\\resources\\org\\juno\\images\\" + switch (effect)
@@ -592,6 +725,12 @@ public class GameplayTradeController implements Gameplay
         return imageView;
 
     }
+
+    /**
+     * make the animation of the effect given
+     *
+     * @param effect the effect given
+     */
     private void zoomAnimation(BuildMP.Effects effect)
     {
         ImageView imageView = createZoomImage(effect);
@@ -605,6 +744,11 @@ public class GameplayTradeController implements Gameplay
         st1.setOnFinished(x -> imageView.setVisible(false));
         st.play();
     }
+    /**
+     * make the animation of the switch atcion
+     *
+     * @param switchData the data of the switch action
+     */
     @Override
     public void doSwitch(SwitchData switchData)
     {
@@ -660,6 +804,11 @@ public class GameplayTradeController implements Gameplay
         }
     }
 
+    /**
+     * manage the start, endmatch and endgame actions
+     *
+     * @param gameflowData the data of the action
+     */
     @Override
     public void gameflow(GameflowData gameflowData)
     {
@@ -670,23 +819,36 @@ public class GameplayTradeController implements Gameplay
             case STARTGAME -> reset();
         }
     }
+    /**
+     * loads on the view the point earned by the players
+     *
+     * @param pointsData the data of the points earned
+     */
     @Override
     public void getPoints(PointsData pointsData)
     {
         ((EndMatchTradeController) GEN_VIEW.getEndMatchTrade().getUserData()).load(pointsData);
     }
 
-
+    /**
+     * loads the scene of the endMatch
+     */
     private void nextMatch()
     {
         GEN_VIEW.changeScene(GenView.SCENES.ENDMATCHTRADE, anchorPane);
     }
+    /**
+     * loads the scene of the endGame
+     */
     private void goEndgame()
     {
         GEN_VIEW.changeScene(GenView.SCENES.ENDGAME, anchorPane);
 
         ((EndgameController) GEN_VIEW.getEndgame().getUserData()).load(TABLE_TRADE);
     }
+    /**
+     * reset the view for the next match
+     */
     public void reset()
     {
         userHand.getChildren().clear();
@@ -708,15 +870,23 @@ public class GameplayTradeController implements Gameplay
         TABLE_TRADE.canStart();
     }
 
-
+    /**
+     * plays the sound of the "beep"
+     */
     protected void beep()
     {
         AUDIO_PLAYER.play(AudioPlayer.Sounds.ALERTBEEP);
     }
+    /**
+     * plays the sound of the "card flip"
+     */
     protected void cardFlip()
     {
         AUDIO_PLAYER.play(AudioPlayer.Sounds.CARDFLIP);
     }
+    /**
+     * plays the sound of the "button click"
+     */
     protected void buttonClick()
     {
         AUDIO_PLAYER.play(AudioPlayer.Sounds.BUTTONCLICK);

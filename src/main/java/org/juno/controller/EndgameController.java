@@ -51,6 +51,9 @@ public class EndgameController
 	public Label levelUp;
 
 
+	/**
+	 * called when the user clicks on the "main menu" button
+	 */
 	@FXML
 	public void mainMenu()
 	{
@@ -60,7 +63,9 @@ public class EndgameController
 		AUDIO_PLAYER.play(AudioPlayer.Sounds.MENUMUSIC);
 	}
 
-
+	/**
+	 * called when the user clicks on the "new match" button
+	 */
 	@FXML
 	public void newMatch()
 	{
@@ -82,12 +87,20 @@ public class EndgameController
 		new Thread(table).start();
 	}
 
+	/**
+	 * plays "button entered" sound
+	 */
 	@FXML
 	public void buttonEntered()
 	{
 		AUDIO_PLAYER.play(AudioPlayer.Sounds.CURSORSELECT);
 	}
 
+	/**
+	 * load the exp earned by the user in the game
+	 *
+	 * @param currentTable the table of the game
+	 */
 	public void load(Table currentTable)
 	{
 		int points = currentTable.getUser().getPoints();
@@ -96,8 +109,7 @@ public class EndgameController
 		{
 			User.getInstance().addVictories();
 			resultsMessage.setText(String.format("You won! You gained %d exp!", points));
-		}
-		else {
+		} else {
 			User.getInstance().addDefeats();
 			resultsMessage.setText(String.format("You lost! You gained %d exp!", points));
 		}
@@ -114,15 +126,19 @@ public class EndgameController
 
 		int lvl = User.getInstance().getLevel();
 		actualLevel.setText("" + lvl);
-		nextLevel.setText("" + (lvl+1));
+		nextLevel.setText("" + (lvl + 1));
 
-		if (prevLvl != lvl) {
+		if (prevLvl != lvl)
+		{
 			progressBar.setProgress(0);
 			levelUp.setVisible(true);
 		}
 		Platform.runLater(this::animation);
 	}
 
+	/**
+	 * animation of the exp bar
+	 */
 	public void animation()
 	{
 		Timeline timeline = new Timeline();

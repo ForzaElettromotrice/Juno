@@ -31,45 +31,73 @@ public abstract class Table extends Observable implements Runnable
 	protected int plus4;
 	protected int stop;
 
-
+	/**
+	 * Constructor, initiate the table
+	 *
+	 * @param to The given TurnOrder
+	 */
 	protected Table(TurnOrder to)
 	{
 		turnOrder = to;
 	}
-
+	/**
+	 * @return the Array of the players
+	 */
 	public Player[] getPlayers()
 	{
 		return turnOrder.getPlayers();
 	}
+	/**
+	 * @return the User Player instance
+	 */
 	public Player getUser()
 	{
 		return turnOrder.getUser();
 	}
+	/**
+	 * @return true if the game has been stopped earlier else false
+	 */
 	public boolean getStopEarlier()
 	{
 		return stopEarlier;
 	}
+	/**
+	 * @return the Player who won the game
+	 */
 	public Player getWinner()
 	{
 		return winner;
 	}
+	/**
+	 * @return the current Player who is playing
+	 */
 	public Player getCurrentPlayer()
 	{
 		return turnOrder.getCurrentPlayer();
 	}
 
-
+	/**
+	 * stop the game earlier
+	 */
 	public void stopEarlier()
 	{
 		stopEarlier = true;
 		winner = null;
 	}
+	/**
+	 * allow the Game loop to start a new Match
+	 */
 	public void canStart()
 	{
 		canStart = true;
 	}
 
-
+	/**
+	 * The loop of the game, it will be executed in a thread and will be stopped when the game is over
+	 * Initialize the game, then it will be executed the matches until the game is over
+	 * after every match it controls if the game is over, if not it will be executed a new match
+	 * in the beginning of every match it will be executed the reset of the table
+	 */
 	protected void startGame()
 	{
 		resetGame();
@@ -113,6 +141,11 @@ public abstract class Table extends Observable implements Runnable
 		}
 		clearChanged();
 	}
+	/**
+	 * The loop of the match, it will be executed in a thread and will be stopped when the match is over
+	 * Initialize the match, then it will be executed the turns until the match is over
+	 * in the beginning of the match it will be executed the resetMatch method
+	 */
 	protected void startMatch()
 	{
 		resetMatch();
@@ -160,9 +193,26 @@ public abstract class Table extends Observable implements Runnable
 			clearChanged();
 		}
 	}
+	/**
+	 * The loop of the turn, it will be executed in a thread and will be stopped when the turn is over
+	 * Initialize the turn, then it will be executed the actions until the turn is over
+	 * in the beginning of the turn it will be executed the startTurn method
+	 * it notifies the observers all the actions that the player has done
+	 *
+	 * @param player The player who is playing
+	 * @return true if the player has won the match else false
+	 */
 	protected abstract boolean startTurn(Player player);
 
-
+	/**
+	 * check if the player has said UNO, if not the player will draw 2 cards and return false
+	 * check if the player has won the match, if yes it will return true else false
+	 * it notifies the observers if the player has won the match, if the player has said UNO or not
+	 *
+	 * @param currentPlayer The player who is playing
+	 * @param delayUno      The delay to wait before the player will be forced to draw 2 cards
+	 * @return true if the player has won the match else false
+	 */
 	protected boolean checkUno(Player currentPlayer, int delayUno)
 	{
 		int sizeHand = currentPlayer.getSizeHand();
@@ -195,6 +245,11 @@ public abstract class Table extends Observable implements Runnable
 		}
 		return false;
 	}
+	/**
+	 * check the effects of the card played by the player, then it notifies the observers the effects
+	 *
+	 * @param chosenCard The card played by the player
+	 */
 	protected void checkEffects(Card chosenCard)
 	{
 		setChanged();
@@ -235,6 +290,12 @@ public abstract class Table extends Observable implements Runnable
 		}
 		clearChanged();
 	}
+	/**
+	 * check if the player has won the match,
+	 * it updates all the points of the players and notify the observers
+	 *
+	 * @return true if the player has won the match else false
+	 */
 	protected boolean checkPoints()
 	{
 		if (!stopEarlier)
@@ -242,7 +303,12 @@ public abstract class Table extends Observable implements Runnable
 		else return true;
 	}
 
-
+	/**
+	 * apply the effects of the cards played by the player in the previous turn
+	 *
+	 * @param currentPlayer The player who should play
+	 * @return The player who should play in case of a skip effect else the same player passed
+	 */
 	protected Player applyEffects(Player currentPlayer)
 	{
 		if (plus2 != 0) currentPlayer.draw(2 * plus2);
@@ -270,7 +336,10 @@ public abstract class Table extends Observable implements Runnable
 		return currentPlayer;
 	}
 
-
+	/**
+	 * it will be executed at the start of the Game,
+	 * it resets all the variables and notify the observers
+	 */
 	protected void resetGame()
 	{
 		stopEarlier = false;
@@ -286,6 +355,10 @@ public abstract class Table extends Observable implements Runnable
 		}
 		clearChanged();
 	}
+	/**
+	 * it will be executed at the start of the Match,
+	 * it resets all the variables and notify the observers
+	 */
 	protected void resetMatch()
 	{
 		DRAW_PILE.reset();
@@ -307,6 +380,10 @@ public abstract class Table extends Observable implements Runnable
 		}
 		clearChanged();
 	}
+	/**
+	 * it will be executed at the start of the Turn,
+	 * it resets all the variables and notify the observers
+	 */
 	protected void resetTurn()
 	{
 		plus2 = 0;
@@ -314,7 +391,11 @@ public abstract class Table extends Observable implements Runnable
 		stop = 0;
 	}
 
-
+	/**
+	 * make the Thread sleep for a certain amount of time
+	 *
+	 * @param millis The amount of time to sleep
+	 */
 	protected void delay(int millis)
 	{
 		try
@@ -326,7 +407,10 @@ public abstract class Table extends Observable implements Runnable
 		}
 	}
 
-
+	/**
+	 * it will be executed when the Thread is started,
+	 * it launches the game
+	 */
 	@Override
 	public void run()
 	{

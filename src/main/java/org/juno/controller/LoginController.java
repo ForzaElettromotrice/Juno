@@ -48,6 +48,11 @@ public class LoginController
 	@FXML
 	public ToggleButton minusToggle;
 
+	/**
+	 * called when the user press a key on the keyboard
+	 *
+	 * @param keyEvent the key pressed
+	 */
 	@FXML
 	public void anchorKeyPressed(KeyEvent keyEvent)
 	{
@@ -63,6 +68,9 @@ public class LoginController
 			commit();
 	}
 
+	/**
+	 * called when the user clicks on the "minus" button
+	 */
 	@FXML
 	public void minusClicked()
 	{
@@ -78,6 +86,10 @@ public class LoginController
 		((ImageView) minusToggle.getChildrenUnmodifiable().get(0)).setImage(new Image("file:\\" + System.getProperty("user.dir") + "\\src\\main\\resources\\org\\juno\\images\\" + (minusToggle.isSelected() ? "check.png" : "minus.png")));
 
 	}
+
+	/**
+	 * called when the user clicks on the "commit" button
+	 */
 	@FXML
 	public void commit()
 	{
@@ -92,6 +104,10 @@ public class LoginController
 		GEN_VIEW.changeScene(GenView.SCENES.STARTMENU, backgroundLogin);
 
 	}
+
+	/**
+	 * called when the user clicks on the "plus" button
+	 */
 	@FXML
 	public void plusClicked()
 	{
@@ -102,12 +118,21 @@ public class LoginController
 		GEN_VIEW.changeScene(GenView.SCENES.REGISTER, backgroundLogin);
 	}
 
+	/**
+	 * play button entered sound
+	 */
 	@FXML
 	public void buttonEntered()
 	{
 		AUDIO_PLAYER.play(AudioPlayer.Sounds.CURSORSELECT);
 	}
 
+	/**
+	 * called when the mouse clicks on the "garbage" button
+	 *
+	 * @param event the mouse event
+	 */
+	@FXML
 	public void garbageClicked(MouseEvent event)
 	{
 		HBox toRemove = ((HBox) ((StackPane) event.getSource()).getParent());
@@ -125,7 +150,12 @@ public class LoginController
 		((VBox) toRemove.getParent()).getChildren().remove(toRemove);
 	}
 
-
+	/**
+	 * called when the user clicks on an account
+	 *
+	 * @param event the mouse event
+	 */
+	@FXML
 	public void hBoxClicked(MouseEvent event)
 	{
 		AUDIO_PLAYER.play(AudioPlayer.Sounds.ALERTBEEP);
@@ -150,10 +180,24 @@ public class LoginController
 		}
 
 	}
+
+	/**
+	 * called when the mouse enters an account
+	 *
+	 * @param event the mouse event
+	 */
+	@FXML
 	public void hBoxEntered(MouseEvent event)
 	{
 		((HBox) event.getSource()).setStyle("-fx-border-color: BLACK; -fx-border-width: 0px 0px 3px 0px; -fx-background-color: YELLOW");
 	}
+
+	/**
+	 * called when the mouse exits an account
+	 *
+	 * @param event the mouse event
+	 */
+	@FXML
 	public void hBoxExited(MouseEvent event)
 	{
 		HBox box = (HBox) event.getSource();
@@ -163,7 +207,9 @@ public class LoginController
 		}
 	}
 
-
+	/**
+	 * called when the scene is shown
+	 */
 	public void load()
 	{
 		backgroundLogin.requestFocus();
@@ -257,6 +303,9 @@ public class LoginController
 		}
 	}
 
+	/**
+	 * plays the click sound
+	 */
 	public void click()
 	{
 		AUDIO_PLAYER.play(AudioPlayer.Sounds.BUTTONCLICK);

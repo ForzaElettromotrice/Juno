@@ -33,13 +33,18 @@ public class StartMenuController
     @FXML
     public ImageView greenFrame;
 
-
+    /**
+     * called when the user clicks on the "Play" button
+     */
     @FXML
     public void playClicked()
     {
         AUDIO_PLAYER.play(AudioPlayer.Sounds.BUTTONCLICK);
         GEN_VIEW.changeScene(GenView.SCENES.CHOOSEMODE, menuAnchor);
     }
+    /**
+     * called when the user clicks on the "Settings" button
+     */
     @FXML
     public void settingsClicked()
     {
@@ -47,6 +52,9 @@ public class StartMenuController
         if (GEN_VIEW.getSettings().getUserData() instanceof SettingsController sc) sc.load();
         GEN_VIEW.changeScene(GenView.SCENES.SETTINGS, menuAnchor);
     }
+    /**
+     * called when the user clicks on the "Stats" button
+     */
     @FXML
     public void statsClicked()
     {
@@ -54,6 +62,9 @@ public class StartMenuController
         if (GEN_VIEW.getStats().getUserData() instanceof StatsController smc) smc.load();
         GEN_VIEW.changeScene(GenView.SCENES.STATS, menuAnchor);
     }
+    /**
+     * called when the user clicks on the "Exit" button
+     */
     @FXML
     public void exitClicked()
     {
@@ -61,25 +72,36 @@ public class StartMenuController
         GEN_VIEW.closeWindow();
     }
 
-
+    /**
+     * called when the mouse enters the "Play" button
+     */
     @FXML
     public void playEntered()
     {
         AUDIO_PLAYER.play(AudioPlayer.Sounds.CURSORSELECT);
         redFrame.setOpacity(1);
     }
+    /**
+     * called when the mouse enters the "Settings" button
+     */
     @FXML
     public void settingsEntered()
     {
         AUDIO_PLAYER.play(AudioPlayer.Sounds.CURSORSELECT);
         yellowFrame.setOpacity(1);
     }
+    /**
+     * called when the mouse enters the "Stats" button
+     */
     @FXML
     public void statsEntered()
     {
         AUDIO_PLAYER.play(AudioPlayer.Sounds.CURSORSELECT);
         blueFrame.setOpacity(1);
     }
+    /**
+     * called when the mouse enters the "Exit" button
+     */
     @FXML
     public void exitEntered()
     {
@@ -88,25 +110,38 @@ public class StartMenuController
     }
 
 
+    /**
+     * called when the mouse exits the "Play" button
+     */
     @FXML
     public void playExited()
     {
         redFrame.setOpacity(0.75);
     }
+    /**
+     * called when the mouse exits the "Settings" button
+     */
     @FXML
     public void settingsExited()
     {
         yellowFrame.setOpacity(0.75);
     }
+    /**
+     * called when the mouse exits the "Stats" button
+     */
     @FXML
     public void statsExited()
     {
         blueFrame.setOpacity(0.75);
     }
+    /**
+     * called when the mouse exits the "Exit" button
+     */
     @FXML
     public void exitExited()
     {
         greenFrame.setOpacity(0.75);
     }
+
 
 }

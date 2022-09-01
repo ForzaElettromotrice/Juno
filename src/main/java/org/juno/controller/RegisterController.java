@@ -53,7 +53,11 @@ public class RegisterController
 	@FXML
 	public Button loginButton;
 
-
+	/**
+	 * called when the user press a key on the keyboard
+	 *
+	 * @param keyEvent the key pressed
+	 */
 	@FXML
 	public void anchorKeyPressed(KeyEvent keyEvent)
 	{
@@ -64,7 +68,9 @@ public class RegisterController
 		}
 	}
 
-
+	/**
+	 * called when the user clicks on "save" button
+	 */
 	@FXML
 	public void saveClicked()
 	{
@@ -78,7 +84,9 @@ public class RegisterController
 		saveData();
 	}
 
-
+	/**
+	 * save the data of the user in the User class
+	 */
 	public void saveData()
 	{
 		User.getInstance().reset();
@@ -98,12 +106,21 @@ public class RegisterController
 		GEN_VIEW.changeScene(GenView.SCENES.STARTMENU, anchor);
 
 	}
+	/**
+	 * called when the user clicks on "login" button
+	 */
+	@FXML
 	public void loginClicked()
 	{
 		AUDIO_PLAYER.play(AudioPlayer.Sounds.BUTTONCLICK);
 		((LoginController) GEN_VIEW.getLogin().getUserData()).load();
 		GEN_VIEW.changeScene(GenView.SCENES.LOGIN, anchor);
 	}
+
+	/**
+	 * called when the scene is shown
+	 * it initialize the scene
+	 */
 	public void load()
 	{
 		anchor.requestFocus();
@@ -112,12 +129,18 @@ public class RegisterController
 		avatarRadioButton1.setSelected(true);
 	}
 
+	/**
+	 * called when the mouse enter the "save" button
+	 */
 	@FXML
 	public void saveEntered()
 	{
 		AUDIO_PLAYER.play(AudioPlayer.Sounds.CURSORSELECT);
 	}
 
+	/**
+	 * called when the user clicks on the avatar
+	 */
 	@FXML
 	public void avatarClicked()
 	{

@@ -48,7 +48,9 @@ public class EndMatchComboController
 	@FXML
 	public Circle avatarBot3;
 
-
+	/**
+	 * called when the user clicks on the "exit" button
+	 */
 	@FXML
 	public void exitClicked()
 	{
@@ -62,6 +64,9 @@ public class EndMatchComboController
 		GEN_VIEW.changeScene(GenView.SCENES.ENDGAME, anchorPane);
 	}
 
+	/**
+	 * called when the user clicks on the "next match" button
+	 */
 	@FXML
 	public void nextMatchClicked()
 	{
@@ -72,12 +77,20 @@ public class EndMatchComboController
 		((GameplayComboController) GEN_VIEW.getGameplayCombo().getUserData()).reset();
 	}
 
+	/**
+	 * play button entered sound
+	 */
 	@FXML
 	public void buttonEntered()
 	{
 		AUDIO_PLAYER.play(AudioPlayer.Sounds.CURSORSELECT);
 	}
 
+	/**
+	 * loads the players' avatars and names and points
+	 *
+	 * @param pointsData the points data
+	 */
 	public void load(PointsData pointsData)
 	{
 		avatarPlayer.setFill(new ImagePattern(new Image(User.getInstance().getAvatar())));
@@ -90,6 +103,9 @@ public class EndMatchComboController
 		labelBot3.setText(String.format("Bot 3: %d points", pointsData.bot3Points()));
 	}
 
+	/**
+	 * plays a click sound
+	 */
 	protected void buttonClick()
 	{
 		AUDIO_PLAYER.play(AudioPlayer.Sounds.BUTTONCLICK);

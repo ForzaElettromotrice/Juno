@@ -65,79 +65,121 @@ public class GenView implements Observer
 		ENDMATCHTRADE
 	}
 
-
+	/**
+	 * Private constructor for singleton pattern
+	 */
 	private GenView()
 	{
 	}
 
+	/**
+	 * @return the instance of the class
+	 */
 	public static GenView getINSTANCE()
 	{
 		return INSTANCE;
 	}
 
+	/**
+	 * @return the primary stage of the application
+	 */
 	public Stage getWindow()
 	{
 		return window;
 	}
 
+	/**
+	 * @return the scene of the login screen
+	 */
 	public Scene getLogin()
 	{
 		return login;
 	}
+	/**
+	 * @return the scene of the register screen
+	 */
 	public Scene getRegister()
 	{
 		return register;
 	}
-	public Scene getStartMenu()
-	{
-		return startMenu;
-	}
-	public Scene getChooseMode()
-	{
-		return chooseMode;
-	}
+	/**
+	 * @return the scene of the classic mode screen
+	 */
 	public Scene getGameplayClassic()
 	{
 		return gameplayClassic;
 	}
+	/**
+	 * @return the scene of the combo mode screen
+	 */
 	public Scene getGameplayCombo()
 	{
 		return gameplayCombo;
 	}
+	/**
+	 * @return the scene of the trade mode screen
+	 */
 	public Scene getGameplayTrade()
 	{
 		return gameplayTrade;
 	}
+	/**
+	 * @return the scene of the stats screen
+	 */
 	public Scene getStats()
 	{
 		return stats;
 	}
+	/**
+	 * @return the scene of the settings screen
+	 */
 	public Scene getSettings()
 	{
 		return settings;
 	}
+	/**
+	 * @return the scene of the end match classic screen
+	 */
 	public Scene getEndMatchClassic()
 	{
 		return endMatchClassic;
 	}
+	/**
+	 * @return the scene of the end match combo screen
+	 */
 	public Scene getEndMatchCombo()
 	{
 		return endMatchCombo;
 	}
+	/**
+	 * @return the scene of the end match trade screen
+	 */
 	public Scene getEndMatchTrade()
 	{
 		return endMatchTrade;
 	}
+	/**
+	 * @return the scene of the end game screen
+	 */
 	public Scene getEndgame()
 	{
 		return endgame;
 	}
 
-
+	/**
+	 * set the primary stage of the application
+	 *
+	 * @param stage the primary stage of the application
+	 */
 	public void setWindow(Stage stage)
 	{
 		window = stage;
 	}
+	/**
+	 * set the current game controller
+	 *
+	 * @param modality the current game mode
+	 */
 	public void setCurrentGameController(TurnOrder.MODALITY modality)
 	{
 		currentGameController = switch (modality)
@@ -148,7 +190,11 @@ public class GenView implements Observer
 				};
 	}
 
-
+	/**
+	 * load all the scenes of the application
+	 *
+	 * @throws IOException if the FXML file is not found or is corrupted
+	 */
 	public void load() throws IOException
 	{
 		FXMLLoader loader = new FXMLLoader(GenView.class.getResource("Login.fxml"));
@@ -203,6 +249,9 @@ public class GenView implements Observer
 		endMatchTrade = new Scene(loader.load());
 		endMatchTrade.setUserData(loader.getController());
 	}
+	/**
+	 * close the application and save
+	 */
 	public void closeWindow()
 	{
 		User.save();
@@ -210,6 +259,12 @@ public class GenView implements Observer
 		System.exit(0);
 	}
 
+	/**
+	 * change the current scene of the application
+	 *
+	 * @param s      the new scene of the application
+	 * @param anchor the anchor pane of the old scene
+	 */
 	public void changeScene(SCENES s, AnchorPane anchor)
 	{
 		Scene scene = (switch (s)
@@ -232,6 +287,12 @@ public class GenView implements Observer
 		makeFadeOut(scene, anchor);
 	}
 
+	/**
+	 * make the scene fade out animation
+	 *
+	 * @param newScene  the new scene of the application
+	 * @param oldAnchor the anchor pane of the old scene
+	 */
 	private void makeFadeOut(Scene newScene, AnchorPane oldAnchor)
 	{
 		FadeTransition fadeTransition = new FadeTransition(Duration.millis(250), oldAnchor);
@@ -244,6 +305,11 @@ public class GenView implements Observer
 		});
 		fadeTransition.play();
 	}
+	/**
+	 * make the scene fade in animation and change the current scene of the application
+	 *
+	 * @param node tha anchor pane of the new scene
+	 */
 	private void makeFadeIn(Node node)
 	{
 		FadeTransition fadeTransition = new FadeTransition(Duration.millis(250), node);
@@ -252,6 +318,13 @@ public class GenView implements Observer
 		fadeTransition.play();
 	}
 
+	/**
+	 * receive the messages of the model and send them to the current controller
+	 *
+	 * @param o   the observable object.
+	 * @param arg an argument passed to the {@code notifyObservers}
+	 *            method.
+	 */
 	@Override
 	public void update(Observable o, Object arg)
 	{

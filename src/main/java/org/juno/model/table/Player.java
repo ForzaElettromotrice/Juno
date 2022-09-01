@@ -34,7 +34,11 @@ public abstract class Player extends Observable
 
 	protected int points;
 
-
+	/**
+	 * Constructor, initiate the player with an ID
+	 *
+	 * @param n The given id
+	 */
 	protected Player(int n)
 	{
 		id = switch (n)
@@ -49,37 +53,62 @@ public abstract class Player extends Observable
 
 	}
 
-
+	/**
+	 * @return the id of the player
+	 */
 	public BuildMP.PG getId()
 	{
 		return id;
 	}
+	/**
+	 * @return the size of the hand of the player
+	 */
 	public int getSizeHand()
 	{
 		return hand.size();
 	}
+	/**
+	 * @return the card that the player has chosen to play
+	 */
 	public Card getChosenCard()
 	{
 		return chosenCard;
 	}
+	/**
+	 * @return true if the player has chosen a card to play else false
+	 */
 	public boolean hasChosen()
 	{
 		return chosenCard != null;
 	}
+	/**
+	 * @return true if the player has passed else false
+	 */
 	public boolean hasPassed()
 	{
 		return hasPassed;
 	}
+	/**
+	 * @return true if the player said UNO else false
+	 */
 	public boolean saidUno()
 	{
 		return saidUno;
 	}
+	/**
+	 * @return the points of the player
+	 */
 	public int getPoints()
 	{
 		return points;
 	}
 
-
+	/**
+	 * Choose a card to play from the given values
+	 *
+	 * @param color The given color
+	 * @param value The given value
+	 */
 	public void chooseCard(Card.Color color, Card.Value value)
 	{
 		Card first = DISCARD_PILE.getFirst();
@@ -106,6 +135,11 @@ public abstract class Player extends Observable
 			}
 		}
 	}
+	/**
+	 * Choose the color of the wild card from the given color
+	 *
+	 * @param color The given color
+	 */
 	public void chooseColor(Card.Color color)
 	{
 		if (chosenCard instanceof WildCard wildCard)
@@ -130,10 +164,16 @@ public abstract class Player extends Observable
 			clearChanged();
 		}
 	}
+	/**
+	 * set the player as if he had passed
+	 */
 	public void setHasPassed()
 	{
 		hasPassed = true;
 	}
+	/**
+	 * set the player as if he said UNO
+	 */
 	public void sayUno()
 	{
 		setChanged();
@@ -148,6 +188,11 @@ public abstract class Player extends Observable
 		clearChanged();
 		saidUno = true;
 	}
+	/**
+	 * Draw a card from the draw pile
+	 *
+	 * @return the card drawn
+	 */
 	public Card draw()
 	{
 		if (hasDrawn) return null;
@@ -174,7 +219,11 @@ public abstract class Player extends Observable
 		return card;
 	}
 
-
+	/**
+	 * Draw cards from the draw pile
+	 *
+	 * @param n The number of cards to draw
+	 */
 	public void draw(int n)
 	{
 		for (int i = 0; i < n; i++)
@@ -195,10 +244,20 @@ public abstract class Player extends Observable
 		}
 	}
 
+	/**
+	 * Add points to the player
+	 *
+	 * @param n The number of points to add
+	 */
 	public void addPoints(int n)
 	{
 		points += n;
 	}
+	/**
+	 * Calculate the points of the player in his hand
+	 *
+	 * @return the points that the player has in his hand
+	 */
 	public int calculatePoints()
 	{
 		int out = 0;
@@ -215,15 +274,23 @@ public abstract class Player extends Observable
 		return out;
 	}
 
-
+	/**
+	 * Reset the player for the next game
+	 */
 	public void resetGame()
 	{
 		points = 0;
 	}
+	/**
+	 * Reset the player for the next Match
+	 */
 	public void resetMatch()
 	{
 		hand.clear();
 	}
+	/**
+	 * Reset the player for the next turn
+	 */
 	public void resetTurn()
 	{
 		chosenCard = null;
@@ -232,7 +299,11 @@ public abstract class Player extends Observable
 		saidUno = false;
 	}
 
-
+	/**
+	 * Make the Thread sleep for the given time
+	 *
+	 * @param millis The time to sleep
+	 */
 	protected void delay(int millis)
 	{
 		try

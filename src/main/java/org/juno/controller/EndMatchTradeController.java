@@ -50,6 +50,9 @@ public class EndMatchTradeController
 	public Circle avatarBot3;
 
 
+	/**
+	 * called when the user clicks on the "exit" button
+	 */
 	@FXML
 	public void exitClicked()
 	{
@@ -63,6 +66,9 @@ public class EndMatchTradeController
 		GEN_VIEW.changeScene(GenView.SCENES.ENDGAME, anchorPane);
 	}
 
+	/**
+	 * called when the user clicks on the "play again" button
+	 */
 	@FXML
 	public void nextMatchClicked()
 	{
@@ -73,12 +79,20 @@ public class EndMatchTradeController
 		((GameplayTradeController) GEN_VIEW.getGameplayTrade().getUserData()).reset();
 	}
 
+	/**
+	 * play button entered sound
+	 */
 	@FXML
 	public void buttonEntered()
 	{
 		AUDIO_PLAYER.play(AudioPlayer.Sounds.CURSORSELECT);
 	}
 
+	/**
+	 * load all the players' points
+	 *
+	 * @param pointsData the points data
+	 */
 	public void load(PointsData pointsData)
 	{
 		avatarPlayer.setFill(new ImagePattern(new Image(User.getInstance().getAvatar())));
@@ -91,6 +105,9 @@ public class EndMatchTradeController
 		labelBot3.setText(String.format("Bot 3: %d points", pointsData.bot3Points()));
 	}
 
+	/**
+	 * play the button click sound
+	 */
 	protected void buttonClick()
 	{
 		AUDIO_PLAYER.play(AudioPlayer.Sounds.BUTTONCLICK);

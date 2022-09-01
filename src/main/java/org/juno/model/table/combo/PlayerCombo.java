@@ -15,12 +15,23 @@ public class PlayerCombo extends Player
 
 	protected boolean combo;
 
+	/**
+	 * Constructor, initiate the player
+	 *
+	 * @param i the id of the player
+	 */
 	public PlayerCombo(int i)
 	{
 		super(i);
 	}
 
-
+	/**
+	 * choose the card to play from the given values,
+	 * if combo is true, the player can play a card with different conditions
+	 *
+	 * @param color The given color
+	 * @param value The given value
+	 */
 	@Override
 	public void chooseCard(Card.Color color, Card.Value value)
 	{
@@ -67,12 +78,20 @@ public class PlayerCombo extends Player
 		combo = false;
 	}
 
+	/**
+	 * @return true if the player can still play a card else false
+	 */
 	public boolean canPlay()
 	{
 		chosenCard = null;
 		return combo;
 	}
 
+	/**
+	 * draws a card from the deck until the player can play a card
+	 *
+	 * @return the card which the player can play
+	 */
 	@Override
 	public Card draw()
 	{
@@ -95,6 +114,9 @@ public class PlayerCombo extends Player
 		}
 	}
 
+	/**
+	 * reset the player to its initial state of a turn
+	 */
 	@Override
 	public void resetTurn()
 	{
