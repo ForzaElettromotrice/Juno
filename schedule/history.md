@@ -74,31 +74,31 @@
    * Added the shuffle method call when creating a new DRAW_PILE.
 
 2. Created a new DataStructure, CircularLinkedList, to be used to manage turns: it is a LinkedList
-    where the last element is linked to the first. WARNING: NOT COMPLETE AND TO BE USED ONLY IN THIS
-    PROJECT: IT MISSES SOME CORE METHODS!!
-    * Created the inner class Node with three fields: value, next and prev, and a constructor that takes a 
-        value T.
+   where the last element is linked to the first. WARNING: NOT COMPLETE AND TO BE USED ONLY IN THIS
+   PROJECT: IT MISSES SOME CORE METHODS!!
+    * Created the inner class Node with three fields: value, next and prev, and a constructor that takes a
+      value T.
     * Created three Nodes, head, tail and currentNode, and int size fields.
     * Created the add, addFirst (uses add), addLast (uses add), add(a certain position is specified),
-        isEmpty, getSize, getFirst, getLast, getNext, get and clear methods.
+      isEmpty, getSize, getFirst, getLast, getNext, get and clear methods.
 
-4. Created the table package: it will define how the game works, bots and players, just like
-    a game table does.
-    * Created the Table class: a Singleton with a private constructors that uses DISCARD_PILE, 
-        DRAW_PILE, Bot and Player. It manages the game flow and has isInverted, endGame and turnOrder (CircularLL!)
-        fields.
+3. Created the table package: it will define how the game works, bots and players, just like
+   a game table does.
+    * Created the Table class: a Singleton with a private constructors that uses DISCARD_PILE,
+      DRAW_PILE, Bot and Player. It manages the game flow and has isInverted, endGame and turnOrder (CircularLL!)
+      fields.
         - Created the isValid (uses the isValid method in Card), getINSTANCE, reset (creates a Player and four bots
-            and basically sets everything up for a new match), turn and starMatch methods.
+          and basically sets everything up for a new match), turn and starMatch methods.
 
-5. Created the sub-package player, that contains Bot and Player.
+4. Created the sub-package player, that contains Bot and Player.
     * Created the Player class, that uses DRAW_PILE, DISCARD_PILE, TABLE and has private fields
-        called hand (LinkedList), saidUno (boolean), chosenCard (if the player has chosen a card
-        to play) and endTurn. It defines the player.
+      called hand (LinkedList), saidUno (boolean), chosenCard (if the player has chosen a card
+      to play) and endTurn. It defines the player.
         - Created the constructor (initializes a new hand and draws 7 cards from DRAW_PILE).
         - Created the sort (sorts the hand by color), draw (draws a certain number of cards, sorts them and sets saidUno
           to false), draw (draws a single card), discard (only discards a card if it is valid, sets the chosenCard
           field), sayUno, notUno (setters for saidUno), getChosenCard, setChosenCard (get/set for chosenCard),
-            setEndTurn and getEndTurn (setters and getters for endTurn) methods.
+          setEndTurn and getEndTurn (setters and getters for endTurn) methods.
     * Created the Bot class that extends Player. It has a private Random rand field to decide if the bot says Uno.
         - Created the randColor (decides what color the black card should assume based on the cards in
           the hand), discard (overrides Player's method by adding a method that in 80% cases says

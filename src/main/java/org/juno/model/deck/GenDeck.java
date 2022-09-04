@@ -8,7 +8,7 @@ import java.util.LinkedList;
  */
 public abstract class GenDeck
 {
-    protected LinkedList<Card> deck;
+    protected final LinkedList<Card> deck;
 
     /**
      * Create the deck to the initial state

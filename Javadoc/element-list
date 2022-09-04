@@ -1,0 +1,11 @@
+module:org.juno
+org.juno
+org.juno.controller
+org.juno.datapackage
+org.juno.model.deck
+org.juno.model.table
+org.juno.model.table.classic
+org.juno.model.table.combo
+org.juno.model.table.trade
+org.juno.model.user
+org.juno.view

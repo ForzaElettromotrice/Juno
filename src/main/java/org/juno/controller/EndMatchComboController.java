@@ -10,7 +10,6 @@ import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import org.juno.datapackage.PointsData;
 import org.juno.model.table.TurnOrder;
-import org.juno.model.table.classic.TableClassic;
 import org.juno.model.table.combo.TableCombo;
 import org.juno.model.user.User;
 import org.juno.view.AudioPlayer;

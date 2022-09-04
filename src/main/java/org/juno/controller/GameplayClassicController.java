@@ -5,8 +5,6 @@ import javafx.animation.PathTransition;
 import javafx.animation.RotateTransition;
 import javafx.animation.ScaleTransition;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
-import javafx.geometry.Point3D;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -31,8 +29,6 @@ import org.juno.model.user.User;
 import org.juno.view.AudioPlayer;
 import org.juno.view.GenView;
 
-import java.net.URL;
-import java.util.ResourceBundle;
 
 /**
  * Defines GameplayControllerNew class,

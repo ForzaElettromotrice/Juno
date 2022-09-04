@@ -1,6 +1,5 @@
 package org.juno.datapackage;
 
-import org.juno.model.table.Player;
 
 /**
  * Defines PointsData record,

@@ -8,7 +8,6 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.Slider;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import org.juno.model.user.User;
 import org.juno.view.AudioPlayer;

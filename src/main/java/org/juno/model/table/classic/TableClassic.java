@@ -56,7 +56,7 @@ public class TableClassic extends Table
 		int delay;
 		int delayUno;
 
-		Card chosenCard = null;
+		Card chosenCard;
 
 		if (currentPlayer.getId() == BuildMP.PG.PLAYER)
 		{

@@ -1,6 +1,5 @@
 package org.juno.datapackage;
 
-import java.util.Map;
 
 /**
  * Defines Data interface,

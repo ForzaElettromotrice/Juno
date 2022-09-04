@@ -5,12 +5,9 @@ import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import org.juno.controller.LoginController;
 import org.juno.model.table.Player;
-import org.juno.model.table.Table;
 import org.juno.model.table.classic.TableClassic;
 import org.juno.model.table.combo.TableCombo;
 import org.juno.model.table.trade.TableTrade;
-import org.juno.model.user.DataCorruptedException;
-import org.juno.model.user.User;
 import org.juno.view.AudioPlayer;
 import org.juno.view.GenView;
 

@@ -1,7 +1,6 @@
 package org.juno.datapackage;
 
 import org.juno.model.deck.Card;
-import org.juno.model.table.Player;
 
 import java.util.Collection;
 
