@@ -9,16 +9,20 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="anchor" prefHeight="1080.0" prefWidth="1920.0" styleClass="backgroundRed" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.juno.controller.ChooseModeController">
-   <HBox alignment="CENTER" layoutX="210.0" layoutY="350.0" prefHeight="300.0" prefWidth="1500.0" spacing="200.0" />
-   <Button id="backCM" layoutX="20.0" layoutY="20.0" mnemonicParsing="false" onAction="#backClicked" onMouseEntered="#buttonEntered" prefHeight="110.0" prefWidth="160.0" text="←Back">
+<AnchorPane fx:id="anchor" prefHeight="1080.0" prefWidth="1920.0" styleClass="backgroundRed" stylesheets="@Style.css"
+            xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="org.juno.controller.ChooseModeController">
+   <HBox alignment="CENTER" layoutX="210.0" layoutY="350.0" prefHeight="300.0" prefWidth="1500.0" spacing="200.0"/>
+   <Button id="backCM" layoutX="20.0" layoutY="20.0" mnemonicParsing="false" onAction="#backClicked"
+           onMouseEntered="#buttonEntered" prefHeight="110.0" prefWidth="160.0" text="←Back">
       <font>
-         <Font size="50.0" />
+         <Font size="50.0"/>
       </font>
    </Button>
-   <Label alignment="CENTER" layoutX="460.0" layoutY="20.0" prefHeight="150.0" prefWidth="1000.0" text="Choose game mode :" textFill="WHITE">
+   <Label alignment="CENTER" layoutX="460.0" layoutY="20.0" prefHeight="150.0" prefWidth="1000.0"
+          text="Choose game mode :" textFill="WHITE">
       <font>
-         <Font name="Javanese Text" size="50.0" />
+         <Font name="Javanese Text" size="50.0"/>
       </font>
    </Label>
    <VBox layoutX="210.0" layoutY="90.0" prefHeight="900.0" prefWidth="1500.0">

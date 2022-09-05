@@ -58,10 +58,7 @@ public class LoginController
 	{
 		if (keyEvent.getCode() == KeyCode.ESCAPE)
 		{
-			for (Node child : boxAccount.getChildren())
-			{
-				((HBox) child).getChildren().get(5).setVisible(false);
-			}
+			boxAccount.getChildren().forEach(child -> ((HBox) child).getChildren().get(5).setVisible(false));
 			minusToggle.setSelected(false);
 			((ImageView) minusToggle.getChildrenUnmodifiable().get(0)).setImage(new Image("file:\\" + System.getProperty("user.dir") + "\\src\\main\\resources\\org\\juno\\images\\" + "minus.png"));
 		} else if (keyEvent.getCode() == KeyCode.ENTER)
@@ -77,12 +74,12 @@ public class LoginController
 		commitButton.setDisable(true);
 		click();
 		accountChosen = "";
-		for (Node child : boxAccount.getChildren())
+		boxAccount.getChildren().forEach(child ->
 		{
 			child.setUserData(false);
 			child.setStyle("-fx-border-color: BLACK; -fx-border-width: 0px 0px 3px 0px;");
 			((HBox) child).getChildren().get(5).setVisible(minusToggle.isSelected());
-		}
+		});
 		((ImageView) minusToggle.getChildrenUnmodifiable().get(0)).setImage(new Image("file:\\" + System.getProperty("user.dir") + "\\src\\main\\resources\\org\\juno\\images\\" + (minusToggle.isSelected() ? "check.png" : "minus.png")));
 
 	}
@@ -166,12 +163,11 @@ public class LoginController
 			if (accountChosen.equals(((Label) box.getChildren().get(1)).getText()))
 				commit();
 
-			for (Node child : boxAccount.getChildren())
+			boxAccount.getChildren().stream().filter(child -> !child.equals(box)).forEach(child ->
 			{
-				if (child.equals(box)) continue;
 				child.setUserData(false);
 				child.setStyle("-fx-border-color: BLACK; -fx-border-width: 0px 0px 3px 0px;");
-			}
+			});
 			box.setUserData(true);
 
 			accountChosen = ((Label) box.getChildren().get(1)).getText();

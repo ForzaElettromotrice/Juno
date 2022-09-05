@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.shape.Circle?>
 
-<AnchorPane fx:id="anchorPane" maxHeight="1080.0" maxWidth="1920.0" minHeight="1080.0" minWidth="1920.0" prefHeight="1080.0" prefWidth="1920.0" styleClass="backgroundGameplay" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.juno.controller.GameplayClassicController">
+<AnchorPane fx:id="anchorPane" maxHeight="1080.0" maxWidth="1920.0" minHeight="1080.0" minWidth="1920.0" prefHeight="1080.0" prefWidth="1920.0" styleClass="backgroundGameplay" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.juno.controller.GameplayClassicController">
    <ImageView fx:id="bot3Turn" fitHeight="417.0" fitWidth="417.0" layoutX="1446.0" layoutY="153.0" pickOnBounds="true" preserveRatio="true" visible="false">
       <Image url="@../images/rays.png" />
    </ImageView>

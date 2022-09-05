@@ -13,7 +13,7 @@
 <?import javafx.scene.text.Font?>
 
 <AnchorPane fx:id="backgroundLogin" onKeyPressed="#anchorKeyPressed" prefHeight="1080.0" prefWidth="1920.0"
-            styleClass="backgroundWhite" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/18"
+            styleClass="backgroundWhite" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/17"
             xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.juno.controller.LoginController">
    <VBox alignment="TOP_CENTER" layoutX="210.0" layoutY="140.0" prefHeight="810.0" prefWidth="1500.0">
       <Label alignment="TOP_CENTER" prefHeight="100.0" prefWidth="1300.0" text="Choose the account">

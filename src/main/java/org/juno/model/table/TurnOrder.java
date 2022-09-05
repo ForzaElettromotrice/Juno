@@ -8,6 +8,9 @@ import org.juno.model.table.combo.PlayerCombo;
 import org.juno.model.table.trade.BotTrade;
 import org.juno.model.table.trade.PlayerTrade;
 
+import java.util.Arrays;
+import java.util.stream.IntStream;
+
 /**
  * Defines TurnOrder class,
  *
@@ -42,15 +45,12 @@ public class TurnOrder
 					case TRADE -> new PlayerTrade(0);
 				};
 
-		for (int i = 1; i < 4; i++)
-		{
-			players[i] = switch (modality)
-					{
-						case CLASSIC -> new BotClassic(i);
-						case COMBO -> new BotCombo(i);
-						case TRADE -> new BotTrade(i);
-					};
-		}
+		IntStream.range(1, 4).forEach(i -> players[i] = switch (modality)
+				{
+					case CLASSIC -> new BotClassic(i);
+					case COMBO -> new BotCombo(i);
+					case TRADE -> new BotTrade(i);
+				});
 
 
 	}
@@ -123,10 +123,7 @@ public class TurnOrder
 	 */
 	public void updatePoints(Player winner)
 	{
-		for (Player player : players)
-		{
-			winner.addPoints(player.calculatePoints());
-		}
+		Arrays.stream(players).mapToInt(Player::calculatePoints).forEach(winner::addPoints);
 	}
 
 	/**
@@ -134,21 +131,18 @@ public class TurnOrder
 	 */
 	public void resetGame()
 	{
-		for (Player player : players)
-		{
-			player.resetGame();
-		}
+		Arrays.stream(players).forEach(Player::resetGame);
 	}
 	/**
 	 * reset the turn order for the next match
 	 */
 	public void resetMatch()
 	{
-		for (Player player : players)
+		Arrays.stream(players).forEach(player ->
 		{
 			player.resetMatch();
 			player.draw(2);
-		}
+		});
 		isInverted = false;
 	}
 

@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="anchor" onKeyPressed="#anchorKeyPressed" prefHeight="1080.0" prefWidth="1920.0" styleClass="backgroundYellow" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.juno.controller.SettingsController">
+<AnchorPane fx:id="anchor" onKeyPressed="#anchorKeyPressed" prefHeight="1080.0" prefWidth="1920.0" styleClass="backgroundYellow" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.juno.controller.SettingsController">
     <Button id="backSettings" fx:id="backButton" layoutX="20.0" layoutY="20.0" mnemonicParsing="false" onAction="#backClicked" onMouseEntered="#buttonEntered" prefHeight="110.0" prefWidth="170.0" text="← Back">
         <font>
             <Font name="Arial" size="50.0" />

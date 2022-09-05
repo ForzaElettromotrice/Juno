@@ -16,7 +16,7 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="anchor" onKeyPressed="#anchorKeyPressed" onMouseClicked="#anchorClicked" prefHeight="1080.0" prefWidth="1920.0" styleClass="backgroundBlue" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.juno.controller.StatsController">
+<AnchorPane fx:id="anchor" onKeyPressed="#anchorKeyPressed" onMouseClicked="#anchorClicked" prefHeight="1080.0" prefWidth="1920.0" styleClass="backgroundBlue" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.juno.controller.StatsController">
    <VBox layoutX="800.0" layoutY="150.0" prefHeight="860.0" prefWidth="1000.0" spacing="20.0">
       <HBox prefHeight="200.0" prefWidth="800.0">
          <ImageView fitHeight="200.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">

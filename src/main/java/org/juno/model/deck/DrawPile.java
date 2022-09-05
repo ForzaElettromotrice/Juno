@@ -72,15 +72,15 @@ public class DrawPile extends GenDeck
     public void reset()
     {
         deck.clear();
-        for (Card.Color c : Arrays.stream(Card.Color.values()).filter(x -> x != Card.Color.BLACK).toList())
+        Arrays.stream(Card.Color.values()).filter(x -> x != Card.Color.BLACK).forEach(c ->
         {
-            for (Card.Value v : Arrays.stream(Card.Value.values()).filter(x -> x != Card.Value.ZERO && x != Card.Value.JOLLY && x != Card.Value.PLUSFOUR).toList())
+            Arrays.stream(Card.Value.values()).filter(x -> x != Card.Value.ZERO && x != Card.Value.JOLLY && x != Card.Value.PLUSFOUR).forEach(v ->
             {
                 deck.add(new Card(c, v));
                 deck.add(new Card(c, v));
-            }
+            });
             deck.add(new Card(c, Card.Value.ZERO));
-        }
+        });
         deck.add(new WildCard(Card.Value.JOLLY));
         deck.add(new WildCard(Card.Value.JOLLY));
         deck.add(new WildCard(Card.Value.PLUSFOUR));

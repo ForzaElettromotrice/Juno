@@ -13,6 +13,7 @@ import org.juno.view.GenView;
 
 
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.Objects;
 
 
@@ -62,28 +63,19 @@ public class Juno extends Application
 		//CLASSIC
 		TABLE_CLASSIC.addObserver(GEN_VIEW);
 
-		for (Player player : TABLE_CLASSIC.getPlayers())
-		{
-			player.addObserver(GEN_VIEW);
-		}
+		Arrays.stream(TABLE_CLASSIC.getPlayers()).forEach(player -> player.addObserver(GEN_VIEW));
 
 
 		//COMBO
 		TABLE_COMBO.addObserver(GEN_VIEW);
 
-		for (Player player : TABLE_COMBO.getPlayers())
-		{
-			player.addObserver(GEN_VIEW);
-		}
+		Arrays.stream(TABLE_COMBO.getPlayers()).forEach(player -> player.addObserver(GEN_VIEW));
 
 
 		//TRADE
 		TABLE_TRADE.addObserver(GEN_VIEW);
 
-		for (Player player : TABLE_TRADE.getPlayers())
-		{
-			player.addObserver(GEN_VIEW);
-		}
+		Arrays.stream(TABLE_TRADE.getPlayers()).forEach(player -> player.addObserver(GEN_VIEW));
 
 
 		//Starting the music!

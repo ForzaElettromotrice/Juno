@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="anchor" onKeyPressed="#anchorKeyPressed" prefHeight="1080.0" prefWidth="1920.0" styleClass="backgroundWhite" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.juno.controller.RegisterController">
+<AnchorPane fx:id="anchor" onKeyPressed="#anchorKeyPressed" prefHeight="1080.0" prefWidth="1920.0" styleClass="backgroundWhite" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.juno.controller.RegisterController">
     <VBox layoutX="460.0" prefHeight="1080.0" prefWidth="1000.0" spacing="20.0">
         <Label alignment="CENTER" prefHeight="150.0" prefWidth="1000.0" styleClass="titleStyle" text="Register" textAlignment="CENTER">
             <font>

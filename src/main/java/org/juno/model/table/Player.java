@@ -9,6 +9,7 @@ import org.juno.model.deck.WildCard;
 
 import java.util.LinkedList;
 import java.util.Observable;
+import java.util.stream.IntStream;
 
 /**
  * Defines Player class,
@@ -226,9 +227,8 @@ public abstract class Player extends Observable
 	 */
 	public void draw(int n)
 	{
-		for (int i = 0; i < n; i++)
+		IntStream.range(0, n).mapToObj(i -> DRAW_PILE.draw()).forEach(card ->
 		{
-			Card card = DRAW_PILE.draw();
 			hand.add(card);
 			setChanged();
 			try
@@ -241,7 +241,7 @@ public abstract class Player extends Observable
 			}
 			clearChanged();
 			delay(250);
-		}
+		});
 	}
 
 	/**
@@ -260,18 +260,13 @@ public abstract class Player extends Observable
 	 */
 	public int calculatePoints()
 	{
-		int out = 0;
 
-		for (Card card : hand)
-		{
-			out += switch (card.getValue())
-					{
-						case JOLLY, PLUSFOUR -> 50;
-						case PLUSTWO, STOP, REVERSE -> 20;
-						default -> card.getValue().getVal();
-					};
-		}
-		return out;
+		return hand.stream().mapToInt(card -> switch (card.getValue())
+				{
+					case JOLLY, PLUSFOUR -> 50;
+					case PLUSTWO, STOP, REVERSE -> 20;
+					default -> card.getValue().getVal();
+				}).sum();
 	}
 
 	/**

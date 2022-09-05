@@ -50,10 +50,7 @@ public class DiscardPile extends GenDeck
         reset();
         discard(top);
 
-        for (Card card : out)
-        {
-            if (card instanceof WildCard wildCard) wildCard.setColor(Card.Color.BLACK);
-        }
+        out.stream().filter(WildCard.class::isInstance).map(WildCard.class::cast).forEach(wildCard -> wildCard.setColor(Card.Color.BLACK));
 
         Collections.shuffle(out);
         return out;

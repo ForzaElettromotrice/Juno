@@ -31,6 +31,8 @@ import org.juno.model.user.User;
 import org.juno.view.AudioPlayer;
 import org.juno.view.GenView;
 
+import java.util.stream.IntStream;
+
 /**
  * Defines GameplayTradeController ,
  *
@@ -660,10 +662,7 @@ public class GameplayTradeController implements Gameplay
             case BOT3 -> bot3Turn.setVisible(true);
         }
 
-        for (Node card : userHand.getChildren())
-        {
-            card.setTranslateY(0);
-        }
+        userHand.getChildren().forEach(card -> card.setTranslateY(0));
 
     }
     /**
@@ -759,10 +758,7 @@ public class GameplayTradeController implements Gameplay
         int userSize = userHand.getChildren().size();
         userHand.getChildren().clear();
 
-        for (Card card : switchData.newHand())
-        {
-            draw(new DrawData(BuildMP.PG.PLAYER, card));
-        }
+        switchData.newHand().stream().map(card -> new DrawData(BuildMP.PG.PLAYER, card)).forEach(this::draw);
 
 
         if (switchData.fromPg() == null)
@@ -775,32 +771,23 @@ public class GameplayTradeController implements Gameplay
             botHand3.getChildren().clear();
 
 
-            for (int i = 0; i < userSize; i++)
-            {
-                draw(new DrawData(BuildMP.PG.BOT1, null));
-            }
-            for (int i = 0; i < bot1Size; i++)
-            {
-                draw(new DrawData(BuildMP.PG.BOT2, null));
-            }
-            for (int i = 0; i < bot2Size; i++)
-            {
-                draw(new DrawData(BuildMP.PG.BOT3, null));
-            }
+            IntStream.range(0, userSize).mapToObj(i -> new DrawData(BuildMP.PG.BOT1, null)).forEach(this::draw);
+            IntStream.range(0, bot1Size).mapToObj(i -> new DrawData(BuildMP.PG.BOT2, null)).forEach(this::draw);
+            IntStream.range(0, bot2Size).mapToObj(i -> new DrawData(BuildMP.PG.BOT3, null)).forEach(this::draw);
         } else
         {
             BuildMP.PG pg = switchData.fromPg() != BuildMP.PG.PLAYER ? switchData.fromPg() : switchData.toPg();
 
             switch (pg)
             {
+                case PLAYER ->
+                {
+                }
                 case BOT1 -> botHand1.getChildren().clear();
                 case BOT2 -> botHand2.getChildren().clear();
                 case BOT3 -> botHand3.getChildren().clear();
             }
-            for (int i = 0; i < userSize; i++)
-            {
-                draw(new DrawData(pg, null));
-            }
+            IntStream.range(0, userSize).mapToObj(i -> new DrawData(pg, null)).forEach(this::draw);
         }
     }
 

@@ -633,10 +633,7 @@ public class GameplayClassicController implements Gameplay
 			case BOT3 -> bot3Turn.setVisible(true);
 		}
 
-		for (Node card : userHand.getChildren())
-		{
-			card.setTranslateY(0);
-		}
+		userHand.getChildren().forEach(card -> card.setTranslateY(0));
 
 	}
 
