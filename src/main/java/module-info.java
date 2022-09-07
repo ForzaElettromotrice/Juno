@@ -3,6 +3,7 @@ module org.juno
 	requires javafx.controls;
 	requires javafx.fxml;
 	requires javafx.media;
+	requires javafx.web;
 
 	opens org.juno to javafx.fxml;
 	exports org.juno;

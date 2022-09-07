@@ -38,18 +38,30 @@ public class BuildMP
 
 	public enum Effects
 	{
-		STOP,
-		REVERSE,
-		PLUSTWO,
-		PLUSFOUR,
-		JOLLY,
-		SAIDUNO,
-		DIDNTSAYUNO,
-		ONECARD,
-		RED,
-		BLUE,
-		YELLOW,
-		GREEN
+		STOP("stopPopUp.gif"),
+		REVERSE("reversePopUp.gif"),
+		PLUSTWO("plusTwoPopUp.gif"),
+		PLUSFOUR("plusFourPopUp.gif"),
+		JOLLY("jollyPopUp.gif"),
+		SAIDUNO("saidUnoPopUp.gif"),
+		DIDNTSAYUNO("didntSayUnoPopUp.gif"),
+		ONECARD("oneCardPopUp.gif"),
+		RED("redPopUp.gif"),
+		BLUE("bluePopUp.gif"),
+		YELLOW("yellowPopUp.gif"),
+		GREEN("greenPopUp.gif");
+
+		private final String path;
+
+		Effects(String s)
+		{
+			path = s;
+		}
+
+		public String getPath()
+		{
+			return path;
+		}
 	}
 
 	public enum Colors

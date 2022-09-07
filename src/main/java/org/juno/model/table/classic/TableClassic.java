@@ -61,10 +61,10 @@ public class TableClassic extends Table
 		if (currentPlayer.getId() == BuildMP.PG.PLAYER)
 		{
 			delay = 100;
-			delayUno = 2000;
+			delayUno = 1250;
 		} else
 		{
-			delay = 1000;
+			delay = 1250;
 			delayUno = 100;
 		}
 

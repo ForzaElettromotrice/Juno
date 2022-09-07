@@ -238,6 +238,7 @@ public abstract class Table extends Observable implements Runnable
 						err.printStackTrace();
 					}
 					clearChanged();
+					delay(1000);
 					currentPlayer.draw(2);
 				}
 			}
@@ -311,10 +312,18 @@ public abstract class Table extends Observable implements Runnable
 	 */
 	protected Player applyEffects(Player currentPlayer)
 	{
-		if (plus2 != 0) currentPlayer.draw(2 * plus2);
-		else if (plus4 != 0) currentPlayer.draw(4 * plus4);
+		if (plus2 != 0)
+		{
+			delay(1000);
+			currentPlayer.draw(2 * plus2);
+		} else if (plus4 != 0)
+		{
+			delay(1000);
+			currentPlayer.draw(4 * plus4);
+		}
 		if (stop != 0)
 		{
+			delay(1000);
 			Player next = null;
 			for (int i = 0; i < stop; i++)
 			{

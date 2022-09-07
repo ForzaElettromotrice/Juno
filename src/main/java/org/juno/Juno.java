@@ -4,7 +4,6 @@ import javafx.application.Application;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import org.juno.controller.LoginController;
-import org.juno.model.table.Player;
 import org.juno.model.table.classic.TableClassic;
 import org.juno.model.table.combo.TableCombo;
 import org.juno.model.table.trade.TableTrade;
