@@ -287,7 +287,6 @@ public class GameplayTradeController implements Gameplay
         Card.Value value = ((Card) lastClicked.getUserData()).getValue();
         Card.Color color = ((Card) lastClicked.getUserData()).getColor();
 
-        System.out.println(color + " " + value);
         TABLE_TRADE.getUser().chooseCard(color, value);
         if (color == Card.Color.BLACK && TABLE_TRADE.getCurrentPlayer().getId() == BuildMP.PG.PLAYER)
             colorGrid.setVisible(true);
@@ -747,9 +746,6 @@ public class GameplayTradeController implements Gameplay
     @Override
     public void doSwitch(SwitchData switchData)
     {
-        System.out.println("HAND TO SWITCH " + switchData.newHand());
-        System.out.println("FROM " + switchData.fromPg());
-        System.out.println("TO " + switchData.toPg());
 
         int userSize = userHand.getChildren().size();
         userHand.getChildren().clear();

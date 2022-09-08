@@ -46,7 +46,6 @@ public class TableClassic extends Table
 	{
 		PlayerClassic currentPlayer = (PlayerClassic) player;
 
-		System.out.println("TURNO DI " + currentPlayer.getId());
 
 		resetTurn();
 		currentPlayer.resetTurn();

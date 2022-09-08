@@ -54,9 +54,6 @@ public class TableTrade extends Table
     {
         PlayerTrade currentPlayer = (PlayerTrade) player;
 
-        System.out.println("TURNO DI " + currentPlayer.getId());
-        System.out.println("MANO INIZIALE = " + currentPlayer.getHand());
-
         resetTurn();
         currentPlayer.resetTurn();
 

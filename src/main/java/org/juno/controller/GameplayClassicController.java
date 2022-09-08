@@ -139,7 +139,6 @@ public class GameplayClassicController implements Gameplay
 		Card.Value value = ((Card) lastClicked.getUserData()).getValue();
 		Card.Color color = ((Card) lastClicked.getUserData()).getColor();
 
-		System.out.println(color + " " + value);
 		TABLE_CLASSIC.getUser().chooseCard(color, value);
 		if (color == Card.Color.BLACK && TABLE_CLASSIC.getCurrentPlayer().getId() == BuildMP.PG.PLAYER)
 		{
