@@ -9,6 +9,8 @@ import org.juno.model.user.User;
 import org.juno.view.AudioPlayer;
 import org.juno.view.GenView;
 
+import java.io.File;
+import java.util.Arrays;
 import java.util.Objects;
 
 /**
@@ -74,11 +76,25 @@ public class RegisterController
 	{
 		AUDIO_PLAYER.play(AudioPlayer.Sounds.BUTTONCLICK);
 
-		if (Objects.equals(usernameTextField.getText(), ""))
+		File dir = new File(System.getProperty("user.dir") + "\\src\\main\\resources\\org\\juno\\model\\user");
+		String erroMessage;
+		if (!Objects.equals(usernameTextField.getText(), ""))
 		{
+			if (Arrays.stream(Objects.requireNonNull(dir.list())).findAny().filter(x -> x.equals(usernameTextField.getText() + ".txt")).isPresent())
+			{
+				erroMessage = "Username already taken";
+				alertLabel.setText(erroMessage);
+				alertLabel.setVisible(true);
+				return;
+			}
+		} else
+		{
+			erroMessage = "You have to choose a username!";
+			alertLabel.setText(erroMessage);
 			alertLabel.setVisible(true);
 			return;
 		}
+
 		saveData();
 	}
 

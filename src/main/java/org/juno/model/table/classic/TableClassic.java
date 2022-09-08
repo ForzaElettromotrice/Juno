@@ -64,7 +64,7 @@ public class TableClassic extends Table
 			delayUno = 1250;
 		} else
 		{
-			delay = 1250;
+			delay = 1000;
 			delayUno = 100;
 		}
 
@@ -77,7 +77,6 @@ public class TableClassic extends Table
 				chosenCard = currentPlayer.getChosenCard();
 				if (chosenCard.getColor() != Card.Color.BLACK)
 				{
-					checkEffects(chosenCard);
 					DISCARD_PILE.discard(chosenCard);
 					setChanged();
 					try
@@ -89,8 +88,9 @@ public class TableClassic extends Table
 						err.printStackTrace();
 					}
 					clearChanged();
-					delay(1000);
+					checkEffects(chosenCard);
 					endTurn = true;
+					delay(500);
 				}
 			} else endTurn = currentPlayer.hasPassed();
 		}

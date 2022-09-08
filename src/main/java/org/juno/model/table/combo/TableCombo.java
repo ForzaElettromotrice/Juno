@@ -81,8 +81,6 @@ public class TableCombo extends Table
 
 				if (chosenCard.getColor() != Card.Color.BLACK)
 				{
-					System.out.println("HA GIOCATO QUESTA CARTA " + chosenCard);
-					checkEffects(chosenCard);
 					DISCARD_PILE.discard(chosenCard);
 
 					setChanged();
@@ -94,9 +92,10 @@ public class TableCombo extends Table
 						System.out.println(err.getMessage());
 						err.printStackTrace();
 					}
+					checkEffects(chosenCard);
 					clearChanged();
-					delay(1000);
 					endTurn = !currentPlayer.canPlay();
+					delay(500);
 				}
 			} else endTurn = currentPlayer.hasPassed();
 		}

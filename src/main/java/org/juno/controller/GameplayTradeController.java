@@ -1,12 +1,8 @@
 package org.juno.controller;
 
 
-import javafx.animation.Interpolator;
-import javafx.animation.PathTransition;
-import javafx.animation.RotateTransition;
-import javafx.animation.ScaleTransition;
+import javafx.animation.*;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
@@ -31,6 +27,8 @@ import org.juno.model.user.User;
 import org.juno.view.AudioPlayer;
 import org.juno.view.GenView;
 
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.stream.IntStream;
 
 /**
@@ -666,82 +664,80 @@ public class GameplayTradeController implements Gameplay
 
     }
     /**
-     * make the animation of the effect given
+     * make the animation of the given effect
      *
-     * @param effectData the data of the effect given
+     * @param effectData the data of the effect
      */
     @Override
     public void effect(EffectData effectData)
     {
-        switch (effectData.effect())
+        if (effectData.effect() == BuildMP.Effects.DIDNTSAYUNO) juno.setVisible(false);
+        else if (effectData.effect() == BuildMP.Effects.ONECARD)
         {
-            case STOP -> zoomAnimation(BuildMP.Effects.STOP);
-            case REVERSE -> zoomAnimation(BuildMP.Effects.REVERSE);
-            case JOLLY -> zoomAnimation(BuildMP.Effects.JOLLY);
-            case PLUSTWO -> zoomAnimation(BuildMP.Effects.PLUSTWO);
-            case PLUSFOUR -> zoomAnimation(BuildMP.Effects.PLUSFOUR);
-            case SAIDUNO -> zoomAnimation(BuildMP.Effects.SAIDUNO);
-            case DIDNTSAYUNO ->
-            {
-                juno.setVisible(false);
-                zoomAnimation(BuildMP.Effects.DIDNTSAYUNO);
-            }
-            case ONECARD -> juno.setVisible(true);
-            default ->
-                    throw new RuntimeException("Questo messaggio non dovrebbe essere arrivato " + effectData.effect());
+            juno.setVisible(true);
+            return;
         }
+
+        zoomAnimation(effectData.effect());
+
     }
 
     /**
-     * create the imageview of the effect given
+     * create the imageview of the effect for the animation
      *
-     * @param effect the effect given
-     * @return the imageview of the effect given
+     * @param effect the effect
+     * @return the imageview of the effect
      */
     private ImageView createZoomImage(BuildMP.Effects effect)
     {
-        ImageView imageView = new ImageView(new Image("file:\\" + USER_DIR + "\\src\\main\\resources\\org\\juno\\images\\" + switch (effect)
-                {
-                    case STOP -> "stopPopUp.png";
-                    case REVERSE -> "reversePopUp.png";
-                    case PLUSTWO -> "plusTwoPopUp.png";
-                    case PLUSFOUR -> "plusFourPopUp.png";
-                    case JOLLY -> "jollyPopUp.png";
-                    case SAIDUNO -> "saidUnoPopUp.png";
-                    case DIDNTSAYUNO -> "didntSayUnoPopUp.png";
-                    case ONECARD -> "oneCardPopUp.png";
-                    case RED -> "redPopUp.png";
-                    case BLUE -> "bluePopUp.png";
-                    case YELLOW -> "yellowPopUp.png";
-                    case GREEN -> "greenPopUp.png";
-                }));
+        ImageView imageView = new ImageView(new Image("file:\\" + USER_DIR + "\\src\\main\\resources\\org\\juno\\images\\" + effect.getPath()));
         anchorPane.getChildren().add(imageView);
-        imageView.setFitWidth(320);
-        imageView.setFitHeight(180);
-        imageView.setX(800);
-        imageView.setY(450);
+
+        if (effect == BuildMP.Effects.SAIDUNO || effect == BuildMP.Effects.DIDNTSAYUNO)
+        {
+            imageView.setFitWidth(1000);
+            imageView.setFitHeight(1000);
+            imageView.setX(460);
+            imageView.setY(40);
+        } else
+        {
+            imageView.setFitWidth(500);
+            imageView.setFitHeight(500);
+            imageView.setX(710);
+            imageView.setY(290);
+        }
 
         return imageView;
 
     }
 
     /**
-     * make the animation of the effect given
+     * make the animation of the given effect
      *
-     * @param effect the effect given
+     * @param effect the effect
      */
     private void zoomAnimation(BuildMP.Effects effect)
     {
         ImageView imageView = createZoomImage(effect);
-        ScaleTransition st = new ScaleTransition(Duration.millis(500), imageView);
-        ScaleTransition st1 = new ScaleTransition(Duration.millis(500), imageView);
-        st.setToX(5);
-        st.setToY(5);
-        st1.setToX(0.5);
-        st1.setToY(0.5);
-        st.setOnFinished(x -> st1.play());
-        st1.setOnFinished(x -> imageView.setVisible(false));
-        st.play();
+
+        FadeTransition ft = new FadeTransition(Duration.millis(200), imageView);
+
+        ft.setFromValue(1);
+        ft.setToValue(0);
+        ft.setOnFinished(x -> anchorPane.getChildren().remove(imageView));
+
+        Timer timer = new Timer();
+
+        timer.schedule(new TimerTask()
+        {
+            @Override
+            public void run()
+            {
+                ft.play();
+                timer.cancel();
+            }
+        }, 1966);
+
     }
     /**
      * make the animation of the switch atcion

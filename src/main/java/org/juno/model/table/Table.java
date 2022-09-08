@@ -238,10 +238,12 @@ public abstract class Table extends Observable implements Runnable
 						err.printStackTrace();
 					}
 					clearChanged();
-					delay(1000);
+					delay(2000);
 					currentPlayer.draw(2);
+					return false;
 				}
 			}
+			delay(1200);
 			return false;
 		}
 		return false;
@@ -263,22 +265,26 @@ public abstract class Table extends Observable implements Runnable
 					plus2 += 1;
 					stop = 1;
 					notifyObservers(BUILD_MP.createMP(BuildMP.Actions.EFFECTS, BuildMP.Effects.PLUSTWO));
+					delay(2520);
 				}
 				case PLUSFOUR ->
 				{
 					plus4 += 1;
 					stop = 1;
 					notifyObservers(BUILD_MP.createMP(BuildMP.Actions.EFFECTS, BuildMP.Effects.PLUSFOUR));
+					delay(2520);
 				}
 				case REVERSE ->
 				{
 					turnOrder.reverse();
 					notifyObservers(BUILD_MP.createMP(BuildMP.Actions.EFFECTS, BuildMP.Effects.REVERSE));
+					delay(2080);
 				}
 				case STOP ->
 				{
 					stop += 1;
 					notifyObservers(BUILD_MP.createMP(BuildMP.Actions.EFFECTS, BuildMP.Effects.STOP));
+					delay(2080);
 				}
 				case JOLLY -> notifyObservers(BUILD_MP.createMP(BuildMP.Actions.EFFECTS, BuildMP.Effects.JOLLY));
 				default ->
@@ -314,16 +320,13 @@ public abstract class Table extends Observable implements Runnable
 	{
 		if (plus2 != 0)
 		{
-			delay(1000);
 			currentPlayer.draw(2 * plus2);
 		} else if (plus4 != 0)
 		{
-			delay(1000);
 			currentPlayer.draw(4 * plus4);
 		}
 		if (stop != 0)
 		{
-			delay(1000);
 			Player next = null;
 			for (int i = 0; i < stop; i++)
 			{

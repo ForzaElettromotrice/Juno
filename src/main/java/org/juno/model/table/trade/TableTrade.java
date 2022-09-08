@@ -86,8 +86,6 @@ public class TableTrade extends Table
                 chosenCard = currentPlayer.getChosenCard();
                 if ((chosenCard.getColor() != Card.Color.BLACK && chosenCard.getValue() != Card.Value.SEVEN) || (chosenCard.getValue() == Card.Value.SEVEN && currentPlayer.readyToTrade()))
                 {
-                    if (currentPlayer.getSizeHand() != 0)
-                        checkEffects(chosenCard);
                     DISCARD_PILE.discard(chosenCard);
                     setChanged();
                     try
@@ -98,9 +96,11 @@ public class TableTrade extends Table
                         System.out.println(err.getMessage());
                         err.printStackTrace();
                     }
+                    if (currentPlayer.getSizeHand() != 0)
+                        checkEffects(chosenCard);
                     clearChanged();
-                    delay(1000);
                     endTurn = true;
+                    delay(500);
                 }
             } else endTurn = currentPlayer.hasPassed();
         }
@@ -134,9 +134,7 @@ public class TableTrade extends Table
             }
             clearChanged();
         }
-
-        System.out.println("MANO finale = " + currentPlayer.getHand());
-        System.out.println("\n");
+        
 
         return checkUno(currentPlayer, delayUno);
     }

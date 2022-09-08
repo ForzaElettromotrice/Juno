@@ -149,14 +149,15 @@ public abstract class Player extends Observable
 			setChanged();
 			try
 			{
-				notifyObservers(BUILD_MP.createMP(BuildMP.Actions.COLOR, switch (color)
+				notifyObservers(BUILD_MP.createMP(BuildMP.Actions.EFFECTS, switch (color)
 						{
-							case RED -> BuildMP.Colors.RED;
-							case BLUE -> BuildMP.Colors.BLUE;
-							case GREEN -> BuildMP.Colors.GREEN;
-							case YELLOW -> BuildMP.Colors.YELLOW;
+							case RED -> BuildMP.Effects.RED;
+							case BLUE -> BuildMP.Effects.BLUE;
+							case GREEN -> BuildMP.Effects.GREEN;
+							case YELLOW -> BuildMP.Effects.YELLOW;
 							default -> throw new MessagePackageTypeNotExistsException("Non puoi scegliere il nero!");
 						}));
+				delay(2080);
 			} catch (MessagePackageTypeNotExistsException err)
 			{
 				System.out.println(err.getMessage());
