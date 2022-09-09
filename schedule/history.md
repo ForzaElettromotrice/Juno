@@ -323,13 +323,10 @@
 1. Fixed level up method: now exceeding exp is not erased, but added to the total Player exp.
 2. Fixed progress bar animation in Endgame: now the current level is shown correctly, the animation
     works fine and a label appears when you level up.
+3. Fixed animations.
 
-##TODO:
-1. Testing for bugs
-2. Pop up images
-3. Finish history
-4. Write essay
-5. Write javadoc
-6. Class diagrams
+##01-04/08/2022
 
-
+1. Done JavaDocs.
+2. Added streams where possible.
+3. Added pop up images for effects.

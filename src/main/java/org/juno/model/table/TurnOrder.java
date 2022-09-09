@@ -141,7 +141,7 @@ public class TurnOrder
 		Arrays.stream(players).forEach(player ->
 		{
 			player.resetMatch();
-			player.draw(2);
+			player.draw(7);
 		});
 		isInverted = false;
 	}

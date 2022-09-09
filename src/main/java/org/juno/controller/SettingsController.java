@@ -12,7 +12,6 @@ import javafx.scene.layout.AnchorPane;
 import org.juno.model.user.User;
 import org.juno.view.AudioPlayer;
 import org.juno.view.GenView;
-//TODO: RIFARE LA GRAFICA DA SCENEBUILDER FATTA MEGLIO
 
 /**
  * Defines SettingsNew ,

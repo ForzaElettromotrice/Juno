@@ -48,7 +48,6 @@ public class Juno extends Application
 		{
 			System.out.println(err.getMessage());
 			err.printStackTrace();
-			System.out.println("GAME ABORTED");
 			return;
 		}
 

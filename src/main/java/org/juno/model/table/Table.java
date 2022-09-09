@@ -426,8 +426,6 @@ public abstract class Table extends Observable implements Runnable
 	@Override
 	public void run()
 	{
-		System.out.println("THREAD NATO");
 		startGame();
-		System.out.println("THREAD MORTO");
 	}
 }
